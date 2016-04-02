@@ -25,7 +25,7 @@ setFlipClickHandler();
 //========| Under the Hood |==================
 
 function initialize(){
-    resizeRootEm();
+    adjustAllSizes();
 }
 function adjustAllSizes(){
     resizeRootEm();

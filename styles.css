@@ -36,9 +36,25 @@ body{
     font-size: 2rem;
     font-style: italic;
     font-weight: bold;
-    color: white;
-    text-shadow: 0 2px 0 black;
+    color: #222;
+    text-shadow: 0 1px #ddd;
     vertical-align: middle;
+}
+
+#menuButton{
+    font-size: 3rem;
+    text-align: center;
+    color: #222;
+    text-shadow: 0 1px #ddd;
+    margin-left: 0.5rem;
+    float: left;
+    cursor: pointer;
+    line-height: 120%;
+    vertical-align: middle;
+}
+
+#menuButton:hover{
+    color: white;
 }
 #photo{
     position: absolute;
@@ -54,18 +70,6 @@ body{
     
 }
 
-#menuButton{
-    font-size: 3rem;
-    text-align: center;
-    margin-left: 0.5rem;
-    float: left;
-    cursor: pointer;
-    line-height: 120%;
-    vertical-align: middle;
-}
-#menuButton:hover{
-    color: white;
-}
 #toc{
     font-style: italic;
     font-family: serif;
