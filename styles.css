@@ -56,6 +56,29 @@ body{
 #menuButton:hover{
     color: white;
 }
+
+#menu{
+    position: fixed;
+    top:4.5rem;
+    border-radius: 1rem;
+    background: lightgray;
+    width: 60%;
+    left: 0;
+    right:0;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0;
+    z-index: 4;
+    visibility: hidden;
+}
+#cross{
+    float: right;
+    color: red;
+    text-shadow: 0 1px 0 white;
+    font-size: 3rem;
+    margin-right: 0.5rem;
+}
+
 #photo{
     position: absolute;
     top: 0.3rem;
@@ -66,8 +89,6 @@ body{
     border: 0.5rem solid #aaa ;
     background: url(abbas1.png) no-repeat center;
     background-size: contain;
-
-    
 }
 
 #toc{
