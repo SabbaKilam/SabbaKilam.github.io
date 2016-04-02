@@ -1,0 +1,109 @@
+/*
+    Author: Abbas Abdulmalik
+    Creation Date: April 2, 2016
+    Title:   Main resume (cv)
+    Revised:
+    Purpose: a gitHub "about me" website
+    Notes:
+*/ 
+
+body{
+    background: gray;
+}
+.fullscreen{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right:0;
+    overflow: hidden;
+    background: linear-gradient(-65deg, hsla(200, 51%, 50%, 0.8), hsla(200, 51%, 95%, 0.8));
+}
+#banner{
+    position: fixed;
+    background: #aaa;
+    top: 0;
+    left:0;
+    right:0;
+    bottom: auto;
+    height: 4.5rem;
+}
+
+#me{
+    padding-left:1rem;
+    padding-top: 0.7rem;
+    margin-left: 3rem;    
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: bold;
+    color: #222;
+    text-shadow: 0 1px #ddd;
+    vertical-align: middle;
+}
+
+#menuButton{
+    font-size: 3rem;
+    text-align: center;
+    color: #222;
+    text-shadow: 0 1px #ddd;
+    margin-left: 0.5rem;
+    float: left;
+    cursor: pointer;
+    line-height: 120%;
+    vertical-align: middle;
+}
+
+#menuButton:hover{
+    color: white;
+}
+#photo{
+    position: absolute;
+    top: 0.3rem;
+    right: 2rem;
+    width: 4rem;
+    padding-bottom: 4rem;
+    border-radius:50%;
+    border: 0.5rem solid #aaa ;
+    background: url(abbas1.png) no-repeat center;
+    background-size: contain;
+
+    
+}
+
+#toc{
+    font-style: italic;
+    font-family: serif;
+    font-size:  2rem;
+}
+
+.page{
+    position: absolute;
+    display: inline-block;
+    height: 65%;
+    width: 60%;
+    top: 25%;
+    left: 0;
+    right:0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 2.5rem;
+    color: white;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top: dashed 5px white;
+    transform-origin: top;
+    transform: rotateX(0deg);
+    transition: transform 1s ease;
+    box-sizing: border-box;
+    user-select: none;
+    cursor: pointer;
+}
+#pg2{
+    background: teal;
+    z-index: 1;
+}
+#pg1{
+    background: teal;
+    z-index: 2;
+}
