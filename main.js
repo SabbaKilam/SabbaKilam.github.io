@@ -19,6 +19,7 @@ var _ = rekwire("module");
 
 _(window).on("load", initialize);
 _(window).on("resize", adjustAllSizes);
+_("#menuButton").click(toggleMenu);
 setFlipClickHandler();
 
 
@@ -34,6 +35,8 @@ function adjustAllSizes(){
 function resizeRootEm(){
     document.documentElement.style.fontSize =(8 + window.innerWidth/100) +"px";
 }
+
+function toggleMenu(){}
 function resizePage(){
     if(window.innerWidth <= 480){
         _(".page").array().forEach(function(m){
