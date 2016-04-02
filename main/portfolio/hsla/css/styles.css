@@ -1,0 +1,166 @@
+html{
+
+  background: url(../images/background4.jpg) no-repeat;
+  background-size: cover;
+  padding: 0;
+  border: 0; 
+  width: 100%;
+  height: 100%;  
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding-top: 50px; /* must add approx. this amount to y in js showColor(x,y)*/
+  border: 0;
+  text-align: center;
+  overflow: hidden;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: white;
+  text-shadow: 2px 2px 3px black;
+} 
+
+div#colorWheel{
+    background: url(../images/ColorWheel3.png);
+    background-size: cover;
+    padding: 0;
+    border: 0;
+    height: 300px;
+    width: 300px; 
+    border-radius: 150px;
+    position: relative;
+    /* disable selecting(highlighting) for copying */    
+     -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; 
+}
+
+div#ball{
+    background: url(../images/BlackBall2.png) no-repeat;
+    background-size: cover;
+    height: 20px;
+    width: 20px;     
+    padding: 0;
+    border: 0;
+    position: absolute;
+    top: 140px;
+    left: 140px;
+    z-index: 1;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;      
+}
+
+div#info {
+    width: 100%;
+    margin: 0 auto;
+    visibility: hidden;
+}
+
+div#content {
+    width: 300px;
+    position: relative;
+    margin: 0 auto;
+}
+
+#controls {
+  margin: 0 auto;
+  text-align: right;
+  width: 10%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;    
+}
+
+input[type="number"]{
+  width: 3.5rem;
+}
+#labels{
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
+}
+#sliders{
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
+
+}
+#keyboard{
+    margin: 2px auto 0;
+    display: inline-block;
+    vertical-align: center;
+}
+#labels span {
+    cursor: pointer;
+    display:block;
+    text-align: right;
+}
+#sliders input { 
+    cursor: pointer;
+    display: block;
+}
+
+#keyboard input {    
+    display: block;
+    width: 43px;
+    height: 15px;
+    background-color: hsla(240, 0%, 73%, 0.38);
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px black;  
+}
+#copyDiv{
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text; 
+}
+
+#hsla{
+    display: inline-block;
+    width: 250px;
+    padding: 20px;    
+    border: solid hsla(0, 0%, 50%, 1.00) 5px;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+    font-weight: bold;
+    color: white;
+}
+
+#mnemonicPicture{
+    width: 100%;
+    padding-top: 550px;
+    position: absolute;
+    top: 5%;
+    background: url("../images/RichYuppiesGetCaughtBurningMoney.png") no-repeat center;
+    background-size: contain;
+    z-index: -5;
+    opacity: 0;
+}
+
+#mnemonicWord{
+    width: 110px;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
