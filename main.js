@@ -129,7 +129,6 @@ function setFlipClickHandler(){
                      ("transition","all " + 0 + "s ease");
             },1000*t);
 
-
             /*
                 Just over halfway through the flip (65%)
                 allow the next flip.
@@ -140,5 +139,5 @@ function setFlipClickHandler(){
         });
     })();
 
-}//===| END ofsetFlipClickHandler |===
+}//===| END of setFlipClickHandler |===
 
