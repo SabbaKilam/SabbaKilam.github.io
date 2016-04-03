@@ -8,8 +8,9 @@
 */
 //========| Global Variables, Data, etc. |====
 
-/*global rekwire*/
-/*  rekwire is contained in
+/*  
+    global rekwire
+    rekwire is contained in
     rekwire.js, loaded by index.html
 */
 //var base = 'https://dl.dropboxusercontent.com/u/21142484/modules/';

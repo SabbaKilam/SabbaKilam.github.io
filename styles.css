@@ -61,9 +61,9 @@ body{
 
 #menu{
     position: fixed;
-    top:5rem;
+    top:5.2rem;
     border-radius: 1rem;
-    background: lightgray;
+    background: #bfbfbf;
     width: 75%;
     left: 0;
     right:0;
