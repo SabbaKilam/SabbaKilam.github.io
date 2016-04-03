@@ -14,10 +14,17 @@
 */
 //var base = 'https://dl.dropboxusercontent.com/u/21142484/modules/';
 var _ = rekwire("module");
-var flag = {
+
+//state variables kept from global space in vars object
+_.vars = {
     menuVisible: false,
-    currentPageIndex: 0
-}; //holds state variable
+    currentPageIndex: 0,
+    pageCount: 0,
+    flipping: false,
+    transitTime: 0.75,//transition time of flip
+    originalBackground: null 
+};
+
 //========| Driver's Seat |===================
 
 _(window).on("load", initialize);
@@ -25,7 +32,6 @@ _(window).on("resize", adjustAllSizes);
 _("#menuButton").click(toggleMenu);
 _("#cross").click(toggleMenu);
 setFlipClickHandler();
-
 
 //========| Under the Hood |==================
 
@@ -43,11 +49,19 @@ function resizeRootEm(){
 }
 
 function setInitialPage(){
-    var msg = '"Developers want to learn on the job,<br/>' +
+    var pgSpanWidth = _("#pg1Span").elem().getBoundingClientRect().width;
+    var pg1Width = _("#pg1").elem().getBoundingClientRect().width;
+    //var newLeft = (1/2)*(pg1Width - pgSpanWidth) +"px";
+    var newLeft = 0.5*(window.innerWidth - pgSpanWidth)+"px";
+    var msg = '<br/>"Developers want to learn on the job,<br/>' +
     'work-life balance, and money.<br/>'+
-    'But mostly, developers just want to code<br/>'
+    'But mostly, developers just want to code."<br/>'+
+    '--StackOverflow Survey, 2016';
+    _("#pg1Span").styles
+        ("paddingLeft", newLeft)
+        ("lineHeight","200%")
     ;
-    
+    _("#pg1Span").html(msg);
 }
 function dissovleSplashPage(){
     _("#splashPage").styles
@@ -55,17 +69,17 @@ function dissovleSplashPage(){
         ("visibility","hidden");
 };
 function toggleMenu(){
-    if(flag.menuVisible){
+    if(_.vars.menuVisible){
         _("#menu").styles
             ("opacity","0")
             ("visibility","hidden");
-    flag.menuVisible = false;
+    _.vars.menuVisible = false;
     }
     else{
         _("#menu").styles
             ("opacity","1")
             ("visibility","visible");
-    flag.menuVisible = true;
+    _.vars.menuVisible = true;
     }
 }
 function resizePage(){
@@ -85,69 +99,53 @@ function resizePage(){
 }
 
 function setFlipClickHandler(){
-    /*
-        flip handler established in an IIFE
-        to private-ize the flipping flag,
-        and other data, and to avoid name collisions
-        on the global object
-    */
-    (function(){
+    _(".page").on("click", function(e){
+        if(_.vars.flipping)return;
+        //prohibit new flip while still flipping
+        _.vars.flipping = true;
 
-        var flipping = false;
-        var t = 0.75; //transition time of flip
-        var originalBackground;
+        //start the flip
+        _.vars.originalBackground = _(e.target).elem().style.background;
+        _(e.target).styles
+             ("background","black")
+             ("transform","rotateX(270deg)")
+             ("transition","all " + _.vars.transitTime + "s ease");
 
-        _(".page").on("click", function(e){
+        /*
+            Halfway through the flip, quickly bring
+            the next page forward (z-index = 2)
+            (the array has only two pages, the active one and the next one)
+        */
+        setTimeout(function(){
+            _(".page").array().forEach(function(m){
+                if(m != e.target){
+                    _(m).styles
+                         ("zIndex","2")
+                         ("transition","all " + 0 + "s ease");
+                }
+            });
+        },1000*_.vars.transitTime*0.5);
 
-            if(flipping)return;
-
-            //prohibit new flip while still flipping
-            flipping = true;
-
-            //start the flip
-            originalBackground = _(e.target).elem().style.background;
+        /*
+            When flipper is out of sight (270deg):
+            1.) immediately restore original background
+            2.) push flipper behind the next page (z-index = 1)
+            3.) rotate it back into starting position
+        */
+        setTimeout(function(){
             _(e.target).styles
-                 ("background","black")
-                 ("transform","rotateX(270deg)")
-                 ("transition","all " + t + "s ease");
+                 ("background", _.vars.originalBackground)
+                 ("zIndex","1")
+                 ("transform","rotateX(0deg)")
+                 ("transition","all " + 0 + "s ease");
+        },1000*_.vars.transitTime);
 
-            /*
-                Halfway through the flip, quickly bring
-                the next page forward (z-index = 2)
-                (the array has only two pages, the active one and the next one)
-            */
-            setTimeout(function(){
-                _(".page").array().forEach(function(m){
-                    if(m != e.target){
-                        _(m).styles
-                             ("zIndex","2")
-                             ("transition","all " + 0 + "s ease");
-                    }
-                });
-            },1000*t*0.5);
-
-            /*
-                When flipper is out of sight (270deg):
-                1.) immediately restore original background
-                2.) push flipper behind the next page (z-index = 1)
-                3.) rotate it back into starting position
-            */
-            setTimeout(function(){
-                _(e.target).styles
-                     ("background", originalBackground)
-                     ("zIndex","1")
-                     ("transform","rotateX(0deg)")
-                     ("transition","all " + 0 + "s ease");
-            },1000*t);
-
-            /*
-                allow the next flip only after flip completes
-            */
-            setTimeout(function(){
-                flipping = false;
-            },1000*t);
-        });
-    })();
-
+        /*
+            allow the next flip only after flip completes
+        */
+        setTimeout(function(){
+            _.vars.flipping = false;
+        },1000*_.vars.transitTime);
+    });//===| END flip click event handler |===
 }//===| END of setFlipClickHandler |===
 
