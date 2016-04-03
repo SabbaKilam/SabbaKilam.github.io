@@ -97,12 +97,6 @@ body{
     background-size: contain;
 }
 
-#toc{
-    font-style: italic;
-    font-family: serif;
-    font-size:  2rem;
-}
-
 .page{
     position: absolute;
     display: inline-block;

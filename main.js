@@ -7,7 +7,6 @@
     Notes:
 */
 //========| Global Variables, Data, etc. |====
-
 /*
     global rekwire
     rekwire is contained in
@@ -16,7 +15,8 @@
 //var base = 'https://dl.dropboxusercontent.com/u/21142484/modules/';
 var _ = rekwire("module");
 var flag = {
-    menuVisible: false
+    menuVisible: false,
+    currentPageIndex: 0
 }; //holds state variable
 //========| Driver's Seat |===================
 
@@ -32,6 +32,7 @@ setFlipClickHandler();
 function initialize(){
     dissovleSplashPage();
     adjustAllSizes();
+    setInitialPage();
 }
 function adjustAllSizes(){
     resizeRootEm();
@@ -39,6 +40,14 @@ function adjustAllSizes(){
 }
 function resizeRootEm(){
     document.documentElement.style.fontSize =(8 + window.innerWidth/100) +"px";
+}
+
+function setInitialPage(){
+    var msg = '"Developers want to learn on the job,<br/>' +
+    'work-life balance, and money.<br/>'+
+    'But mostly, developers just want to code<br/>'
+    ;
+    
 }
 function dissovleSplashPage(){
     _("#splashPage").styles
@@ -132,12 +141,11 @@ function setFlipClickHandler(){
             },1000*t);
 
             /*
-                Just over halfway through the flip (65%)
-                allow the next flip.
+                allow the next flip only after flip completes
             */
             setTimeout(function(){
                 flipping = false;
-            },1000*t*0.65);
+            },1000*t);
         });
     })();
 
