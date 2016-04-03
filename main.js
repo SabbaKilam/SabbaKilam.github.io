@@ -9,17 +9,20 @@
 //========| Global Variables, Data, etc. |====
 
 /*global rekwire*/
-/*  rekwire is contained in 
+/*  rekwire is contained in
     rekwire.js, loaded by index.html
-*/    
+*/
 //var base = 'https://dl.dropboxusercontent.com/u/21142484/modules/';
 var _ = rekwire("module");
-
+var flag = {
+    menuVisible: false
+}; //holds state variable
 //========| Driver's Seat |===================
 
 _(window).on("load", initialize);
 _(window).on("resize", adjustAllSizes);
 _("#menuButton").click(toggleMenu);
+_("#cross").click(toggleMenu);
 setFlipClickHandler();
 
 
@@ -39,21 +42,35 @@ function resizeRootEm(){
 function dissovleSplashPage(){
     _("#splashPage").styles
         ("opacity","0")
-        ("visibility","hidden");    
+        ("visibility","hidden");
 };
-function toggleMenu(){}
+function toggleMenu(){
+    if(flag.menuVisible){
+        _("#menu").styles
+            ("opacity","0")
+            ("visibility","hidden");
+    flag.menuVisible = false;
+    }
+    else{
+        _("#menu").styles
+            ("opacity","1")
+            ("visibility","visible");
+    flag.menuVisible = true;
+    }
+}
 function resizePage(){
     if(window.innerWidth <= 480){
         _(".page").array().forEach(function(m){
             m.style.width = "98.5%";
         });
+        _("#menu").css("width","98.5%");
     }
     else{
         _(".page").array().forEach(function(m){
-            m.style.width = "60%";            
+            m.style.width = "60%";
         });
+        _("#menu").css("width","60%");        
     }
-    
 }
 
 function setFlipClickHandler(){
@@ -64,25 +81,25 @@ function setFlipClickHandler(){
         on the global object
     */
     (function(){
-    
+
         var flipping = false;
-        var t = 0.75; //transition time of flip    
-        var originalBackground;    
-    
+        var t = 0.75; //transition time of flip
+        var originalBackground;
+
         _(".page").on("click", function(e){
-    
+
             if(flipping)return;
-            
+
             //prohibit new flip while still flipping
             flipping = true;
-    
+
             //start the flip
             originalBackground = _(e.target).elem().style.background;
             _(e.target).styles
                  ("background","black")
                  ("transform","rotateX(270deg)")
                  ("transition","all " + t + "s ease");
-            
+
             /*
                 Halfway through the flip, quickly bring
                 the next page forward (z-index = 2)
@@ -96,8 +113,8 @@ function setFlipClickHandler(){
                              ("transition","all " + 0 + "s ease");
                     }
                 });
-            },1000*t*0.5);             
-            
+            },1000*t*0.5);
+
             /*
                 When flipper is out of sight (270deg):
                 1.) immediately restore original background
@@ -107,12 +124,12 @@ function setFlipClickHandler(){
             setTimeout(function(){
                 _(e.target).styles
                      ("background", originalBackground)
-                     ("zIndex","1")                 
+                     ("zIndex","1")
                      ("transform","rotateX(0deg)")
                      ("transition","all " + 0 + "s ease");
             },1000*t);
-    
-    
+
+
             /*
                 Just over halfway through the flip (65%)
                 allow the next flip.
@@ -121,7 +138,7 @@ function setFlipClickHandler(){
                 flipping = false;
             },1000*t*0.65);
         });
-    })();    
-    
+    })();
+
 }//===| END ofsetFlipClickHandler |===
 
