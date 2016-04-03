@@ -128,3 +128,18 @@ body{
     background: teal;
     z-index: 2;
 }
+
+#splashPage{
+    background: linear-gradient(65deg, white, hsl(35,50%,50%));
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right:0;
+    margin: auto;
+    z-index: 6;
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 1s;
+    transition: all 2s ease;
+}

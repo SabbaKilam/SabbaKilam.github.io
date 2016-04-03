@@ -26,6 +26,7 @@ setFlipClickHandler();
 //========| Under the Hood |==================
 
 function initialize(){
+    dissovleSplashPage();
     adjustAllSizes();
 }
 function adjustAllSizes(){
@@ -35,7 +36,11 @@ function adjustAllSizes(){
 function resizeRootEm(){
     document.documentElement.style.fontSize =(8 + window.innerWidth/100) +"px";
 }
-
+function dissovleSplashPage(){
+    _("#splashPage").styles
+        ("opacity","0")
+        ("visibility","hidden");    
+};
 function toggleMenu(){}
 function resizePage(){
     if(window.innerWidth <= 480){
