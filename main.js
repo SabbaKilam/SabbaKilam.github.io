@@ -8,7 +8,7 @@
 */
 //========| Global Variables, Data, etc. |====
 
-/*  
+/*
     global rekwire
     rekwire is contained in
     rekwire.js, loaded by index.html
@@ -61,16 +61,12 @@ function toggleMenu(){
 }
 function resizePage(){
     if(window.innerWidth <= 600){
-        _(".page").array().forEach(function(m){
-            m.style.width = "98.5%";
-        });
+        _(".page").css("width", "98.5%");
         _("#menu").css("width","98.5%");
     }
     else{
-        _(".page").array().forEach(function(m){
-            m.style.width = "75%";
-        });
-        _("#menu").css("width","75%");        
+        _(".page").css("width", "75%");
+        _("#menu").css("width","75%");
     }
 }
 
