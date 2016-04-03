@@ -116,7 +116,7 @@ body{
     color: white;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    border-top: dashed 5px white;
+    border-top: dashed 5px lightgray;
     transform-origin: top;
     transform: rotateX(0deg);
     transition: transform 1s ease;

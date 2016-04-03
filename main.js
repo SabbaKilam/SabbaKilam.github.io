@@ -61,11 +61,16 @@ function toggleMenu(){
 }
 function resizePage(){
     if(window.innerWidth <= 600){
-        _(".page").css("width", "98.5%");
+        _(".page").styles
+            ("width", "98.5%")
+            ("borderTop","5px solid lightgray")            
+        ;
         _("#menu").css("width","98.5%");
     }
     else{
-        _(".page").css("width", "75%");
+        _(".page").styles
+            ("width", "75%")
+            ("borderTop","5px dashed lightgray");
         _("#menu").css("width","75%");
     }
 }
