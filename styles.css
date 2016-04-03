@@ -64,7 +64,7 @@ body{
     top:5rem;
     border-radius: 1rem;
     background: lightgray;
-    width: 60%;
+    width: 75%;
     left: 0;
     right:0;
     margin-left: auto;
@@ -104,7 +104,7 @@ body{
     position: absolute;
     display: inline-block;
     height: 73%;
-    width: 60%;
+    width: 75%;
     top: 25%;
     left: 0;
     right:0;

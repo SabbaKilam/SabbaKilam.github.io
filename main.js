@@ -67,9 +67,9 @@ function resizePage(){
     }
     else{
         _(".page").array().forEach(function(m){
-            m.style.width = "60%";
+            m.style.width = "75%";
         });
-        _("#menu").css("width","60%");        
+        _("#menu").css("width","75%");        
     }
 }
 
