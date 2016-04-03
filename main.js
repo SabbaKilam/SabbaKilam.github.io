@@ -60,7 +60,7 @@ function toggleMenu(){
     }
 }
 function resizePage(){
-    if(window.innerWidth <= 480){
+    if(window.innerWidth <= 600){
         _(".page").array().forEach(function(m){
             m.style.width = "98.5%";
         });
