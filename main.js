@@ -49,10 +49,24 @@ function resizeRootEm(){
     document.documentElement.style.fontSize =(8 + window.innerWidth/100) +"px";
 }
 
+function resizePage(){
+    if(window.innerWidth <= 600){
+        _(".page").styles
+            ("width", "98.5%")
+            ("borderTop","5px solid lightgray")            
+        ;
+        _("#menu").css("width","98.5%");
+    }
+    else{
+        _(".page").styles
+            ("width", "75%")
+            ("borderTop","5px dashed lightgray");
+        _("#menu").css("width","75%");
+    }
+}
+
 function setInitialPage(){
     var pgSpanWidth = _("#pg1Span").elem().getBoundingClientRect().width;
-    var pg1Width = _("#pg1").elem().getBoundingClientRect().width;
-    //var newLeft = (1/2)*(pg1Width - pgSpanWidth) +"px";
     var newLeft = 0.5*(window.innerWidth - pgSpanWidth)+"px";
     var msg = '<br/>"Developers want to learn on the job,<br/>' +
     'work-life balance, and money.<br/>'+
@@ -68,7 +82,7 @@ function dissovleSplashPage(){
     _("#splashPage").styles
         ("opacity","0")
         ("visibility","hidden");
-};
+}
 function toggleMenu(){
     if(_.vars.menuVisible){
         _("#menu").styles
@@ -84,21 +98,6 @@ function toggleMenu(){
     }
     //------
     objectColorFlash( _("#menuButton").elem(),"white", 0.25 );
-}
-function resizePage(){
-    if(window.innerWidth <= 600){
-        _(".page").styles
-            ("width", "98.5%")
-            ("borderTop","5px solid lightgray")            
-        ;
-        _("#menu").css("width","98.5%");
-    }
-    else{
-        _(".page").styles
-            ("width", "75%")
-            ("borderTop","5px dashed lightgray");
-        _("#menu").css("width","75%");
-    }
 }
 
 function setFlipClickHandler(){
@@ -164,6 +163,5 @@ function objectColorFlash(object, color, duration){
         object.style.color = oldColor;
         _.vars.flashing = false;
     }, 1000*duration);
-    
 }
 //------------------
