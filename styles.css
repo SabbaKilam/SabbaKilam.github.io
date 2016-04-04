@@ -126,6 +126,9 @@ body{
     background: teal;
     z-index: 2;
 }
+#pg1Span{
+    cursor: auto;
+}
 
 #splashPage{
     background: linear-gradient(65deg, white, hsl(35,50%,50%));

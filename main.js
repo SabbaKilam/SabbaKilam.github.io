@@ -1,4 +1,4 @@
-/*
+/**
     Author: Abbas Abdulmalik
     Creation Date: April 2, 2016
     Title:   Main resume (cv)
@@ -7,12 +7,12 @@
     Notes:
 */
 //========| Global Variables, Data, etc. |====
-/*
-    global rekwire
+/**
     rekwire is contained in
     rekwire.js, loaded by index.html
 */
 //var base = 'https://dl.dropboxusercontent.com/u/21142484/modules/';
+/*global rekwire*/
 var _ = rekwire("module");
 
 //state variables kept from global space in vars object
@@ -34,12 +34,14 @@ _("#menuButton").click(toggleMenu);
 _("#cross").click(toggleMenu);
 setFlipClickHandler();
 
+
 //========| Under the Hood |==================
 
 function initialize(){
     dissovleSplashPage();
     adjustAllSizes();
     setInitialPage();
+    _("#pg1Span").click(function(e){e.stopPropagation();});
 }
 function adjustAllSizes(){
     resizeRootEm();
@@ -53,7 +55,7 @@ function resizePage(){
     if(window.innerWidth <= 600){
         _(".page").styles
             ("width", "98.5%")
-            ("borderTop","5px solid lightgray")            
+            ("borderTop","5px solid lightgray")
         ;
         _("#menu").css("width","98.5%");
     }
@@ -66,12 +68,13 @@ function resizePage(){
 }
 
 function setInitialPage(){
+    var surveyLink = "http://stackoverflow.com/research/developer-survey-2016#work";
     var pgSpanWidth = _("#pg1Span").elem().getBoundingClientRect().width;
     var newLeft = 0.5*(window.innerWidth - pgSpanWidth)+"px";
     var msg = '<br/>"Developers want to learn on the job,<br/>' +
     'work-life balance, and money.<br/>'+
     'But mostly, developers just want to code."<br/>'+
-    '--StackOverflow Survey, 2016';
+    '--StackOverflow <a href='+ surveyLink +'>Survey</a>, 2016';
     _("#pg1Span").styles
         ("paddingLeft", newLeft)
         ("lineHeight","200%")
@@ -99,7 +102,19 @@ function toggleMenu(){
     //------
     objectColorFlash( _("#menuButton").elem(),"white", 0.25 );
 }
+function objectColorFlash(object, color, duration){
+    //if busy flashing - do not disturb
+    if(_.vars.flashing)return;
+    _.vars.flashing = true;
+    var oldColor = object.style.color;
 
+    object.style.color = color;
+    //return old color after flashing color
+    setTimeout(function(){
+        object.style.color = oldColor;
+        _.vars.flashing = false;
+    }, 1000*duration);
+}
 function setFlipClickHandler(){
     _(".page").on("click", function(e){
         if(_.vars.flipping)return;
@@ -151,17 +166,4 @@ function setFlipClickHandler(){
     });//===| END flip click event handler |===
 }//===| END of setFlipClickHandler |===
 
-function objectColorFlash(object, color, duration){
-    //if busy flashing - do not disturb
-    if(_.vars.flashing)return;
-    _.vars.flashing = true;
-    var oldColor = object.style.color;
-    
-    object.style.color = color;
-    //return old color after flashing color
-    setTimeout(function(){
-        object.style.color = oldColor;
-        _.vars.flashing = false;
-    }, 1000*duration);
-}
 //------------------
