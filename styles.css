@@ -118,7 +118,10 @@ body{
     cursor: pointer;
 }
 #pg2{
-    background: gray;
+    background: url(images/folder.png) no-repeat center;
+    background-size: contain;
+    background-color: white;
+    
     z-index: 1;
 }
 #pg1{
