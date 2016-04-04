@@ -116,12 +116,12 @@ body{
     box-sizing: border-box;
     user-select: none;
     cursor: pointer;
+    box-shadow: 1px 1px 15px #333;    
 }
 #pg2{
-    background: url(images/folder.png) no-repeat center;
+    background: url(images/folder2.png) no-repeat center;
     background-size: contain;
     background-color: white;
-    
     z-index: 1;
 }
 #pg1{
