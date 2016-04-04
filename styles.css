@@ -55,10 +55,6 @@ body{
     user-select: none;
 }
 
-#menuButton:hover{
-    color: white;
-}
-
 #menu{
     position: fixed;
     top:5.2rem;

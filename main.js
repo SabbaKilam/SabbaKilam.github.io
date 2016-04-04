@@ -22,7 +22,8 @@ _.vars = {
     pageCount: 0,
     flipping: false,
     transitTime: 0.75,//transition time of flip
-    originalBackground: null 
+    originalBackground: null,
+    flashing: false
 };
 
 //========| Driver's Seat |===================
@@ -81,6 +82,8 @@ function toggleMenu(){
             ("visibility","visible");
     _.vars.menuVisible = true;
     }
+    //------
+    objectColorFlash( _("#menuButton").elem(),"white", 0.25 );
 }
 function resizePage(){
     if(window.innerWidth <= 600){
@@ -149,3 +152,18 @@ function setFlipClickHandler(){
     });//===| END flip click event handler |===
 }//===| END of setFlipClickHandler |===
 
+function objectColorFlash(object, color, duration){
+    //if busy flashing - do not disturb
+    if(_.vars.flashing)return;
+    _.vars.flashing = true;
+    var oldColor = object.style.color;
+    
+    object.style.color = color;
+    //return old color after flashing color
+    setTimeout(function(){
+        object.style.color = oldColor;
+        _.vars.flashing = false;
+    }, 1000*duration);
+    
+}
+//------------------
