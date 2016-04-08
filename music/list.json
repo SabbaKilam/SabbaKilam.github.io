@@ -3,8 +3,24 @@
         "title": "Venus as a Boy",
         "artist": "Bjork"
     },
-    "eyesface":{
+    "eyesface": {
         "title": "Eyes Without a Face",
         "artist": "Billy Idol"
+    },
+    "europa": {
+        "title": "Europa",
+        "artist": "Gato Barbieri"
+    },
+    "": {
+        "title": "",
+        "artist": ""
+    },
+    "": {
+        "title": "",
+        "artist": ""
+    },
+    "": {
+        "title": "",
+        "artist": ""
     }
 }
