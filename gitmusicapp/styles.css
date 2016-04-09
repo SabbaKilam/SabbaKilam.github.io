@@ -60,6 +60,13 @@ body{
 }
 #appTitle{
     font-style: italic;
+    width: 32%;
+    margin: 0.2rem auto;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    background: linear-gradient(60deg, white, hsl(-30, 50%, 50%)) no-repeat;
+    background-size: cover;
+    box-shadow: inset 1px 1px 1px black;
 }
 #menuButton{
     font-style: normal;
@@ -72,7 +79,8 @@ body{
     text-shadow: 0 1px 0 hsl(165,50%,70%);
     float: left;
     padding-left: 2%;
-    font-size: 2.2rem;
+    font-size: 3rem;
+    font-style: normal;    
     cursor: pointer;
 }
 #audioPlayer{
