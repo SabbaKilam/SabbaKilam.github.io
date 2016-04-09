@@ -16,7 +16,11 @@
     <body>
         <div id="mobileHolder">
             <div id="content">
-                <h3 id="appTitle"><span id="menuButton">&equiv;</span>Git Y'r Music!</h3>
+                 <div>
+                     <span id="menuButton">&equiv;</span>
+                     <div id="currentlyPlaying"></div> 
+                 </div>
+                <h3 id="appTitle">Git Y'r Music!</h3>
                    &nbsp;GitHub Friend&rAarr;<input id="gitname" type="text" class="roundPink">
                         <input type="button" id="btn" value="Get Friend's Playlist" class="roundPink">
                     <br/><br/>
@@ -29,8 +33,8 @@
                         <option>Choose a Song</option>
                     </select>
                 </div><!-- end of playlistHolder -->
-                <br/><br/>
-                <div id="currentlyPlaying"></div>                
+                <br/>
+               
             <audio id="audioPlayer" controls autoplay src="http://www.noiseaddicts.com/samples_1w72b820/4929.mp3"></audio>
         
             </div><!-- end of content -->
