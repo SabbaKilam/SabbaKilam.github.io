@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf=8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">           
+        <meta name="viewport" content="width=device-width,
+            maximum-scale=1,
+            minimum-scale=1,
+            initial-scale=1,
+            user-scalable=no"
+        >
+        <title>Test Music App</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="js/prefixfree.js"></script>        
+    </head>
+    <body>
+        <div id="mobileHolder">
+            <div id="content">
+                <h3 id="appTitle"><span id="menuButton">&equiv;</span>Git Y'r Music!</h3>
+                   &nbsp;GitHub Friend&rAarr;<input id="gitname" type="text" class="roundPink">
+                        <input type="button" id="btn" value="Get Friend's Playlist" class="roundPink">
+                    <br/><br/>
+                      &nbsp;Current Playlist&rAarr;<select id="chooser" class="roundPink"><div id="shuffleIcon">testing</div>
+                    <option>Select A Playist</option>
+                </select>
+                <br/>
+                <div id="playlistHolder">
+                    <select id="playlist" class="roundPink">
+                        <option>Choose a Song</option>
+                    </select>
+                </div><!-- end of playlistHolder -->
+                <audio id="audioPlayer" controls autoplay></audio>
+                <div id="currentlyPlaying"></div>
+            </div><!-- end of content -->
+        </div><!-- end mobileHolder-->
+        
+    <!--NO HTML BELOW THIS POINT-->
+    <script src="main.js"></script>    
+    </body>
+</html>

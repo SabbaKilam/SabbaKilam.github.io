@@ -1,10 +1,14 @@
 {
-    "twocitiez": {
-        "title": "A Tale of 2 Citiez",
-        "artist": "J. cole"
+    "crazy": {
+        "title": "Crazy",
+        "artist": "Gnarles Barkley"
     },
-    "jan28": {
-        "title": "January 28th",
-        "artist": "J. Cole"
+    "gethealed": {
+        "title": "Did Ya' Get Healed?",
+        "artist": "Van Morrison"
     }
+    "venusboy": {
+        "title": "Venus As A Boy",
+        "artist": "Bjork"
+    }    
 }
