@@ -30,5 +30,33 @@
     "motherchild": {
         "title": "Mother & Child Reunion",
         "artist": "Paul Simon"
-    }    
+    },
+    "latifrobe": {
+        "title": "Love Theme From 'The Robe'",
+        "artist": "Yussef Latif"
+    },
+    "latifspartacus": {
+        "title": "Love Theme From 'Spartacus'",
+        "artist": "Yussef Latif"
+    },
+    "morrisontidings": {
+        "title": "Glad Tidings",
+        "artist": "Van Morrison"
+    },
+    "towerpoweryoungman": {
+        "title": "You're Still A Young Man",
+        "artist": "Tower of Power"
+    },
+    "quickfreshair": {
+        "title": "Fresh Air",
+        "artist": "Quicksilver Messenger Service"
+    },
+    "Elton John - Come Down in Time": {
+        "title": "Come Down in Time",
+        "artist": "Elton John"
+    },
+    "Red Hot Chili Peppers - Wet Sand": {
+        "title": "Wet Sand",
+        "artist": "Red Hot Chili Peppers"
+    }
 }
