@@ -77,11 +77,18 @@ body{
 }
 
 #audioPlayer{
+    position: absolute;
     width:92%;
+    left: 0;
+    right:0;
+    height: 1%;
+    bottom: 0;
+    top: auto;
+    
 }
 #playlist{
     text-align: center;
-    width: 75%;
+    width: 60%;
 }
 #currentlyPlaying{
     font-size: 0.8rem;
