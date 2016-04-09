@@ -1,18 +1,29 @@
 /**
-<div id="content">
-    GitHub Name: <input id="gitname">
-    <button id="btn">Get Playlist</button>
-    <br/><br/>
-    Current Playlist: <select id="chooser">
-        <option>Select A Playist</option>
-    </select>
-    <br/>
-    <div id="playlistHolder">
-        <select id="playlist">
-            <option>Choose Song</option>
+<div id="mobileHolder">
+    <div id="content">
+        <div>
+            <span id="menuButton">&equiv;</span>
+            <div id="currentlyPlaying"></div>
+        </div>
+        <h3 id="appTitle">Git Y'r Music!</h3>
+           &nbsp;GitHub Friend&rAarr;<input id="gitname" type="text" class="roundPink">
+            <input type="button" id="btn" value="Get Friend's Playlist" class="roundPink">
+            <br/><br/>
+          &nbsp;Current Playlist&rAarr;
+        <select id="chooser" class="roundPink"><div id="shuffleIcon">testing</div>
+            <option>Select A Playist</option>
         </select>
-    </div>
-</div>
+        <br/>
+        <div id="playlistHolder">
+            <select id="playlist" class="roundPink">
+                <option>Choose a Song</option>
+            </select>
+        </div><!-- end of playlistHolder -->
+        <br/>
+        <audio id="audioPlayer" controls autoplay src="http://www.noiseaddicts.com/samples_1w72b820/4929.mp3"></audio>
+        <!--http://www.noiseaddicts.com/free-samples-mp3/-->
+    </div><!-- end of content -->
+</div><!-- end mobileHolder-->
 */
 "use strict";
 
