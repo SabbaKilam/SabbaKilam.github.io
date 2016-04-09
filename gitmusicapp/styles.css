@@ -61,6 +61,9 @@ body{
 #appTitle{
     font-style: italic;
 }
+#menuButton{
+    font-style: normal;
+}
 #gitname{
     width: 25%;
 }
