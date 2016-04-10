@@ -161,9 +161,7 @@ function saveNewList() {
     var newname = gitname.value.toLowerCase().trim();
     if (!lists[newname]) {
         //save new list to our lists object
-        var newListObject = JSON.parse(ajax.response);
-        newListObject = sortProperties(newListObject);
-        lists[newname] = newListObject;
+        lists[newname] = JSON.parse(ajax.response);
         addNameToBox(newname);
         sendListToServer(lists);
     }
