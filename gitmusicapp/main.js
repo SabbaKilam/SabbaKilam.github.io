@@ -289,15 +289,15 @@ function sortProperties(object){
 }
 //---------
 function sortedListByArtist(object){
+    var artist, title, joiner = "```";//tripple backtick unlikely to conflict 
 	//first gather the song filenames (keys of the list object)
 	var recordNames = Object.keys(object);
 	//prepare for a list of primary keys: artist```title
 	var primaryKeys = [];
 	//combine the artist and title of each song
 	recordNames.forEach(function(m){
-		var artist = object[m].artist;
-		var title = object[m].title;
-		var joiner = "```"; //this is unlikely to conflict
+		artist = object[m].artist;
+		title = object[m].title;
 		var primaryKey = artist + joiner + title;
 		primaryKeys.push(primaryKey);
 	});
@@ -307,16 +307,15 @@ function sortedListByArtist(object){
 	//prepare for a sorted collection of song filenames (keys of the list object)
 	var sortedObject = {};
 	for(var i=0; i < primaryKeys.length; i++){
-		var joiner = "```";
-		var artist = primaryKeys[i].split(joiner)[0];
-		var title = primaryKeys[i].split(joiner)[1];
+		artist = primaryKeys[i].split(joiner)[0];
+		title = primaryKeys[i].split(joiner)[1];
 		/*
 			1.) Iterate through each member of the original object & look for this artist.
 			2.) Match this artist to this title in the orignal object.
 			3.) Save the orignal song to the new object song list.
 			4.) Return the completed sorted object.
 		*/
-		// 1.) Iterate through each, etc. ...
+		//1.) Iterate through each, etc. ...
 		for(var aSong in object){
 			if(object[aSong].artist === artist){
 				//2.) Match this artist to this title, etc. ...
@@ -330,19 +329,16 @@ function sortedListByArtist(object){
 	//4.) return the sorted object.
 	return sortedObject;
 }//===| end of sortedListByArtist() |=====
+
 function toggleMenu(){
     if(menuOpen){
         menu.style.visibility = "hidden";
         menu.style.opacity = 0;
         menuOpen = false;
-        //flashObjectColor(menuButton, "white", 0.25);
-        //flashObjectColor(X, "white", 0.25);
     }
     else{
         menu.style.visibility = "visible";
         menu.style.opacity = 1;
         menuOpen = true;
-        //flashObjectColor(menuButton, "white", 0.25);
-        //flashObjectColor(X, "white", 0.25);
     }
 }
