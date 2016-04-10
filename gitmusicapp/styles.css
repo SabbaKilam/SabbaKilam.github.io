@@ -65,7 +65,7 @@ body{
     visibility: hidden;
     background: lightgray;
     transition: opacity 1s ease, visibility 1s ease;
-    min-height: 11rem;    
+    min-height: 12rem;    
 }
 #gitFriend{
     width: 95%;
