@@ -41,23 +41,51 @@ body{
     background: lightgray;
 
 }
-#content{
+.portal{
     position: absolute;
     width: 95%;
     top: 1%;
     left: 1%;
-    min-height: 12rem;
-    padding-top: 0.5%;
+    min-height: 10rem;
+    padding-top: 1%;
     padding-bottom: 2%;
     text-align: center;
     border-radius: 10px;
+    font-weight: bold;    
+}
+#content{
     box-shadow: 3px 3px 10px black;
     background: linear-gradient(-60deg, white, teal);
     color: #1d1d1d;
     text-shadow: 0 1px 0 hsl(165,50%,70%);
-    font-weight: bold;
     vertical-align: baseline;
 }
+#menu{
+    opacity: 0;
+    visibility: hidden;
+    background: lightgray;
+    transition: opacity 1s ease, visibility 1s ease;
+    min-height: 11rem;    
+}
+#gitFriend{
+    width: 95%;
+    text-align: center;
+    margin: 5rem auto;
+    padding: 1%;
+    border-radius: 8px;
+    box-shadow: 1px 1px 1px black;
+}
+#X{
+    float: right;
+    padding-right: 2%;
+    font-size: 2rem;
+    font-style: normal;    
+    cursor: pointer;
+    color: red;
+    text-shadow: 0 1px 0 #eee; 
+    
+}
+
 #appTitle{
     font-style: italic;
     width: 45%;

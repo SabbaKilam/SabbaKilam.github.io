@@ -15,15 +15,15 @@
     </head>
     <body>
         <div id="mobileHolder">
-            <div id="content">
+            <div id="content" class="portal">
                  <div>
                      <span id="menuButton">&equiv;</span>
-                     <div id="currentlyPlaying"></div>
+
                  </div>
                 <h3 id="appTitle">Git Y'r Music!</h3>
-                   &nbsp;GitHub Friend&rAarr;<input id="gitname" type="text" class="roundPink">
-                        <input type="button" id="btn" value="Get Friend's Playlist" class="roundPink">
-                    <br/><br/>
+                    <br/>
+                     <div id="currentlyPlaying"></div>
+                    <br/>
                       &nbsp;Current Playlist&rAarr;<select id="chooser" class="roundPink"><div id="shuffleIcon">testing</div>
                     <option>Select A Playist</option>
                 </select>
@@ -37,6 +37,13 @@
                 <audio id="audioPlayer" controls autoplay src="http://www.noiseaddicts.com/samples_1w72b820/4929.mp3"></audio>
                 <!--http://www.noiseaddicts.com/free-samples-mp3/-->
             </div><!-- end of content -->
+            <div id="menu" class="portal"><span id="X">&cross;</span>
+                <div id="gitFriend">
+                    GitHub Friend&rAarr;<input id="gitname" type="text" class="roundPink">
+                    <input type="button" id="btn" value="Get Friend's Playlist" class="roundPink">
+                </div>
+
+            </div>
         </div><!-- end mobileHolder-->
 
     <!--NO HTML BELOW THIS POINT-->

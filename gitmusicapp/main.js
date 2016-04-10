@@ -40,6 +40,8 @@ var playlist = id("playlist");
 var audioPlayer = id("audioPlayer");
 var currentlyPlaying = id("currentlyPlaying");
 var menuButton = id("menuButton");
+var menu = id("menu");
+var X = id("X");
 var propNames = Object.keys;
 
 var playlistHeader = "Choose a Song";
@@ -51,6 +53,7 @@ var currentUrl = "";
 var currentPlayListName = "";
 var busyFlashingColor = false;
 var busyFlashingStyle = false;
+var menuOpen = false;
 
 //====| The Driver's Seat |====
 
@@ -61,7 +64,16 @@ btn.onclick = function (e) {
     getNewList();
 };
 menuButton.onclick = function (e) {
+    toggleMenu(e);
     flashObjectColor(this, "white", 0.25);
+};
+X.onclick = function (e) {
+    toggleMenu(e);
+    flashObjectColor(this, "white", 0.25);
+};
+id("appTitle").onclick = function (e) {
+    toggleMenu(e);
+    flashObjectColor(menuButton, "white", 0.25);
 };
 gitname.onkeyup = getNewList;
 gitname.onclick = function () {
@@ -118,7 +130,8 @@ function configureResizing() {
         var left = 1 / 2 * (window.innerWidth - dimensions.width).toFixed(2) + "px";
         content.style.top = top;
         content.style.left = left;
-        //gitname.value = `Top: ${top}; Left: ${left}`;
+        menu.style.top = top;
+        menu.style.left = left;
     }
     function resizeAndCenter() {
         resizeRootEm();
@@ -317,3 +330,19 @@ function sortedListByArtist(object){
 	//4.) return the sorted object.
 	return sortedObject;
 }//===| end of sortedListByArtist() |=====
+function toggleMenu(){
+    if(menuOpen){
+        menu.style.visibility = "hidden";
+        menu.style.opacity = 0;
+        menuOpen = false;
+        //flashObjectColor(menuButton, "white", 0.25);
+        //flashObjectColor(X, "white", 0.25);
+    }
+    else{
+        menu.style.visibility = "visible";
+        menu.style.opacity = 1;
+        menuOpen = true;
+        //flashObjectColor(menuButton, "white", 0.25);
+        //flashObjectColor(X, "white", 0.25);
+    }
+}
