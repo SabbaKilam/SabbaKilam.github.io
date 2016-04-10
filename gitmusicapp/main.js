@@ -284,7 +284,7 @@ function sortedListByArtist(object){
 	recordNames.forEach(function(m){
 		var artist = object[m].artist;
 		var title = object[m].title;
-		var joiner = "```";
+		var joiner = "```"; //this is unlikely to conflict
 		var primaryKey = artist + joiner + title;
 		primaryKeys.push(primaryKey);
 	});
@@ -298,21 +298,22 @@ function sortedListByArtist(object){
 		var artist = primaryKeys[i].split(joiner)[0];
 		var title = primaryKeys[i].split(joiner)[1];
 		/*
-			1.) iterate through each member of the original object & look for this artist.
-			2.) iterate that artist to find the title that matches this title.
-			3.) return this original member
-			
+			1.) Iterate through each member of the original object & look for this artist.
+			2.) Match this artist to this title in the orignal object.
+			3.) Save the orignal song to the new object song list.
+			4.) Return the completed sorted object.
 		*/
-		// 1.) iterate through each etc. ...
+		// 1.) Iterate through each, etc. ...
 		for(var aSong in object){
 			if(object[aSong].artist === artist){
-				//2.) iterate that artist to find etc. ...
+				//2.) Match this artist to this title, etc. ...
 				if(object[aSong].title === title){
+				    //3.) Save the origianl song, etc..
 					sortedObject[aSong] = object[aSong];
-					//console.log(aSong);
 				}
 			}
 		}	
 	}
+	//4.) return the sorted object.
 	return sortedObject;
 }//===| end of sortedListByArtist() |=====
