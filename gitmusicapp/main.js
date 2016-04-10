@@ -162,7 +162,8 @@ function saveNewList() {
     if (!lists[newname]) {
         //save new list to our lists object
         var newListObject = JSON.parse(ajax.response);
-        newListObject = sortProperties(newListObject);
+        var sortedListObject = sortedListByArtist(newListObject);
+        newListObject = sortedListObject;
         lists[newname] = newListObject;
         addNameToBox(newname);
         sendListToServer(lists);
@@ -273,3 +274,45 @@ function sortProperties(object){
 	}
 	return sortedObject;
 }
+//---------
+function sortedListByArtist(object){
+	//first gather the song filenames (keys of the list object)
+	var recordNames = Object.keys(object);
+	//prepare for a list of primary keys: artist```title
+	var primaryKeys = [];
+	//combine the artist and title of each song
+	recordNames.forEach(function(m){
+		var artist = object[m].artist;
+		var title = object[m].title;
+		var joiner = "```";
+		var primaryKey = artist + joiner + title;
+		primaryKeys.push(primaryKey);
+	});
+	//of course sort the primary keys. This is the central action
+	primaryKeys.sort();
+
+	//prepare for a sorted collection of song filenames (keys of the list object)
+	var sortedObject = {};
+	for(var i=0; i < primaryKeys.length; i++){
+		var joiner = "```";
+		var artist = primaryKeys[i].split(joiner)[0];
+		var title = primaryKeys[i].split(joiner)[1];
+		/*
+			1.) iterate through each member of the original object & look for this artist.
+			2.) iterate that artist to find the title that matches this title.
+			3.) return this original member
+			
+		*/
+		// 1.) iterate through each etc. ...
+		for(var aSong in object){
+			if(object[aSong].artist === artist){
+				//2.) iterate that artist to find etc. ...
+				if(object[aSong].title === title){
+					sortedObject[aSong] = object[aSong];
+					//console.log(aSong);
+				}
+			}
+		}	
+	}
+	return sortedObject;
+}//===| end of sortedListByArtist() |=====
