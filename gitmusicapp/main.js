@@ -59,8 +59,8 @@ var menuOpen = false;
 window.onload = initialize;
 playlist.onchange = playSong;
 btn.onclick = function (e) {
-    flashObjectColor(this, "white", 0.25);
-    getNewList();
+    getNewList(e);
+    //flashObjectColor(this, "white", 0.25);
 };
 menuButton.onclick = function (e) {
     toggleMenu(e);
