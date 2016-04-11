@@ -43,7 +43,6 @@ var menuButton = id("menuButton");
 var menu = id("menu");
 var X = id("X");
 var propNames = Object.keys;
-
 var playlistHeader = "Choose a Song";
 var ajax = new XMLHttpRequest();
 var lists = {};
@@ -92,8 +91,8 @@ function initialize() {
     addListsFromBrowser();
     // 4. Store lists object on the browser
     storeListsToBrowser();
-
     configureResizing();
+    
 } //===| END of initialize() |=====
 
 var addListsFromBrowser = function addListsFromBrowser() {};
@@ -312,7 +311,7 @@ function sortedListByArtist(object){
 		/*
 			1.) Iterate through each member of the original object & look for this artist.
 			2.) Match this artist to this title in the orignal object.
-			3.) Save the orignal song to the new object song list.
+			3.) Save the original song to the new object song list.
 			4.) Return the completed sorted object.
 		*/
 		//1.) Iterate through each, etc. ...
