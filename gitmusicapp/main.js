@@ -57,15 +57,6 @@ var currentPlayListName = "";
 var busyFlashingColor = false;
 var busyFlashingStyle = false;
 var menuOpen = false;
-/**
- * 
- *  background: linear-gradient(-60deg, white, hsl(186, 50%, 40%));
- * 
-    background: linear-gradient(60deg, white, hsl(6, 50%, 50%)) no-repeat;
-    background-size: cover;
-    
-    
-*/
 var prefix = ["-webkit-","-moz-","-ms-","-o-",""];
 var mainColorAngle = 186;
 var backgroundColorAngle = 6;
@@ -96,10 +87,10 @@ function initialize() {
     // 4. Store lists object on the browser
     //storeListsToBrowser();
     configureResizing();
-    loadColorsFromBrowser();
+    loadColors();
 
 } //===| END of initialize() |=====
-function loadColorsFromBrowser(){
+function loadColors(){
     if(window.localStorage){
         var possibleAngle = window.localStorage.getItem("mainColorAngle");
         if(possibleAngle){
@@ -107,12 +98,19 @@ function loadColorsFromBrowser(){
             colorSlider.value = mainColorAngle;
             setMainColor();
         }
+        else{
+            setMainColor();
+        }
         possibleAngle = window.localStorage.getItem("backgroundColorAngle");
         if(possibleAngle){
             backgroundColorAngle = possibleAngle;
             setBackgroundColor();
         }
+        else{
+           setBackgroundColor();
+        }
     }
+    //else{}
 }
 
 function toggleAndFlash(e){
