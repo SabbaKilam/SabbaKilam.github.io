@@ -65,16 +65,18 @@ body{
     visibility: hidden;
     background: lightgray;
     transition: opacity 1s ease, visibility 1s ease;
-    min-height: 12rem;    
+    min-height: 14rem;
 }
-#gitFriend{
+
+.gitMenu{
     width: 95%;
     text-align: center;
-    margin: 5rem auto;
+    margin: 0.25rem auto;
     padding: 1%;
     border-radius: 8px;
-    box-shadow: 1px 1px 1px black;
+    box-shadow: 1px 1px 1px black;    
 }
+
 #X{
     float: right;
     padding-right: 2%;
@@ -120,4 +122,9 @@ body{
 #currentlyPlaying{
     padding-top: 0.5rem;
     font-size: 1.2rem;
+}
+
+table{
+    width: 75%;
+    margin: 0 auto;
 }
