@@ -80,7 +80,7 @@ function initialize() {
     // 4. Store lists object on the browser
     //storeListsToBrowser();
     configureResizing();
-    
+
 } //===| END of initialize() |=====
 
 function toggleAndFlash(e){
@@ -93,11 +93,15 @@ function clearInput(e){
 }
 
 function addListsFromBrowser(){
-    var serverList = window.localStorage.getItem("lists");
-    var userLists = JSON.parse(serverList);
-    for (var list in userLists) {
-        if (!lists[list]) {
-            lists[list] = userLists[list];
+    if(window.localStorage){
+        if(window.localStorage.getItem("lists")){
+            var serverList = window.localStorage.getItem("lists");
+            var userLists = JSON.parse(serverList);
+            for (var list in userLists) {
+                if (!lists[list]) {
+                    lists[list] = userLists[list];
+                }
+            }
         }
     }
 }
@@ -117,7 +121,7 @@ function addListsFromServer() {
             }
         }
         addPlaylistNamesToBox(); //the slippery slope to callback hell
-        storeListsToBrowser();        
+        storeListsToBrowser();
     };
 };
 
@@ -300,7 +304,7 @@ function sortProperties(object){
 }
 //---------
 function sortedListByArtist(object){
-    var artist, title, joiner = "```";//tripple backtick unlikely to conflict 
+    var artist, title, joiner = "```";//tripple backtick unlikely to conflict
 	//first gather the song filenames (keys of the list object)
 	var recordNames = Object.keys(object);
 	//prepare for a list of primary keys: artist```title
@@ -335,7 +339,7 @@ function sortedListByArtist(object){
 					sortedObject[aSong] = object[aSong];
 				}
 			}
-		}	
+		}
 	}
 	//4.) return the sorted object.
 	return sortedObject;
