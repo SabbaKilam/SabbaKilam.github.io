@@ -125,7 +125,6 @@ function storeListsToBrowser() {
     if(window.localStorage !== undefined){
         var listString = JSON.stringify(lists);
         window.localStorage.setItem("lists", listString);
-        alert(window.localStorage.getItem("lists"));
     }
 }
 //----------
