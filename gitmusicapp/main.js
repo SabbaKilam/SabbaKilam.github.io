@@ -6,7 +6,7 @@
             <div id="currentlyPlaying"></div>
         </div>
         <h3 id="appTitle">Git Y'r Music!</h3>
-           &nbsp;GitHub Friend&rAarr;<input id="gitname" type="text" class="roundPink">
+           &nbsp;GitHub Friend&rAarr;<input id="gitName" type="text" class="roundPink">
             <input type="button" id="friendButton" value="Get Friend's Playlist" class="roundPink">
             <br/><br/>
           &nbsp;Current Playlist&rAarr;
@@ -33,7 +33,7 @@ function id(string) {
     return document.getElementById(string);
 }
 var content = id("content");
-var gitname = id("gitname");
+var gitName = id("gitName");
 var friendButton = id("friendButton");
 var chooser = id("chooser");
 var playlist = id("playlist");
@@ -43,6 +43,8 @@ var menuButton = id("menuButton");
 var menu = id("menu");
 var X = id("X");
 var appTitle = id("appTitle");
+var colorSlider = id("colorSlider");
+var gitColor = id("gitColor");
 
 var propNames = Object.keys;
 var playlistHeader = "Choose a Song";
@@ -55,6 +57,18 @@ var currentPlayListName = "";
 var busyFlashingColor = false;
 var busyFlashingStyle = false;
 var menuOpen = false;
+/**
+ * 
+ *  background: linear-gradient(-60deg, white, hsl(186, 50%, 40%));
+ * 
+    background: linear-gradient(60deg, white, hsl(6, 50%, 50%)) no-repeat;
+    background-size: cover;
+    
+    
+*/
+var prefix = ["-webkit-","-moz-","-ms-","-o-",""];
+var mainColorAngle = 186;
+var backgroundColorAngle = 6;
 
 //====| The Driver's Seat |====
 
@@ -64,9 +78,11 @@ friendButton.onclick = getNewList;
 menuButton.onclick = toggleAndFlash;
 X.onclick = toggleAndFlash;
 appTitle.onclick = toggleAndFlash;
-gitname.onkeyup = getNewList;
-gitname.onclick =clearInput;
+gitName.onkeyup = getNewList;
+gitName.onclick =clearInput;
 chooser.onchange = changePlayList;
+colorSlider.oninput = showColors;
+gitColor.onmousedown = showColors;
 
 //====| Under The Hood |====
 
@@ -80,16 +96,71 @@ function initialize() {
     // 4. Store lists object on the browser
     //storeListsToBrowser();
     configureResizing();
+    loadColorsFromBrowser();
 
 } //===| END of initialize() |=====
+function loadColorsFromBrowser(){
+    if(window.localStorage){
+        var possibleAngle = window.localStorage.getItem("mainColorAngle");
+        if(possibleAngle){
+            mainColorAngle = possibleAngle;
+            colorSlider.value = mainColorAngle;
+            setMainColor();
+        }
+        possibleAngle = window.localStorage.getItem("backgroundColorAngle");
+        if(possibleAngle){
+            backgroundColorAngle = possibleAngle;
+            setBackgroundColor();
+        }
+    }
+}
 
 function toggleAndFlash(e){
+    e.stopPropagation();
     toggleMenu(e);
     flashObjectColor(menuButton, "white", 0.25);
 }
 
 function clearInput(e){
     e.target.value = "";
+}
+
+function showColors(e){
+    e.stopPropagation();
+    gitName.value = colorSlider.value;
+    setMainColor();
+    setBackgroundColor();
+    flashObjectStyle(menu, "background", "transparent", 1.5);
+}
+
+function setMainColor(){
+    mainColorAngle = colorSlider.value;
+    prefix.forEach(function(pre){
+        content.style.background = pre +
+        "linear-gradient(-60deg, hsl(" +
+            mainColorAngle +
+            ", 50%, 40%), white)"
+        ;        
+    });
+    if(window.localStorage){
+        window.localStorage.setItem("mainColorAngle",mainColorAngle);
+    }
+
+}
+function setBackgroundColor(){
+    backgroundColorAngle = (mainColorAngle - 180);
+    document.body.style.background = "-webkit-linear-gradient(60deg, white, hsl(" +
+        backgroundColorAngle +
+        ", 50%, 50%)) no-repeat"
+    ;
+    document.body.style.backgroundSize = "cover";
+    appTitle.style.background = "-webkit-linear-gradient(60deg, white, hsl("+
+       backgroundColorAngle +
+        ", 50%, 50%)) no-repeat"
+    ;
+    if(window.localStorage){
+        window.localStorage.setItem("backgroundColorAngle",backgroundColorAngle);
+    }
 }
 
 function addListsFromBrowser(){
@@ -172,7 +243,7 @@ function getNewList(e) {
     }
 
     //point to url
-    var url = "https://" + gitname.value + ".github.io/music/list.json";
+    var url = "https://" + gitName.value + ".github.io/music/list.json";
     ajax.open("GET", url);
     ajax.send();
     //------------
@@ -186,7 +257,7 @@ function getNewList(e) {
 }
 //----------
 function saveNewList() {
-    var newname = gitname.value.toLowerCase().trim();
+    var newname = gitName.value.toLowerCase().trim();
     if (!lists[newname]) {
         //save new list to our lists object
         var newListObject = JSON.parse(ajax.response);
@@ -211,8 +282,8 @@ function addNameToBox(newGitName) {
         var op = document.createElement("option");
         op.innerHTML = newGitName;
         chooser.appendChild(op);
-        gitname.value = "";
-        gitname.placeholder = newGitName + " playlist saved";
+        gitName.value = "";
+        gitName.placeholder = newGitName + " playlist saved";
     }
 }
 //----------

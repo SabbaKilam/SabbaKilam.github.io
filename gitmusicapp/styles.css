@@ -11,7 +11,7 @@ body{
     width: 100%;
     height: 100%;
     font-family: sans-serif;
-    background: linear-gradient(60deg, white, hsl(-30, 50%, 50%)) no-repeat;
+    background: linear-gradient(60deg, white, hsl(6, 50%, 50%)) no-repeat;
     background-size: cover;
     overflow: hidden;
 }
@@ -28,7 +28,7 @@ body{
     margin: auto;
 }
 .roundPink{
-    background: hsl(-30, 60%, 92%);
+    background: hsl(6, 60%, 90%);
     font-weight: bold;
     font-size: 0.8rem;
     border-radius: 5px;
@@ -55,7 +55,7 @@ body{
 }
 #content{
     box-shadow: 3px 3px 10px black;
-    background: linear-gradient(-60deg, white, teal);
+    //background: linear-gradient(-60deg, hsl(186, 50%, 0%), white);
     color: #1d1d1d;
     text-shadow: 0 1px 0 hsl(165,50%,70%);
     vertical-align: baseline;
@@ -94,7 +94,7 @@ body{
     margin: 0.2rem auto;
     border-radius: 0.5rem;
     padding: 0.2rem;
-    background: linear-gradient(60deg, white, hsl(-30, 50%, 50%)) no-repeat;
+    background: linear-gradient(60deg, white, hsl(6, 50%, 50%)) no-repeat;
     background-size: cover;
     box-shadow: inset 1px 1px 1px black;
 }
@@ -127,4 +127,10 @@ body{
 table{
     width: 75%;
     margin: 0 auto;
+}
+
+#colorSlider{
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0.2rem;
 }
