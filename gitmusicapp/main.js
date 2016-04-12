@@ -44,6 +44,7 @@ var menu = id("menu");
 var X = id("X");
 var appTitle = id("appTitle");
 var colorSlider = id("colorSlider");
+var shadowSlider = id("shadowSlider");
 var gitColor = id("gitColor");
 
 var propNames = Object.keys;
@@ -73,7 +74,17 @@ gitName.onkeyup = getNewList;
 gitName.onclick =clearInput;
 chooser.onchange = changePlayList;
 colorSlider.oninput = showColors;
-gitColor.onmousedown = showColors;
+colorSlider.onmousedown = showColors;
+gitColor.onmouseup = hideColors;
+shadowSlider.onblur = function(e){
+    shadowSlider.style.visibility = "hidden";
+};
+shadowSlider.onclick = function(e){
+    shadowSlider.style.visibility = "hidden";
+};
+menu.onclick = function(e){
+    shadowSlider.style.visibility = "hidden";
+};
 
 //====| Under The Hood |====
 
@@ -87,10 +98,11 @@ function initialize() {
     // 4. Store lists object on the browser
     //storeListsToBrowser();
     configureResizing();
-    loadColors();
+    loadColorsFromBrowser();
 
 } //===| END of initialize() |=====
-function loadColors(){
+
+function loadColorsFromBrowser(){
     if(window.localStorage){
         var possibleAngle = window.localStorage.getItem("mainColorAngle");
         if(possibleAngle){
@@ -110,7 +122,6 @@ function loadColors(){
            setBackgroundColor();
         }
     }
-    //else{}
 }
 
 function toggleAndFlash(e){
@@ -128,7 +139,19 @@ function showColors(e){
     gitName.value = colorSlider.value;
     setMainColor();
     setBackgroundColor();
-    flashObjectStyle(menu, "background", "transparent", 1.5);
+    //flashObjectStyle(menu, "background", "transparent", 1.5);
+    menu.style.transition = "all 0s ease";
+    menu.style.visibility = "hidden";
+    shadowSlider.style.visibility = "visible";
+    shadowSlider.value= colorSlider.value;
+    menuOpen = false;
+}
+
+function hideColors(){
+    menu.style.transition = "all 1s ease;";    
+    shadowSlider.style.visibility = "hidden";
+    menu.style.visibility = "visible";
+    menuOpen = true;    
 }
 
 function setMainColor(){
@@ -192,7 +215,7 @@ function addListsFromServer() {
         addPlaylistNamesToBox(); //the slippery slope to callback hell
         storeListsToBrowser();
     };
-};
+}
 
 function storeListsToBrowser() {
     if(window.localStorage !== undefined){
@@ -217,11 +240,22 @@ function configureResizing() {
         menu.style.top = top;
         menu.style.left = left;
     }
+    function alignSliders(){
+        var sliderStats = colorSlider.getBoundingClientRect();
+        shadowSlider.style.position = "absolute";
+        shadowSlider.style.left = sliderStats.left + "px";
+        shadowSlider.style.top = sliderStats.top  + "px";
+        shadowSlider.value = colorSlider.value;
+        
+    }
+    //-------------------
     function resizeAndCenter() {
         resizeRootEm();
         centerPlayer();
+        alignSliders();        
     }
     //-------------
+    
 }
 //----------
 function addPlaylistNamesToBox() {
@@ -232,7 +266,7 @@ function addPlaylistNamesToBox() {
             sort out duplicates
         */
     }
-};
+}
 //----------
 function getNewList(e) {
     var enterKey = 13;
@@ -362,16 +396,7 @@ function flashObjectStyle(object, style, value, durationSeconds) {
     }, 1000 * durationSeconds);
 }
 //---------
-function sortProperties(object){
-	var sortedObject = {};
-	var propNames = Object.keys(object);
-	propNames.sort();
-	for (var i=0; i < propNames.length; i++ ){
-		sortedObject[propNames[i]] = object[propNames[i]];
-	}
-	return sortedObject;
-}
-//---------
+
 function sortedListByArtist(object){
     var artist, title, joiner = "```";//tripple backtick unlikely to conflict
 	//first gather the song filenames (keys of the list object)
@@ -416,11 +441,13 @@ function sortedListByArtist(object){
 
 function toggleMenu(){
     if(menuOpen){
+        menu.style.transition = "all 1s ease";
         menu.style.visibility = "hidden";
         menu.style.opacity = 0;
         menuOpen = false;
     }
     else{
+        menu.style.transition = "all 1s ease";        
         menu.style.visibility = "visible";
         menu.style.opacity = 1;
         menuOpen = true;

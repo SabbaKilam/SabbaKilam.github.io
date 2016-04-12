@@ -55,7 +55,7 @@ body{
 }
 #content{
     box-shadow: 3px 3px 10px black;
-    //background: linear-gradient(-60deg, hsl(186, 50%, 0%), white);
+    background: linear-gradient(-60deg, hsl(186, 50%, 0%), white);
     color: #1d1d1d;
     text-shadow: 0 1px 0 hsl(165,50%,70%);
     vertical-align: baseline;
@@ -133,4 +133,7 @@ table{
     display: inline-block;
     border: 1px solid black;
     border-radius: 0.2rem;
+}
+#shadowSlider{
+    visibility: hidden;
 }
