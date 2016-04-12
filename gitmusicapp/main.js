@@ -136,14 +136,12 @@ function clearInput(e){
 
 function showColors(e){
     e.stopPropagation();
-    gitName.value = colorSlider.value;
     setMainColor();
     setBackgroundColor();
-    //flashObjectStyle(menu, "background", "transparent", 1.5);
     menu.style.transition = "all 0s ease";
     menu.style.visibility = "hidden";
     shadowSlider.style.visibility = "visible";
-    shadowSlider.value= colorSlider.value;
+    shadowSlider.value = colorSlider.value;
     menuOpen = false;
 }
 
