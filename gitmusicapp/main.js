@@ -1,4 +1,12 @@
 /**
+    
+    Author: Abbas Abdulmalik
+    Creation Date: April 7, 2016
+    Title:  Git Y'r Music
+    Revised: April 12, 2016
+    Purpose: A music playlist sharing app
+    Notes: play friends' music without downloading the file
+
 <div id="mobileHolder">
     <div id="content">
         <div>
