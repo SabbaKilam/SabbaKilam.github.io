@@ -69,6 +69,10 @@ var menuOpen = false;
 var prefix = ["-webkit-","-moz-","-ms-","-o-",""];
 var mainColorAngle = 186;
 var backgroundColorAngle = 6;
+var shuffleBox = id("shuffleBox");
+var shuffleState = id("shuffleState");
+var shuffleIcon = id("shuffleIcon");
+var shuffleOn = false;
 
 //====| The Driver's Seat |====
 
@@ -84,6 +88,9 @@ chooser.onchange = changePlayList;
 colorSlider.oninput = showColors;
 colorSlider.onmousedown = showColors;
 gitColor.onmouseup = hideColors;
+shuffleBox.onclick = toggleShuffle;
+
+//------| testing out stuff |--------
 shadowSlider.onblur = function(e){
     shadowSlider.style.visibility = "hidden";
 };
@@ -110,6 +117,26 @@ function initialize() {
 
 } //===| END of initialize() |=====
 
+function toggleShuffle(){
+    if(shuffleOn){
+        shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
+        shuffleState.innerHTML = "off";
+        shuffleState.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
+        shuffleIcon.style.textShadow = "0 1px 0 hsl(165,50%,70%)";        
+        shuffleState.style.color = "black";
+        shuffleIcon.style.color = "black";
+        shuffleOn = false;
+    }
+    else{
+        shuffleBox.style.boxShadow = "1px 1px 1px black";
+        shuffleState.innerHTML = "on";
+        shuffleState.style.color = "lightgray";
+        shuffleIcon.style.color = "lightgray";
+        shuffleState.style.textShadow = "0 1px 0 black";
+        shuffleIcon.style.textShadow = "0 1px 0 black";
+        shuffleOn = true;
+    }
+}
 function loadColorsFromBrowser(){
     if(window.localStorage){
         var possibleAngle = window.localStorage.getItem("mainColorAngle");

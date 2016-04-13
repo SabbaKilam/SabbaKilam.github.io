@@ -34,17 +34,21 @@
                     <br/>
                      <div id="currentlyPlaying"></div>
                     <br/>
-                      &nbsp;Current Playlist&rAarr;<select id="chooser" class="roundPink"><div id="shuffleIcon">testing</div>
+                      &nbsp;Current Playlist&rAarr;<select id="chooser" class="roundPink">
                     <option>Select A Playist</option>
                 </select>
-                <br/>
+                <div id="audioControls">
+                    <div id="shuffleBox">
+                         <span id="shuffleIcon">&sect;</span>&nbsp;shuffle&nbsp;<span id="shuffleState">&nbsp;off</span>                        
+                    </div>
+                </div>
                 <div id="playlistHolder">
                     <select id="playlist" class="roundPink">
                         <option>Choose a Song</option>
                     </select>
                 </div><!-- end of playlistHolder -->
                 <br/>
-                <audio id="audioPlayer" controls autoplay src="http://www.noiseaddicts.com/samples_1w72b820/4929.mp3"></audio>
+                <audio id="audioPlayer" controls autoplay src="ttp://www.noiseaddicts.com/samples_1w72b820/4929.mp3"></audio>
                 <!--http://www.noiseaddicts.com/free-samples-mp3/-->
             </div><!-- end of content -->
 
@@ -54,23 +58,23 @@
                 <table>
                     <tr><td>
                     <div id="gitFriend" class="gitMenu">
-                        GitHub Friend&rAarr;<input id="gitName" type="text" class="roundPink" placeholder="Try SabbaKilam">
+                        &bull;&nbsp;GitHub Friend&rAarr;<input id="gitName" type="text" class="roundPink" placeholder="Try SabbaKilam">
                         <input type="button" id="friendButton" value="Get Friend's Playlist" class="roundPink">
                     </div>
                     </td></tr>
                     <tr><td>
                         <div id="gitFile" class="gitMenu">
-                            Upload a Song&rAarr;<input  id="fileInput" type="file" class="roundPink">
+                            &bull;&nbsp;Upload a Song&rAarr;<input  id="fileInput" type="file" class="roundPink">
                         </div>
                     </td></tr>
                     <tr><td>
                         <div id="gitColor" class="gitMenu">
-                            Color Choices&rAarr;<input type="range" id="colorSlider" value="186" min="1" max="359" class="roundPink">
+                            &bull;&nbsp;Color Choices&rAarr;<input type="range" id="colorSlider" value="186" min="1" max="359" class="roundPink">
                         </div>
                     </td></tr>
                     <tr><td>
                         <div id="gitColor" class="gitMenu">
-                            Remove playlist&rAarr;<select id="removeList"  class="roundPink">
+                            &bull;&nbsp;Remove playlist&rAarr;<select id="removeList"  class="roundPink">
                                 <option>Choose Playlist to Remove</option>
                             </select>
                         </div>                        
