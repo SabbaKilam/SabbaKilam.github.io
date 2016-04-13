@@ -1,5 +1,5 @@
 /**
-    
+
     Author: Abbas Abdulmalik
     Creation Date: April 7, 2016
     Title:  Git Y'r Music
@@ -54,6 +54,7 @@ var appTitle = id("appTitle");
 var colorSlider = id("colorSlider");
 var shadowSlider = id("shadowSlider");
 var gitColor = id("gitColor");
+var fileInput = id("fileInput");
 
 var propNames = Object.keys;
 var playlistHeader = "Choose a Song";
@@ -83,12 +84,19 @@ friendButton.onclick = getNewList;
 menuButton.onclick = toggleAndFlash;
 X.onclick = toggleAndFlash;
 appTitle.onclick = toggleAndFlash;
+
+//---| menu actions |------
+
 gitName.onkeyup = getNewList;
 gitName.onclick =clearInput;
-chooser.onchange = changePlayList;
+fileInput.onchange = uploadSong;
 colorSlider.oninput = showColors;
 colorSlider.onmousedown = showColors;
 gitColor.onmouseup = hideColors;
+
+//---| END menu actions |------
+
+chooser.onchange = changePlayList;
 shuffleBox.onclick = toggleShuffle;
 
 //------| testing out stuff |--------
@@ -103,6 +111,37 @@ menu.onclick = function(e){
 };
 
 //====| Under The Hood |====
+
+function uploadSong(){
+    try{
+        var file = fileInput.files[0];
+        var noMp3 = file.name.substring(0, file.name.length - 4);
+        var artist = noMp3.split("-")[0].trim();
+        var title = noMp3.split("-")[1].trim();
+        /**
+         * 0.) Limit file to .mp3 files.
+         * 1.) Pop a dialog and get title and artist.
+         * 2.) Validate file, artist and title (no blank fields)
+         * 3.) Ajax post to getMusicFile.php setting requestHeaders
+         *
+        */
+        //---| ajax post |---
+        var fileSender = new XMLHttpRequest();
+        fileSender.open("POST","phpfiles/getMusicFile.php");
+        fileSender.setRequestHeader("title", title);
+        fileSender.setRequestHeader("artist", artist);
+        fileSender.setRequestHeader("filename", file.name);
+        fileSender.send(file);
+
+        //---| post's response |---
+        fileSender.onload = function(e){
+            alert(fileSender.response);
+        };
+    }
+    catch(error){
+        alert("Problems uploading a song.\n" + error);
+    }
+}
 
 function initialize() {
     // 1. Augment our lists object with downloaded lists
@@ -123,7 +162,7 @@ function toggleShuffle(){
         shuffleBox.style.boxShadow = "1px 1px 1px black";
         shuffleState.innerHTML = "off";
         shuffleState.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
-        shuffleIcon.style.textShadow = "0 1px 0 hsl(165,50%,70%)";        
+        shuffleIcon.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
         shuffleState.style.color = "black";
         shuffleIcon.style.color = "black";
         clearInterval(shuffleTimerId);
@@ -190,7 +229,7 @@ function showColors(e){
 }
 
 function hideColors(){
-    menu.style.transition = "all 1s ease;";    
+    menu.style.transition = "all 1s ease;";
     shadowSlider.style.visibility = "hidden";
 }
 
@@ -201,7 +240,7 @@ function setMainColor(){
         "linear-gradient(-60deg, hsl(" +
             mainColorAngle +
             ", 50%, 40%), white)"
-        ;        
+        ;
     });
     if(window.localStorage){
         window.localStorage.setItem("mainColorAngle",mainColorAngle);
@@ -210,7 +249,7 @@ function setMainColor(){
 }
 function setBackgroundColor(){
     backgroundColorAngle = (mainColorAngle - 180);
-    
+
     prefix.forEach(function(m){
         document.body.style.background = m +
             "linear-gradient(60deg, white, hsl(" +
@@ -222,11 +261,11 @@ function setBackgroundColor(){
             "linear-gradient(60deg, white, hsl("+
             backgroundColorAngle +
             ", 50%, 50%)) no-repeat"
-        ;        
+        ;
     });
 
-    
-    
+
+
     if(window.localStorage){
         window.localStorage.setItem("backgroundColorAngle",backgroundColorAngle);
     }
@@ -294,16 +333,16 @@ function configureResizing() {
         shadowSlider.style.left = sliderStats.left + "px";
         shadowSlider.style.top = sliderStats.top  + "px";
         shadowSlider.value = colorSlider.value;
-        
+
     }
     //-------------------
     function resizeAndCenter() {
         resizeRootEm();
         centerPlayer();
-        alignSliders();        
+        alignSliders();
     }
     //-------------
-    
+
 }
 //----------
 function addPlaylistNamesToBox() {
@@ -495,7 +534,7 @@ function toggleMenu(){
         menuOpen = false;
     }
     else{
-        menu.style.transition = "all 1s ease";        
+        menu.style.transition = "all 1s ease";
         menu.style.visibility = "visible";
         menu.style.opacity = 1;
         menuOpen = true;
