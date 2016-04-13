@@ -183,8 +183,6 @@ function showColors(e){
 function hideColors(){
     menu.style.transition = "all 1s ease;";    
     shadowSlider.style.visibility = "hidden";
-    menu.style.visibility = "visible";
-    menuOpen = true;    
 }
 
 function setMainColor(){
