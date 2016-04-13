@@ -136,7 +136,11 @@ function uploadSong(){
         //---| post's response |---
         fileSender.onreadystatechange = function(){
             if(fileSender.readyState === 4){
-                alert(fileSender.responseText);
+                alert("Status: "+
+                    fileSender.status +
+                    "\n" +
+                    fileSender.responseText
+                );
             }
         };
         fileSender.onload = function(e){
