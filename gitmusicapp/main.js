@@ -134,6 +134,11 @@ function uploadSong(){
         fileSender.send(file);
 
         //---| post's response |---
+        fileSender.onreadystatechange = function(){
+            if(fileSender.readyState === 4){
+                alert(fileSender.responseText);
+            }
+        };
         fileSender.onload = function(e){
             alert(fileSender.response);
         };
