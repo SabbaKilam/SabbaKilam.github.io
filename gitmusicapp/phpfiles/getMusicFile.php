@@ -25,12 +25,15 @@ $listAddition = ",
     }
  }";
 
+//====| Save mp3 file to music follder |====
+
 $webroot  = $_SERVER['DOCUMENT_ROOT'] . '/';
 $musicFolder = $webroot . "music/";
 $destination = $musicFolder . $musicFilename;
 $source = "php://input";
-
 file_put_contents($destination, $source);
+
+//====| Append the music list file |====
 
 exit($listAddition);
 
