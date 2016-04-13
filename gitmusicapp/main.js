@@ -73,6 +73,7 @@ var shuffleBox = id("shuffleBox");
 var shuffleState = id("shuffleState");
 var shuffleIcon = id("shuffleIcon");
 var shuffleOn = false;
+var shuffleTimerId = null;
 
 //====| The Driver's Seat |====
 
@@ -119,24 +120,32 @@ function initialize() {
 
 function toggleShuffle(){
     if(shuffleOn){
-        shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
+        shuffleBox.style.boxShadow = "1px 1px 1px black";
         shuffleState.innerHTML = "off";
         shuffleState.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
         shuffleIcon.style.textShadow = "0 1px 0 hsl(165,50%,70%)";        
         shuffleState.style.color = "black";
         shuffleIcon.style.color = "black";
+        clearInterval(shuffleTimerId);
+        shuffleIcon.style.transform = "rotateZ(90deg)";
         shuffleOn = false;
     }
     else{
-        shuffleBox.style.boxShadow = "1px 1px 1px black";
+        shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
         shuffleState.innerHTML = "on";
         shuffleState.style.color = "lightgray";
         shuffleIcon.style.color = "lightgray";
         shuffleState.style.textShadow = "0 1px 0 black";
         shuffleIcon.style.textShadow = "0 1px 0 black";
         shuffleOn = true;
+        toggleShuffle.angle = -10;
+        shuffleTimerId = setInterval(function(){
+            toggleShuffle.angle += 10;
+            shuffleIcon.style.transform = "rotateZ("+toggleShuffle.angle+"deg)";
+        },100);
     }
 }
+toggleShuffle.angle = 0;
 function loadColorsFromBrowser(){
     if(window.localStorage){
         var possibleAngle = window.localStorage.getItem("mainColorAngle");
@@ -201,15 +210,23 @@ function setMainColor(){
 }
 function setBackgroundColor(){
     backgroundColorAngle = (mainColorAngle - 180);
-    document.body.style.background = "-webkit-linear-gradient(60deg, white, hsl(" +
-        backgroundColorAngle +
-        ", 50%, 50%)) no-repeat"
-    ;
-    document.body.style.backgroundSize = "cover";
-    appTitle.style.background = "-webkit-linear-gradient(60deg, white, hsl("+
-       backgroundColorAngle +
-        ", 50%, 50%)) no-repeat"
-    ;
+    
+    prefix.forEach(function(m){
+        document.body.style.background = m +
+            "linear-gradient(60deg, white, hsl(" +
+            backgroundColorAngle +
+            ", 50%, 50%)) no-repeat"
+        ;
+        document.body.style.backgroundSize = "cover";
+        appTitle.style.background = m +
+            "linear-gradient(60deg, white, hsl("+
+            backgroundColorAngle +
+            ", 50%, 50%)) no-repeat"
+        ;        
+    });
+
+    
+    
     if(window.localStorage){
         window.localStorage.setItem("backgroundColorAngle",backgroundColorAngle);
     }
