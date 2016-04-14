@@ -143,9 +143,6 @@ function uploadSong(){
                 );
             }
         };
-        fileSender.onload = function(e){
-            //alert(fileSender.response);
-        };
     }
     catch(error){
         alert("Problems uploading a song.\n" + error);

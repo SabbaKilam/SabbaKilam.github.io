@@ -264,38 +264,28 @@
         "artist": "Martin Sexton"
     }
 ,
-    "A Flock Of Seagulls - Space Age Love Song" :{
+    "A Flock Of Seagulls - Space Age Love Song" : {
         "title" : "Space Age Love Song",
         "artist" : "A Flock Of Seagulls"
     }
 ,
-    "Air - La Femme d'Argent" :{
-        "title" : "La Femme d'Argent",
-        "artist" : "Air"
+    "A Flock Of Seagulls - Space Age Love Song" : {
+        "title" : "Space Age Love Song",
+        "artist" : "A Flock Of Seagulls"
     }
 ,
-    "Azymuth  -  Last Summer In Rio" :{
-        "title" : "Last Summer In Rio",
-        "artist" : "Azymuth"
-    }
-,
-    "Anugama - Call Of The Mountain" :{
+    "Anugama - Call Of The Mountain" : {
         "title" : "Call Of The Mountain",
         "artist" : "Anugama"
     }
 ,
-    "Double - The Captain Of Her Heart" :{
-        "title" : "The Captain Of Her Heart",
-        "artist" : "Double"
+    "Air - La Femme d'Argent" : {
+        "title" : "La Femme d'Argent",
+        "artist" : "Air"
     }
 ,
-    "Dr. Buzzard's Original Savannah Band  - Cherchez La Femme" :{
-        "title" : "Cherchez La Femme",
-        "artist" : "Dr. Buzzard's Original Savannah Band"
-    }
-,
-    "Fleetwood Mac - Hypnotized" :{
-        "title" : "Hypnotized",
-        "artist" : "Fleetwood Mac"
+    "Azymuth  -  Last Summer In Rio" : {
+        "title" : "Last Summer In Rio",
+        "artist" : "Azymuth"
     }
 }
