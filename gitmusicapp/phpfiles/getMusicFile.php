@@ -43,6 +43,7 @@ if( !file_exists($destination) ){
     $listPath = $musicFolder . "list.json";
     $list = trim(file_get_contents($listPath));
     $list = substr($list, 0, $list.length -1);
+    $list = trim($list);
 
     $list = $list . $listAddition;
     $source = $list;
