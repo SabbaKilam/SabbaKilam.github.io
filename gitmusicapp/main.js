@@ -144,7 +144,7 @@ function uploadSong(){
             }
         };
         fileSender.onload = function(e){
-            alert(fileSender.response);
+            //alert(fileSender.response);
         };
     }
     catch(error){
