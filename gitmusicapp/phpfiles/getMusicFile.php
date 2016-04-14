@@ -21,7 +21,7 @@ $musicFolder = $webroot . "music/";
 //====| Save mp3 file to music folder |====
 
 $destination = $musicFolder . $musicFilename;
-$source = "php://input";
+$source = file_get_contents('php://input');
 
 //if the file doesn't already exist
 if( !file_exists($destination) ){
@@ -50,7 +50,7 @@ if( !file_exists($destination) ){
     file_put_contents($destination, $source);
     
     //====| exit program |=====
-    exit($list);
+    exit(  implode ("\n", scandir($musicFolder)   ) );
 }
 else{
     //====| exit program |=====    

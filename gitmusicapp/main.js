@@ -114,7 +114,7 @@ menu.onclick = function(e){
 
 function uploadSong(){
     try{
-        var file = fileInput.files[0];
+        var file = this.files[0];
         var noMp3 = file.name.substring(0, file.name.length - 4);
         var artist = noMp3.split("-")[0].trim();
         var title = noMp3.split("-")[1].trim();
