@@ -269,8 +269,18 @@
         "artist" : "A Flock Of Seagulls"
     }
 ,
+    "Air - La Femme d'Argent" :{
+        "title" : "La Femme d'Argent",
+        "artist" : "Air"
+    }
+,
     "Azymuth  -  Last Summer In Rio" :{
         "title" : "Last Summer In Rio",
         "artist" : "Azymuth"
+    }
+,
+    "Anugama - Call Of The Mountain" :{
+        "title" : "Call Of The Mountain",
+        "artist" : "Anugama"
     }
 }

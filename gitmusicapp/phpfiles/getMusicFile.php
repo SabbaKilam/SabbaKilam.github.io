@@ -48,6 +48,7 @@ if( !file_exists($destination) ){
     $source = $list;
     $destination = $musicFolder . "list.json";
     file_put_contents($destination, $source);
+    
     //====| exit program |=====
     exit($list);
 }
