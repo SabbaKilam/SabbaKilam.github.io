@@ -14,3 +14,5 @@
 [14-Apr-2016 01:19:06 UTC] PHP Stack trace:
 [14-Apr-2016 01:19:06 UTC] PHP   1. {main}() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:0
 [14-Apr-2016 01:19:06 UTC] PHP   2. file_get_contents() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:41
+[14-Apr-2016 04:59:42 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php on line 55
+[14-Apr-2016 05:02:21 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php on line 55

@@ -50,7 +50,8 @@ if( !file_exists($destination) ){
     file_put_contents($destination, $source);
     
     //====| exit program |=====
-    exit(  implode ("\n", scandir($musicFolder)   ) );
+    //exit(  implode ("\n", scandir($musicFolder)   ) );
+    exit("Push to github and check for file: " . $musicFilename);
 }
 else{
     //====| exit program |=====    
