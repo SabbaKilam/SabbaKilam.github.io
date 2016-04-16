@@ -81,12 +81,19 @@ var shuffleTimerId = null;
 //====| The Driver's Seat |====
 
 window.onload = initialize;
+chooser.onchange = changePlayList;
 playlist.onchange = playSong;
 friendButton.onclick = getNewList;
 menuButton.onclick = toggleAndFlash;
 X.onclick = toggleAndFlash;
 appTitle.onclick = toggleAndFlash;
-
+shuffleBox.onclick = toggleShuffle;
+audioPlayer.onended = function(e){
+    if(shuffleOn && chooser.selectedIndex !== 0){
+        playlist.selectedIndex = songsArray.indexOf(getRandomSong());
+        playSong();
+    }
+};
 //---| menu actions |------
 
 gitName.onkeyup = getNewList;
@@ -98,8 +105,8 @@ gitColor.onmouseup = hideColors;
 
 //---| END menu actions |------
 
-chooser.onchange = changePlayList;
-shuffleBox.onclick = toggleShuffle;
+
+
 
 //------| testing out stuff |--------
 shadowSlider.onblur = function(e){
@@ -167,32 +174,42 @@ function initialize() {
 
 function toggleShuffle(){
     if(shuffleOn){
-        shuffleBox.style.boxShadow = "1px 1px 1px black";
-        shuffleState.innerHTML = "off";
-        shuffleState.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
-        shuffleIcon.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
-        shuffleState.style.color = "black";
-        shuffleIcon.style.color = "black";
-        clearInterval(shuffleTimerId);
-        shuffleIcon.style.transform = "rotateZ(90deg)";
-        shuffleOn = false;
+        turnShuffleOff();
     }
     else{
-        shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
-        shuffleState.innerHTML = "on";
-        shuffleState.style.color = "lightgray";
-        shuffleIcon.style.color = "lightgray";
-        shuffleState.style.textShadow = "0 1px 0 black";
-        shuffleIcon.style.textShadow = "0 1px 0 black";
-        shuffleOn = true;
-        toggleShuffle.angle = -10;
-        shuffleTimerId = setInterval(function(){
-            toggleShuffle.angle += 10;
-            shuffleIcon.style.transform = "rotateZ("+toggleShuffle.angle+"deg)";
-        },100);
+        turnShuffleOn();
     }
 }
 toggleShuffle.angle = 0;
+
+function turnShuffleOn(){
+    if(chooser.selectedIndex === 0){return;}
+    playlist.selectedIndex = songsArray.indexOf(getRandomSong(songsArray));
+    playSong();
+    shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
+    shuffleState.innerHTML = "on";
+    shuffleState.style.color = "lightgray";
+    shuffleIcon.style.color = "lightgray";
+    shuffleState.style.textShadow = "0 1px 0 black";
+    shuffleIcon.style.textShadow = "0 1px 0 black";
+    shuffleOn = true;
+    toggleShuffle.angle = -10;
+    shuffleTimerId = setInterval(function(){
+        toggleShuffle.angle += 10;
+        shuffleIcon.style.transform = "rotateZ("+toggleShuffle.angle+"deg)";
+    },100);    
+}
+function turnShuffleOff(){
+    shuffleBox.style.boxShadow = "1px 1px 1px black";
+    shuffleState.innerHTML = "off";
+    shuffleState.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
+    shuffleIcon.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
+    shuffleState.style.color = "black";
+    shuffleIcon.style.color = "black";
+    clearInterval(shuffleTimerId);
+    shuffleIcon.style.transform = "rotateZ(90deg)";
+    shuffleOn = false;    
+}
 function loadColorsFromBrowser(){
     if(window.localStorage){
         var possibleAngle = window.localStorage.getItem("mainColorAngle");
@@ -415,6 +432,7 @@ function addNameToBox(newGitName) {
 }
 //----------
 function changePlayList(e) {
+    turnShuffleOff();
     if (chooser.selectedIndex === 0) {
         playlist.innerHTML = "";
         var topOption = document.createElement("option");
