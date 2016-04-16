@@ -40,6 +40,8 @@
 function id(string) {
     return document.getElementById(string);
 }
+/*global CreateListMixer*/
+var getRandomSong = CreateListMixer();
 var content = id("content");
 var gitName = id("gitName");
 var friendButton = id("friendButton");
