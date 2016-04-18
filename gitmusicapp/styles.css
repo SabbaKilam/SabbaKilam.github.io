@@ -117,7 +117,15 @@ body{
     font-size: 2.5rem;
     font-style: normal;    
     cursor: pointer;
+    vertical-align: middle;
 }
+#menuWord{
+    font-size: 0.85rem;
+    font-style: italic;
+    font-weight: normal;
+    vertical-align: middle;    
+}
+
 #audioPlayer{
     width:92%;
     border-radius: 0.2rem;
