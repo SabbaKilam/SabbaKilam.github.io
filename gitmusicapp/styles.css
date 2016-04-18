@@ -109,6 +109,7 @@ body{
 #gitname{
     width: 25%;
 }
+
 #menuButton{
     color: black;
     text-shadow: 0 1px 0 hsl(165,50%,70%);
@@ -117,8 +118,8 @@ body{
     font-size: 1.5rem;
     font-style: normal;    
     cursor: pointer;
-    //vertical-align: middle;
 }
+
 #menuWord{
     display: inline-block;
     font-size: 0.8rem;
