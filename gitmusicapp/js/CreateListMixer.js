@@ -31,13 +31,6 @@ function CreateListMixer(){
 					list = arguments[0];
 				if({}.toString.call(arguments[0]) === '[object Object]'){
 					list = Object.keys(list);
-					/*
-					var objectList=[];
-					for(let prop in list){
-						objectList.push(prop);
-					}
-					list = objectList;
-					*/
 				}
 				randList = randomize(list);
 				listLength = list.length;
