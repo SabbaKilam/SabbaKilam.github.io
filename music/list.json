@@ -323,10 +323,6 @@
         "title" : "Crazy",
         "artist" : "Gnarls Barkley"
     },
-    "Vientos De Los Andes - Track 2" :{
-        "title" : "Track 2",
-        "artist" : "Vientos De Los Andes"
-    },
     "Van Morrison - Did Ye Get Healed" :{
         "title" : "Did Ye Get Healed",
         "artist" : "Van Morrison"
@@ -354,5 +350,9 @@
     "Marc Broussard - Home" :{
         "title" : "Home",
         "artist" : "Marc Broussard"
+    },
+    "Unknown - Vientos De Los Andes-Track 2" :{
+        "title" : "Vientos De Los Andes",
+        "artist" : "Unknown"
     }
 }
