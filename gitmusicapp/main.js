@@ -58,6 +58,7 @@ var colorSlider = id("colorSlider");
 var shadowSlider = id("shadowSlider");
 var gitColor = id("gitColor");
 var fileInput = id("fileInput");
+var removeList = id("removeList");
 
 var propNames = Object.keys;
 var playlistHeader = "Choose a Song";
@@ -92,6 +93,7 @@ shuffleBox.onclick = toggleShuffle;
 audioPlayer.onended = playNextSong;
 nextSong.onclick = playNextSong;
 
+
 //---| menu actions |------
 
 gitName.onkeyup = getNewList;
@@ -100,6 +102,7 @@ fileInput.onchange = uploadSong;
 colorSlider.oninput = showColors;
 colorSlider.onmousedown = showColors;
 gitColor.onmouseup = hideColors;
+removeList.onchange = removePlaylist;
 
 //---| END menu actions |------
 
@@ -116,11 +119,36 @@ menu.onclick = function(e){
 
 //====| Under The Hood |====
 
+function removePlaylist(e){
+    var listToRemove = removeList.options[removeList.selectedIndex].innerHTML;
+    var arrayOfplaylists = [].slice.call(chooser.options,0);
+    arrayOfplaylists.forEach(function(m,i,a){
+        if(m.innerHTML === listToRemove){
+            chooser.removeChild(chooser[i]);
+            //remove old list from menu
+            removeList.removeChild(removeList[i]);
+            removeList.selectedIndex = 0;
+
+            //remove from lists
+            delete lists[listToRemove];
+
+            //save reduced list to local storage:
+            storeListsToBrowser(lists);
+
+            //save reduced list to server:
+            sendListToServer(lists);
+        }
+    });
+}
+
 function playNextSong(e){
     if(shuffleOn && chooser.selectedIndex !== 0){
         playlist.selectedIndex = songsArray.indexOf(getRandomSong()) + 1;
+        flashObjectStyle(nextSong,"box-shadow","inset 1px 1px 1px black", 0.25);
+        flashObjectColor(nextSong,"white", 0.25)
         playSong();
-    }     
+    }
+
 }
 
 function uploadSong(){
@@ -199,7 +227,7 @@ function turnShuffleOn(){
     shuffleTimerId = setInterval(function(){
         toggleShuffle.angle += 10;
         shuffleIcon.style.transform = "rotateZ(" + toggleShuffle.angle % 360 + "deg)";
-    },100);    
+    },100);
 }
 function turnShuffleOff(){
     shuffleBox.style.boxShadow = "1px 1px 1px black";
@@ -210,7 +238,7 @@ function turnShuffleOff(){
     shuffleIcon.style.color = "black";
     clearInterval(shuffleTimerId);
     shuffleIcon.style.transform = "rotateZ(90deg)";
-    shuffleOn = false;    
+    shuffleOn = false;
 }
 function loadColorsFromBrowser(){
     if(window.localStorage){
@@ -290,9 +318,6 @@ function setBackgroundColor(){
             ", 50%, 50%)) no-repeat"
         ;
     });
-
-
-
     if(window.localStorage){
         window.localStorage.setItem("backgroundColorAngle",backgroundColorAngle);
     }
@@ -307,10 +332,18 @@ function addListsFromBrowser(){
                 if (!lists[list]) {
                     lists[list] = userLists[list];
                 }
+                addToRemoveList(list);
             }
         }
     }
 }
+//------
+function addToRemoveList(listName){
+    var option =document.createElement("option");
+    option.innerHTML = listName;
+    id("removeList").appendChild(option);
+}
+
 //----------
 function addListsFromServer() {
     var listGetter = new XMLHttpRequest();
@@ -412,6 +445,9 @@ function saveNewList() {
         lists[newname] = newListObject;
         addNameToBox(newname);
         sendListToServer(lists);
+        if(Object.keys(lists).length === 1){
+            chooser.selectedIndex = 1;
+        }
     }
     storeListsToBrowser(lists);
 }
