@@ -114,16 +114,18 @@ body{
     text-shadow: 0 1px 0 hsl(165,50%,70%);
     float: left;
     padding-left: 2%;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-style: normal;    
     cursor: pointer;
-    vertical-align: middle;
+    //vertical-align: middle;
 }
 #menuWord{
-    font-size: 0.85rem;
+    display: inline-block;
+    font-size: 0.8rem;
     font-style: italic;
     font-weight: normal;
-    vertical-align: middle;    
+    vertical-align: middle;
+    margin-bottom:0.25rem;
 }
 
 #audioPlayer{
