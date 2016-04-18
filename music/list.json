@@ -306,5 +306,41 @@
     "Archies - Sugar Sugar" :{
         "title" : "Sugar Sugar",
         "artist" : "Archies"
+    },
+    "Quicksilver Messenger Service - What About Me" :{
+        "title" : "What About Me",
+        "artist" : "Quicksilver Messenger Service"
+    },
+    "Joni Mitchell - River" :{
+        "title" : "River",
+        "artist" : "Joni Mitchell"
+    },
+    "Joni Mitchell - Help Me" :{
+        "title" : "Help Me",
+        "artist" : "Joni Mitchell"
+    },
+    "Joni Mitchell - All I Want" :{
+        "title" : "All I Want",
+        "artist" : "Joni Mitchell"
+    },
+    "Gnarls Barkley - Crazy" :{
+        "title" : "Crazy",
+        "artist" : "Gnarls Barkley"
+    },
+    "Vientos De Los Andes - Track 2" :{
+        "title" : "Track 2",
+        "artist" : "Vientos De Los Andes"
+    },
+    "Van Morrison - Did Ye Get Healed" :{
+        "title" : "Did Ye Get Healed",
+        "artist" : "Van Morrison"
+    },
+    "Stevie Wonder  - Pastime Paradise" :{
+        "title" : "Pastime Paradise",
+        "artist" : "Stevie Wonder"
+    },
+    "Spinners - It a Shame" :{
+        "title" : "It a Shame",
+        "artist" : "Spinners"
     }
 }
