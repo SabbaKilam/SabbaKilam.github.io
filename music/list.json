@@ -358,5 +358,17 @@
     "Unknown - Vientos De Los Andes-Track 10" :{
         "title" : "Vientos De Los Andes-Track 10",
         "artist" : "Unknown"
+    },
+    "Turtles-Elenore" :{
+        "title" : "Elenore",
+        "artist" : "Turtles"
+    },
+    "Tommy James & The Shondells - Crystal Blue Persuasion" :{
+        "title" : "Crystal Blue Persuasion",
+        "artist" : "Tommy James & The Shondells"
+    },
+    "Tommy James & The Shondells - Crimson & Clover" :{
+        "title" : "Crimson & Clover",
+        "artist" : "Tommy James & The Shondells"
     }
 }
