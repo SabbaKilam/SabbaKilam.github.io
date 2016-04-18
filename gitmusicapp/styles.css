@@ -136,7 +136,10 @@ body{
 
 #playlist{
     text-align: center;
-    width: 60%;
+    vertical-align: middle;
+    width: 30%;
+    box-shadow: 1px 1px 1px black;
+    border-radius: 0.2rem;    
 }
 #currentlyPlaying{
     padding-top: 0.5rem;
@@ -163,12 +166,14 @@ table{
     margin: 0.25rem auto;
 }
 #shuffleBox{
+    display: inline-block;    
     margin: 0 auto;
     box-shadow: 1px 1px 1px black;
     border-radius: 0.2rem;
     width: 5.5rem;
     cursor: pointer;
     transition: all 0.25s ease;
+    vertical-align: middle;    
 }
 
 #shuffleIcon{
@@ -178,7 +183,20 @@ table{
     transform: rotateZ(90deg);
     width: 20%;    
 }
-#shuffleState{
-   
+
+#nextSong{
+    display: inline-block;
+    width: 1rem;
+    border-radius: 0.2rem;    
+    font-size: 1.3rem;
+    vertical-align: top;
+    box-shadow: 1px 1px 1px black;
+    border-radius: 0.2rem; 
+    margin: 0 auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    line-height: 1.18rem;
+    cursor: pointer;
+  
 }
 /*===========| END audio controls |===========*/

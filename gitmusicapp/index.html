@@ -38,15 +38,19 @@
                     <option>Select A Playist</option>
                 </select>
                 <div id="audioControls">
-                    <div id="shuffleBox">
-                         <span id="shuffleIcon">&sect;</span>&nbsp;shuffle&nbsp;<span id="shuffleState">&nbsp;off</span>                        
-                    </div>
+
+
+                    <div id="playlistHolder">
+                        <select id="playlist" class="roundPink">
+                            <option>Choose a Song</option>
+                        </select>
+                        <div id="shuffleBox">
+                             <span id="shuffleIcon">&sect;</span>&nbsp;shuffle&nbsp;<span id="shuffleState">&nbsp;off</span>  
+                        </div>
+                        <div id="nextSong">&raquo;</div><!--	&#9193;-->                        
+                    </div><!-- end of playlistHolder -->                    
                 </div>
-                <div id="playlistHolder">
-                    <select id="playlist" class="roundPink">
-                        <option>Choose a Song</option>
-                    </select>
-                </div><!-- end of playlistHolder -->
+
                 <br/>
                 <audio id="audioPlayer" controls autoplay src="http://www.noiseaddicts.com/samples_1w72b820/4929.mp3"></audio>
                 <!--http://www.noiseaddicts.com/free-samples-mp3/-->

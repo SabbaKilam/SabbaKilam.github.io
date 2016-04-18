@@ -42,6 +42,7 @@ function id(string) {
 }
 /*global CreateListMixer*/
 var getRandomSong = CreateListMixer();
+var nextSong = id("nextSong");
 var content = id("content");
 var gitName = id("gitName");
 var friendButton = id("friendButton");
@@ -88,12 +89,9 @@ menuButton.onclick = toggleAndFlash;
 X.onclick = toggleAndFlash;
 appTitle.onclick = toggleAndFlash;
 shuffleBox.onclick = toggleShuffle;
-audioPlayer.onended = function(e){
-    if(shuffleOn && chooser.selectedIndex !== 0){
-        playlist.selectedIndex = songsArray.indexOf(getRandomSong());
-        playSong();
-    }
-};
+audioPlayer.onended = playNextSong;
+nextSong.onclick = playNextSong;
+
 //---| menu actions |------
 
 gitName.onkeyup = getNewList;
@@ -117,6 +115,13 @@ menu.onclick = function(e){
 };
 
 //====| Under The Hood |====
+
+function playNextSong(e){
+    if(shuffleOn && chooser.selectedIndex !== 0){
+        playlist.selectedIndex = songsArray.indexOf(getRandomSong()) + 1;
+        playSong();
+    }     
+}
 
 function uploadSong(){
     try{
@@ -181,7 +186,7 @@ toggleShuffle.angle = 0;
 
 function turnShuffleOn(){
     if(chooser.selectedIndex === 0){return;}
-    playlist.selectedIndex = songsArray.indexOf(getRandomSong(songsArray));
+    playlist.selectedIndex = songsArray.indexOf(getRandomSong(songsArray)) + 1;
     playSong();
     shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
     shuffleState.innerHTML = "on";
