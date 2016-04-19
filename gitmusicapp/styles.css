@@ -166,7 +166,8 @@ table{
     vertical-align: middle;
     width: 15rem;
     box-shadow: 1px 1px 1px black;
-    border-radius: 0.2rem;    
+    border-radius: 0.2rem; 
+    text-align: left;
 }
 #audioControls{
     font-size: 0.7rem;
@@ -195,13 +196,13 @@ table{
     display: inline-block;
     width: 1rem;
     border-radius: 0.2rem;    
-    font-size: 1.3rem;
+    font-size: 1.29rem;
     vertical-align: top;
     box-shadow: 1px 1px 1px black;
     margin: 0 auto;
     padding-left: 0.5rem;
     padding-right: 0.1rem;
-    line-height: 1.19rem;
+    line-height: 1.18rem;
     cursor: pointer;
 }
 /*===========| END audio controls |===========*/
