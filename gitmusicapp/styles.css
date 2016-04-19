@@ -110,7 +110,7 @@ body{
     width: 25%;
 }
 #menuCouple{
-    vertical-align: middle;    
+  height: .2rem;
 }
 
 #menuButton{
@@ -126,7 +126,7 @@ body{
 
 #menuWord{
     display: inline-block;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     font-style: italic;
     font-weight: normal;
     vertical-align: middle;
@@ -197,8 +197,8 @@ table{
     box-shadow: 1px 1px 1px black;
     margin: 0 auto;
     padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    line-height: 1.19rem;
+    padding-right: 0.25rem;
+    line-height: 1.2rem;
     cursor: pointer;
 }
 /*===========| END audio controls |===========*/
