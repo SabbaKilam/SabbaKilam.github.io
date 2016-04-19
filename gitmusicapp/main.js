@@ -144,8 +144,8 @@ function removePlaylist(e){
 function playNextSong(e){
     if(shuffleOn && chooser.selectedIndex !== 0){
         playlist.selectedIndex = songsArray.indexOf(getRandomSong()) + 1;
-        flashObjectStyle(nextSong,"box-shadow","inset 1px 1px 1px black", 0.25);
-        flashObjectColor(nextSong,"white", 0.25)
+        flashObjectStyle(nextSong,"box-shadow","inset 1px 1px 1px black", 0.5);
+        flashObjectColor(nextSong,"white", 0.5)
         playSong();
     }
 
