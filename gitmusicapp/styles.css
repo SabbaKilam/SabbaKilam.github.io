@@ -134,7 +134,7 @@ body{
 }
 
 #audioPlayer{
-    width:92%;
+    width:90%;
     border-radius: 0.2rem;
 }
 
@@ -159,12 +159,12 @@ table{
 }
 /*===========| audio controls |===========*/
 #controlsTable{
-    width: 20rem;
+    width: 18rem;
 }
 #playlist{
     text-align: center;
     vertical-align: middle;
-    width: 13rem;
+    width: 11rem;
     box-shadow: 1px 1px 1px black;
     border-radius: 0.2rem; 
     text-align: left;
