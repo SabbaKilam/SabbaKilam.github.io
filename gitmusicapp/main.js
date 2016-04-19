@@ -93,7 +93,6 @@ shuffleBox.onclick = toggleShuffle;
 audioPlayer.onended = playNextSong;
 nextSong.onclick = playNextSong;
 
-
 //---| menu actions |------
 
 gitName.onkeyup = getNewList;
@@ -140,17 +139,16 @@ function removePlaylist(e){
         }
     });
 }
-
+//----------
 function playNextSong(e){
     if(shuffleOn && chooser.selectedIndex !== 0){
         playlist.selectedIndex = songsArray.indexOf(getRandomSong()) + 1;
         flashObjectStyle(nextSong,"box-shadow","inset 1px 1px 1px black", 0.5);
-        flashObjectColor(nextSong,"white", 0.5)
+        flashObjectColor(nextSong,"white", 0.5);
         playSong();
     }
-
 }
-
+//----------
 function uploadSong(){
     try{
         var file = this.files[0];
@@ -187,7 +185,7 @@ function uploadSong(){
         alert("Problems uploading a song.\n" + error);
     }
 }
-
+//----------
 function initialize() {
     // 1. Augment our lists object with downloaded lists
     addListsFromServer();
@@ -201,7 +199,7 @@ function initialize() {
     loadColorsFromBrowser();
 
 } //===| END of initialize() |=====
-
+//----------
 function toggleShuffle(){
     if(shuffleOn){
         turnShuffleOff();
@@ -211,7 +209,7 @@ function toggleShuffle(){
     }
 }
 toggleShuffle.angle = 0;
-
+//----------
 function turnShuffleOn(){
     if(chooser.selectedIndex === 0){return;}
     playlist.selectedIndex = songsArray.indexOf(getRandomSong(songsArray)) + 1;
@@ -229,6 +227,7 @@ function turnShuffleOn(){
         shuffleIcon.style.transform = "rotateZ(" + toggleShuffle.angle % 360 + "deg)";
     },100);
 }
+//----------
 function turnShuffleOff(){
     shuffleBox.style.boxShadow = "1px 1px 1px black";
     shuffleState.innerHTML = "off";
@@ -240,6 +239,7 @@ function turnShuffleOff(){
     shuffleIcon.style.transform = "rotateZ(90deg)";
     shuffleOn = false;
 }
+//----------
 function loadColorsFromBrowser(){
     if(window.localStorage){
         var possibleAngle = window.localStorage.getItem("mainColorAngle");
@@ -261,17 +261,17 @@ function loadColorsFromBrowser(){
         }
     }
 }
-
+//----------
 function toggleAndFlash(e){
     e.stopPropagation();
     toggleMenu(e);
     flashObjectColor(menuButton, "white", 0.25);
 }
-
+//----------
 function clearInput(e){
     e.target.value = "";
 }
-
+//----------
 function showColors(e){
     e.stopPropagation();
     setMainColor();
@@ -282,17 +282,17 @@ function showColors(e){
     shadowSlider.value = colorSlider.value;
     menuOpen = false;
 }
-
+//----------
 function hideColors(){
     menu.style.transition = "all 1s ease;";
     shadowSlider.style.visibility = "hidden";
 }
-
+//----------
 function setMainColor(){
     mainColorAngle = colorSlider.value;
     prefix.forEach(function(pre){
         content.style.background = pre +
-        "linear-gradient(-60deg, hsl(" +
+            "linear-gradient(-60deg, hsl(" +
             mainColorAngle +
             ", 50%, 40%), white)"
         ;
@@ -300,11 +300,10 @@ function setMainColor(){
     if(window.localStorage){
         window.localStorage.setItem("mainColorAngle",mainColorAngle);
     }
-
 }
+//----------
 function setBackgroundColor(){
     backgroundColorAngle = (mainColorAngle - 180);
-
     prefix.forEach(function(m){
         document.body.style.background = m +
             "linear-gradient(60deg, white, hsl(" +
@@ -322,7 +321,7 @@ function setBackgroundColor(){
         window.localStorage.setItem("backgroundColorAngle",backgroundColorAngle);
     }
 }
-
+//----------
 function addListsFromBrowser(){
     if(window.localStorage){
         if(window.localStorage.getItem("lists")){
@@ -343,7 +342,6 @@ function addToRemoveList(listName){
     option.innerHTML = listName;
     id("removeList").appendChild(option);
 }
-
 //----------
 function addListsFromServer() {
     var listGetter = new XMLHttpRequest();
@@ -363,7 +361,7 @@ function addListsFromServer() {
         storeListsToBrowser();
     };
 }
-
+//----------
 function storeListsToBrowser() {
     if(window.localStorage !== undefined){
         var listString = JSON.stringify(lists);
@@ -402,7 +400,6 @@ function configureResizing() {
         alignSliders();
     }
     //-------------
-
 }
 //----------
 function addPlaylistNamesToBox() {
@@ -445,8 +442,10 @@ function saveNewList() {
         lists[newname] = newListObject;
         addNameToBox(newname);
         sendListToServer(lists);
+        //if only one list ...
         if(Object.keys(lists).length === 1){
             chooser.selectedIndex = 1;
+            changePlayList();
         }
     }
     storeListsToBrowser(lists);
@@ -547,7 +546,6 @@ function flashObjectStyle(object, style, value, durationSeconds) {
     }, 1000 * durationSeconds);
 }
 //---------
-
 function sortedListByArtist(object){
     var artist, title, joiner = "```";//tripple backtick unlikely to conflict
 	//first gather the song filenames (keys of the list object)
@@ -589,7 +587,7 @@ function sortedListByArtist(object){
 	//4.) return the sorted object.
 	return sortedObject;
 }//===| end of sortedListByArtist() |=====
-
+//----------
 function toggleMenu(){
     if(menuOpen){
         menu.style.transition = "all 1s ease";
