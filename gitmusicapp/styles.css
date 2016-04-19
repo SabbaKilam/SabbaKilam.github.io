@@ -164,7 +164,7 @@ table{
 #playlist{
     text-align: center;
     vertical-align: middle;
-    width: 15rem;
+    width: 13rem;
     box-shadow: 1px 1px 1px black;
     border-radius: 0.2rem; 
     text-align: left;
@@ -178,7 +178,7 @@ table{
     margin: 0 auto;
     box-shadow: 1px 1px 1px black;
     border-radius: 0.2rem;
-    width: 7rem;
+    width: 6rem;
     cursor: pointer;
     transition: all 0.25s ease;
     vertical-align: middle;    
@@ -194,7 +194,7 @@ table{
 
 #nextSong{
     display: inline-block;
-    width: 1rem;
+    width: 0.8rem;
     border-radius: 0.2rem;    
     font-size: 1.29rem;
     vertical-align: top;
