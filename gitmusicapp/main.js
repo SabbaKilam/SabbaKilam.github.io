@@ -3,7 +3,7 @@
     Author: Abbas Abdulmalik
     Creation Date: April 2, 2016
     Title:  Git Y'r Music
-    Revised: April 19, 2016
+    Revised: April 20, 2016
     Purpose: A music playlist sharing app
     Notes: play friends' music without downloading their files
 */
@@ -66,14 +66,12 @@ menuButton.onclick = toggleAndFlash;
 X.onclick = toggleAndFlash;
 appTitle.onclick = toggleAndFlash;
 shuffleBox.onclick = toggleShuffle;
+nextSong.onclick = playNextSong;
 audioPlayer.onended = function(){
     if(shuffleOn){
         playNextSong();
     }
 };
-
-nextSong.onclick = playNextSong;
-
 //---| menu actions |------
 
 gitName.onkeyup = getNewList;
