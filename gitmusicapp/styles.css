@@ -162,7 +162,6 @@ table{
     width: 18rem;
 }
 #playlist{
-    text-align: center;
     vertical-align: middle;
     width: 11rem;
     box-shadow: 1px 1px 1px black;
@@ -185,11 +184,24 @@ table{
 }
 
 #shuffleIcon{
+    /* new optional stuff */
+    background: url(images/shuffle.png) no-repeat center;
+    background-size: cover;
+    /* END new optional stuff */    
     font-size: 1rem;    
     display: inline-block;
-    transform-origin: 50% 55%;
-    transform: rotateZ(90deg);
-    width: 20%;    
+    //transform-origin: 50% 55%;
+    //transform: rotateZ(90deg);
+    width: 20%; 
+}
+#shuffleImage{
+    /* new optional stuff */
+    background: url(images/shuffle1.png) no-repeat center;
+    background-size: cover;
+    /* END new optional stuff */    
+    font-size: 1rem;    
+    display: inline-block;
+    width: 20%;      
 }
 
 #nextSong{

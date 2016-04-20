@@ -15,6 +15,8 @@ function id(string) {
     return document.getElementById(string);
 }
 /*global CreateListMixer*/
+var cycleTime = 0.5; // half a second?
+var shuffleImages = ["images/shuffle.png","images/shuffle1.png","images/shuffle2.png"];
 var getRandomSong = CreateListMixer();
 var nextSong = id("nextSong");
 var content = id("content");
@@ -124,7 +126,7 @@ function playNextSong(e){
     if(chooser.selectedIndex !== 0){
         if(shuffleOn){
             playlist.selectedIndex = songsArray.indexOf(getRandomSong()) + 1;
-            playSong();            
+            playSong();
         }
         else if(playlist.selectedIndex !== highestIndex){
             playlist.selectedIndex += 1;
@@ -132,10 +134,10 @@ function playNextSong(e){
         }
         else{
             playlist.selectedIndex = 1;
-            playSong();        
+            playSong();
         }
         flashObjectStyle(nextSong,"box-shadow","inset 1px 1px 1px black", 0.5);
-        flashObjectColor(nextSong,"white", 0.5);        
+        flashObjectColor(nextSong,"white", 0.5);
     }
 }
 //----------
@@ -192,10 +194,10 @@ function initialize() {
 //----------
 function toggleShuffle(){
     if(shuffleOn){
-        turnShuffleOff();
+        turnShuffle2Off();
     }
     else{
-        turnShuffleOn();
+        turnShuffle2On();
     }
 }
 toggleShuffle.angle = 0;
@@ -228,6 +230,69 @@ function turnShuffleOff(){
     clearInterval(shuffleTimerId);
     shuffleIcon.style.transform = "rotateZ(90deg)";
     shuffleOn = false;
+}
+//----------
+function turnShuffle2On(){
+    if(chooser.selectedIndex === 0){return;}
+    playlist.selectedIndex = songsArray.indexOf(getRandomSong(songsArray)) + 1;
+    playSong();
+    shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
+    shuffleState.innerHTML = "on";
+    shuffleState.style.color = "lightgray";
+    shuffleIcon.style.color = "lightgray";
+    shuffleState.style.textShadow = "0 1px 0 black";
+    shuffleIcon.style.textShadow = "0 1px 0 black";
+    shuffleOn = true;
+    fadeShuffleImage();
+}
+//----------
+function turnShuffle2Off(){
+    shuffleBox.style.boxShadow = "1px 1px 1px black";
+    shuffleState.innerHTML = "off";
+    shuffleState.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
+    shuffleIcon.style.textShadow = "0 1px 0 hsl(165,50%,70%)";
+    shuffleState.style.color = "black";
+    shuffleIcon.style.color = "black";
+    clearInterval(shuffleTimerId);
+    shuffleIcon.style.transform = "rotateZ(0deg)";
+
+	shuffleIcon.style.opacity = "1";
+	shuffleIcon.style.background = "url(images/shuffle.png) no-repeat center";
+	shuffleIcon.style.backgroundSize = "contain";
+
+    shuffleOn = false;
+}
+//----------
+function fadeShuffleImage(){
+	var minOpacity = 0.3;
+	var opacity = minOpacity;
+	var brighter = 1, darker = -1;
+	var direction = brighter;
+	var steps = 10;
+	if(shuffleOn){
+		shuffleTimerId = setInterval(function(){
+			opacity += (1/steps)* direction;
+			if(opacity >= 1){
+				direction = darker;
+
+			}
+			if (opacity <= minOpacity){
+				direction = brighter;
+				//rotate images
+				shuffleImages.push(shuffleImages.shift());
+				shuffleIcon.style.background = "url("+ shuffleImages[0] +") no-repeat center";
+				shuffleIcon.style.backgroundSize = "contain";
+
+			}
+			shuffleIcon.style.opacity = opacity +"";
+		}, cycleTime*1000/steps);
+	}
+	else{
+		clearInterval(shuffleTimerId);
+		shuffleIcon.style.opacity = "1";
+		shuffleIcon.style.background = "url(images/shuffle.png) no-repeat center";
+		shuffleIcon.style.backgroundSize = "contain";
+	}
 }
 //----------
 function loadColorsFromBrowser(){
@@ -460,7 +525,8 @@ function addNameToBox(newGitName) {
 }
 //----------
 function changePlayList(e) {
-    turnShuffleOff();
+    //turnShuffleOff();
+    turnShuffle2Off();
     if (chooser.selectedIndex === 0) {
         playlist.innerHTML = "";
         var topOption = document.createElement("option");
