@@ -422,5 +422,21 @@
     "Billy Idol - Rebel Yell" :{
         "title" : "Rebel Yell",
         "artist" : "Billy Idol"
+    },
+    "Shocking Blue - Venus" :{
+        "title" : "Venus",
+        "artist" : "Shocking Blue"
+    },
+    "Rascals - People Got To Be Free" :{
+        "title" : "People Got To Be Free",
+        "artist" : "Rascals"
+    },
+    "Rascals - A Beautiful Morning" :{
+        "title" : "A Beautiful Morning",
+        "artist" : "Rascals"
+    },
+    "Rascals - Good Lovin'" :{
+        "title" : "Good Lovin'",
+        "artist" : "Rascals"
     }
 }
