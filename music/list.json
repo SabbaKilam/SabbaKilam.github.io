@@ -378,5 +378,49 @@
     "Jasmine Thompson - All of Me" :{
         "title" : "All of Me",
         "artist" : "Jasmine Thompson"
+    },
+    "Joni Mitchell - California" :{
+        "title" : "California",
+        "artist" : "Joni Mitchell"
+    },
+    "Joni Mitchell - A Case Of You" :{
+        "title" : "A Case Of You",
+        "artist" : "Joni Mitchell"
+    },
+    "The Impressions - People Get Ready" :{
+        "title" : "People Get Ready",
+        "artist" : "The Impressions"
+    },
+    "Sly & The Family Stone - Hot Fun In The Summertime" :{
+        "title" : "Hot Fun In The Summertime",
+        "artist" : "Sly & The Family Stone"
+    },
+    "Sly & The Family Stone - If You Want Me To Stay" :{
+        "title" : "If You Want Me To Stay",
+        "artist" : "Sly & The Family Stone"
+    },
+    "Red Hot Chili Peppers - Venice Queen" :{
+        "title" : "Venice Queen",
+        "artist" : "Red Hot Chili Peppers"
+    },
+    "Wim Wenders - Often A Bird" :{
+        "title" : "Often A Bird",
+        "artist" : "Wim Wenders"
+    },
+    "Susan Tedeschi - Angel From Montgomery" :{
+        "title" : "Angel From Montgomery",
+        "artist" : "Susan Tedeschi"
+    },
+    "Ray LaMontagne - How Come" :{
+        "title" : "How Come",
+        "artist" : "Ray LaMontagne"
+    },
+    "Brook Benton - Rainy Night In Georgia" :{
+        "title" : "Rainy Night In Georgia",
+        "artist" : "Brook Benton"
+    },
+    "Billy Idol - Rebel Yell" :{
+        "title" : "Rebel Yell",
+        "artist" : "Billy Idol"
     }
 }
