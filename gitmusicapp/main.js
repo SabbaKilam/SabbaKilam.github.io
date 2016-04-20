@@ -423,6 +423,7 @@ function getNewList(e) {
 }
 //----------
 function saveNewList() {
+    toggleMenu();
     var newname = gitName.value.toLowerCase().trim();
     if (!lists[newname]) {
         //save new list to our lists object
