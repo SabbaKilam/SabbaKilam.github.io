@@ -64,7 +64,12 @@ menuButton.onclick = toggleAndFlash;
 X.onclick = toggleAndFlash;
 appTitle.onclick = toggleAndFlash;
 shuffleBox.onclick = toggleShuffle;
-audioPlayer.onended = playNextSong;
+audioPlayer.onended = function(){
+    if(shuffleOn){
+        playNextSong();
+    }
+};
+
 nextSong.onclick = playNextSong;
 
 //---| menu actions |------
