@@ -1,37 +1,11 @@
 /**
 
     Author: Abbas Abdulmalik
-    Creation Date: April 7, 2016
+    Creation Date: April 2, 2016
     Title:  Git Y'r Music
-    Revised: April 12, 2016
+    Revised: April 19, 2016
     Purpose: A music playlist sharing app
-    Notes: play friends' music without downloading the file
-
-<div id="mobileHolder">
-    <div id="content">
-        <div>
-            <span id="menuButton">&equiv;</span>
-            <div id="currentlyPlaying"></div>
-        </div>
-        <h3 id="appTitle">Git Y'r Music!</h3>
-           &nbsp;GitHub Friend&rAarr;<input id="gitName" type="text" class="roundPink">
-            <input type="button" id="friendButton" value="Get Friend's Playlist" class="roundPink">
-            <br/><br/>
-          &nbsp;Current Playlist&rAarr;
-        <select id="chooser" class="roundPink"><div id="shuffleIcon">testing</div>
-            <option>Select A Playist</option>
-        </select>
-        <br/>
-        <div id="playlistHolder">
-            <select id="playlist" class="roundPink">
-                <option>Choose a Song</option>
-            </select>
-        </div><!-- end of playlistHolder -->
-        <br/>
-        <audio id="audioPlayer" controls autoplay src="http://www.noiseaddicts.com/samples_1w72b820/4929.mp3"></audio>
-        <!--http://www.noiseaddicts.com/free-samples-mp3/-->
-    </div><!-- end of content -->
-</div><!-- end mobileHolder-->
+    Notes: play friends' music without downloading their files
 */
 "use strict";
 
@@ -145,8 +119,6 @@ function playNextSong(e){
     if(chooser.selectedIndex !== 0){
         if(shuffleOn){
             playlist.selectedIndex = songsArray.indexOf(getRandomSong()) + 1;
-            flashObjectStyle(nextSong,"box-shadow","inset 1px 1px 1px black", 0.5);
-            flashObjectColor(nextSong,"white", 0.5);
             playSong();            
         }
         else if(playlist.selectedIndex !== highestIndex){
@@ -156,7 +128,9 @@ function playNextSong(e){
         else{
             playlist.selectedIndex = 1;
             playSong();        
-        }        
+        }
+        flashObjectStyle(nextSong,"box-shadow","inset 1px 1px 1px black", 0.5);
+        flashObjectColor(nextSong,"white", 0.5);        
     }
 }
 //----------
