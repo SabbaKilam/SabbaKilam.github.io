@@ -657,3 +657,45 @@ function toggleMenu(){
         menuOpen = true;
     }
 }
+//-------
+function substringSubarray(string, array){
+/**
+ * A function that is given a string and an array.
+ * It returns a (possibly) smaller array of elements
+ * that match the string.
+ * It returns nothing if both the string and array
+ * are not provided.
+*/	
+	//Needs both arguments, else returns nothing
+	if(array === undefined){
+		return [];
+	}
+	//first argument needs to be string
+	else if(typeof string !== 'string'){
+		return [];
+	}
+	//second argument needs to be an array
+	else if(type(array) !== '[object Array]'){
+		return [];
+	}
+	
+	return matchedArray();
+	
+	//---| helper function |---
+	function type(thing){
+		return {}.toString.call(thing);	
+	}
+	function matchedArray(){
+		var newArray = [];
+		//fill this array with the items that match the string
+		array.forEach(function(m){
+			//push m to the newArray,
+			//if it contains the substring
+			//ignoring case
+			if(m.toLowerCase().indexOf(string.toLowerCase()) !== -1){
+				newArray.push(m);
+			}
+		});
+		return newArray;
+	}
+}//===| END of substringSubarray() |===
