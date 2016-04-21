@@ -16,7 +16,7 @@ function id(string) {
 }
 /*global CreateListMixer*/
 var cycleTime = 0.5; // half a second?
-var shuffleImages = ["images/shuffle1.png","images/shuffle2.png"];
+var shuffleImages = ["images/shuffle3.png","images/shuffle1.png","images/shuffle2.png","images/shuffle4.png",];
 var getRandomSong = CreateListMixer();
 var nextSong = id("nextSong");
 var content = id("content");

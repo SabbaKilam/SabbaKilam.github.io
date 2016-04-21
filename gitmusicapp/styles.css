@@ -159,11 +159,11 @@ table{
 }
 /*===========| audio controls |===========*/
 #controlsTable{
-    width: 20rem;
+    width: 17.5rem;
 }
 #playlist{
     vertical-align: middle;
-    width: 10rem;
+    width: 9rem;
     box-shadow: 1px 1px 1px black;
     border-radius: 0.2rem;
     text-align: left;
@@ -188,7 +188,9 @@ table{
 }
 #searchBox{
     text-align: center;
-    width: 4rem;
+    font-weight: bold;
+    width: 3rem;
+    font-size: 0.6rem;    
     
 }
 #shuffleIcon{
