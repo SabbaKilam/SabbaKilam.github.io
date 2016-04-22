@@ -35,6 +35,7 @@ var shadowSlider = id("shadowSlider");
 var gitColor = id("gitColor");
 var fileInput = id("fileInput");
 var removeList = id("removeList");
+var searchBox = id("searchBox");
 
 var propNames = Object.keys;
 var playlistHeader = "Choose a Song";
@@ -59,6 +60,7 @@ var shuffleTimerId = null;
 //====| The Driver's Seat |====
 
 window.onload = initialize;
+searchBox.onkeyup = findMatches;
 chooser.onchange = changePlayList;
 playlist.onchange = playSong;
 friendButton.onclick = getNewList;
@@ -72,6 +74,8 @@ audioPlayer.onended = function(){
         playNextSong();
     }
 };
+
+
 //---| menu actions |------
 
 gitName.onkeyup = getNewList;
@@ -110,6 +114,35 @@ function initialize() {
     loadColorsFromBrowser();
 
 } //===| END of initialize() |=====
+function findMatches(e){
+    //if the search box is empty, restore old playlist
+    if(e.target.value === ""){
+            //restore playlist and anything else that needs restoring. Then ...
+            changePlayList();
+            return;
+    }
+    //-------------------
+    var keyCode = e.keyCode;
+    if(keyCode && keyCode === 13){
+        var matchedSongsWithIndex = [];
+        var matchedSongsArray = substringSubarray(searchBox.value,songsArray);
+        matchedSongsArray.forEach(function(m,i,a){
+            matchedSongsWithIndex.push(m+"~~~ "+ songsArray.indexOf(m));
+        });
+        alert(matchedSongsWithIndex.join('```\n').split('```'));
+        /**
+         * Test here to see if we can restore a broken playlist
+        */
+        if(matchedSongsArray.length !== 0 && searchBox.value !== ""){
+            playlist.innerHTML = "";
+        }
+        else{
+            changePlayList();
+        }
+        /**   end of test */
+    }
+}
+//----------
 function removePlaylist(e){
     var listToRemove = removeList.options[removeList.selectedIndex].innerHTML;
     var arrayOfplaylists = [].slice.call(chooser.options,0);
@@ -231,9 +264,9 @@ function turnShuffleOff(){
 //----------
 function turnShuffle2On(){
     if(chooser.selectedIndex === 0){return;}
-    var songOnDeck = getRandomSong(songsArray);
     
-    //if a sing is not already playing, play song:
+    var songOnDeck = getRandomSong(songsArray);
+    //if a song is not already playing, play song:
     if(audioPlayer.paused){
         playlist.selectedIndex = songsArray.indexOf(songOnDeck) + 1;        
         playSong();        
