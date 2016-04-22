@@ -97,6 +97,19 @@ menu.onclick = function(e){
 
 //====| Under The Hood |====
 
+function initialize() {
+    // 1. Augment our lists object with downloaded lists
+    addListsFromServer();
+    // 2. Fill our chooser with lists' names
+    //addPlaylistNamesToBox();//called from within 1. above
+    // 3. Further augment our lists object with browser's copy
+    addListsFromBrowser();
+    // 4. Store lists object on the browser
+    //storeListsToBrowser();
+    configureResizing();
+    loadColorsFromBrowser();
+
+} //===| END of initialize() |=====
 function removePlaylist(e){
     var listToRemove = removeList.options[removeList.selectedIndex].innerHTML;
     var arrayOfplaylists = [].slice.call(chooser.options,0);
@@ -176,20 +189,6 @@ function uploadSong(){
     }
 }
 //----------
-function initialize() {
-    // 1. Augment our lists object with downloaded lists
-    addListsFromServer();
-    // 2. Fill our chooser with lists' names
-    //addPlaylistNamesToBox();//called from within 1. above
-    // 3. Further augment our lists object with browser's copy
-    addListsFromBrowser();
-    // 4. Store lists object on the browser
-    //storeListsToBrowser();
-    configureResizing();
-    loadColorsFromBrowser();
-
-} //===| END of initialize() |=====
-//----------
 function toggleShuffle(){
     if(shuffleOn){
         turnShuffle2Off();
@@ -232,8 +231,14 @@ function turnShuffleOff(){
 //----------
 function turnShuffle2On(){
     if(chooser.selectedIndex === 0){return;}
-    playlist.selectedIndex = songsArray.indexOf(getRandomSong(songsArray)) + 1;
-    playSong();
+    var songOnDeck = getRandomSong(songsArray);
+    
+    //if a sing is not already playing, play song:
+    if(audioPlayer.paused){
+        playlist.selectedIndex = songsArray.indexOf(songOnDeck) + 1;        
+        playSong();        
+    }
+
     shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
     shuffleState.innerHTML = "on";
     shuffleState.style.color = "lightgray";
