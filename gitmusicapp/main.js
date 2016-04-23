@@ -116,6 +116,7 @@ function initialize() {
 
 } //===| END of initialize() |=====
 function findMatches(e){
+    var keyCode = e.keyCode;
     //if the search box is empty, restore old playlist
     if(e.target.value === ""){
             //restore playlist and anything else that needs restoring. Then ...
@@ -155,6 +156,9 @@ function findMatches(e){
             playlist.selectedIndex = 1;
             playSong();
             audioPlayer.pause();
+            if(keyCode === 13){
+                audioPlayer.play()
+            }
         }
         else{
             songsArray = songsArrayBackup;            
