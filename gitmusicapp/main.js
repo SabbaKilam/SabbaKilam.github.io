@@ -43,6 +43,7 @@ var ajax = new XMLHttpRequest();
 var lists = {};
 var namesArray = [];
 var songsArray = [];
+var songsArrayBackup = [];
 var currentUrl = "";
 var currentPlayListName = "";
 var busyFlashingColor = false;
@@ -118,29 +119,49 @@ function findMatches(e){
     //if the search box is empty, restore old playlist
     if(e.target.value === ""){
             //restore playlist and anything else that needs restoring. Then ...
+            songsArray = songsArrayBackup;
             changePlayList();
             return;
     }
     //-------------------
-    var keyCode = e.keyCode;
-    if(keyCode && keyCode === 13){
-        var matchedSongsWithIndex = [];
-        var matchedSongsArray = substringSubarray(searchBox.value,songsArray);
+   // var keyCode = e.keyCode;
+    //if(keyCode && keyCode === 13){
+        //var matchedSongsWithIndex = [];
+        var matchedSongsArray = subList(searchBox.value,songsArrayBackup);
+        
+        /*
         matchedSongsArray.forEach(function(m,i,a){
             matchedSongsWithIndex.push(m+"~~~ "+ songsArray.indexOf(m));
         });
         alert(matchedSongsWithIndex.join('```\n').split('```'));
-        /**
+        /
+        
          * Test here to see if we can restore a broken playlist
         */
+        
         if(matchedSongsArray.length !== 0 && searchBox.value !== ""){
+            songsArray = matchedSongsArray;
             playlist.innerHTML = "";
+            var list = chooser.options[chooser.selectedIndex].innerHTML;            
+            var header = document.createElement("option");
+            header.innerHTML = playlistHeader;
+            playlist.appendChild(header);
+            songsArray.forEach(function (m) {
+                var artistTitle = lists[list][m].artist + " - " + lists[list][m].title;
+                var option = document.createElement("option");
+                option.innerHTML = artistTitle;
+                playlist.appendChild(option);
+            });
+            playlist.selectedIndex = 1;
+            playSong();
+            audioPlayer.pause();
         }
         else{
+            songsArray = songsArrayBackup;            
             changePlayList();
         }
         /**   end of test */
-    }
+    //}
 }
 //----------
 function removePlaylist(e){
@@ -271,7 +292,6 @@ function turnShuffle2On(){
         playlist.selectedIndex = songsArray.indexOf(songOnDeck) + 1;        
         playSong();        
     }
-
     shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
     shuffleState.innerHTML = "on";
     shuffleState.style.color = "lightgray";
@@ -563,6 +583,7 @@ function addNameToBox(newGitName) {
 function changePlayList(e) {
     //turnShuffleOff();
     turnShuffle2Off();
+    //searchBox.value="";
     if (chooser.selectedIndex === 0) {
         playlist.innerHTML = "";
         var topOption = document.createElement("option");
@@ -575,6 +596,7 @@ function changePlayList(e) {
     currentPlayListName = list;
     currentUrl = "https://" + list + ".github.io" + "/music/";
     songsArray = propNames(lists[list]);
+    songsArrayBackup = songsArray;
 
     playlist.innerHTML = "";
     var header = document.createElement("option");
@@ -695,6 +717,68 @@ function toggleMenu(){
         menuOpen = true;
     }
 }
+//-------
+function subList(string, list){
+/**
+ * A function that is given a string and an array.
+ * It returns a (possibly) smaller array of elements
+ * that match the string.
+ * It returns nothing if both the string and array
+ * are not provided.
+*/		
+	var returnList = null;
+	
+	//test the arguments
+	if(list === undefined){
+		return;
+	}
+	else if(typeof string !== "string"){
+		return;
+	}
+	else if(typeof list !== "object"){
+		return;
+	}
+	//done testing arguments
+	
+	if(type(list) === "Array"){
+		buildSubArray();
+	}
+	else{
+		buildSubObject();
+	}
+	return returnList;
+	
+	//---helper functions---
+	function buildSubArray(){
+		returnList = [];
+		if(string.length !== 0){
+			list.forEach(function(m){
+				if(m.toLowerCase().indexOf(string.toLowerCase()) !== -1){
+					returnList.push(m);
+				}
+			});			
+		}		
+	}
+	//----
+	function buildSubObject(){
+		returnList={};
+		if(string.length !== 0){
+			for(var prop in list){
+				if(prop.toLowerCase().indexOf(string.toLowerCase()) !== -1){
+					returnList[prop] = list[prop];
+				}
+			}			
+		}		
+	}
+	//----	
+	function type(arg){
+		var prefix = '[object ';
+		var trueType = {}.toString.call(arg);
+		trueType = trueType.slice(prefix.length, trueType.length-1);
+		return trueType;
+	}
+	//---end of helpers--
+}//=====| END of subList() |==========
 //-------
 function substringSubarray(string, array){
 /**
