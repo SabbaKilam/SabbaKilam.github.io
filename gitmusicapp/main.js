@@ -101,12 +101,7 @@ menu.onclick = function(e){
 };
 
 //====| Under The Hood |====
-function refreshList(){
-    if(chooser.selectedIndex !== 0){
-        flashObjectStyle(listRefresher,"box-shadow","inset 1px 1px 1px black", 0.5);
-        flashObjectColor(listRefresher,"white", 0.5);         
-    }
-} 
+
 
 function initialize() {
     // 1. Augment our lists object with downloaded lists
@@ -121,6 +116,29 @@ function initialize() {
     loadColorsFromBrowser();
 
 } //===| END of initialize() |=====
+function refreshList(e){
+    if(chooser.selectedIndex !== 0){
+        flashObjectStyle(listRefresher,"box-shadow","inset 1px 1px 1px black", 0.5);
+        flashObjectColor(listRefresher,"white", 0.5);
+        //-----------
+
+        var currentOption = chooser.options[chooser.selectedIndex];
+        var listname = currentOption.innerHTML;
+        
+        var E = {};
+        E.target = chooser;
+        E.keyCode = 13;
+        
+        removePlaylist(E);
+        gitName.value = listname;
+        getNewList(E);
+        toggleMenu();
+        setTimeout(function(){
+            chooser.selectedIndex = chooser.options.length-1;
+        },500);
+ 
+    }
+} 
 
 function findMatches(e){
     var keyCode = e.keyCode;
@@ -158,13 +176,16 @@ function findMatches(e){
     }
 }
 //----------
-function removePlaylist(e){
-    var listToRemove = removeList.options[removeList.selectedIndex].innerHTML;
+function removePlaylist(e,x){
+    var source = e.target;
+    var listToRemove = source.options[source.selectedIndex].innerHTML;
+   // var listToRemove = removeList.options[removeList.selectedIndex].innerHTML;
     var arrayOfplaylists = [].slice.call(chooser.options,0);
     arrayOfplaylists.forEach(function(m,i,a){
         if(m.innerHTML === listToRemove){
             chooser.removeChild(chooser[i]);
             //remove old list from menu
+            
             removeList.removeChild(removeList[i]);
             removeList.selectedIndex = 0;
 
@@ -457,7 +478,7 @@ function addListsFromBrowser(){
 }
 //------
 function addToRemoveList(listName){
-    var option =document.createElement("option");
+    var option = document.createElement("option");
     option.innerHTML = listName;
     id("removeList").appendChild(option);
 }
@@ -536,7 +557,8 @@ function getNewList(e) {
     if (e.keyCode && e.keyCode !== enterKey) {
         return;
     }
-
+    // add to remove list
+    addToRemoveList(gitName.value);
     //point to url
     var url = "https://" + gitName.value + ".github.io/music/list.json";
     ajax.open("GET", url);
