@@ -65,7 +65,7 @@ body{
     box-shadow: 3px 3px 10px black;
     background: linear-gradient(-60deg, hsl(186, 50%, 0%), white);
     color: #1d1d1d;
-    text-shadow: 0 1px 0 hsl(165,50%,70%);
+    text-shadow: 0 1px 0 lightgray;/*hsl(165,50%,70%);*/
     vertical-align: baseline;
 }
 #menu{
@@ -115,7 +115,7 @@ body{
 
 #menuButton{
     color: black;
-    text-shadow: 0 1px 0 hsl(165,50%,70%);
+    text-shadow: 0 1px 0 lightgray;/*hsl(165,50%,70%);*/
     float: left;
     padding-left: 2%;
     font-size: 2rem;
@@ -205,8 +205,25 @@ table{
     //transform: rotateZ(90deg);
     //width: 20%;
 }
-
+.smallControl{
+    display: inline-block;
+    width: 1rem;
+    border-radius: 0.2rem;
+    font-size: 1.29rem;
+    vertical-align: middle;
+    box-shadow: 1px 1px 1px black;
+    margin: 0 auto;
+    padding-left: 0.5rem;
+    padding-right: 0.1rem;
+    line-height: 1.16rem;/*1.18rem;*/
+    cursor: pointer;    
+}
+#refreshList{
+    font-size: 1rem;
+    font-weight: bold;
+}
 #nextSong{
+    /*
     display: inline-block;
     width: 1rem;
     border-radius: 0.2rem;
@@ -218,5 +235,6 @@ table{
     padding-right: 0.1rem;
     line-height: 1.18rem;
     cursor: pointer;
+    */
 }
 /*===========| END audio controls |===========*/
