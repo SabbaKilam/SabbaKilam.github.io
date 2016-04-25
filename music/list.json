@@ -462,5 +462,21 @@
     "Van Morrison - Wild Night" :{
         "title" : "Wild Night",
         "artist" : "Van Morrison"
+    },
+    "Van Morrison - Domino" :{
+        "title" : "Domino",
+        "artist" : "Van Morrison"
+    },
+    "Van Morrison - Into The Mystic" :{
+        "title" : "Into The Mystic",
+        "artist" : "Van Morrison"
+    },
+    "Van Morrison - Tupelo Honey" :{
+        "title" : "Tupelo Honey",
+        "artist" : "Van Morrison"
+    },
+    "Van Morrison - Brown Eyed Girl" :{
+        "title" : "Brown Eyed Girl",
+        "artist" : "Van Morrison"
     }
 }
