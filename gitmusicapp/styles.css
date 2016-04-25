@@ -222,19 +222,5 @@ table{
     font-size: 1rem;
     font-weight: bold;
 }
-#nextSong{
-    /*
-    display: inline-block;
-    width: 1rem;
-    border-radius: 0.2rem;
-    font-size: 1.29rem;
-    vertical-align: top;
-    box-shadow: 1px 1px 1px black;
-    margin: 0 auto;
-    padding-left: 0.5rem;
-    padding-right: 0.1rem;
-    line-height: 1.18rem;
-    cursor: pointer;
-    */
-}
+
 /*===========| END audio controls |===========*/
