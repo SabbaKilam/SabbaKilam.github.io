@@ -1,0 +1,226 @@
+/*
+    Author: Abbas Abdulmalik
+    Creation Date: April 7, 2016
+    Title:  Git Y'r Music
+    Revised: April 12, 2016
+    Purpose: A music playlist sharing app
+    Notes: play friends' music without downloading the file
+*/
+html{
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+body{
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    background: linear-gradient(60deg, white, hsl(6, 50%, 50%)) no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+#mobileHolder{
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    bottom:0;
+    left:0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    padding:0;
+    margin: auto;
+}
+.roundPink{
+    background: hsl(6, 60%, 90%);
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-radius: 5px;
+}
+.roundPink:focus{
+    outline: none;
+}
+
+#btn{
+    background: lightgray;
+
+}
+.portal{
+    position: absolute;
+    width: 95%;
+    top: 1%;
+    left: 1%;
+    min-height: 10rem;
+    padding-top: 1%;
+    padding-bottom: 2%;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+}
+#content{
+    box-shadow: 3px 3px 10px black;
+    background: linear-gradient(-60deg, hsl(186, 50%, 0%), white);
+    color: #1d1d1d;
+    text-shadow: 0 1px 0 lightgray;/*hsl(165,50%,70%);*/
+    vertical-align: baseline;
+}
+#menu{
+    opacity: 0;
+    visibility: hidden;
+    background: lightgray;
+    transition: opacity 1s ease, visibility 1s ease;
+    min-height: 14rem;
+}
+
+.gitMenu{
+    width: 95%;
+    text-align: left;
+    margin: 0.25rem auto;
+    padding: 1%;
+    border-radius: 8px;
+    box-shadow: 1px 1px 1px black;
+}
+
+#X{
+    float: left;
+    padding-left: 2%;
+    font-size: 2rem;
+    font-style: normal;
+    cursor: pointer;
+    color: red;
+    text-shadow: 0 2px 0 #eee;
+
+}
+
+#appTitle{
+    font-style: italic;
+    width: 45%;
+    margin: 0.2rem auto;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    background: linear-gradient(60deg, white, hsl(6, 50%, 50%)) no-repeat;
+    background-size: cover;
+    box-shadow: inset 1px 1px 1px black;
+}
+#gitname{
+    width: 25%;
+}
+#menuCouple{
+  height: .2rem;
+}
+
+#menuButton{
+    color: black;
+    text-shadow: 0 1px 0 lightgray;/*hsl(165,50%,70%);*/
+    float: left;
+    padding-left: 2%;
+    font-size: 2rem;
+    font-style: normal;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+#menuWord{
+    display: inline-block;
+    font-size: 0.8rem;
+    font-style: italic;
+    font-weight: normal;
+    vertical-align: middle;
+    margin-bottom:0.25rem;
+}
+
+#audioPlayer{
+    width:90%;
+    border-radius: 0.2rem;
+}
+
+
+#currentlyPlaying{
+    padding-top: 0.5rem;
+    font-size: 1.2rem;
+}
+
+table{
+    width: 75%;
+    margin: 0 auto;
+}
+
+#colorSlider{
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+}
+#shadowSlider{
+    visibility: hidden;
+}
+/*===========| audio controls |===========*/
+#controlsTable{
+    width: 17.5rem;
+}
+#playlist{
+    vertical-align: middle;
+    width: 9rem;
+    box-shadow: 1px 1px 1px black;
+    border-radius: 0.2rem;
+    text-align: left;
+}
+#audioControls{
+    font-size: 0.7rem;
+    margin: 0.25rem auto;
+}
+.controlsBox{
+    display: inline-block;
+    margin: 0 auto;
+    box-shadow: 1px 1px 1px black;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    vertical-align: middle;
+    font-size: 0.7rem;
+    width: 4.5rem;    
+}
+#shuffleBox{
+    width: 5rem;
+}
+#searchBox{
+    text-align: center;
+    font-weight: bold;
+    width: 3rem;
+    font-size: 0.6rem;    
+    
+}
+#shuffleIcon{
+    /* new optional stuff */
+    background: url(images/shuffle.png) no-repeat center;
+    background-size: contain;
+    /* END new optional stuff */
+    font-size: 1rem;
+    display: inline-block;
+    width: 20%;
+    //transform-origin: 50% 55%;
+    //transform: rotateZ(90deg);
+    //width: 20%;
+}
+.smallControl{
+    display: inline-block;
+    width: 1rem;
+    border-radius: 0.2rem;
+    font-size: 1.29rem;
+    vertical-align: middle;
+    box-shadow: 1px 1px 1px black;
+    margin: 0 auto;
+    padding-left: 0.5rem;
+    padding-right: 0.1rem;
+    line-height: 1.16rem;/*1.18rem;*/
+    cursor: pointer;    
+}
+#refreshList{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/*===========| END audio controls |===========*/
