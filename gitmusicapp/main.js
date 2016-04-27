@@ -250,7 +250,7 @@ function playSong() {
     alert();
     var picture = currentList[songsArray[i]].picture;
     var pictureDiv = id("pictureDiv");
-    pictureDiv.style.background = "url(music/pictures/"+ picture +") no-repeat center";
+    pictureDiv.style.background = "url(/music/pictures/"+ picture +") no-repeat center";
     pictureDiv.style.backgroundSize = "contain";
 }
 //----------
