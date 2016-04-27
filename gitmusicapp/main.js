@@ -247,7 +247,7 @@ function playSong() {
     }
     //--see if we can show a piture
     var currentList = lists[chooser.options[chooser.selectedIndex].innerHTML];
-    //alert(currentList[songsArray[i]].picture);
+    alert(currentList[songsArray[i]].picture);
 }
 //----------
 function uploadSong(){
