@@ -2,9 +2,9 @@
     Author: Abbas Abdulmalik
     Creation Date: April 2, 2016
     Title:  Git Y'r Music
-    Revised: April 22, 2016
+    Revised: April 27, 2016
     Purpose: A music playlist sharing app
-    Notes: play friends' music without downloading their files
+    Notes: added boz scaggs album cover picture
 */
 "use strict";
 
@@ -233,7 +233,7 @@ function playNextSong(e){
 }
 //----------
 function playSong() {
-    playlist.size = 0;
+    playlist.size = 0;//close select element to show only item playing
     var i = playlist.selectedIndex;
     if (i > 0) {
         currentlyPlaying.innerHTML = playlist[i].innerHTML + " (" + currentPlayListName + ")";
@@ -245,6 +245,9 @@ function playSong() {
         var url = currentUrl + songsArray[i] + ".mp3";
         audioPlayer.src = url;
     }
+    //--see if we can show a piture
+    var currentList = lists[chooser.options[chooser.selectedIndex].innerHTML];
+    //alert(currentList[songsArray[i]].picture);
 }
 //----------
 function uploadSong(){
