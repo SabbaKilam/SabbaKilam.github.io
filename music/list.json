@@ -412,7 +412,8 @@
     },
     "Susan Tedeschi - Angel From Montgomery" :{
         "title" : "Angel From Montgomery",
-        "artist" : "Susan Tedeschi"
+        "artist" : "Susan Tedeschi",
+        "picture": "tedeschi-angel.png"
     },
     "Ray LaMontagne - How Come" :{
         "title" : "How Come",
