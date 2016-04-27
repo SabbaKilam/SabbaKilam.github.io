@@ -437,11 +437,13 @@
     },
     "Rascals - A Beautiful Morning" :{
         "title" : "A Beautiful Morning",
-        "artist" : "Rascals"
+        "artist" : "Rascals",
+        "picture": "rascals-timepeace.png"
     },
     "Rascals - Good Lovin'" :{
         "title" : "Good Lovin'",
-        "artist" : "Rascals"
+        "artist" : "Rascals",
+        "picture": "rascals-timepeace.png"        
     },
     "Traffic - Glad & Freedom Rider" :{
         "title" : "Glad & Freedom Rider",
