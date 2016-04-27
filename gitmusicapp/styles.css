@@ -225,9 +225,12 @@ table{
 
 #pictureDiv{
     position: absolute;
-    width: 3rem;
-    height: 3rem;
-    outline: 1px solid red;
+    width: 5rem;
+    height: 5rem;
+    right: 0.5rem;
+    top: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 1px black;    
 }
 
 /*===========| END audio controls |===========*/

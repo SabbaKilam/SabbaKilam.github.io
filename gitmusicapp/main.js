@@ -247,11 +247,15 @@ function playSong() {
     }
     //--see if we can show a piture
     var currentList = lists[chooser.options[chooser.selectedIndex].innerHTML];
-    alert();
     var picture = currentList[songsArray[i]].picture;
     var pictureDiv = id("pictureDiv");
-    pictureDiv.style.background = "url(/music/pictures/"+ picture +") no-repeat center";
-    pictureDiv.style.backgroundSize = "contain";
+    pictureDiv.style.background = "none";
+    if(picture){
+        setTimeout(function(){
+            pictureDiv.style.background = "url(/music/pictures/"+ picture +") no-repeat center";
+            pictureDiv.style.backgroundSize = "cover";
+        },1);        
+    }
 }
 //----------
 function uploadSong(){
