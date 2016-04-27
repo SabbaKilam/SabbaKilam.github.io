@@ -223,4 +223,11 @@ table{
     font-weight: bold;
 }
 
+#pictureDiv{
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    outline: 1px solid red;
+}
+
 /*===========| END audio controls |===========*/
