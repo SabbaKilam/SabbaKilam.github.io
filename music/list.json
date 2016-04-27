@@ -433,7 +433,8 @@
     },
     "Rascals - People Got To Be Free" :{
         "title" : "People Got To Be Free",
-        "artist" : "Rascals"
+        "artist" : "Rascals",
+        "picture": "rascals-peoplefree.png"
     },
     "Rascals - A Beautiful Morning" :{
         "title" : "A Beautiful Morning",
