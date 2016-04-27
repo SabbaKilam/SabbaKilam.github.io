@@ -9,6 +9,8 @@
 "use strict";
 
 //====| Global Objects and Data |====
+/*global rekwire*/
+var toggleOn = false;
 
 function id(string) {
     return document.getElementById(string);
@@ -76,6 +78,20 @@ audioPlayer.onended = function(){
         playNextSong();
     }
 };
+
+id("pictureDiv").addEventListener("click", function(e){
+    e.stopPropagation();
+    if(toggleOn){
+        contractPicture(e);
+        toggleOn = false;
+    }
+    else{
+        expandPicture(e);
+        toggleOn = true;
+    }
+});
+
+
 //---| menu actions |------
 
 gitName.onkeyup = getNewList;
@@ -124,29 +140,29 @@ function refreshList(e){
         var currentOption = chooser.options[chooser.selectedIndex];
         var listname = currentOption.innerHTML;
         var E = {};
-        
-        E.target = chooser;        
+
+        E.target = chooser;
         removePlaylist(E);
         E.target = removeList;
-        removePlaylist(E);  
-        
+        removePlaylist(E);
+
         gitName.value = listname;
-        E.keyCode = 13;        
+        E.keyCode = 13;
         getNewList(E);
-        
+
         toggleMenu();
         setTimeout(function(){
             chooser.selectedIndex = chooser.options.length-1;
         },500);
     }
-} 
+}
 
 function findMatches(e){
     var keyCode = e.keyCode;
     //if the search box is empty, restore old playlist
     if(e.target.value === ""){
             //restore playlist and anything else that needs restoring:
-            playlist.size = 0;  
+            playlist.size = 0;
             songsArray = songsArrayBackup;
             changePlayList();
             return;
@@ -155,7 +171,7 @@ function findMatches(e){
     if(matchedSongsArray.length !== 0 && searchBox.value !== ""){
         songsArray = matchedSongsArray;
         playlist.innerHTML = "";
-        var list = chooser.options[chooser.selectedIndex].innerHTML;            
+        var list = chooser.options[chooser.selectedIndex].innerHTML;
         var header = document.createElement("option");
         header.innerHTML = playlistHeader;
         playlist.appendChild(header);
@@ -172,7 +188,7 @@ function findMatches(e){
             playlist.size = 7;
         }
         else{
-            playlist.size = songsArray.length + 2;            
+            playlist.size = songsArray.length + 2;
         }
 
         if(keyCode === 13){
@@ -181,8 +197,8 @@ function findMatches(e){
         }
     }
     else{
-        playlist.size = 0;        
-        songsArray = songsArrayBackup;            
+        playlist.size = 0;
+        songsArray = songsArrayBackup;
         changePlayList();
     }
 }
@@ -196,7 +212,7 @@ function removePlaylist(e,x){
         if(m.innerHTML === listToRemove){
             chooser.removeChild(chooser[i]);
             //remove old list from menu
-            
+
             removeList.removeChild(removeList[i]);
             removeList.selectedIndex = 0;
 
@@ -238,7 +254,7 @@ function playSong() {
     if (i > 0) {
         currentlyPlaying.innerHTML = playlist[i].innerHTML + " (" + currentPlayListName + ")";
         flashObjectStyle(currentlyPlaying,"text-shadow","0 2px 0 black", 0.25);
-        flashObjectColor(currentlyPlaying,"lightgray", 0.25);        
+        flashObjectColor(currentlyPlaying,"lightgray", 0.25);
     }
     i -= 1;
     if (i >= 0) {
@@ -253,8 +269,8 @@ function playSong() {
     if(picture){
         setTimeout(function(){
             pictureDiv.style.background = "url(/music/pictures/"+ picture +") no-repeat center";
-            pictureDiv.style.backgroundSize = "cover";
-        },1);        
+            pictureDiv.style.backgroundSize = "contain";
+        },1);
     }
 }
 //----------
@@ -337,12 +353,12 @@ function turnShuffleOff(){
 //----------
 function turnShuffle2On(){
     if(chooser.selectedIndex === 0){return;}
-    
+
     var songOnDeck = getRandomSong(songsArray);
     //if a song is not already playing, play song:
     if(audioPlayer.paused){
-        playlist.selectedIndex = songsArray.indexOf(songOnDeck) + 1;        
-        playSong();        
+        playlist.selectedIndex = songsArray.indexOf(songOnDeck) + 1;
+        playSong();
     }
     shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
     shuffleState.innerHTML = "on";
@@ -767,9 +783,9 @@ function subList(string, list){
  * that match the string.
  * It returns nothing if both the string and array
  * are not provided.
-*/		
+*/
 	var returnList = null;
-	
+
 	//test the arguments
 	if(list === undefined){
 		return;
@@ -781,7 +797,7 @@ function subList(string, list){
 		return;
 	}
 	//done testing arguments
-	
+
 	if(type(list) === "Array"){
 		buildSubArray();
 	}
@@ -789,7 +805,7 @@ function subList(string, list){
 		buildSubObject();
 	}
 	return returnList;
-	
+
 	//---helper functions---
 	function buildSubArray(){
 		returnList = [];
@@ -798,8 +814,8 @@ function subList(string, list){
 				if(m.toLowerCase().indexOf(string.toLowerCase()) !== -1){
 					returnList.push(m);
 				}
-			});			
-		}		
+			});
+		}
 	}
 	//----
 	function buildSubObject(){
@@ -809,10 +825,10 @@ function subList(string, list){
 				if(prop.toLowerCase().indexOf(string.toLowerCase()) !== -1){
 					returnList[prop] = list[prop];
 				}
-			}			
-		}		
+			}
+		}
 	}
-	//----	
+	//----
 	function type(arg){
 		var prefix = '[object ';
 		var trueType = {}.toString.call(arg);
@@ -829,7 +845,7 @@ function substringSubarray(string, array){
  * that match the string.
  * It returns nothing if both the string and array
  * are not provided.
-*/	
+*/
 	//Needs both arguments, else returns nothing
 	if(array === undefined){
 		return [];
@@ -842,12 +858,12 @@ function substringSubarray(string, array){
 	else if(type(array) !== '[object Array]'){
 		return [];
 	}
-	
+
 	return matchedArray();
-	
+
 	//---| helper function |---
 	function type(thing){
-		return {}.toString.call(thing);	
+		return {}.toString.call(thing);
 	}
 	function matchedArray(){
 		var newArray = [];
@@ -863,3 +879,14 @@ function substringSubarray(string, array){
 		return newArray;
 	}
 }//===| END of substringSubarray() |===
+//-------
+function expandPicture(e){
+    id("pictureDiv").style.height = "98%";
+    id("pictureDiv").style.width = "98%";
+}
+//--------------
+function contractPicture(e){
+    var me = e.target;
+    me.style.width = "6rem";
+    me.style.height = "6rem";
+}
