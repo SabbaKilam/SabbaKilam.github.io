@@ -129,8 +129,17 @@ function initialize() {
     //storeListsToBrowser();
     configureResizing();
     loadColorsFromBrowser();
+    hasOneList();
 
 } //===| END of initialize() |=====
+function hasOneList(){
+    setTimeout(function(){
+        if(chooser.options.length === 2){
+            chooser.selectedIndex = 1;
+            changePlayList();
+        }        
+    },500);
+}
 function refreshList(e){
     if(chooser.selectedIndex !== 0){
         flashObjectStyle(listRefresher,"box-shadow","inset 1px 1px 1px black", 0.5);
