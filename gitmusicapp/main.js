@@ -274,7 +274,7 @@ function playSong() {
     var currentList = lists[chooser.options[chooser.selectedIndex].innerHTML];
     var picture = currentList[songsArray[i]].picture;
     var pictureDiv = id("pictureDiv");
-    pictureDiv.style.background = "none";
+    pictureDiv.style.background = "hsla(0, 0%, 0%, 0.3)";
     if(picture){
         setTimeout(function(){
             pictureDiv.style.background = "url(/music/pictures/"+ picture +") no-repeat center";
