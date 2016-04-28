@@ -137,7 +137,7 @@ function hasOneList(){
         if(chooser.options.length === 2){
             chooser.selectedIndex = 1;
             changePlayList();
-        }        
+        }
     },500);
 }
 function refreshList(e){
@@ -281,6 +281,7 @@ function playSong() {
             pictureDiv.style.backgroundSize = "contain";
         },1);
     }
+
 }
 //----------
 function uploadSong(){
@@ -890,12 +891,42 @@ function substringSubarray(string, array){
 }//===| END of substringSubarray() |===
 //-------
 function expandPicture(e){
-    id("pictureDiv").style.height = "98%";
-    id("pictureDiv").style.width = "98%";
+    var me = e.target;
+    me.style.position = "fixed";
+    me.style.right="0";
+    me.style.top = "0";
+    me.style.left = "0";
+    me.style.bottom= "0";
+    me.style.margin= "auto";    
+
+    me.style.height = "100%";
+    me.style.width = "100%";
 }
 //--------------
 function contractPicture(e){
     var me = e.target;
-    me.style.width = "6rem";
-    me.style.height = "6rem";
+    me.style.width = "7rem";
+    me.style.height = "7rem";
+    me.style.position = "relative";
+    me.style.float = "right";
+    me.style.marginRight = "2rem";
+    me.style.marginBottom = "1.5rem";
+    //me.style.
+   //me.style.
+    
 }
+/*
+#pictureDiv{
+    width: 5rem;
+    height: 5rem;
+    float: right;
+    margin-right: 2rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    background: hsla(0, 0%, 0%, 0.3);
+    box-shadow: 1px 1px 3px black;
+    border-radius: 0.5rem;
+    z-index: 10;
+}
+*/
