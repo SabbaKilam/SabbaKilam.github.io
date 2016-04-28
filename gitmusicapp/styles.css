@@ -201,9 +201,6 @@ table{
     font-size: 1rem;
     display: inline-block;
     width: 20%;
-    //transform-origin: 50% 55%;
-    //transform: rotateZ(90deg);
-    //width: 20%;
 }
 .smallControl{
     display: inline-block;
