@@ -376,7 +376,8 @@
     },
     "Omar Faruk Tekbilek - Night Time" :{
         "title" : "Night Time",
-        "artist" : "Omar Faruk Tekbilek"
+        "artist" : "Omar Faruk Tekbilek",
+        "picture": "tekbilek-night.png"
     },
     "Jasmine Thompson - All of Me" :{
         "title" : "All of Me",
