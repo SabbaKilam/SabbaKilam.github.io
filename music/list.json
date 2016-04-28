@@ -335,7 +335,8 @@
     },
     "Van Morrison - Did Ye Get Healed" :{
         "title" : "Did Ye Get Healed",
-        "artist" : "Van Morrison"
+        "artist" : "Van Morrison",
+        "picture": "morrisson-poetic.png"
     },
     "Stevie Wonder  - Pastime Paradise" :{
         "title" : "Pastime Paradise",
@@ -497,5 +498,10 @@
     "Van Morrison - Brown Eyed Girl" :{
         "title" : "Brown Eyed Girl",
         "artist" : "Van Morrison"
+    },
+    "Van Morrison - Wavelength" :{
+        "title" : "Wavelength",
+        "artist" : "Van Morrison",
+        "picture": "morrison-stillontop.png"
     }
 }
