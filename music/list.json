@@ -133,7 +133,8 @@
     },
     "Joni Mitchell - Harry's House - Centerpiece": {
         "title": "Harry's House, Centerpiece Medley",
-        "artist": "Joni Mitchell"
+        "artist": "Joni Mitchell",
+        "picture": "joni-helpme.png"
     },
     "Kool and the Gang - Summer Madness": {
         "title": "Summer Madness",
@@ -312,15 +313,18 @@
     },
     "Joni Mitchell - River" :{
         "title" : "River",
-        "artist" : "Joni Mitchell"
+        "artist" : "Joni Mitchell",
+        "picture": "joni-blue.png"
     },
     "Joni Mitchell - Help Me" :{
         "title" : "Help Me",
-        "artist" : "Joni Mitchell"
+        "artist" : "Joni Mitchell",
+        "picture": "joni-helpme.png"
     },
     "Joni Mitchell - All I Want" :{
         "title" : "All I Want",
-        "artist" : "Joni Mitchell"
+        "artist" : "Joni Mitchell",
+        "picture": "joni-blue.png"
     },
     "Gnarls Barkley - Crazy" :{
         "title" : "Crazy",
@@ -385,11 +389,13 @@
     },
     "Joni Mitchell - California" :{
         "title" : "California",
-        "artist" : "Joni Mitchell"
+        "artist" : "Joni Mitchell",
+        "picture": "joni-blue.png"
     },
     "Joni Mitchell - A Case Of You" :{
         "title" : "A Case Of You",
-        "artist" : "Joni Mitchell"
+        "artist" : "Joni Mitchell",
+        "picture": "joni-blue.png"
     },
     "The Impressions - People Get Ready" :{
         "title" : "People Get Ready",
