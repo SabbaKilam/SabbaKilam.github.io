@@ -134,7 +134,7 @@
     "Joni Mitchell - Harry's House - Centerpiece": {
         "title": "Harry's House, Centerpiece Medley",
         "artist": "Joni Mitchell",
-        "picture": "joni-helpme.png"
+        "picture": "joni-hissing.png"
     },
     "Kool and the Gang - Summer Madness": {
         "title": "Summer Madness",
@@ -175,7 +175,8 @@
     },
     "Joni Mitchell - How Do You Stop": {
         "title": "How Do You Stop",
-        "artist": "Joni Mitchell"
+        "artist": "Joni Mitchell",
+        "picture": "joni-turbulent.png"
     },
     "Jackie Deshannon - What The World Needs Now": {
         "title": "What The World Needs Now",
