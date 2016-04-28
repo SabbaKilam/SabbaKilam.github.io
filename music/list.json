@@ -41,7 +41,8 @@
     },
     "morrisontidings": {
         "title": "Glad Tidings",
-        "artist": "Van Morrison"
+        "artist": "Van Morrison",
+        "picture": "morrison-moondance.png"
     },
     "towerpoweryoungman": {
         "title": "You're Still A Young Man",
@@ -469,7 +470,8 @@
     },
     "Van Morrison - Moondance" :{
         "title" : "Moondance",
-        "artist" : "Van Morrison"
+        "artist" : "Van Morrison",
+        "picture": "morrison-moondance.png"
     },
     "Van Morrison - Cleaning Windows" :{
         "title" : "Cleaning Windows",
@@ -485,7 +487,8 @@
     },
     "Van Morrison - Into The Mystic" :{
         "title" : "Into The Mystic",
-        "artist" : "Van Morrison"
+        "artist" : "Van Morrison",
+        "picture": "morrison-moondance.png"
     },
     "Van Morrison - Tupelo Honey" :{
         "title" : "Tupelo Honey",
