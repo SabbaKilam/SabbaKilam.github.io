@@ -9,7 +9,8 @@
     },
     "europa": {
         "title": "Europa",
-        "artist": "Gato Barbieri"
+        "artist": "Gato Barbieri",
+        "picture": "gato-caliente.png"
     },
     "childrendarkness": {
         "title": "Children Of Darkness",
@@ -25,7 +26,8 @@
     },
     "brotherlee": {
         "title": "Brother Lee",
-        "artist": "Citizen Cope"
+        "artist": "Citizen Cope",
+        "picture": "cope-lee.png"
     },
     "motherchild": {
         "title": "Mother & Child Reunion",
@@ -62,7 +64,8 @@
     },
     "Ray Lynch - Kathleen's Song": {
         "title": "Kathleen's Song",
-        "artist": "Ray Lynch"
+        "artist": "Ray Lynch",
+        "picture": "lynch-breakfast.png"
     },
     "Ray Lynch - Pastorale": {
         "title": "Pastorale",
@@ -114,7 +117,8 @@
     },
     "Dr. Buzzard's Original Savannah Band - Cherchez La Femme": {
         "title": "Cherchez La Femme",
-        "artist": "Dr. Buzzard's Original Savannah Band"
+        "artist": "Dr. Buzzard's Original Savannah Band",
+        "picture": "buzzard-femme.png"
     },
     "Edie Brickell - Good Times": {
         "title": "Good Times",
@@ -148,15 +152,18 @@
     },
     "Lynn Miles - I Loved A Cowboy": {
         "title": "I Loved A Cowboy",
-        "artist": "Lynn Miles"
+        "artist": "Lynn Miles",
+        "picture": "miles-haunted.png"
     },
     "Martin Sexton -The American": {
         "title": "The American",
-        "artist": "Martin Sexton"
+        "artist": "Martin Sexton",
+        "picture": "sexton-american.png"
     },
     "Paul Simon - American Tune": {
         "title": "American Tune",
-        "artist": "Paul Simon"
+        "artist": "Paul Simon",
+        "picture": "simon-americantune.png"
     },
     "Prokofiev - Montagues and Capulets": {
         "title": "Montagues and Capulets",
@@ -190,7 +197,8 @@
     },
     "Crowded House - Don't Dream It's Over (Hey Now)": {
         "title": "Don't Dream It's Over (Hey Now)",
-        "artist": "Crowded House"
+        "artist": "Crowded House",
+        "picture": "crowded-dream.png"
     },
     "Cowsills - The Rain, The Park and Other Things (Flower Girl)": {
         "title": "The Rain, The Park and Other Things (Flower Girl)",
@@ -211,7 +219,8 @@
     },
     "Hollies - Hey Carrie Ann": {
         "title": "Hey Carrie Ann",
-        "artist": "Hollies"
+        "artist": "Hollies",
+        "picture": "hollies-carrieanne.png"
     },
     "It's A Beautiful Day - White Bird": {
         "title": "White Bird",
@@ -263,11 +272,13 @@
     },
     "Dr. John - I Don't Wanna Know": {
         "title": "I Don't Wanna Know",
-        "artist": "Dr. John"
+        "artist": "Dr. John",
+        "picture": "drjohn-evillove.png"
     },
     "Martin Sexton - Glory Bound": {
         "title": "Glory Bound",
-        "artist": "Martin Sexton"
+        "artist": "Martin Sexton",
+        "picture" :"sexton-american.png"
     },
     "A Flock Of Seagulls - Space Age Love Song" : {
         "title" : "Space Age Love Song",
@@ -360,7 +371,8 @@
     },
     "Marc Broussard - Home" :{
         "title" : "Home",
-        "artist" : "Marc Broussard"
+        "artist" : "Marc Broussard",
+        "picture": "broussard-home.png"
     },
     "Unknown - Vientos De Los Andes-Track 2" :{
         "title" : "Vientos De Los Andes-Track 2",
@@ -372,7 +384,8 @@
     },
     "Turtles-Elenore" :{
         "title" : "Elenore",
-        "artist" : "Turtles"
+        "artist" : "Turtles",
+        "picture": "turtles-elenore.png"
     },
     "Tommy James & The Shondells - Crystal Blue Persuasion" :{
         "title" : "Crystal Blue Persuasion",

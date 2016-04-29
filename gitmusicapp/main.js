@@ -897,8 +897,7 @@ function expandPicture(e){
     me.style.top = "0";
     me.style.left = "0";
     me.style.bottom= "0";
-    me.style.margin= "auto";    
-
+    me.style.margin= "auto";
     me.style.height = "100%";
     me.style.width = "100%";
 }
@@ -913,7 +912,7 @@ function contractPicture(e){
     me.style.marginBottom = "1.5rem";
     //me.style.
    //me.style.
-    
+
 }
 /*
 #pictureDiv{
