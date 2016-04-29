@@ -64,6 +64,10 @@ var shuffleTimerId = null;
 
 window.onload = initialize;
 searchBox.onkeyup = findMatches;
+searchBox.onclick = function(){
+    this.value = "";
+    changePlayList();
+};
 chooser.onchange = changePlayList;
 playlist.onchange = playSong;
 friendButton.onclick = getNewList;
