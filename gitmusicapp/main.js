@@ -906,26 +906,10 @@ function contractPicture(e){
     var me = e.target;
     me.style.width = "7rem";
     me.style.height = "7rem";
-    me.style.position = "relative";
-    me.style.float = "right";
-    me.style.marginRight = "2rem";
-    me.style.marginBottom = "1.5rem";
-    //me.style.
-   //me.style.
-
+    setTimeout(function(){
+        me.style.position = "relative";
+        me.style.float = "right";
+        me.style.marginRight = "2rem";
+        me.style.marginBottom = "1.5rem";        
+    },800);
 }
-/*
-#pictureDiv{
-    width: 5rem;
-    height: 5rem;
-    float: right;
-    margin-right: 2rem;
-    margin-bottom: 1.5rem;
-    cursor: pointer;
-    transition: all 0.5s ease;
-    background: hsla(0, 0%, 0%, 0.3);
-    box-shadow: 1px 1px 3px black;
-    border-radius: 0.5rem;
-    z-index: 10;
-}
-*/
