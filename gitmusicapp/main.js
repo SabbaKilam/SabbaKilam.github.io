@@ -275,17 +275,20 @@ function playSong() {
         audioPlayer.src = url;
     }
     //--see if we can show a piture
-    var currentList = lists[chooser.options[chooser.selectedIndex].innerHTML];
+    var list = chooser.options[chooser.selectedIndex].innerHTML;
+    var currentList = lists[list];
     var picture = currentList[songsArray[i]].picture;
     var pictureDiv = id("pictureDiv");
     pictureDiv.style.background = "hsla(0, 0%, 0%, 0.3)";
     if(picture){
         setTimeout(function(){
-            pictureDiv.style.background = "url(/music/pictures/"+ picture +") no-repeat center";
+            pictureDiv.style.background = "url("+
+            "https://" + list + ".github.io"+
+            "/music/pictures/"+ picture +
+            ") no-repeat center";
             pictureDiv.style.backgroundSize = "contain";
         },1);
     }
-
 }
 //----------
 function uploadSong(){
