@@ -525,5 +525,10 @@
         "title" : "Groovin'",
         "artist" : "Rascals",
         "picture": "rascals-groovin.png"
+    },
+    "Ahmad Jamal - Poinciana" :{
+        "title" : "Poinciana",
+        "artist" : "Ahmad Jamal",
+        "picture": "ahmadjamal-poinciana2.png"
     }
 }
