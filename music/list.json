@@ -316,7 +316,8 @@
     },
     "Buffalongo - Dancing in the Moonlight" :{
         "title" : "Dancing in the Moonlight",
-        "artist" : "Buffalongo"
+        "artist" : "Buffalongo",
+        "picture": "boffalongo-dancingmoonlight.png"
     },
     "Archies - Sugar Sugar" :{
         "title" : "Sugar Sugar",
