@@ -518,5 +518,10 @@
         "title" : "Wavelength",
         "artist" : "Van Morrison",
         "picture": "morrison-stillontop.png"
+    },
+    "Rascals - Groovin'" :{
+        "title" : "Groovin'",
+        "artist" : "Rascals",
+        "picture": "rascals-groovin.png"
     }
 }
