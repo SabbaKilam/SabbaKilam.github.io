@@ -567,5 +567,10 @@
         "title" : "All You Do is Dial",
         "artist" : "Heatwave",
         "picture": "heatwave-toohottohandle.png"
+    },
+    "Duffy - Mercy" :{
+        "title" : "Mercy",
+        "artist" : "Duffy",
+        "picture": "duffy-mercy.png"
     }
 }
