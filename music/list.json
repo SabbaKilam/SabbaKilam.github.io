@@ -530,5 +530,20 @@
         "title" : "Poinciana",
         "artist" : "Ahmad Jamal",
         "picture": "ahmadjamal-poinciana2.png"
+    },
+    "October Project - Sunday Morning Yellow Sky" :{
+        "title" : "Sunday Morning Yellow Sky",
+        "artist" : "October Project",
+        "picture": "octoberproject-fallingfarther.jpg"
+    },
+    "October Project - Deep As You Go" :{
+        "title" : "Deep As You Go",
+        "artist" : "October Project",
+        "picture": "octoberproject-fallingfarther.jpg"
+    },
+    "October Project - Bury My Lovely" :{
+        "title" : "Bury My Lovely",
+        "artist" : "October Project",
+        "picture": "octoberproject-octoberproject.jpg"
     }
 }
