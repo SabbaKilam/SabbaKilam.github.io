@@ -562,5 +562,10 @@
         "title" : "Do You Sleep",
         "artist" : "Lisa Loeb",
         "picture": "lisaloeb.png"
+    },
+    "Heatwave - All You Do is Dial" :{
+        "title" : "All You Do is Dial",
+        "artist" : "Heatwave",
+        "picture": "heatwave-toohottohandle.png"
     }
 }
