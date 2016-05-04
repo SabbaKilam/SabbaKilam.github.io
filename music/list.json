@@ -545,5 +545,20 @@
         "title" : "Bury My Lovely",
         "artist" : "October Project",
         "picture": "octoberproject-octoberproject.jpg"
+    },
+    "Lisa Loeb - Snow Day" :{
+        "title" : "Snow Day",
+        "artist" : "Lisa Loeb",
+        "picture": "lisaloeb.png"
+    },
+    "Lisa Loeb - Stay" :{
+        "title" : "Stay",
+        "artist" : "Lisa Loeb",
+        "picture": "lisaloeb.png"
+    },
+    "Lisa Loeb - Do You Sleep" :{
+        "title" : "Do You Sleep",
+        "artist" : "Lisa Loeb",
+        "picture": "lisaloeb.png"
     }
 }
