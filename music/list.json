@@ -36,11 +36,13 @@
     },
     "latifrobe": {
         "title": "Love Theme From 'The Robe'",
-        "artist": "Yussef Latif"
+        "artist": "Yussef Latif",
+        "picture": "lateef-easternsounds.png"
     },
     "latifspartacus": {
         "title": "Love Theme From 'Spartacus'",
-        "artist": "Yussef Latif"
+        "artist": "Yussef Latif",
+        "picture": "lateef-easternsounds.png"
     },
     "morrisontidings": {
         "title": "Glad Tidings",
@@ -133,7 +135,8 @@
     },
     "Joan Armatrading - Down To Zero": {
         "title": "Down To Zero",
-        "artist": "Joan Armatrading"
+        "artist": "Joan Armatrading",
+        "picture": "joanarmatrading.png"
     },
     "John Barry - Fun City": {
         "title": "Fun City",
@@ -231,7 +234,8 @@
     },
     "Joan Armatrading - The Weakness In Me": {
         "title": "The Weakness In Me",
-        "artist": "Joan Armatrading"
+        "artist": "Joan Armatrading",
+        "picture": "joanarmatrading.png"
     },
     "Jesse Winchester - That's What Makes You Strong": {
         "title": "That's What Makes You Strong",
