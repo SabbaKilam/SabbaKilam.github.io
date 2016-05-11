@@ -311,14 +311,13 @@ function playSong() {
     }
     else{
         setTimeout(function(){
-            var randomImage = getRandomImage();
-            alert(randomImage);
-            pictureDiv.style.background = "url(../music/altpix/"+
-            + randomImage +
+            pictureDiv.style.background = "url("+
+            "https://" + list + ".github.io"+
+            "/music/altpix/"+ getRandomImage() +
             ") no-repeat center";
             pictureDiv.style.backgroundSize = "contain";
+            addScroller(songsArray[i]);               
         },1);        
-        //scroller.removeScroller();
     }
 }
 //----------
