@@ -281,9 +281,10 @@ function playNextSong(e){
 }
 //----------
 function playSong() {
-    addScroller(songsArray[i]); 
+    //addScroller(songsArray[i]); 
     playlist.size = 0;//close select element to show only item playing
     var i = playlist.selectedIndex;
+    var songNameString = playlist[i].innerHTML.trim();
     if (i > 0) {
         currentlyPlaying.innerHTML = playlist[i].innerHTML + " (" + currentPlayListName + ")";
         flashObjectStyle(currentlyPlaying,"text-shadow","0 2px 0 black", 0.25);
@@ -306,7 +307,7 @@ function playSong() {
             "/music/pictures/"+ picture +
             ") no-repeat center";
             pictureDiv.style.backgroundSize = "contain";
-            addScroller(songsArray[i]);            
+            addScroller(songNameString);            
         },1);
     }
     else{
@@ -316,7 +317,7 @@ function playSong() {
             "/music/altpix/"+ getRandomImage() +
             ") no-repeat center";
             pictureDiv.style.backgroundSize = "contain";
-            addScroller(songsArray[i]);               
+            addScroller(songNameString);               
         },1);        
     }
 }
