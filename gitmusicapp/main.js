@@ -20,6 +20,7 @@ function id(string) {
 var cycleTime = 0.5; // half a second?
 var shuffleImages = ["images/shuffle3.png","images/shuffle1.png","images/shuffle2.png","images/shuffle4.png",];
 var getRandomSong = CreateListMixer();
+var getRandomImage = CreateListMixer();
 var nextSong = id("nextSong");
 var content = id("content");
 var gitName = id("gitName");
@@ -61,6 +62,22 @@ var shuffleState = id("shuffleState");
 var shuffleIcon = id("shuffleIcon");
 var shuffleOn = false;
 var shuffleTimerId = null;
+
+var altpix = [
+    "cranespool.gif",
+    "deercrossing.gif",
+    "dripreflect.gif",
+    "moonclouds.gif",
+    "moonreflect.gif",
+    "riverstones.gif",
+    "rushingwater.gif",
+    "shimmerblack.gif",
+    "treecreek.gif",
+    "treepool.gif",
+    "waterfall.gif",
+    "waterfall2.gif"
+];
+getRandomImage(altpix);
 
 //====| The Driver's Seat |====
 
@@ -264,6 +281,7 @@ function playNextSong(e){
 }
 //----------
 function playSong() {
+    addScroller(songsArray[i]); 
     playlist.size = 0;//close select element to show only item playing
     var i = playlist.selectedIndex;
     if (i > 0) {
@@ -281,7 +299,6 @@ function playSong() {
     var currentList = lists[list];
     var picture = currentList[songsArray[i]].picture;
     pictureDiv.style.background = "hsla(0, 0%, 0%, 0.3)";
-
     if(picture){
         setTimeout(function(){
             pictureDiv.style.background = "url("+
@@ -293,7 +310,15 @@ function playSong() {
         },1);
     }
     else{
-        scroller.removeScroller();
+        setTimeout(function(){
+            var randomImage = getRandomImage();
+            alert(randomImage);
+            pictureDiv.style.background = "url(../music/altpix/"+
+            + randomImage +
+            ") no-repeat center";
+            pictureDiv.style.backgroundSize = "contain";
+        },1);        
+        //scroller.removeScroller();
     }
 }
 //----------
