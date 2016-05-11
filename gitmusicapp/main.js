@@ -16,6 +16,7 @@ function id(string) {
     return document.getElementById(string);
 }
 /*global CreateListMixer*/
+/*global scroller*/
 var cycleTime = 0.5; // half a second?
 var shuffleImages = ["images/shuffle3.png","images/shuffle1.png","images/shuffle2.png","images/shuffle4.png",];
 var getRandomSong = CreateListMixer();
@@ -38,6 +39,7 @@ var fileInput = id("fileInput");
 var removeList = id("removeList");
 var searchBox = id("searchBox");
 var listRefresher = id("refreshList");
+var pictureDiv = id("pictureDiv");
 
 var propNames = Object.keys;
 var playlistHeader = "Choose a Song";
@@ -278,8 +280,8 @@ function playSong() {
     var list = chooser.options[chooser.selectedIndex].innerHTML;
     var currentList = lists[list];
     var picture = currentList[songsArray[i]].picture;
-    var pictureDiv = id("pictureDiv");
     pictureDiv.style.background = "hsla(0, 0%, 0%, 0.3)";
+
     if(picture){
         setTimeout(function(){
             pictureDiv.style.background = "url("+
@@ -287,7 +289,11 @@ function playSong() {
             "/music/pictures/"+ picture +
             ") no-repeat center";
             pictureDiv.style.backgroundSize = "contain";
+            addScroller(songsArray[i]);            
         },1);
+    }
+    else{
+        scroller.removeScroller();
     }
 }
 //----------
@@ -698,7 +704,6 @@ function changePlayList(e) {
     flashObjectStyle(playlist, "textShadow", "1px 1px 1px black", 0.4);
 }
 //----------
-
 function sendListToServer(listObject) {
     var listString = JSON.stringify(listObject);
     var listSender = new XMLHttpRequest();
@@ -898,6 +903,7 @@ function substringSubarray(string, array){
 }//===| END of substringSubarray() |===
 //-------
 function expandPicture(e){
+    scroller.modify();
     var me = e.target;
     me.style.position = "fixed";
     me.style.right="0";
@@ -910,6 +916,7 @@ function expandPicture(e){
 }
 //--------------
 function contractPicture(e){
+    scroller.modify();
     var me = e.target;
     me.style.width = "7rem";
     me.style.height = "7rem";
@@ -920,3 +927,10 @@ function contractPicture(e){
         me.style.marginBottom = "1.5rem";        
     },800);
 }
+//-------------
+function addScroller(textToscroll){
+    scroller.text = textToscroll;
+    scroller.addScroller(pictureDiv);
+}
+//-------------
+function removeScroller(){}
