@@ -75,7 +75,24 @@ var altpix = [
     "treecreek.gif",
     "treepool.gif",
     "waterfall.gif",
-    "waterfall2.gif"
+    "waterfall2.gif",
+    "anotherwaterfall.gif",
+    "yetanotherwaterfall.gif",
+    "poseidon.gif",
+    "bigmountainfall.gif",
+    "bookbreezewater.gif",
+    "cloudslake.gif",
+    "smokecabinsnow.gif",
+    "leafdrops.gif",
+    "mountainlake.gif",
+    "deereating.gif",
+    "palmisland.gif",
+    "rockwaterpassage.gif",
+    "snowwaterfall.gif",
+    "snowtree.gif",
+    "stream2.gif",
+    "paris.gif",
+    "trafficnight.gif"
 ];
 getRandomImage(altpix);
 
