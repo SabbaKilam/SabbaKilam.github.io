@@ -49,7 +49,7 @@ var scroller = {
     this.targetElement.style.postion = "relative";
     this.targetElement.style.overflow = "hidden";
     this.targetElement.style.whiteSpace = "nowrap";
-    this.targetElement.style.textOverflow = "ellipsis";
+    //this.targetElement.style.textOverflow = "ellipsis";
     this.targetElement.style.textAlign = "left";
   }
 };
