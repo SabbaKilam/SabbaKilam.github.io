@@ -89,12 +89,16 @@ var altpix = [
     "palmisland.gif",
     "rockwaterpassage.gif",
     "snowwaterfall.gif",
-    "snowtree.gif",
+    "snowtree3.gif",
     "stream2.gif",
     "paris.gif",
     "trafficnight.gif"
 ];
 getRandomImage(altpix);
+
+var extrasOn = false;
+var extrasDiv = id("extrasDiv");
+var onOffExtras = id("onOffExtras");
 
 //====| The Driver's Seat |====
 
@@ -113,6 +117,9 @@ appTitle.onclick = toggleAndFlash;
 shuffleBox.onclick = toggleShuffle;
 nextSong.onclick = playNextSong;
 listRefresher.onclick = refreshList;
+extrasDiv.onclick = toggleExtras;
+
+
 audioPlayer.onended = function(){
     if(shuffleOn){
         playNextSong();
@@ -298,7 +305,7 @@ function playNextSong(e){
 }
 //----------
 function playSong() {
-    //addScroller(songsArray[i]); 
+    scroller.removeScroller();
     playlist.size = 0;//close select element to show only item playing
     var i = playlist.selectedIndex;
     var songNameString = playlist[i].innerHTML.trim();
@@ -316,26 +323,29 @@ function playSong() {
     var list = chooser.options[chooser.selectedIndex].innerHTML;
     var currentList = lists[list];
     var picture = currentList[songsArray[i]].picture;
-    pictureDiv.style.background = "hsla(0, 0%, 0%, 0.3)";
+    pictureDiv.style.background = "hsla(0, 0%, 0%, 0.3)";//dark "see-through"
     if(picture){
+        //scroller.removeScroller();
         setTimeout(function(){
             pictureDiv.style.background = "url("+
             "https://" + list + ".github.io"+
             "/music/pictures/"+ picture +
             ") no-repeat center";
             pictureDiv.style.backgroundSize = "contain";
-            addScroller(songNameString);            
+
         },1);
     }
     else{
-        setTimeout(function(){
-            pictureDiv.style.background = "url("+
-            "https://" + list + ".github.io"+
-            "/music/altpix/"+ getRandomImage() +
-            ") no-repeat center";
-            pictureDiv.style.backgroundSize = "contain";
-            addScroller(songNameString);               
-        },1);        
+        if(extrasOn){
+            setTimeout(function(){
+                pictureDiv.style.background = "url("+
+                "https://" + list + ".github.io"+
+                "/music/altpix/"+ getRandomImage() +
+                ") no-repeat center";
+                pictureDiv.style.backgroundSize = "contain";
+                addScroller(songNameString);
+            },1);
+        }
     }
 }
 //----------
@@ -414,6 +424,77 @@ function turnShuffleOff(){
     clearInterval(shuffleTimerId);
     shuffleIcon.style.transform = "rotateZ(90deg)";
     shuffleOn = false;
+}
+//----------
+function toggleExtras(){
+    if(extrasOn){
+        turnExtrasOff();
+    }
+    else{
+        turnExtrasOn();
+    }
+}
+//----------
+function turnExtrasOn(){
+    //code here
+    extrasOn = true;
+    onOffExtras.innerHTML = "on";
+    extrasDiv.style.backgroundColor = "rgba(200, 200, 200, 0.5)";
+    extrasDiv.style.boxShadow = "inset 1px 1px 1px black";
+    var i = playlist.selectedIndex;
+    if (i > 0) {
+        currentlyPlaying.innerHTML = playlist[i].innerHTML +
+            " (" +
+            currentPlayListName +
+            ")"
+        ;
+        flashObjectStyle(currentlyPlaying,"text-shadow","0 2px 0 black", 0.25);
+        flashObjectColor(currentlyPlaying,"lightgray", 0.25);
+    }
+    i -= 1;      
+    var list = chooser.options[chooser.selectedIndex].innerHTML;
+    var currentList = lists[list];
+    var picture = currentList[songsArray[i]].picture;
+    setTimeout(function(){
+        if(!picture){
+            pictureDiv.style.background = "url("+
+            "https://" + list + ".github.io"+
+            "/music/altpix/"+ getRandomImage() +
+            ") no-repeat center";
+            pictureDiv.style.backgroundSize = "contain";
+            var songName = playlist[playlist.selectedIndex].innerHTML.trim();
+            addScroller(songName);
+        }
+    },1);
+}
+//----------
+function turnExtrasOff(){
+    extrasOn = false;
+    onOffExtras.innerHTML = "off";
+    extrasDiv.style.backgroundColor = "transparent";
+    extrasDiv.style.boxShadow = "1px 1px 1px black";
+
+    pictureDiv.style.background = "hsla(0, 0%, 0%, 0.3)";//dark "see-through"
+    scroller.removeScroller();
+    var i = playlist.selectedIndex;
+    if (i > 0) {
+        currentlyPlaying.innerHTML = playlist[i].innerHTML + " (" + currentPlayListName + ")";
+        flashObjectStyle(currentlyPlaying,"text-shadow","0 2px 0 black", 0.25);
+        flashObjectColor(currentlyPlaying,"lightgray", 0.25);
+    }
+    i -= 1;    
+    var list = chooser.options[chooser.selectedIndex].innerHTML;
+    var currentList = lists[list];
+    var picture = currentList[songsArray[i]].picture;
+    setTimeout(function(){
+        if(picture){
+            pictureDiv.style.background = "url("+
+            "https://" + list + ".github.io"+
+            "/music/pictures/"+ currentList[songsArray[i]].picture +
+            ") no-repeat center";
+            pictureDiv.style.backgroundSize = "contain";
+        }
+    },1);
 }
 //----------
 function turnShuffle2On(){
@@ -966,7 +1047,7 @@ function contractPicture(e){
         me.style.position = "relative";
         me.style.float = "right";
         me.style.marginRight = "2rem";
-        me.style.marginBottom = "1.5rem";        
+        me.style.marginBottom = "1.5rem";
     },800);
 }
 //-------------

@@ -234,4 +234,10 @@ table{
     z-index: 10;
 }
 
+#extrasDiv{
+    width: 4.5rem;
+    padding: 0.15rem;
+    
+}
+
 /*===========| END audio controls |===========*/
