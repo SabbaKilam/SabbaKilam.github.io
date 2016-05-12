@@ -17,9 +17,11 @@ var scroller = {
     this.modify();
   },
   modify: function() {
-    this.scrollElement.innerHTML = this.text;
-    this.scrollElement.style.color = this.color;
-    this.changeSpeed();
+    try{
+      this.scrollElement.innerHTML = this.text;
+      this.scrollElement.style.color = this.color;
+      this.changeSpeed();      
+    }catch(e){}
   },
   removeScroller: function(target) {
     if( this.targetElement &&  this.scrollElement && this.targetElement.removeChild){
