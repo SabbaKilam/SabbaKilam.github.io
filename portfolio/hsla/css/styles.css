@@ -155,6 +155,7 @@ input[type="number"]{
     border: 1px solid white;
     border-radius: 5px;
     cursor: pointer;
+    user-select: none;
 }
 
 
