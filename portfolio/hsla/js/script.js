@@ -403,20 +403,53 @@ function coreColorSetter(){
 
 var mword = document.getElementById("mnemonicWord");
 var mpic = document.getElementById("mnemonicPicture");
+/*
 mword.onclick = function(){
-    //alert("Clicked");
     mpic.style.opacity = 1;
     mpic.style.zIndex = 5;
 
 };
-mword.onmouseout = function(){
-    //alert("mouseouted")
-    mpic.style.opacity = 0;
-    mpic.style.zIndex = -5;
+*/
+(function(){
+    
+    var pictureVisible = false;
+    
+    mword.onclick = togglePicture;
+    mword.onmouseout = hide;
+    mpic.onclick = hide;
+    
+    //----| Internal Helpers |----
+    function togglePicture(e){
+        if(pictureVisible){
+            hide(e);
+        }
+        else{
+            showPicture(e);
+            pictureVisible = true;          
+        }        
+    }
+    function hide(e){
+        hidePicture(e);
+        pictureVisible = false;        
+    }
+})();
+/*
+mword.onmouseout = function(e){
+    hidePicture(e);
+    mword.click();//to make closure variable "pictureVisible" false
 };
+mpic.onclick = function(e){
+    hidePicture(e);
+};
+*/
+//----| Helpers |----
+function hidePicture(e){
+    mpic.style.opacity = 0;
+    mpic.style.zIndex = -5;    
+}
+function showPicture(e){
+    mpic.style.opacity = 1;
+    mpic.style.zIndex = 5;    
+}
 
-mpic.onclick = function(){
-    mpic.style.opacity = 0;
-    mpic.style.zIndex = -5;
-};
 
