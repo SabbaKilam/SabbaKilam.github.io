@@ -2,21 +2,25 @@
     Author: Abbas Abdulmalik
     Creation Date: April 2, 2016
     Title:  Git Y'r Music
-    Revised: April 22, 2016
+    Revised: April 27, 2016
     Purpose: A music playlist sharing app
-    Notes: play friends' music without downloading their files
+    Notes: added boz scaggs album cover picture
 */
 "use strict";
 
 //====| Global Objects and Data |====
+/*global rekwire*/
+var toggleOn = false;
 
 function id(string) {
     return document.getElementById(string);
 }
 /*global CreateListMixer*/
+/*global scroller*/
 var cycleTime = 0.5; // half a second?
 var shuffleImages = ["images/shuffle3.png","images/shuffle1.png","images/shuffle2.png","images/shuffle4.png",];
 var getRandomSong = CreateListMixer();
+var getRandomImage = CreateListMixer();
 var nextSong = id("nextSong");
 var content = id("content");
 var gitName = id("gitName");
@@ -36,6 +40,7 @@ var fileInput = id("fileInput");
 var removeList = id("removeList");
 var searchBox = id("searchBox");
 var listRefresher = id("refreshList");
+var pictureDiv = id("pictureDiv");
 
 var propNames = Object.keys;
 var playlistHeader = "Choose a Song";
@@ -58,10 +63,51 @@ var shuffleIcon = id("shuffleIcon");
 var shuffleOn = false;
 var shuffleTimerId = null;
 
+var altpix = [
+    "cranespool.gif",
+    "deercrossing.gif",
+    "dripreflect.gif",
+    "moonclouds.gif",
+    "moonreflect.gif",
+    "riverstones.gif",
+    "rushingwater.gif",
+    "shimmerblack.gif",
+    "treecreek.gif",
+    "treepool.gif",
+    "waterfall.gif",
+    "waterfall2.gif",
+    "anotherwaterfall.gif",
+    "yetanotherwaterfall.gif",
+    "poseidon.gif",
+    "bigmountainfall.gif",
+    "bookbreezewater.gif",
+    "cloudslake.gif",
+    "smokecabinsnow.gif",
+    "leafdrops.gif",
+    "mountainlake.gif",
+    "deereating.gif",
+    "palmisland.gif",
+    "rockwaterpassage.gif",
+    "snowwaterfall.gif",
+    "snowtree3.gif",
+    "stream2.gif",
+    "paris.gif",
+    "trafficnight.gif"
+];
+getRandomImage(altpix);
+
+var extrasOn = false;
+var extrasDiv = id("extrasDiv");
+var onOffExtras = id("onOffExtras");
+
 //====| The Driver's Seat |====
 
 window.onload = initialize;
 searchBox.onkeyup = findMatches;
+searchBox.onclick = function(){
+    this.value = "";
+    changePlayList();
+};
 chooser.onchange = changePlayList;
 playlist.onchange = playSong;
 friendButton.onclick = getNewList;
@@ -71,11 +117,28 @@ appTitle.onclick = toggleAndFlash;
 shuffleBox.onclick = toggleShuffle;
 nextSong.onclick = playNextSong;
 listRefresher.onclick = refreshList;
+extrasDiv.onclick = toggleExtras;
+
+
 audioPlayer.onended = function(){
     if(shuffleOn){
         playNextSong();
     }
 };
+
+id("pictureDiv").addEventListener("click", function(e){
+    if(!extrasOn)e.stopPropagation();
+    if(toggleOn){
+        contractPicture(e);
+        toggleOn = false;
+    }
+    else{
+        expandPicture(e);
+        toggleOn = true;
+    }
+});
+
+
 //---| menu actions |------
 
 gitName.onkeyup = getNewList;
@@ -113,8 +176,17 @@ function initialize() {
     //storeListsToBrowser();
     configureResizing();
     loadColorsFromBrowser();
+    hasOneList();
 
 } //===| END of initialize() |=====
+function hasOneList(){
+    setTimeout(function(){
+        if(chooser.options.length === 2){
+            chooser.selectedIndex = 1;
+            changePlayList();
+        }
+    },500);
+}
 function refreshList(e){
     if(chooser.selectedIndex !== 0){
         flashObjectStyle(listRefresher,"box-shadow","inset 1px 1px 1px black", 0.5);
@@ -124,29 +196,29 @@ function refreshList(e){
         var currentOption = chooser.options[chooser.selectedIndex];
         var listname = currentOption.innerHTML;
         var E = {};
-        
-        E.target = chooser;        
+
+        E.target = chooser;
         removePlaylist(E);
         E.target = removeList;
-        removePlaylist(E);  
-        
+        removePlaylist(E);
+
         gitName.value = listname;
-        E.keyCode = 13;        
+        E.keyCode = 13;
         getNewList(E);
-        
+
         toggleMenu();
         setTimeout(function(){
             chooser.selectedIndex = chooser.options.length-1;
         },500);
     }
-} 
+}
 
 function findMatches(e){
     var keyCode = e.keyCode;
     //if the search box is empty, restore old playlist
     if(e.target.value === ""){
             //restore playlist and anything else that needs restoring:
-            playlist.size = 0;  
+            playlist.size = 0;
             songsArray = songsArrayBackup;
             changePlayList();
             return;
@@ -155,7 +227,7 @@ function findMatches(e){
     if(matchedSongsArray.length !== 0 && searchBox.value !== ""){
         songsArray = matchedSongsArray;
         playlist.innerHTML = "";
-        var list = chooser.options[chooser.selectedIndex].innerHTML;            
+        var list = chooser.options[chooser.selectedIndex].innerHTML;
         var header = document.createElement("option");
         header.innerHTML = playlistHeader;
         playlist.appendChild(header);
@@ -172,7 +244,7 @@ function findMatches(e){
             playlist.size = 7;
         }
         else{
-            playlist.size = songsArray.length + 2;            
+            playlist.size = songsArray.length + 2;
         }
 
         if(keyCode === 13){
@@ -181,8 +253,8 @@ function findMatches(e){
         }
     }
     else{
-        playlist.size = 0;        
-        songsArray = songsArrayBackup;            
+        playlist.size = 0;
+        songsArray = songsArrayBackup;
         changePlayList();
     }
 }
@@ -196,7 +268,7 @@ function removePlaylist(e,x){
         if(m.innerHTML === listToRemove){
             chooser.removeChild(chooser[i]);
             //remove old list from menu
-            
+
             removeList.removeChild(removeList[i]);
             removeList.selectedIndex = 0;
 
@@ -233,17 +305,47 @@ function playNextSong(e){
 }
 //----------
 function playSong() {
-    playlist.size = 0;
+    scroller.removeScroller();
+    playlist.size = 0;//close select element to show only item playing
     var i = playlist.selectedIndex;
+    var songNameString = playlist[i].innerHTML.trim();
     if (i > 0) {
         currentlyPlaying.innerHTML = playlist[i].innerHTML + " (" + currentPlayListName + ")";
         flashObjectStyle(currentlyPlaying,"text-shadow","0 2px 0 black", 0.25);
-        flashObjectColor(currentlyPlaying,"lightgray", 0.25);        
+        flashObjectColor(currentlyPlaying,"lightgray", 0.25);
     }
     i -= 1;
     if (i >= 0) {
         var url = currentUrl + songsArray[i] + ".mp3";
         audioPlayer.src = url;
+    }
+    //--see if we can show a piture
+    var list = chooser.options[chooser.selectedIndex].innerHTML;
+    var currentList = lists[list];
+    var picture = currentList[songsArray[i]].picture;
+    pictureDiv.style.background = "hsla(0, 0%, 0%, 0.3)";//dark "see-through"
+    if(picture){
+        //scroller.removeScroller();
+        setTimeout(function(){
+            pictureDiv.style.background = "url("+
+            "https://" + list + ".github.io"+
+            "/music/pictures/"+ picture +
+            ") no-repeat center";
+            pictureDiv.style.backgroundSize = "contain";
+
+        },1);
+    }
+    else{
+        if(extrasOn){
+            setTimeout(function(){
+                pictureDiv.style.background = "url("+
+                "https://" + list + ".github.io"+
+                "/music/altpix/"+ getRandomImage() +
+                ") no-repeat center";
+                pictureDiv.style.backgroundSize = "contain";
+                addScroller(songNameString);
+            },1);
+        }
     }
 }
 //----------
@@ -324,14 +426,85 @@ function turnShuffleOff(){
     shuffleOn = false;
 }
 //----------
+function toggleExtras(){
+    if(extrasOn){
+        turnExtrasOff();
+    }
+    else{
+        turnExtrasOn();
+    }
+}
+//----------
+function turnExtrasOn(){
+    //code here
+    extrasOn = true;
+    onOffExtras.innerHTML = "on";
+    extrasDiv.style.backgroundColor = "rgba(200, 200, 200, 0.5)";
+    extrasDiv.style.boxShadow = "inset 1px 1px 1px black";
+    var i = playlist.selectedIndex;
+    if (i > 0) {
+        currentlyPlaying.innerHTML = playlist[i].innerHTML +
+            " (" +
+            currentPlayListName +
+            ")"
+        ;
+        flashObjectStyle(currentlyPlaying,"text-shadow","0 2px 0 black", 0.25);
+        flashObjectColor(currentlyPlaying,"lightgray", 0.25);
+    }
+    i -= 1;      
+    var list = chooser.options[chooser.selectedIndex].innerHTML;
+    var currentList = lists[list];
+    var picture = currentList[songsArray[i]].picture;
+    setTimeout(function(){
+        if(!picture){
+            pictureDiv.style.background = "url("+
+            "https://" + list + ".github.io"+
+            "/music/altpix/"+ getRandomImage() +
+            ") no-repeat center";
+            pictureDiv.style.backgroundSize = "contain";
+            var songName = playlist[playlist.selectedIndex].innerHTML.trim();
+            addScroller(songName);
+        }
+    },1);
+}
+//----------
+function turnExtrasOff(){
+    extrasOn = false;
+    onOffExtras.innerHTML = "off";
+    extrasDiv.style.backgroundColor = "transparent";
+    extrasDiv.style.boxShadow = "1px 1px 1px black";
+
+    pictureDiv.style.background = "hsla(0, 0%, 0%, 0.3)";//dark "see-through"
+    scroller.removeScroller();
+    var i = playlist.selectedIndex;
+    if (i > 0) {
+        currentlyPlaying.innerHTML = playlist[i].innerHTML + " (" + currentPlayListName + ")";
+        flashObjectStyle(currentlyPlaying,"text-shadow","0 2px 0 black", 0.25);
+        flashObjectColor(currentlyPlaying,"lightgray", 0.25);
+    }
+    i -= 1;    
+    var list = chooser.options[chooser.selectedIndex].innerHTML;
+    var currentList = lists[list];
+    var picture = currentList[songsArray[i]].picture;
+    setTimeout(function(){
+        if(picture){
+            pictureDiv.style.background = "url("+
+            "https://" + list + ".github.io"+
+            "/music/pictures/"+ currentList[songsArray[i]].picture +
+            ") no-repeat center";
+            pictureDiv.style.backgroundSize = "contain";
+        }
+    },1);
+}
+//----------
 function turnShuffle2On(){
     if(chooser.selectedIndex === 0){return;}
-    
+
     var songOnDeck = getRandomSong(songsArray);
     //if a song is not already playing, play song:
     if(audioPlayer.paused){
-        playlist.selectedIndex = songsArray.indexOf(songOnDeck) + 1;        
-        playSong();        
+        playlist.selectedIndex = songsArray.indexOf(songOnDeck) + 1;
+        playSong();
     }
     shuffleBox.style.boxShadow = "inset 1px 1px 1px black";
     shuffleState.innerHTML = "on";
@@ -654,7 +827,6 @@ function changePlayList(e) {
     flashObjectStyle(playlist, "textShadow", "1px 1px 1px black", 0.4);
 }
 //----------
-
 function sendListToServer(listObject) {
     var listString = JSON.stringify(listObject);
     var listSender = new XMLHttpRequest();
@@ -756,9 +928,9 @@ function subList(string, list){
  * that match the string.
  * It returns nothing if both the string and array
  * are not provided.
-*/		
+*/
 	var returnList = null;
-	
+
 	//test the arguments
 	if(list === undefined){
 		return;
@@ -770,7 +942,7 @@ function subList(string, list){
 		return;
 	}
 	//done testing arguments
-	
+
 	if(type(list) === "Array"){
 		buildSubArray();
 	}
@@ -778,7 +950,7 @@ function subList(string, list){
 		buildSubObject();
 	}
 	return returnList;
-	
+
 	//---helper functions---
 	function buildSubArray(){
 		returnList = [];
@@ -787,8 +959,8 @@ function subList(string, list){
 				if(m.toLowerCase().indexOf(string.toLowerCase()) !== -1){
 					returnList.push(m);
 				}
-			});			
-		}		
+			});
+		}
 	}
 	//----
 	function buildSubObject(){
@@ -798,10 +970,10 @@ function subList(string, list){
 				if(prop.toLowerCase().indexOf(string.toLowerCase()) !== -1){
 					returnList[prop] = list[prop];
 				}
-			}			
-		}		
+			}
+		}
 	}
-	//----	
+	//----
 	function type(arg){
 		var prefix = '[object ';
 		var trueType = {}.toString.call(arg);
@@ -818,7 +990,7 @@ function substringSubarray(string, array){
  * that match the string.
  * It returns nothing if both the string and array
  * are not provided.
-*/	
+*/
 	//Needs both arguments, else returns nothing
 	if(array === undefined){
 		return [];
@@ -831,12 +1003,12 @@ function substringSubarray(string, array){
 	else if(type(array) !== '[object Array]'){
 		return [];
 	}
-	
+
 	return matchedArray();
-	
+
 	//---| helper function |---
 	function type(thing){
-		return {}.toString.call(thing);	
+		return {}.toString.call(thing);
 	}
 	function matchedArray(){
 		var newArray = [];
@@ -852,3 +1024,36 @@ function substringSubarray(string, array){
 		return newArray;
 	}
 }//===| END of substringSubarray() |===
+//-------
+function expandPicture(e){
+    if(extrasOn)scroller.modify();
+    var me = e.target;
+    me.style.position = "fixed";
+    me.style.right="0";
+    me.style.top = "0";
+    me.style.left = "0";
+    me.style.bottom= "0";
+    me.style.margin= "auto";
+    me.style.height = "100%";
+    me.style.width = "100%";
+}
+//--------------
+function contractPicture(e){
+    if(extrasOn)scroller.modify();
+    var me = e.target;
+    me.style.width = "7rem";
+    me.style.height = "7rem";
+    setTimeout(function(){
+        me.style.position = "relative";
+        me.style.float = "right";
+        me.style.marginRight = "2rem";
+        me.style.marginBottom = "1.5rem";
+    },800);
+}
+//-------------
+function addScroller(textToscroll){
+    scroller.text = textToscroll;
+    scroller.addScroller(pictureDiv);
+}
+//-------------
+function removeScroller(){}

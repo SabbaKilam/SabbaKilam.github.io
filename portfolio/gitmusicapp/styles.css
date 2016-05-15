@@ -181,7 +181,7 @@ table{
     transition: all 0.25s ease;
     vertical-align: middle;
     font-size: 0.7rem;
-    width: 4.5rem;    
+    width: 4.5rem;
 }
 #shuffleBox{
     width: 5rem;
@@ -190,8 +190,8 @@ table{
     text-align: center;
     font-weight: bold;
     width: 3rem;
-    font-size: 0.6rem;    
-    
+    font-size: 0.6rem;
+
 }
 #shuffleIcon{
     /* new optional stuff */
@@ -201,9 +201,6 @@ table{
     font-size: 1rem;
     display: inline-block;
     width: 20%;
-    //transform-origin: 50% 55%;
-    //transform: rotateZ(90deg);
-    //width: 20%;
 }
 .smallControl{
     display: inline-block;
@@ -216,11 +213,31 @@ table{
     padding-left: 0.5rem;
     padding-right: 0.1rem;
     line-height: 1.16rem;/*1.18rem;*/
-    cursor: pointer;    
+    cursor: pointer;
 }
 #refreshList{
     font-size: 1rem;
     font-weight: bold;
+}
+
+
+#pictureDiv{
+    width: 7rem;
+    height: 7rem;
+    float: right;
+    margin-right: 4rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    background: hsla(0, 0%, 0%, 0.3);
+    border-radius: 0.5rem;
+    z-index: 10;
+}
+
+#extrasDiv{
+    width: 4.5rem;
+    padding: 0.15rem;
+    
 }
 
 /*===========| END audio controls |===========*/

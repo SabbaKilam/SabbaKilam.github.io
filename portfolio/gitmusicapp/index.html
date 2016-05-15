@@ -23,7 +23,8 @@
         <link rel="stylesheet" href="styles.css" />
         <link rel="icon" href="favicon.png" />
         <script src="js/prefixfree.js"></script>
-        <script src="js/CreateListMixer.js"></script>        
+        <script src="js/CreateListMixer.js"></script>
+        <script src="js/scroller.js"></script>
     </head>
     <body>
         <div id="mobileHolder">
@@ -32,14 +33,23 @@
                      <span id="menuButton">&equiv;<span id="menuWord">&nbsp;menu</span></span>
                  </div>
                 <h3 id="appTitle">Git Y'r Music!</h3>
+                <br/>
+                <audio id="audioPlayer" controls autoplay src="silent.mp3"></audio>
+                <!--http://www.noiseaddicts.com/free-samples-mp3/-->
+                <!--http://www.noiseaddicts.com/samples_1w72b820/3739.mp3-->                
+                
+                
+                    <div id="fullId">
+                        <div id="currentlyPlaying"></div>
+                        <div id="pictureDiv"></div>                          
+                    </div> 
                     <br/>
-                     <div id="currentlyPlaying"></div>
-                    <br/>
-                     Current Playlist&rAarr;<select id="chooser" class="roundPink">
+                     Current Playlist: <select id="chooser" class="roundPink">
                     <option>Select A Playlist</option>
                 </select><div id="refreshList" class="smallControl" title="Refresh List">&orarr;</div>
                 <div id="audioControls">
                     <div id="playlistHolder">
+                        
                         <table id="controlsTable">
                             <tr>
                                 <td>
@@ -59,13 +69,20 @@
                                     <div id="nextSong" class="smallControl">&raquo;</div>                                     
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="controlsBox" id="extrasDiv">
+                                        <span id="extrasSpan">
+                                            Extras <span id="onOffExtras">off</span>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
                         </table>
                     </div><!-- end of playlistHolder -->                    
                 </div>
                 <br/>
-                <audio id="audioPlayer" controls autoplay src="tweet.mp3"></audio>
-                <!--http://www.noiseaddicts.com/free-samples-mp3/-->
-                <!--http://www.noiseaddicts.com/samples_1w72b820/3739.mp3-->
+                
             </div><!-- end of content -->
 
             <div id="menu" class="portal"><span id="X">&cross;</span>
@@ -78,7 +95,7 @@
                     </td></tr>
                     <tr><td>
                         <div id="gitFile" class="gitMenu">
-                            &bull;&nbsp;Upload a Song&rAarr;<input  id="fileInput" type="file" class="roundPink">
+                            &bull;&nbsp;Upload a Song&rAarr;<input  id="fileInput" type="file" accept=".mp3" class="roundPink">
                         </div>
                     </td></tr>
                     <tr><td>
@@ -93,11 +110,10 @@
                             </select>
                         </div>                        
                     </td></tr>
-                    <tr><td></td></tr>
-                    <tr><td></td></tr>
                 </table>
             </div><!-- end of menu-->
             <input type="range" id="shadowSlider" value="186" min="1" max="359" class="roundPink">
+            
         </div><!-- end mobileHolder-->
 
     <!--NO HTML BELOW THIS POINT-->
