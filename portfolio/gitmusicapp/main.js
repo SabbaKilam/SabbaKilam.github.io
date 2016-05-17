@@ -179,6 +179,43 @@ function initialize() {
     hasOneList();
 
 } //===| END of initialize() |=====
+
+function configureResizing() {
+    resizeAndCenter();
+    window.onresize = resizeAndCenter;
+    /*
+    //----helpers-----
+    function resizeRootEm() {
+        document.documentElement.style.fontSize = 1.2 * window.innerWidth / 100 + 10 + "px";
+    }
+    function centerPlayer() {
+        var dimensions = id("content").getBoundingClientRect();
+        var top = 1 / 2 * (window.innerHeight - dimensions.height).toFixed(2) + "px";
+        var left = 1 / 2 * (window.innerWidth - dimensions.width).toFixed(2) + "px";
+        content.style.top = top;
+        content.style.left = left;
+        menu.style.top = top;
+        menu.style.left = left;
+    }
+    function alignSliders(){
+        var sliderStats = colorSlider.getBoundingClientRect();
+        shadowSlider.style.position = "absolute";
+        shadowSlider.style.left = sliderStats.left + "px";
+        shadowSlider.style.top = sliderStats.top  + "px";
+        shadowSlider.value = colorSlider.value;
+
+    }
+    //-------------------
+    function resizeAndCenter() {
+        resizeRootEm();
+        centerPlayer();
+        alignSliders();
+    }
+    //-------------
+    */
+}
+//----------
+
 function hasOneList(){
     setTimeout(function(){
         if(chooser.options.length === 2){
@@ -451,7 +488,7 @@ function turnExtrasOn(){
         flashObjectStyle(currentlyPlaying,"text-shadow","0 2px 0 black", 0.25);
         flashObjectColor(currentlyPlaying,"lightgray", 0.25);
     }
-    i -= 1;      
+    i -= 1;
     var list = chooser.options[chooser.selectedIndex].innerHTML;
     var currentList = lists[list];
     var picture = currentList[songsArray[i]].picture;
@@ -482,7 +519,7 @@ function turnExtrasOff(){
         flashObjectStyle(currentlyPlaying,"text-shadow","0 2px 0 black", 0.25);
         flashObjectColor(currentlyPlaying,"lightgray", 0.25);
     }
-    i -= 1;    
+    i -= 1;
     var list = chooser.options[chooser.selectedIndex].innerHTML;
     var currentList = lists[list];
     var picture = currentList[songsArray[i]].picture;
@@ -694,39 +731,7 @@ function storeListsToBrowser() {
     }
 }
 //----------
-function configureResizing() {
-    resizeAndCenter();
-    window.onresize = resizeAndCenter;
-    //----helpers-----
-    function resizeRootEm() {
-        document.documentElement.style.fontSize = 1.2 * window.innerWidth / 100 + 10 + "px";
-    }
-    function centerPlayer() {
-        var dimensions = id("content").getBoundingClientRect();
-        var top = 1 / 2 * (window.innerHeight - dimensions.height).toFixed(2) + "px";
-        var left = 1 / 2 * (window.innerWidth - dimensions.width).toFixed(2) + "px";
-        content.style.top = top;
-        content.style.left = left;
-        menu.style.top = top;
-        menu.style.left = left;
-    }
-    function alignSliders(){
-        var sliderStats = colorSlider.getBoundingClientRect();
-        shadowSlider.style.position = "absolute";
-        shadowSlider.style.left = sliderStats.left + "px";
-        shadowSlider.style.top = sliderStats.top  + "px";
-        shadowSlider.value = colorSlider.value;
 
-    }
-    //-------------------
-    function resizeAndCenter() {
-        resizeRootEm();
-        centerPlayer();
-        alignSliders();
-    }
-    //-------------
-}
-//----------
 function addPlaylistNamesToBox() {
     for (var userName in lists) {
         addNameToBox(userName);
@@ -1048,7 +1053,16 @@ function contractPicture(e){
         me.style.float = "right";
         me.style.marginRight = "2rem";
         me.style.marginBottom = "1.5rem";
+        //resizeAndCenter();
     },800);
+    setTimeout(function(){
+        var controls = id("audioControls");
+        var width = controls.getBoundingClientRect().width;
+        controls.style.width = (width + 1) + "px";
+        width = controls.getBoundingClientRect().width;
+        controls.style.width = (width - 1) + "px";
+        resizeAndCenter();        
+    },900);
 }
 //-------------
 function addScroller(textToscroll){
@@ -1057,3 +1071,32 @@ function addScroller(textToscroll){
 }
 //-------------
 function removeScroller(){}
+//---------
+function resizeAndCenter(){
+    resizeRootEm();
+    centerPlayer();
+    alignSliders();
+
+    //----| Helper Functions |-----
+    function resizeRootEm() {
+        document.documentElement.style.fontSize = 1.2 * window.innerWidth / 100 + 10 + "px";
+    }
+    function centerPlayer() {
+        var dimensions = id("content").getBoundingClientRect();
+        var top = 1 / 2 * (window.innerHeight - dimensions.height).toFixed(2) + "px";
+        var left = 1 / 2 * (window.innerWidth - dimensions.width).toFixed(2) + "px";
+        content.style.top = top;
+        content.style.left = left;
+        menu.style.top = top;
+        menu.style.left = left;
+    }
+    function alignSliders(){
+        var sliderStats = colorSlider.getBoundingClientRect();
+        shadowSlider.style.position = "absolute";
+        shadowSlider.style.left = sliderStats.left + "px";
+        shadowSlider.style.top = sliderStats.top  + "px";
+        shadowSlider.value = colorSlider.value;
+
+    }
+    //----| END of Helpers |---
+}//----| END of resizeAndCenter |----
