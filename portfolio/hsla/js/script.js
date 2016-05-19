@@ -1,3 +1,13 @@
+/*
+  Author: Abbas Abdulmalik
+  Title: hsla color picker
+  Created: December 3, 2013
+  Revised: May 19, 2013
+  Purpose: A quick and easy way to choose colors for web apps
+  Notes: I know, I know: Polluting global namespace, not very declarative,
+         using my own old lame library functions, not enough comments.
+         Try not to beat yourself up too much, because it still works :)  
+*/
 var dragFlag = true;
 var radius = 50;
 var saturation = "";
@@ -88,6 +98,7 @@ function maybeProhibitDrag(e){// makes it hard to drop the ball
 //=============NEW DRAG AND NO DROP ABOVE====================
 //============keyboard input numbers event handlers
 id('hueNum').onchange = changeHue;
+id('hueNum').oninput = changeHue;
 function changeHue(){
     hueNumFlag = true;
     if(!hueSliderFlag){
@@ -107,7 +118,9 @@ function changeHue(){
     }
     hueNumFlag = false;
 }
-id('saturationNum').onchange = function(){
+id('saturationNum').onchange = changeSaturation;
+id('saturationNum').oninput = changeSaturation;
+function changeSaturation(){
     saturationNumFlag = true;
     if(!saturationSliderFlag){
         fixNumberError('saturationNum','saturation', 0, 100);
@@ -115,6 +128,29 @@ id('saturationNum').onchange = function(){
         hueSatCore();
     }
     saturationNumFlag = false;
+};
+id('lightNum').onchange = changeLight;
+id('lightNum').oninput = changeLight;
+function changeLight(){
+    lightnessNumFlag = true;
+    if(!lightnessSliderFlag){
+        fixNumberError('lightNum', 'light',0 ,100);
+        id('light').value = id('lightNum').value;
+        coreColorSetter();
+    }
+    lightnessNumFlag = false;
+};
+id('opacityNum').onchange = changeOpacity;
+id('opacityNum').oninput = changeOpacity;
+function changeOpacity(){
+    opacityNumFlag = true;
+    if(!opacitySliderFlag){
+        fixNumberError('opacityNum', 'opacity', 0, 1.00);
+        id('opacity').value = id('opacityNum').value;
+        coreColorSetter();
+        id('opacityNum').value = parseFloat(opacity).toFixed(2);
+    }
+    opacityNumFlag = false;
 };
 //==========mouse scroll wheel===============
 //window.addEventListener("DOMMouseScroll",...;//Firefox
@@ -132,26 +168,6 @@ function wheelDelta(e){
     var delta = Math.max(-1, Math.min(1,(e.wheelDelta || -e.detail)));
     return delta;
 }
-//---
-id('lightNum').onchange = function(){
-    lightnessNumFlag = true;
-    if(!lightnessSliderFlag){
-        fixNumberError('lightNum', 'light',0 ,100);
-        id('light').value = id('lightNum').value;
-        coreColorSetter();
-    }
-    lightnessNumFlag = false;
-};
-id('opacityNum').onchange = function(){
-    opacityNumFlag = true;
-    if(!opacitySliderFlag){
-        fixNumberError('opacityNum', 'opacity', 0, 1.00);
-        id('opacity').value = id('opacityNum').value;
-        coreColorSetter();
-        id('opacityNum').value = parseFloat(opacity).toFixed(2);
-    }
-    opacityNumFlag = false;
-};
 //helper
 /*global isNumber*/
 function fixNumberError(elemID1, elemID2 ,min, max){
