@@ -1,11 +1,12 @@
+//======================================| ORIGINAL |=======================================
 /*
   Author: Abbas Abdulmalik
   Title: hsla color picker
   Created: December 3, 2013
-  Revised: May 19, 2013
+  Revised: May 20, 2013
   Purpose: A quick and easy way to choose colors for web apps
-  Notes: I know, I know: Polluting the global namespace, not very declarative,
-         using my own old lame library functions, not enough comments.
+  Notes: I know, I know: Polluting the global namespace; code not very declarative;
+         using my own old lame library functions; not enough comments; etc.
          Try not to beat yourself up too much, because it still works :)  
 */
 var dragFlag = true;
@@ -19,7 +20,7 @@ var maximumRadius = 150;
 var colorString = "";
 var complementString = "";
 var centerX = parseInt(window.innerWidth/2, 10);
-var centerY = 157;//160
+var centerY = 204;
 var x = -75 + centerX;
 var y = 210;
 var dx, dy;
@@ -35,8 +36,18 @@ var wheelInUse = false;
 
 //==========Event Handlers=======================
 window.onload = function(){
-    var x = -75 + parseInt(window.innerWidth/2, 10);
-    var y = 210;// y_center ~= 160 for now.
+    var yDirection = Math.floor( 2*Math.random() ) == 0 ? -1 : 1;
+    var yDistance = Math.floor(maximumRadius * Math.random());
+    var y = centerY + yDirection*yDistance;
+
+    //xDistance is now restricted by y and maximumRadius
+    //var xMaximum = sqrt(maximumRadius^2 - (y-centerY)^2).
+     
+    var xDirection = Math.floor( 2*Math.random() ) == 0 ? -1 : 1;
+    var xMaximum = Math.sqrt( maximumRadius*maximumRadius - (y - centerY)*(y - centerY) );
+    var xDistance = Math.floor( xMaximum * Math.random() );
+    var x = centerX + xDirection*xDistance;    
+
     /*global id*/
     id('light').value = luminosity;
     id('opacity').value = opacity;
@@ -46,16 +57,11 @@ window.onload = function(){
     id('hueNum').value = degrees;
     id('saturationNum').value= saturation;
 };
+
 window.onresize = function(){
-    //the center of the circle changes in the x-direction
-    var deltaCenterX = centerX - parseInt(window.innerWidth/2, 10);
-    //establish the new center
-    centerX = parseInt(window.innerWidth/2, 10);
-    //decrees x by the difference between old and new center
-    x = (parseFloat(id('saturation').value) * maximumRadius * Math.cos(rad) / 100  + centerX);
-    x -= deltaCenterX;
-    showColor(x,y);
+    centerX = parseFloat(window.innerWidth/2, 10);
 };
+    
 //click anywhere on the colored circle to choose the color and move the ball
 /*global on*/
 on("mousedown",id('colorWheel'),function(e){
@@ -197,8 +203,6 @@ function newHue(){
     var x = (parseFloat(id('saturation').value) * maximumRadius * Math.cos(rad) / 100  + centerX);
     var y = (centerY - parseFloat(id('saturation').value) * maximumRadius * Math.sin(rad) / 100);
 
-    y += 45; //css has body padding-top at 50px
-
     var dx = x - centerX;
     var dy = centerY - y;
     var radius = Math.round(Math.sqrt(dy*dy + dx*dx));
@@ -228,8 +232,6 @@ function hueSatCore(){
     var rad = degreesToRadians(mostRecentAngle);
     var x = (parseFloat(id('saturation').value) * maximumRadius * Math.cos(rad) / 100  + centerX);
     var y = (centerY - parseFloat(id('saturation').value) * maximumRadius * Math.sin(rad) / 100);
-
-    y+=45; //css has body padding-top at 50px
 
     var dx = x - centerX;
     var dy = centerY - y;
@@ -340,8 +342,6 @@ function degreesToRadians(degrees){
 //====================================================
 function showColor(x,y){
 
-    y -=45; //css has body padding-top at 50px
-
     dx = x - centerX;
     dy = centerY - y;
     var rad = Math.atan(dy/dx);
@@ -368,7 +368,7 @@ function showColor(x,y){
 }
 //============================
 function moveBall(x,y){
-    id('ball').style.marginTop = "" + (y - centerY) +"px";
+    id('ball').style.marginTop = "" + (y - centerY + 3 ) +"px"; //3 or 4 px minor adjustment added for centering pointer
     id('ball').style.marginLeft = "" + (x - centerX) +"px";
 }
 //===============================
@@ -420,13 +420,7 @@ function coreColorSetter(){
 
 var mword = document.getElementById("mnemonicWord");
 var mpic = document.getElementById("mnemonicPicture");
-/*
-mword.onclick = function(){
-    mpic.style.opacity = 1;
-    mpic.style.zIndex = 5;
 
-};
-*/
 (function(){
     
     var pictureVisible = false;
@@ -450,15 +444,7 @@ mword.onclick = function(){
         pictureVisible = false;        
     }
 })();
-/*
-mword.onmouseout = function(e){
-    hidePicture(e);
-    mword.click();//to make closure variable "pictureVisible" false
-};
-mpic.onclick = function(e){
-    hidePicture(e);
-};
-*/
+
 //----| Helpers |----
 function hidePicture(e){
     mpic.style.opacity = 0;
@@ -468,5 +454,6 @@ function showPicture(e){
     mpic.style.opacity = 1;
     mpic.style.zIndex = 5;    
 }
+
 
 
