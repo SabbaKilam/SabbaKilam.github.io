@@ -4,7 +4,7 @@
   Created: December 3, 2013
   Revised: May 19, 2013
   Purpose: A quick and easy way to choose colors for web apps
-  Notes: I know, I know: Polluting global namespace, not very declarative,
+  Notes: I know, I know: Polluting the global namespace, not very declarative,
          using my own old lame library functions, not enough comments.
          Try not to beat yourself up too much, because it still works :)  
 */
@@ -52,6 +52,7 @@ window.onresize = function(){
     //establish the new center
     centerX = parseInt(window.innerWidth/2, 10);
     //decrees x by the difference between old and new center
+    x = (parseFloat(id('saturation').value) * maximumRadius * Math.cos(rad) / 100  + centerX);
     x -= deltaCenterX;
     showColor(x,y);
 };
