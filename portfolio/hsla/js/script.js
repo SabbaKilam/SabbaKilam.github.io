@@ -3,7 +3,7 @@
   Author: Abbas Abdulmalik
   Title: hsla color picker
   Created: December 3, 2013
-  Revised: May 20, 2013
+  Revised: May 20, 2016
   Purpose: A quick and easy way to choose colors for web apps
   Notes: I know, I know: Polluting the global namespace; code not very declarative;
          using my own old lame library functions; not enough comments; etc.
