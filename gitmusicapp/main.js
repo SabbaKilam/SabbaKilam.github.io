@@ -92,7 +92,8 @@ var altpix = [
     "snowtree3.gif",
     "stream2.gif",
     "paris.gif",
-    "trafficnight.gif"
+    "trafficnight.gif",
+    "downstream.gif"
 ];
 getRandomImage(altpix);
 
