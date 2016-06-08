@@ -2,7 +2,7 @@
  * Author: Abbas Abdulmalik
  * Creation Date: April 15, 2016
  * Title:  CreateListMixer
- * Revised: (Date)
+ * Revised: June 7, 2016
  * Purpose: Factory creates a function that
  * returns a random item from collection provided (array or object)
  * Notes: Example-> var list = ["a", "short", "list"];//three (3) items to test
@@ -11,10 +11,11 @@
  * 					getRandomItem();//returns next item
  * 					getRandomItem();//returns next item (last of three)
  * 					getRandomItem();//new first item from re-ramdomized list
- * 					var list2 = [1,2,3,4,5,6];// a new list;
+ *					// a new list;					
+ *					var list2 = { record1: "string", record2: "anotherString", ...};
  * 					getRandomItem(list2);//returns first of new randomized list2
- * 					etc.
- * Also returns property names of objects (as well as array members);
+ * 					getRandomItem();//etc.
+ * Returns a property name for objects or an array member for arrays;
  * Returns 'false' if argument of function is not an object (fails typeof arg === 'object')
  * 
 */
