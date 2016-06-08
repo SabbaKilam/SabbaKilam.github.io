@@ -576,5 +576,10 @@
         "title" : "Mercy",
         "artist" : "Duffy",
         "picture": "duffy-mercy.png"
+    },
+    "Anugama - Silk Tree" :{
+        "title" : "Silk Tree",
+        "artist" : "Anugama",
+        "picture": "nightingale-lightdance.png"
     }
 }
