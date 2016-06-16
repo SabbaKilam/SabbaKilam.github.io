@@ -328,7 +328,8 @@
     },
     "Archies - Sugar Sugar" :{
         "title" : "Sugar Sugar",
-        "artist" : "Archies"
+        "artist" : "Archies",
+        "picture": "archiessugar.png"
     },
     "Quicksilver Messenger Service - What About Me" :{
         "title" : "What About Me",
