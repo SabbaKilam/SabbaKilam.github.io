@@ -1,0 +1,1 @@
+<center><h2>Dice App!</h2></center>
