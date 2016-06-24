@@ -51,7 +51,8 @@
     },
     "towerpoweryoungman": {
         "title": "You're Still A Young Man",
-        "artist": "Tower of Power"
+        "artist": "Tower of Power",
+        "picture" : "TOPbumpcity.jpg"
     },
     "quickfreshair": {
         "title": "Fresh Air",
