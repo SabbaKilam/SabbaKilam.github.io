@@ -582,5 +582,10 @@
         "title" : "Silk Tree",
         "artist" : "Anugama",
         "picture": "nightingale-lightdance.png"
+    },
+    "Allman Brothers Band - Blue Sky" :{
+        "title" : "Blue Sky",
+        "artist" : "Allman Brothers Band",
+        "picture" : "allmaneatapeach.jpg"
     }
 }
