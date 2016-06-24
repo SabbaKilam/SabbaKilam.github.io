@@ -593,5 +593,10 @@
         "title" : "So Very Hard To Go",
         "artist" : "Tower Of Power",
         "picture" : "towerofpower.jpeg"
+    },
+    "Billy Stewart - I Do Love You" :{
+        "title" : "I Do Love You",
+        "artist" : "Billy Stewart",
+        "picture" : "billystewart.jpg"
     }
 }
