@@ -587,5 +587,10 @@
         "title" : "Blue Sky",
         "artist" : "Allman Brothers Band",
         "picture" : "allmaneatapeach.jpg"
+    },
+    "Tower Of Power - So Very Hard To Go" :{
+        "title" : "So Very Hard To Go",
+        "artist" : "Tower Of Power",
+        "picture" : "towerofpower.jpeg"
     }
 }
