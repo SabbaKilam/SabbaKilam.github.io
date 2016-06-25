@@ -613,5 +613,10 @@
         "title" : "I Do Love You",
         "artist" : "Billy Stewart",
         "picture" : "billystewart.jpg"
+    },
+    "Jamestown Massacre - Summer Sun" :{
+        "title" : "Summer Sun",
+        "artist" : "Jamestown Massacre",
+        "picture" : "summersun.jpg"
     }
 }
