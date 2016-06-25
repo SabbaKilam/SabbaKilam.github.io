@@ -603,5 +603,10 @@
         "title" : "Sitting in the Park",
         "artist" : "Billy Stewart",
         "picture" : "billystewart.jpg"
+    },
+    "Malo - Suavecito" :{
+        "title" : "Suavecito",
+        "artist" : "Malo",
+        "picture" : "malo.jpg"
     }
 }
