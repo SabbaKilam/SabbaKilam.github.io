@@ -598,5 +598,10 @@
         "title" : "I Do Love You",
         "artist" : "Billy Stewart",
         "picture" : "billystewart.jpg"
+    },
+    "Billy Stewart - Sitting in the Park" :{
+        "title" : "Sitting in the Park",
+        "artist" : "Billy Stewart",
+        "picture" : "billystewart.jpg"
     }
 }
