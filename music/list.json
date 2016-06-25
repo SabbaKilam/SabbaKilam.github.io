@@ -618,5 +618,15 @@
         "title" : "Summer Sun",
         "artist" : "Jamestown Massacre",
         "picture" : "summersun.jpg"
+    },
+    "Chicago - Beginnings" :{
+        "title" : "Beginnings",
+        "artist" : "Chicago",
+        "picture" : "cta.jpg"
+    },
+    "Chicago - Introduction" :{
+        "title" : "Introduction",
+        "artist" : "Chicago",
+        "picture" : "cta.jpg"
     }
 }
