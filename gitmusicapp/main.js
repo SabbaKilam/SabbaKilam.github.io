@@ -1042,6 +1042,9 @@ function expandPicture(e){
     me.style.margin= "auto";
     me.style.height = "100%";
     me.style.width = "100%";
+    var i = playlist.selectedIndex;
+    var songNameString = playlist[i].innerHTML.trim();    
+    addScroller(songNameString);
 }
 //--------------
 function contractPicture(e){
@@ -1055,6 +1058,7 @@ function contractPicture(e){
         me.style.marginRight = "2rem";
         me.style.marginBottom = "1.5rem";
         //resizeAndCenter();
+        removeScroller();
     },800);
     setTimeout(function(){
         var controls = id("audioControls");
@@ -1071,7 +1075,9 @@ function addScroller(textToscroll){
     scroller.addScroller(pictureDiv);
 }
 //-------------
-function removeScroller(){}
+function removeScroller(){
+   scroller.removeScroller(pictureDiv);    
+}
 //---------
 function resizeAndCenter(){
     resizeRootEm();

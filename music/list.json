@@ -608,5 +608,10 @@
         "title" : "Suavecito",
         "artist" : "Malo",
         "picture" : "malo.jpg"
+    },
+    "Billy Stewart - I Do Love You" :{
+        "title" : "I Do Love You",
+        "artist" : "Billy Stewart",
+        "picture" : "billystewart.jpg"
     }
 }
