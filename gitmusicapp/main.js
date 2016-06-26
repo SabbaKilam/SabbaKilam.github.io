@@ -1044,7 +1044,9 @@ function expandPicture(e){
     me.style.width = "100%";
     var i = playlist.selectedIndex;
     var songNameString = playlist[i].innerHTML.trim();    
-    addScroller(songNameString);
+    if(extrasOn){
+       addScroller(songNameString);     
+    }
 }
 //--------------
 function contractPicture(e){
