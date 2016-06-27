@@ -62,6 +62,7 @@ var shuffleState = id("shuffleState");
 var shuffleIcon = id("shuffleIcon");
 var shuffleOn = false;
 var shuffleTimerId = null;
+var pictureIsExpanded = false;
 
 var altpix = [
     "cranespool.gif",
@@ -370,7 +371,9 @@ function playSong() {
             "/music/pictures/"+ picture +
             ") no-repeat center";
             pictureDiv.style.backgroundSize = "contain";
-
+            if(pictureIsExpanded && extrasOn){
+                addScroller(songNameString);
+            }
         },1);
     }
     else{
@@ -381,7 +384,9 @@ function playSong() {
                 "/music/altpix/"+ getRandomImage() +
                 ") no-repeat center";
                 pictureDiv.style.backgroundSize = "contain";
-                addScroller(songNameString);
+                if(pictureIsExpanded){
+                    addScroller(songNameString);
+                }
             },1);
         }
     }
@@ -1047,6 +1052,7 @@ function expandPicture(e){
     if(extrasOn){
        addScroller(songNameString);     
     }
+    pictureIsExpanded = true;
 }
 //--------------
 function contractPicture(e){
@@ -1070,6 +1076,7 @@ function contractPicture(e){
         controls.style.width = (width - 1) + "px";
         resizeAndCenter();        
     },900);
+    pictureIsExpanded = false;
 }
 //-------------
 function addScroller(textToscroll){
