@@ -23,10 +23,11 @@
 
 }
 .appHolder{
-    background: black;
+    background: white;
 }
 .splashScreen{
     background: teal;
     opacity: 1;
+    font-size: 2rem;    
     transition: opacity 10s ease;
 }
