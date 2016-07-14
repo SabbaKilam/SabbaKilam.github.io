@@ -3,8 +3,13 @@ document.body.onload = function(){
     var ajax = new XMLHttpRequest();
     var url = "http://abbas411.com/apps/music/getabbas.php";
     //----------------------------
-    ajax.open("GET", url);
-    ajax.send();
+    try{        
+        ajax.open("GET", url);
+        ajax.send();
+    }
+    catch(e){
+        alert(e);
+    }
     ajax.onload = function(){
         alert(ajax.response);
     }
