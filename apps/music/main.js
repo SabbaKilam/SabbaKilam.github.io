@@ -1,6 +1,15 @@
 document.body.onload = function(){
     var titles = document.getElementsByClassName("title");
-    [].forEach.call(titles, function(m){
+    var ajax = new XMLHttpRequest();
+    var url = "http://abbas411.com/apps/music/getabbas.php";
+    //----------------------------
+    ajax.open("GET", url);
+    ajax.send();
+    ajax.onload = function(){
+        alert(ajax.response);
+    }
+    //----------------------------
+    Array.prototype.forEach.call(titles, function(m){
         var top = 0.5*(window.innerHeight) - 0.5*(m.getBoundingClientRect().height) + "px";
         styles(m)
             ("background","gray")
