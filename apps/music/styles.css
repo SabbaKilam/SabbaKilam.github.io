@@ -3,7 +3,7 @@ body{
 }
 .title{
     margin: 0 auto;
-    width: 20%;
+    width: 75%;
     /*
     ("position","relative")
     ("margin"," 0 auto")            
@@ -27,6 +27,7 @@ body{
 }
 .appHolder{
     background: black;
+    font-size: 3rem;
 }
 .splashScreen{
     top: -4.5rem;
