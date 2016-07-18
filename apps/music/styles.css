@@ -1,7 +1,9 @@
+body{
+    background: black;
+}
 .title{
     margin: 0 auto;
     width: 20%;
-    
     /*
     ("position","relative")
     ("margin"," 0 auto")            
@@ -14,7 +16,7 @@
 
 .fullscreen{
     position: fixed;
-    overflow-x: hidden;
+    overflow: hidden;
     top: 0;
     bottom: 0;
     left: 0;
@@ -24,11 +26,17 @@
 
 }
 .appHolder{
-    background: white;
+    background: black;
 }
 .splashScreen{
-    background: teal;
+    top: -2rem;
+    background-color: black;
+    background: url(FlashingIpod.gif) no-repeat -10%;
+    background-position: center top;    
+    background-size: cover;
+    width: 10rem;
+    padding-bottom: 15rem;
     opacity: 1;
     font-size: 2rem;    
-    transition: opacity 10s ease;
+    transition: opacity 2s ease;
 }
