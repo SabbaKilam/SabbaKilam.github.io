@@ -17,8 +17,8 @@ document.body.onload = function(){
         document.documentElement.style.fontSize = (2 + window.innerWidth/85) + "px";
         setTimeout(function(){
             lib.styles(lib.id("splashScreen"))
-                ("width","40rem")
-                ("padding-bottom","10rem")
+                ("width","60rem")
+                ("padding-bottom","15rem")
                 ("","")
                 ("","")
                 ("","")
