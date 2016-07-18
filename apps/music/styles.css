@@ -29,12 +29,12 @@ body{
     background: black;
 }
 .splashScreen{
-    top: -2rem;
+    top: -4.5rem;
     background-color: black;
-    background: url(FlashingIpod.gif) no-repeat -10%;
+    background: url(FlashingIpod.gif) no-repeat center;
     background-position: center top;    
     background-size: cover;
-    width: 10rem;
+    width: 60rem;
     padding-bottom: 15rem;
     opacity: 1;
     font-size: 2rem;    
