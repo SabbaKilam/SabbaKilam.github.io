@@ -7,6 +7,8 @@ document.body.onload = function(){
 
     setTimeout(function(){
         document.getElementById("splashScreen").style.opacity = "0";
+        document.getElementById("appHolder").style.opacity = "1";
+        
     }, 2000);
     //=================
     setInterval(function(){

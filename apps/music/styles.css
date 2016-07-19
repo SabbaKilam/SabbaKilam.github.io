@@ -28,6 +28,7 @@ body{
 .appHolder{
     background: black;
     font-size: 3rem;
+    opacity: 0; /* hides it from FOUC at load time*/
 }
 .splashScreen{
     top: -4.5rem;
