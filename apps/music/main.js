@@ -6,8 +6,8 @@ document.body.onload = function(){
     //----------------------------
 
     setTimeout(function(){
-        document.getElementById("splashScreen").style.opacity = "0";
-        document.getElementById("appHolder").style.opacity = "1";
+        document.getElementById("splashScreen1").style.opacity = "0";
+        //document.getElementById("appHolder").style.opacity = "1";
         
     }, 2000);
     //=================
@@ -18,7 +18,7 @@ document.body.onload = function(){
     function resizeApp(){
         document.documentElement.style.fontSize = (2 + window.innerWidth/85) + "px";
         setTimeout(function(){
-            lib.styles(lib.id("splashScreen"))
+            lib.styles(lib.id("splashScreen1"))
                 ("width","60rem")
                 ("padding-bottom","15rem")
                 ("","")

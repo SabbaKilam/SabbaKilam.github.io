@@ -30,12 +30,24 @@ body{
     font-size: 3rem;
     opacity: 0; /* hides it from FOUC at load time*/
 }
-.splashScreen{
+.splashScreen1{
     top: -4.5rem;
     background-color: black;
     background: url(FlashingIpod.gif) no-repeat center;
     background-position: center top;    
     background-size: cover;
+    width: 60rem;
+    padding-bottom: 15rem;
+    opacity: 1;
+    font-size: 2rem;    
+    transition: opacity 2s ease;
+}
+
+.splashScreen2{
+    background-color: black;
+    background: url(YourMusic.png) no-repeat center;
+    background-position: center center;    
+    background-size: contain;
     width: 60rem;
     padding-bottom: 15rem;
     opacity: 1;
