@@ -8,19 +8,17 @@ document.body.onload = function(){
     player.src = "shortwordup.mp3";
     title.style.opacity = "0";
     player.play();
+    setTimeout(function(){
+        document.getElementById("appHolder").style.opacity = "1";        
+    },8000);// 8 second intro ends
     player.onended = function(){
-        //player.src = "";
         title.style.opacity = "1";
     };
-    title.onclick = function(){
-        title.innerHTML = "Coming Soon";
-    };
+
     resizeApp();
     //----------------------------
     setTimeout(function(){
         document.getElementById("splashScreen1").style.opacity = "0";
-
-        
         document.getElementById("splashScreen2").style.opacity = "1";        
     }, 4000);
     setTimeout(function(){
