@@ -6,6 +6,8 @@ body{
     width: 75%;
     background-position: center center;
     background: linear-gradient(teal, transparent);
+    opacity: 1;
+    transition: opacity 1s ease;
     /*
     ("position","relative")
     ("margin"," 0 auto")            

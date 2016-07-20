@@ -6,7 +6,12 @@ document.body.onload = function(){
     var title = document.getElementById("title");
     var player = document.getElementById("player");
     player.src = "shortwordup.mp3";
+    title.style.opacity = "0";
     player.play();
+    player.onended = function(){
+        //player.src = "";
+        title.style.opacity = "1";
+    };
     title.onclick = function(){
         title.innerHTML = "Coming Soon";
     };
@@ -17,13 +22,13 @@ document.body.onload = function(){
 
         
         document.getElementById("splashScreen2").style.opacity = "1";        
-    }, 2000);
+    }, 4000);
     setTimeout(function(){
         document.getElementById("splashScreen1").style.visibility = "hidden";        
         document.getElementById("splashScreen2").style.opacity = "0";
         document.getElementById("splashScreen2").style.visibility = "hidden";        
         document.getElementById("appHolder").style.opacity = "1";
-    }, 4000);    
+    }, 7500);    
     //=================
     setInterval(function(){
         resizeApp();
