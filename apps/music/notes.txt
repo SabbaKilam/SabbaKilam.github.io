@@ -1,0 +1,22 @@
+What our apps should be like:
+    Start the app as a private app
+    Music files are stored outside the app (googledrive)
+    Each song has:
+        mp3 file
+        a graphic option (album cover?)
+        artist, tile
+        Options:album name, release year, genre
+    Ability to upload song file (and graphic) from anywhere
+    Option: browse Youtube, play and upload songs
+    
+Google drive link to musicpool:
+https://drive.google.com/folderview?id=0B43RjYofYZaJcFQtRTNZSUNrR0E&usp=sharing
+Google public link:
+https://drive.google.com/folderview?id=0B43RjYofYZaJcFQtRTNZSUNrR0E&usp=sharing
+//=====| Backdoor |=====================
+Google drive backdoor hack link:
+https://googledrive.com/host/0B43RjYofYZaJcFQtRTNZSUNrR0E
+
+    
+    
+        

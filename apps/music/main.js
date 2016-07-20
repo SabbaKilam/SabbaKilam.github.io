@@ -1,13 +1,13 @@
 document.body.onload = function(){
     /*global lib*/
     window.onresize = resizeApp;
+    var url = "https://googledrive.com/host/0B43RjYofYZaJcFQtRTNZSUNrR0E";
     var titles = document.getElementsByClassName("title");
     var title = document.getElementById("title");
+    var player = document.getElementById("player");
+    player.src = url + "/wordup.mp3";
     title.onclick = function(){
         title.innerHTML = "Coming Soon";
-    };
-    window.onresize = function(){
-        title.innerHTML = "App Goes Here"
     };
     resizeApp();
     //----------------------------
