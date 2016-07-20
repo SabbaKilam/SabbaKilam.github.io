@@ -4,12 +4,14 @@ document.body.onload = function(){
     var titles = document.getElementsByClassName("title");
     resizeApp();
     //----------------------------
-
     setTimeout(function(){
         document.getElementById("splashScreen1").style.opacity = "0";
-        //document.getElementById("appHolder").style.opacity = "1";
-        
+        document.getElementById("splashScreen2").style.opacity = "1";        
     }, 2000);
+    setTimeout(function(){
+        document.getElementById("splashScreen2").style.opacity = "0";
+        document.getElementById("appHolder").style.opacity = "1";
+    }, 4000);    
     //=================
     setInterval(function(){
         resizeApp();
@@ -34,13 +36,13 @@ document.body.onload = function(){
     Array.prototype.forEach.call(titles, function(m){
         var top = 0.5*(window.innerHeight) - 0.5*(m.getBoundingClientRect().height) + "px";
         lib.styles(m)
-            ("background","gray")
+            ("background","teal")
             ("text-align","center")
-            ("border-radius","5px")
+            ("border-radius","8px")
             ("margin-top",top)
             ("color","white")
-            ("","")
-            ("","")
+            ("padding","1%")
+            ("box-shadow","3px 3px 8px #FFF")
         ;
     });    
 };
