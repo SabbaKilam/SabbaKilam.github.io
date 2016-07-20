@@ -4,7 +4,10 @@ document.body.onload = function(){
     var titles = document.getElementsByClassName("title");
     var title = document.getElementById("title");
     title.onclick = function(){
-        this.innerHTML = "Coming Soon";
+        title.innerHTML = "Coming Soon";
+    };
+    window.onresize = function(){
+        title.innerHTML = "App Goes Here"
     };
     resizeApp();
     //----------------------------
