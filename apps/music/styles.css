@@ -5,6 +5,7 @@ body{
     margin: 0 auto;
     width: 75%;
     background-position: center center;
+    background: linear-gradient(teal, transparent);
     /*
     ("position","relative")
     ("margin"," 0 auto")            

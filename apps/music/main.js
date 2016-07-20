@@ -47,13 +47,11 @@ document.body.onload = function(){
     Array.prototype.forEach.call(titles, function(m){
         var top = 0.5*(window.innerHeight) - 0.5*(m.getBoundingClientRect().height) + "px";
         lib.styles(m)
-            ("background","teal")
             ("text-align","center")
             ("border-radius","8px")
             ("margin-top",top)
             ("color","white")
             ("padding","1%")
-            ("box-shadow","3px 3px 15px #ddd")
         ;
     });    
 };
