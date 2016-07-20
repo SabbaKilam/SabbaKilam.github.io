@@ -2,14 +2,22 @@ document.body.onload = function(){
     /*global lib*/
     window.onresize = resizeApp;
     var titles = document.getElementsByClassName("title");
+    var title = document.getElementById("title");
+    title.onclick = function(){
+        this.innerHTML = "Coming Soon";
+    };
     resizeApp();
     //----------------------------
     setTimeout(function(){
         document.getElementById("splashScreen1").style.opacity = "0";
+
+        
         document.getElementById("splashScreen2").style.opacity = "1";        
     }, 2000);
     setTimeout(function(){
+        document.getElementById("splashScreen1").style.visibility = "hidden";        
         document.getElementById("splashScreen2").style.opacity = "0";
+        document.getElementById("splashScreen2").style.visibility = "hidden";        
         document.getElementById("appHolder").style.opacity = "1";
     }, 4000);    
     //=================
@@ -42,7 +50,7 @@ document.body.onload = function(){
             ("margin-top",top)
             ("color","white")
             ("padding","1%")
-            ("box-shadow","3px 3px 8px #FFF")
+            ("box-shadow","3px 3px 15px #ddd")
         ;
     });    
 };

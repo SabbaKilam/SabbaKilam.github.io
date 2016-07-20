@@ -4,6 +4,7 @@ body{
 .title{
     margin: 0 auto;
     width: 75%;
+    background-position: center center;
     /*
     ("position","relative")
     ("margin"," 0 auto")            
