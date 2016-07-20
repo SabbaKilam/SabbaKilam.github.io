@@ -7,12 +7,22 @@ document.body.onload = function(){
     var player = document.getElementById("player");
     player.src = "shortwordup.mp3";
     title.style.opacity = "0";
+    player.pause();
     player.play();
     setTimeout(function(){
-        document.getElementById("appHolder").style.opacity = "1";        
+        document.getElementById("splashScreen1").style.visibility = "hidden";        
+        document.getElementById("splashScreen2").style.opacity = "0";
+        document.getElementById("splashScreen2").style.visibility = "hidden";        
+        document.getElementById("appHolder").style.opacity = "1";
+        document.getElementById("appHolder").style.visibility = "visible";
+        title.style.opacity = "1";                
     },8000);// 8 second intro ends
     player.onended = function(){
-        title.style.opacity = "1";
+        document.getElementById("splashScreen1").style.visibility = "hidden";        
+        document.getElementById("splashScreen2").style.opacity = "0";
+        document.getElementById("splashScreen2").style.visibility = "hidden";        
+        document.getElementById("appHolder").style.opacity = "1";
+        title.style.opacity = "1";        
     };
 
     resizeApp();
@@ -26,6 +36,7 @@ document.body.onload = function(){
         document.getElementById("splashScreen2").style.opacity = "0";
         document.getElementById("splashScreen2").style.visibility = "hidden";        
         document.getElementById("appHolder").style.opacity = "1";
+        document.getElementById("appHolder").style.visibility = "visible";        
     }, 7500);    
     //=================
     setInterval(function(){
