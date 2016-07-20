@@ -6,6 +6,7 @@ document.body.onload = function(){
     var title = document.getElementById("title");
     var player = document.getElementById("player");
     player.src = "shortwordup.mp3";
+    player.play();
     title.onclick = function(){
         title.innerHTML = "Coming Soon";
     };
