@@ -16,6 +16,7 @@ var stopIcon = "&#9632";
 var sliderWidth = 35;
 var sliderTime = id("sliderTime");
 var timeSlider = id("timeSlider");
+var volumeSlider = id("volumeSlider");
 var sliderPlay = id("sliderPlay");
 //=====| App STARTS here |====
 window.onload = function(){
@@ -168,6 +169,7 @@ function showCurrentTimes(){
 		timeSlider.style.borderLeft = (borderLeft) + "rem solid #aaa";
 		var newWidth = sliderWidth - borderLeft;
 		timeSlider.style.width = newWidth + "rem";
+		//volumeSlider.innerHTML = player.volume;
 	}, 250);
 }
 //-------------------

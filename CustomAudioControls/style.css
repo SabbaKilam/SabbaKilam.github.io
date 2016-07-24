@@ -3,6 +3,10 @@ body{
 	font-family: sans-serif;
 	background: black;
 	font-size: 1.75rem;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	
 }
 #controls{
 	text-align: center;
@@ -11,7 +15,7 @@ body{
 	border-radius: 0.5rem;
 	padding-top: 2%;
 	padding-bottom: 2%;
-	background: linear-gradient(hsla(210, 6%, 90%, 1.00),hsla(210, 6%, 84%, 1.00), hsla(210, 6%, 90%, 1.00), black);
+	background: linear-gradient(lightgray, hsla(210, 6%, 90%, 1.00),hsla(210, 6%, 84%, 1.00), hsla(210, 6%, 90%, 1.00), black);
 }
 .line{
   width: 100%;
@@ -83,7 +87,7 @@ body{
 	
 }
 #timeSlider{
-	width: 37rem;
+	width: 35rem;
 	margin: 0 auto;
 }
 
