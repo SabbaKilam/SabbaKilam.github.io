@@ -13,15 +13,15 @@ var duration = id("duration");
 var playIcon = "&#9658;";
 var pauseIcon = " &#10074;&#10074;";//"&#9612;&#9612;" "&#10073;&#10073;";//"&#x00399;&#x00399; ";//
 var stopIcon = "&#9632";
-var sliderWidth = 19;
+var sliderWidth = 35;
 var sliderTime = id("sliderTime");
 var timeSlider = id("timeSlider");
 var sliderPlay = id("sliderPlay");
 //=====| App STARTS here |====
 window.onload = function(){
-	document.documentElement.style.fontSize = 3 + window.innerWidth/100 + "px";
+	document.documentElement.style.fontSize = 2.5 + window.innerWidth/85 + "px";
 	window.onresize = function(){
-		document.documentElement.style.fontSize = (3 + window.innerWidth/100) + "px";
+		document.documentElement.style.fontSize = (2.5 + window.innerWidth/85) + "px";
 	};
 	
 	rotateSongsRandomly();
@@ -158,15 +158,16 @@ function getDuration(){
 //-------------------
 function showCurrentTimes(){
 	setInterval(function(){
-		var ratio = player.currentTime / player.duration
+		var ratio = player.currentTime / player.duration ;
 		var	borderLeft = sliderWidth * ratio;	
 		if(player.duration){
 			duration.innerHTML = getDuration();			
 		}
 		currentTime.innerHTML = getCurrentTime();
 		sliderTime.innerHTML = getCurrentTime();
-		timeSlider.style.borderLeft = borderLeft + "rem solid #aaa";
-		timeSlider.style.width = (sliderWidth - borderLeft) + "rem";
+		timeSlider.style.borderLeft = (borderLeft) + "rem solid #aaa";
+		var newWidth = sliderWidth - borderLeft;
+		timeSlider.style.width = newWidth + "rem";
 	}, 250);
 }
 //-------------------
