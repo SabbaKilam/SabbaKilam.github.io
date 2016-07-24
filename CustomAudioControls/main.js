@@ -30,7 +30,6 @@ window.onload = function(){
 	showCurrentTimes();
 	(function makeButtonsWork(){
 		var playing = false;
-		var timeMonitor = 0;
 		var smallerFont = "1.30rem";
 		var regularFont = "1.5rem";
 		var lessPadding = "0.59%";
@@ -113,9 +112,21 @@ window.onload = function(){
 			};
 		})();
 		//--------------
-		sliderPlay.onmousedown = function(){
-			btnPlay.click();
-		};
+		(function(){
+			var mousedown = false;
+			volumeSlider.onmousedown = function(e){
+				mousedown = true;
+				var sliderData = volumeSlider.getBoundingClientRect();
+				var xDiff = e.clientX - sliderData.left;
+				var ratio = xDiff / sliderData.width;
+				player.volume = ratio;				
+			};
+			var vol = player.volume;
+			if(vol >= 5/6){}
+			else if(vol < 5/6  && vol > 1/3){}
+			else if(false){}
+			else if(false){}
+		})();
 		//--------------
 	})();
 };
@@ -166,6 +177,7 @@ function showCurrentTimes(){
 		}
 		currentTime.innerHTML = getCurrentTime();
 		sliderTime.innerHTML = getCurrentTime();
+		
 		timeSlider.style.borderLeft = (borderLeft) + "rem solid #aaa";
 		var newWidth = sliderWidth - borderLeft;
 		timeSlider.style.width = newWidth + "rem";
