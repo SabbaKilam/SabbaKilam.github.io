@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Custom Audio Controls</title>
+<link rel="stylesheet" href="style.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+<body>
+ <div id="controls">
+ 	<div class="control" id="btnPlay">Play &#9658;</div>
+ 	<span class="control" id="btnStop">Stop &#9632;</span>
+ 	<div class="control" id="times"><span id="currentTime">0:00</span>&nbsp;&nbsp; / &nbsp;&nbsp;<span id="duration">0:00</span></div>
+ 	<div class="line"></div>
+ 	<br>
+ 	<audio id="player"></audio> 	
+ 	<div class="sliders">
+ 		<table id="tblSliders">
+ 			<tr>
+ 				<td><span id="sliderPlay">&#9658;</span></td>
+  				<td><div class="slider" id="timeSlider"></div></td>
+  				<td><span id="sliderTime">0:00</span></td>
+  				<td><span id="sliderSpeaker"></span></td>
+  				<td><div class="slider" id="volumeSlider"></div></td>
+ 			</tr>
+ 		</table>
+ 	</div>
+ </div>
+ <script src="main.js">
+ </script>
+</body>
+</html>
