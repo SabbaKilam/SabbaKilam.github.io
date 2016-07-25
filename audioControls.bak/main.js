@@ -1,19 +1,10 @@
-/*
-	curing visual jitters: 
-	* body line-height over 150% (css)
-	* resized REM adjustment uses parseInt
-	* slider widths in px, not REM after converting
-	from rem to px
-
-*/
 function id(idString){
 	return document.getElementById(idString);
 }
 var url = "https://googledrive.com/host/0B43RjYofYZaJcFQtRTNZSUNrR0E/";
-var imageBase = "https://SabbaKilam.github.io/CustomAudioControls/img/";
 //var url = "https://SabbaKilam.github.io/music/";
 var songs = ["whatiam", "wordup", "venicequeen", "healed", "shame", "crazy"];
-var speakers = ["speakerMute","speakerSoft","speakerMedium","speakerLoud"];
+var speakersArray = ["speakerMute","speakerSoft","speakerMedium","speakerLoud"];
 var song = songs[0];
 var player = id("player");
 var btnPlay = id("btnPlay");
@@ -23,26 +14,24 @@ var duration = id("duration");
 var playIcon = "&#9658;";
 var pauseIcon = " &#10074;&#10074;";//"&#9612;&#9612;" "&#10073;&#10073;";//"&#x00399;&#x00399; ";//
 var stopIcon = "&#9632";
-var sliderWidth = 27;
+var sliderWidth = 36;
 var sliderTime = id("sliderTime");
 var timeSlider = id("timeSlider");
+var volumeSlider = id("volumeSlider");
 var sliderPlay = id("sliderPlay");
 var sliderSpeaker = id("sliderSpeaker");
 //=====| App STARTS here |====
 window.onload = function(){
-	adjustRem();
+	document.documentElement.style.fontSize = 2.5 + window.innerWidth/85 + "px";
 	window.onresize = function(){
-		adjustRem();
+		document.documentElement.style.fontSize = (2.5 + window.innerWidth/85) + "px";
 	};
-	sliderSpeaker.style.background = "url("+
-		imageBase + speakers[3] + ".png) no-repeat center";
-	sliderSpeaker.style.backgroundSize = "contain"	;	
+	
 	rotateSongsRandomly();
 	player.pause();
 	showCurrentTimes();
 	(function makeButtonsWork(){
 		var playing = false;
-		var timeMonitor = 0;
 		var smallerFont = "1.30rem";
 		var regularFont = "1.5rem";
 		var lessPadding = "0.59%";
@@ -59,10 +48,11 @@ window.onload = function(){
 				player.play();
 				playing = true;
 				btnPlay.innerHTML = "Pause " + pauseIcon;
-				//reduceSize(true);
+				reduceSize(true);
 				sliderPlay.innerHTML = pauseIcon;				
 			}
 		};
+		sliderPlay.onmousedown = btnPlay.click();
 		player.onended = function(){
 			playing = false;
 			btnPlay.innerHTML = "Play " + playIcon;
@@ -71,7 +61,7 @@ window.onload = function(){
 			queueNextSong();
 			setTimeout(function(){
 				btnPlay.innerHTML = "Pause " + pauseIcon;
-				//reduceSize(true);
+				reduceSize(true);
 				sliderPlay.innerHTML = pauseIcon;				
 				player.play();
 				playing = true;
@@ -125,31 +115,68 @@ window.onload = function(){
 			};
 		})();
 		//--------------
-		sliderPlay.onmousedown = function(){
-			btnPlay.click();
-		};
+		(function volumeSliderStuff(){
+			var mousedown = false;
+			var sliderData = volumeSlider.getBoundingClientRect();			
+			volumeSlider.onmousedown = function(e){
+				mousedown = true;
+				var xDiff = e.clientX - sliderData.left;
+				var ratio = xDiff / sliderData.width;
+				player.volume = ratio;
+				
+				var vol = player.volume;
+				var fullWidth = sliderData.width;
+				if(vol >= 5/6){
+					sliderSpeaker.style.background = "url(img/" +
+						speakersArray[3] + ".png) " +
+						"no-repeat center";
+					sliderSpeaker.style.backgroundSize = "contain";
+				}
+				else if(vol < 5/6  && vol > 1/3){
+					sliderSpeaker.style.background = "url(img/" +
+						speakersArray[2] + ".png) " +
+						"no-repeat center";
+					sliderSpeaker.style.backgroundSize = "contain";					
+				}
+				else if(vol <= 1/3 && vol > 0.065){
+					sliderSpeaker.style.background = "url(img/" +
+						speakersArray[1] + ".png) " +
+						"no-repeat center";
+					sliderSpeaker.style.backgroundSize = "contain";					
+				}
+				else if(vol <= 0.065){
+					sliderSpeaker.style.background = "url(img/" +
+						speakersArray[0] + ".png) " +
+						"no-repeat center";
+					sliderSpeaker.style.backgroundSize = "contain";					
+					player.mute = true;
+					player.volume = 0;
+					vol = 0;
+				}
+				volumeSlider.style.borderLeft = (fullWidth * vol) + "px solid #aaa";
+				volumeSlider.style.width = fullWidth - (fullWidth * vol) + "px";				
+			};
+			sliderSpeaker.onmousedown = function(){
+				volumeSlider.style.borderLeft = 0;
+				var width = volumeSlider.getBoundingClientRect().width;
+				volumeSlider.style.width = width + "px";
+				
+				sliderSpeaker.style.background = "url(img/" +
+					speakersArray[0] + ".png) " +
+					"no-repeat center";
+				sliderSpeaker.style.backgroundSize = "contain";					
+				player.mute = true;
+				player.volume = 0;
+			};
+		})();
+		//--------------
 	})();
 };
 //====| App ENDS here  |====
 
 //====| Under The Hood |=====
-//--------------
-function getCurrentTime(){
-	var currentTime = "00:00";
-	var minutes = parseInt(player.currentTime / 60, 10);	
-	var seconds = parseInt(player.currentTime % 60, 10);
-	if(seconds < 10 ){
-		seconds = "0" + seconds;
-	}
-	currentTime = minutes + ":" + seconds;
-	return currentTime;
-}		
-//--------------
-
 function rotateSongsRandomly(){
-	var rawRotations = (songs.length)*Math.random();
-	var rotations = Math.ceil( rawRotations );
-	//ceiling for a least one rotation
+	var rotations = Math.ceil( songs.length*Math.random() ); //ceiling for a least one rotation
 	for(var i = 0; i < rotations; i++){
 		rotateOnce();
 	}
@@ -161,31 +188,42 @@ function rotateSongsRandomly(){
 	}
 }
 //-------------------
-function getDuration(){
-	var duration = "0:00";
-	var minutes = parseInt(player.duration / 60, 10);	
-	var seconds = parseInt(player.duration % 60, 10);
-	if(!isNaN(seconds) && seconds < 10  ){
+function getCurrentTime(){
+	var currentTime = "00:00";
+	var minutes = parseInt(player.currentTime / 60);	
+	var seconds = parseInt(player.currentTime % 60);
+	if(seconds < 10 ){
 		seconds = "0" + seconds;
 	}
-	if(!isNaN(seconds) && !isNaN(minutes)){
-		duration = minutes + ":" + seconds;
+	currentTime = minutes + ":" + seconds;
+	return currentTime;
+}
+//-------------------
+function getDuration(){
+	var duration = "00:00";
+	var minutes = parseInt(player.duration / 60);	
+	var seconds = parseInt(player.duration % 60);
+	if(seconds < 10 ){
+		seconds = "0" + seconds;
 	}
+	duration = minutes + ":" + seconds;
 	return duration;
 }
 //-------------------
 function showCurrentTimes(){
+	var fullWidth = timeSlider.getBoundingClientRect().width
 	setInterval(function(){
-		var fullWidthPx = sliderWidth * adjustRem();
-		var ratio = player.currentTime / player.duration
-		var	borderLeft = parseInt(fullWidthPx * ratio, 10);	
+		var ratio = player.currentTime / player.duration ;
+		var	borderLeft = fullWidth * ratio;	
 		if(player.duration){
 			duration.innerHTML = getDuration();			
 		}
 		currentTime.innerHTML = getCurrentTime();
 		sliderTime.innerHTML = getCurrentTime();
-		timeSlider.style.borderLeft = borderLeft + "px solid #8c8c8c";
-		timeSlider.style.width = ( fullWidthPx - borderLeft ) + "px";
+		
+		timeSlider.style.borderLeft = (borderLeft) + "px solid #aaa";
+		var newWidth = fullWidth - borderLeft;
+		timeSlider.style.width = newWidth + "px";
 	}, 250);
 }
 //-------------------
@@ -194,11 +232,7 @@ function queueNextSong(){
 	song = songs[0];
 	player.src = url +  song + ".mp3";
 }
-function adjustRem(){
-	var newRem = parseInt(3 + window.innerWidth/100, 10);
-	 document.documentElement.style.fontSize = newRem + "px";
-	 return newRem;
-}
+
 
 
 

@@ -1,19 +1,21 @@
 body{
 	user-select: none;
 	font-family: sans-serif;
-	background: gray;
+	background: black;
 	font-size: 1.75rem;
-	line-height: 160%;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	
 }
 #controls{
 	text-align: center;
-	width: 55rem;
-	margin:	15rem auto 0 auto;
+	width: 55rem;/* 55rem */
+	margin: 0 auto;
 	border-radius: 0.5rem;
-	//box-shadow: 2px 2px 2px #aaa;
 	padding-top: 2%;
 	padding-bottom: 2%;
-	background: linear-gradient(hsla(210, 6%, 90%, 1.00),hsla(210, 6%, 84%, 1.00), hsla(210, 6%, 90%, 1.00), black);
+	background: linear-gradient(lightgray, hsla(210, 6%, 90%, 1.00),hsla(210, 6%, 84%, 1.00), hsla(210, 6%, 90%, 1.00), black);
 }
 .line{
   width: 100%;
@@ -64,8 +66,10 @@ body{
 <div class="sliders">
  <table id="tblSliders">
  	<tr>
+   		<td colspan="4"><div class="slider" id="timeSlider"></div></td>
+ 	</tr>
+ 	<tr>
  		<td><span id="sliderPlay">&#9658;</span></td>
-  		<td><div class="slider" id="timeSlider"></div></td>
   		<td><span id="sliderTime">0:00</span></td>
   		<td><span id="sliderSpeaker">&#x1f50a;</span></td>
   		<td><div class="slider" id="volumeSlider"></div></td>
@@ -76,19 +80,19 @@ body{
 .slider{
 	background: #55a;
 	width: 13rem;
-	height: 1.5rem;
-	border-radius: 0.3rem;
-	box-shadow: inset 0 1px 2px black;
+	height: 2rem;
+	box-shadow: inset 0 1px 2px #333;
 	cursor: pointer;
-	
 }
 #timeSlider{
-	width: 27rem;
+	width: 36rem;
+	height: 2rem;
 	margin: 0 auto;
 }
 
 #volumeSlider{
-	width: 7rem;
+	width: 8rem;
+	height: 2rem;	
 }
 #sliderPlay{
 	cursor: pointer;
@@ -96,9 +100,6 @@ body{
 #sliderSpeaker{
 	width: 2rem;
 	padding-bottom: 2rem;
+	background: url(img/speakerLoud.png) no-repeat center;
+	background-size: contain;
 }
-
-
-
-
-
