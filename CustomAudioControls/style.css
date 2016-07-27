@@ -92,13 +92,20 @@ body{
 }
 #sliderPlay{
 	cursor: pointer;
+	padding-right: 0.5rem;
 }
 #sliderSpeaker{
 	width: 2rem;
 	padding-bottom: 2rem;
 }
 
-
+#togglePlay{
+	cursor: pointer;
+}
+#spacer{
+	display: inline-block;
+	width: 3rem;
+}
 
 
 

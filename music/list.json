@@ -374,11 +374,13 @@
     },
     "Jasmine Thompson - Ain't Nobody" :{
         "title" : "Ain't Nobody",
-        "artist" : "Jasmine Thompson"
+        "artist" : "Jasmine Thompson",
+        "picture" : "jasminethompson.png"
     },
     "Jasmine Thompson - La La La" :{
         "title" : "La La La",
-        "artist" : "Jasmine Thompson"
+        "artist" : "Jasmine Thompson",
+        "picture" : "jasminethompson.png"
     },
     "Marc Broussard - Home" :{
         "title" : "Home",
@@ -413,7 +415,8 @@
     },
     "Jasmine Thompson - All of Me" :{
         "title" : "All of Me",
-        "artist" : "Jasmine Thompson"
+        "artist" : "Jasmine Thompson",
+        "picture" : "jasminethompson.png"
     },
     "Joni Mitchell - California" :{
         "title" : "California",
@@ -488,7 +491,9 @@
     },
     "Jasmine Thompson - Take Me To Church" :{
         "title" : "Take Me To Church",
-        "artist" : "Jasmine Thompson"
+        "artist" : "Jasmine Thompson",
+        "picture" : "jasminethompson.png",
+        "picture" : "jasminethompson.png"
     },
     "Nightcrawlers - Digitalis" :{
         "title" : "Digitalis",
