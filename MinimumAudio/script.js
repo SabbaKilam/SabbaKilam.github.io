@@ -38,7 +38,7 @@ $.quickVolume = function(fraction){
 //=======| App BEGINS here |========//
 window.onload = function(){
 	$.adjustRem();
-	$.fullSliderWidth = 15; //in rem;
+	$.fullSliderWidth = 30; //in rem;
 	$.url = "https://SabbaKilam.github.io/music/";
 	$.urlImages = "https://SabbaKilam.github.io/apps/music/img/";
 	$.speakers = ["speakerMute","speakerSoft","speakerMedium","speakerLoud"];
@@ -63,10 +63,10 @@ window.onload = function(){
 				("margin","1rem auto 0")
 				("width", $.fullSliderWidth + "rem")
 				("box-shadow"," inset 1px 1px 5px black")
-				("height","1rem")
+				("height","2rem")
 				("color","#ccc")
 				("text-align","left")
-				("border-radius","0.5rem")
+				("border-radius","0.75rem")
 				("background","teal")
 				("font-size","0.75rem")
 			;
