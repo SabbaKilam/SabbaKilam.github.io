@@ -66,7 +66,7 @@ window.onload = function(){
 				("height","2rem")
 				("color","#ccc")
 				("text-align","left")
-				("border-radius","0.75rem")
+				("border-radius","1rem")
 				("background","teal")
 				("font-size","1.25rem")
 			;

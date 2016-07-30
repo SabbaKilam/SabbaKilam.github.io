@@ -1,21 +1,24 @@
 body{
-    padding: 0;
-    margin: 0;
-    user-select: none;
-    margin-top: 5rem;
-    background: lightgray;
-    font-family: sans-serif;
-    line-height: 180%;
-    vertical-align: top;
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  margin-top: 5rem;
+  background: #5a5a5a;
+  font-family: sans-serif;
+  line-height: 180%;
+  vertical-align: top;
 }
 #app{
+  padding-top: 0.25rem;
+  padding-bottom: 1rem;
   position: fixed;
   top: 0.5rem;
-  bottom: 0;
+  bottom: auto;
   left: 0;
   right: 0;
   margin: 2rem auto 0 auto;
   overflow: hidden;
+  background: lightgray;
 }
 .touchPanel{
   margin: 0.1rem auto 0.1rem auto;
@@ -57,11 +60,11 @@ body{
 }
 
 #speaker{
-  width: 2rem;
-  padding-bottom: 2rem;
+  width: 2.2rem;
+  padding-bottom: 2.2rem;
   background: url(https://SabbaKilam.github.io/apps/music/img/speakerMedium.png) no-repeat center;
   background-size: contain;
-  margin: 0 auto;
+  margin: 0.25rem auto 0 auto;
   text-align: center;
   border-radius: 50%;
   cursor: pointer;  
