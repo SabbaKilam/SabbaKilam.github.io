@@ -68,7 +68,7 @@ window.onload = function(){
 				("text-align","left")
 				("border-radius","0.75rem")
 				("background","teal")
-				("font-size","0.75rem")
+				("font-size","1.25rem")
 			;
 		});
 	}

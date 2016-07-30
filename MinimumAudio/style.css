@@ -45,7 +45,8 @@ body{
 }
 
 .slider{
-	line-height: 130%;
+	padding-top: 0.4rem;
+	font-size: 3rem;
 }
 
 .line{
