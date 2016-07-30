@@ -63,7 +63,7 @@ window.onload = function(){
 				("margin","0.5rem auto 0.75rem")
 				("width", $.fullSliderWidth + "rem")
 				("box-shadow"," inset 1px 1px 5px black")
-				("height","1.5rem")
+				("height","2rem")
 				("color","#ccc")
 				("text-align","left")
 				("border-radius","1rem")
