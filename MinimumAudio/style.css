@@ -35,16 +35,14 @@ body{
   border-radius: 0.25rem;
   color: black;
   text-shadow: 0 1px 0 #ddd;
-  background: linear-gradient(#ddd, #bbb, #ddd);
+  background: linear-gradient(#ddd, #aaa, #ddd);
   box-shadow:1px 1px 1px black; 
   font-size: 1.5rem;
   vertical-align: bottom;
   padding-top: 0.75rem;
 
 }
-.touch:hover{
-  opacity: 0.5;
-}
+
 .touch:active{
   box-shadow: 1px 1px 1px white;
   background: linear-gradient(gray, lightgray);  
