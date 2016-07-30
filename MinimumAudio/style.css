@@ -1,8 +1,12 @@
+html{
+  padding: 0;
+  margin: 0;  
+}
+
 body{
   padding: 0;
   margin: 0;
   user-select: none;
-  margin-top: 5rem;
   background: #5a5a5a;
   font-family: sans-serif;
   line-height: 180%;
@@ -12,16 +16,16 @@ body{
   padding-top: 0.25rem;
   padding-bottom: 1rem;
   position: fixed;
-  top: 0.5rem;
+  top: 0;
   bottom: auto;
   left: 0;
   right: 0;
-  margin: 2rem auto 0 auto;
+  margin: 0 auto 0 auto;
   overflow: hidden;
   background: lightgray;
 }
 .touchPanel{
-  margin: 0.1rem auto 0.1rem auto;
+  margin: 0.5rem auto 0.1rem auto;
   text-align: center;
 }
 .touch{
@@ -39,7 +43,7 @@ body{
 
 }
 .touch:hover{
-  opacity: 0.80;
+  opacity: 0.5;
 }
 .touch:active{
   box-shadow: 1px 1px 1px white;
@@ -48,7 +52,6 @@ body{
 }
 
 .slider{
-	padding-top: 0.4rem;
 	font-size: 3rem;
 }
 

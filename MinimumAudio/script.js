@@ -60,10 +60,10 @@ window.onload = function(){
 	function styleThese(objectList){
 		[].forEach.call(objectList, function(m){
 			$.styles(m)
-				("margin","1rem auto 0")
+				("margin","0.5rem auto 0.75rem")
 				("width", $.fullSliderWidth + "rem")
 				("box-shadow"," inset 1px 1px 5px black")
-				("height","2rem")
+				("height","1.5rem")
 				("color","#ccc")
 				("text-align","left")
 				("border-radius","1rem")
