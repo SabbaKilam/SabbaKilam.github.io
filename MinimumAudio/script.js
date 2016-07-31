@@ -39,7 +39,7 @@ $.quickVolume = function(fraction){
 window.onload = function(){
 	document.body.appendChild($.player);
 	$.adjustRem();
-	$.fullSliderWidth = 20.6; //in rem;
+	$.fullSliderWidth = 20.8; //in rem;
 	$.url = "https://SabbaKilam.github.io/music/";
 	$.urlImages = "https://SabbaKilam.github.io/apps/music/img/";
 	$.speakers = ["speakerMute","speakerSoft","speakerMedium","speakerLoud"];
@@ -64,12 +64,12 @@ window.onload = function(){
 				("margin","0.5rem auto 0.75rem")
 				("width", $.fullSliderWidth + "rem")
 				("box-shadow"," inset 1px 1px 5px black")
-				("height","2rem")
+				("height","1.5rem")
 				("color","#ccc")
 				("text-align","left")
-				("border-radius","1rem")
+				("border-radius","1.5rem")
 				("background","teal")
-				("font-size","1.25rem")
+				("font-size","1.22rem")
 			;
 		});
 		$.styles($.volumeSlider)("color","black");
