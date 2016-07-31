@@ -52,6 +52,7 @@ body{
 
 .slider{
 	font-size: 3rem;
+	cursor: ew-resize;
 }
 
 .line{

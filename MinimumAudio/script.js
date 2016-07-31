@@ -90,8 +90,9 @@ window.onload = function(){
 	};
 	$.adjustSpeakerImage = function adjustSpeakerImage(){
 	  var vol = $.player.volume;
-	  if(vol === 0){
-	    $.speakerImage(0);	    
+	  if(vol < 0.011){
+	    $.speakerImage(0);
+	    $.player.volume = 0.00;
 	  }
 	  else if( vol > 0 && vol < 1/6){
 	    $.speakerImage(1);
@@ -148,7 +149,7 @@ window.onload = function(){
 			var notTooFarRight = mouseX <= right;
 			if(notTooFarLeft && notTooFarRight){
 				leftMargin = parseInt(mouseX - left, 10);
-				$.styles(timeSlider)
+				$.styles($.timeSlider)
 					("border-left",leftMargin +"px solid #aaa")
 					("width",(fullWidth - leftMargin) + "px");
             		//inform the player of the new time:
@@ -165,7 +166,7 @@ window.onload = function(){
 			var notPassedRight = mouseX <= volRight;
 			if(notPassedLeft && notPassedRight){
 				leftMargin = parseInt(mouseX - volLeft, 10);
-				$.styles(volumeSlider)
+				$.styles($.volumeSlider)
 					("border-left",leftMargin +"px solid #aaa")
 					("width",(fullWidth - leftMargin) + "px");				
 				//inform player of new volume
@@ -214,7 +215,7 @@ window.onload = function(){
 		var volLeft = $.volumeSlider.getBoundingClientRect().left;
 		var leftMargin = parseInt(mouseX - volLeft, 10);
 		var fullWidth = parseInt($.fullSliderWidth * $.adjustRem(), 10);//$.getRem()		
-		$.styles(volumeSlider)
+		$.styles($.volumeSlider)
 			("border-left",leftMargin +"px solid #aaa")
 			("width",(fullWidth - leftMargin) + "px");				
 			//inform player of new volume
