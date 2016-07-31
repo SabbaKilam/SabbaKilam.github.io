@@ -72,6 +72,7 @@ window.onload = function(){
 				("font-size","1.25rem")
 			;
 		});
+		$.styles($.volumeSlider)("color","black");
 	}
 	//____________________________________________//
 	function attachElements(){
@@ -180,7 +181,9 @@ window.onload = function(){
 					("width",(fullWidth - leftMargin) + "px");				
 				//inform player of new volume
 				$.player.volume = $.quickVolume(leftMargin / fullWidth);
-		        $.volumeSlider.innerHTML = ($.player.volume).toFixed(2);
+		        //$.volumeSlider.innerHTML = ($.player.volume).toFixed(2);
+		        var pct = "&nbsp;" + parseInt($.player.volume * 100,10) + "%";
+		        $.volumeSlider.innerHTML = pct;
 		        $.adjustSpeakerImage();
 			  }
 		  }
@@ -230,7 +233,9 @@ window.onload = function(){
 			//inform player of new volume
 			var vol = $.quickVolume(leftMargin / fullWidth);
 			$.player.volume = vol;
-	    $.volumeSlider.innerHTML = vol.toFixed(2);
+			//$.volumeSlider.innerHTML = vol.toFixed(2);
+			var pct = "&nbsp;" + parseInt($.player.volume * 100,10) + "%";
+			$.volumeSlider.innerHTML = pct;
 	    $.adjustSpeakerImage();
 	});
 	$.volumeSlider.addEventListener("mouseup", function(e){});
@@ -260,7 +265,9 @@ window.onload = function(){
                 ("border-left", volumeLeftBorder + "px solid #aaa")
                 ("width", (fullSliderWidth - volumeLeftBorder)+ "px")
             ;
-      	    $.volumeSlider.innerHTML = ($.player.volume).toFixed(2);
+      	    //$.volumeSlider.innerHTML = ($.player.volume).toFixed(2);
+	        var pct = "&nbsp;" + parseInt($.player.volume * 100,10) + "%";
+	        $.volumeSlider.innerHTML = pct;      	    
       	    $.adjustSpeakerImage(); 
 	    }, 100);
 	}

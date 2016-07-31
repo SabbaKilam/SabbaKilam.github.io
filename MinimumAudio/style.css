@@ -53,6 +53,14 @@ body{
 .slider{
 	font-size: 3rem;
 	cursor: ew-resize;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow */
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: clip;
+}
+#volumeSlider{
+  overflow: visible;
+  color: #555;
 }
 
 .line{
