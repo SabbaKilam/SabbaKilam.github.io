@@ -51,6 +51,7 @@ body{
 }
 
 .slider{
+  padding-top: 0.10rem;
 	font-size: 3rem;
 	cursor: ew-resize;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow */

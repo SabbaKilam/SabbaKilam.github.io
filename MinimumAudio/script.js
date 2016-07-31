@@ -102,8 +102,12 @@ window.onload = function(){
 	  else if(vol >= 1/6 && vol < 2/3){
 	    $.speakerImage(2);
 	  }
-	  else if(vol >= 2/3){
+	  else if(vol >= 2/3 && vol < 0.991){
 	    $.speakerImage(3);
+	  }
+	  else if(vol >= 0.991){
+	    $.speakerImage(3);
+	    $.player.volume = 1;	  	
 	  }
 	};
 	//____________| User Events Group (Updates Model and player) |___________
