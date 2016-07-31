@@ -165,7 +165,7 @@ window.onload = function(){
             		//inform the player of the new time:
             		if(!isNaN($.player.duration)){
             		    $.player.currentTime = $.player.duration * leftMargin/fullWidth;
-	    		        $.timeSlider.innerHTML = ($.player.currentTime).toFixed(2);
+	    		        $.timeSlider.innerHTML = "&nbsp;" + ($.player.currentTime).toFixed(2);
             		}
 			}
 	  	  }
@@ -207,7 +207,7 @@ window.onload = function(){
 		//inform the player of the new time:
 		if(!isNaN($.player.duration)){
 		    $.player.currentTime = $.player.duration * leftMargin/fullWidth;
-	    	$.timeSlider.innerHTML = ($.player.duration* leftMargin/fullWidth).toFixed(2);
+	    	$.timeSlider.innerHTML = "&nbsp;" + ($.player.duration* leftMargin/fullWidth).toFixed(2);
 		}	
 	});
 	$.timeSlider.addEventListener("mouseover", function(e){
@@ -259,7 +259,7 @@ window.onload = function(){
 	            ("border-left", timeLeftBorder + "px solid #aaa")
 	            ("width", (fullSliderWidth - timeLeftBorder)+"px")
           ;
-    	    	$.timeSlider.innerHTML = ($.player.currentTime).toFixed(2);
+    	    	$.timeSlider.innerHTML = "&nbsp;" + ($.player.currentTime).toFixed(2);
     	      //adjust volume slider	
             $.styles($.volumeSlider) 
                 ("border-left", volumeLeftBorder + "px solid #aaa")
