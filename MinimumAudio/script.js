@@ -103,7 +103,18 @@ window.onload = function(){
 	    $.speakerImage(3);
 	  }
 	};
-	//____________| User Events Group (Updates Model and player) |___________//
+	//____________| User Events Group (Updates Model and player) |___________
+	$.btnBack.addEventListener("click", function(){
+		$.player.pause();
+		$.player.currentTime = 0;
+		$.btnPlay.innerHTML = $.playIcon;
+		$.playRequested = true;		
+	});
+	$.player.addEventListener("ended", function(){
+		$.btnPlay.innerHTML = $.playIcon;
+		$.playRequested = true;
+	});
+	
 	$.btnPlay.addEventListener("click", function(e){
         if($.playRequested){
             $.player.play();
