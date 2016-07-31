@@ -61,6 +61,7 @@ body{
 #volumeSlider{
   overflow: visible;
   color: #555;
+  font-weight: bold;
 }
 
 .line{
