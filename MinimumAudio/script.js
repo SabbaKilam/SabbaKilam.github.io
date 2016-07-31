@@ -107,9 +107,12 @@ window.onload = function(){
 	};
 	//____________| User Events Group (Updates Model and player) |___________
 	$.player.addEventListener("play", function(){
-		$.player.pause();
 		$.btnPlay.innerHTML = $.pauseIcon;
 		$.playRequested = false;			
+	});
+	$.player.addEventListener("pause", function(){
+		$.btnPlay.innerHTML = $.playIcon;
+		$.playRequested = true;			
 	});
 	$.btnBack.addEventListener("click", function(){
 		$.player.pause();
