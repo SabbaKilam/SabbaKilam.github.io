@@ -63,16 +63,19 @@ window.onload = function(){
 			$.styles(m)
 				("margin","0.5rem auto 0.75rem")
 				("width", $.fullSliderWidth + "rem")
-				("box-shadow"," inset 1px 1px 5px black")
+				("box-shadow"," inset 2px 1px 6px black")
 				("height","1.5rem")
-				("color","#ccc")
+				("color","white")
 				("text-align","left")
 				("border-radius","1.5rem")
-				("background","teal")
+				("background","#55a")
 				("font-size","1.22rem")
 			;
 		});
-		$.styles($.volumeSlider)("color","black");
+		$.styles($.volumeSlider)
+			("color","white")
+			("text-shadow","0 1px 0 black")
+		;
 	}
 	//____________________________________________//
 	function attachElements(){
