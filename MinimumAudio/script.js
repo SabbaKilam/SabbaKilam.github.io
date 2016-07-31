@@ -37,6 +37,7 @@ $.quickVolume = function(fraction){
 };
 //=======| App BEGINS here |========//
 window.onload = function(){
+	document.body.appendChild($.player);
 	$.adjustRem();
 	$.fullSliderWidth = 25; //in rem;
 	$.url = "https://SabbaKilam.github.io/music/";
