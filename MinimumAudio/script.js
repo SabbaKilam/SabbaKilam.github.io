@@ -191,13 +191,10 @@ window.onload = function(){
 			var notTooFarRight = mouseX <= right;
 			if(notTooFarLeft && notTooFarRight){
 				leftMargin = parseInt(mouseX - left, 10);
-				$.styles($.timeSlider)
-					("border-left",leftMargin +"px solid #aaa")
-					("width",(fullWidth - leftMargin) + "px");
-            		//inform the player of the new time:
-            		if(!isNaN($.player.duration)){
-            		    $.player.currentTime = $.player.duration * leftMargin/fullWidth;
-	    	        }
+        		//inform the player of the new time:
+        		if(!isNaN($.player.duration)){
+        		    $.player.currentTime = $.player.duration * leftMargin/fullWidth;
+    	        }
 			}
 	  	  }
 		  if($.volumeMouseIsDown){
@@ -209,11 +206,8 @@ window.onload = function(){
 			var notPassedRight = mouseX <= volRight;
 			if(notPassedLeft && notPassedRight){
 				leftMargin = parseInt(mouseX - volLeft, 10);
-				$.styles($.volumeSlider)
-					("border-left",leftMargin +"px solid #aaa")
-					("width",(fullWidth - leftMargin) + "px");				
 				//inform player of new volume
-				$.player.volume = $.quickVolume(leftMargin / fullWidth);
+				$.player.volume = leftMargin / fullWidth;
 			  }
 		  }
 	});
@@ -230,10 +224,6 @@ window.onload = function(){
 		var left = this.getBoundingClientRect().left;
 		var mouseX = e.clientX;
 		var leftMargin = parseInt(mouseX - left, 10);
-		$.styles(this)
-			("border-left",leftMargin +"px solid #aaa")
-			("width",(fullWidth - leftMargin) + "px")   
-		;
 		//inform the player of the new time:
 		if(!isNaN($.player.duration)){
 		    $.player.currentTime = $.player.duration * leftMargin/fullWidth;
@@ -262,18 +252,9 @@ window.onload = function(){
 		var volLeft = $.volumeSlider.getBoundingClientRect().left;
 		var leftMargin = parseInt(mouseX - volLeft, 10);
 		if(leftMargin > 0){$.speakerIsClicked = false;}
-		var fullWidth = parseInt($.fullSliderWidth * $.adjustRem(), 10);//$.getRem()		
-		$.styles($.volumeSlider)
-			("border-left",leftMargin +"px solid #aaa")
-			("width",(fullWidth - leftMargin) + "px");
-
-			//inform player of new volume
-			var vol = $.quickVolume(leftMargin / fullWidth);
-			$.player.volume = vol;
-			//$.volumeSlider.innerHTML = vol.toFixed(2);
-			var pct = "&nbsp;" + parseInt($.player.volume * 100,10) + "%";
-			$.volumeSlider.innerHTML = pct;
-	    $.adjustSpeakerImage();
+		var fullWidth = parseInt($.fullSliderWidth * $.adjustRem(), 10);
+		//inform player of new volume
+		$.player.volume = leftMargin / fullWidth;
 	});
 	$.volumeSlider.addEventListener("mouseup", function(e){});
 	$.volumeSlider.addEventListener("mouseover", function(e){
@@ -299,7 +280,7 @@ window.onload = function(){
 	        $.styles($.timeSlider)
 	            ("border-left", timeLeftBorder + "px solid #aaa")
 	            ("width", (fullSliderWidth - timeLeftBorder)+"px")
-        		;
+    		;
  	    	$.timeSlider.innerHTML = "&nbsp;" + $.secToMinSec($.player.currentTime);
  	    	$.timePrefix.innerHTML =  $.secToMinSec($.player.currentTime);
  	    	if(!isNaN($.player.duration)){
