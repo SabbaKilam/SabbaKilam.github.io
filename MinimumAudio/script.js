@@ -43,7 +43,8 @@ window.onload = function(){
 	$.adjustRem();
 	$.fullSliderWidth = 20.8; //in rem;
 	$.url = "https://SabbaKilam.github.io/music/";
-	$.urlImages = "https://SabbaKilam.github.io/apps/music/img/";
+	//$.urlImages = "https://SabbaKilam.github.io/apps/music/img/";
+	$.urlImages = "img/";//local path
 	$.speakers = ["speakerMute","speakerSoft","speakerMedium","speakerLoud"];
 	//$.player.src = $.url + "Allman Brothers Band - Blue Sky.mp3";
 	$.player.src = $.url + "Chicago - Introduction.mp3";	
