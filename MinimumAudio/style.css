@@ -54,7 +54,7 @@ body{
 .slider{
   padding-top: 0;
   padding-bottom: 0.18rem;
-	font-size: 3rem;
+	font-size: 1.22rem;
 	cursor: pointer;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow */
   white-space: nowrap;
@@ -75,11 +75,11 @@ body{
 }
 
 #speaker{
-  width: 2.2rem;
-  padding-bottom: 2.2rem;
+  width: 2.1rem;
+  padding-bottom: 2.1rem;
   background: url(https://SabbaKilam.github.io/apps/music/img/speakerMedium.png) no-repeat center;
   background-size: contain;
-  margin: 0.25rem auto 0 auto;
+  margin: 0.25rem auto 0.5rem auto;
   text-align: center;
   border-radius: 50%;
   cursor: pointer;  
@@ -90,7 +90,12 @@ body{
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    
+}
+
+#timeTable{
+  margin: 0 auto;
+  text-align: center;
+	font-size: 1.22rem;  
 }
 
 
