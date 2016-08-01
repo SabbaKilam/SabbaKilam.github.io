@@ -5,7 +5,9 @@ var $ = {
   volumeMouseIsDown: false,
   pauseIcon: "Pause &#10074;&#10074;",
   playIcon: "Play &#9658;",
-  playRequested: true
+  playRequested: true,
+  speakerIsClicked: false,
+  mutedVolume: 1/3
 };	
 // Add methods for DOM and CSS chores:
     // a.) Make a shortcut for document.getElementById():
@@ -146,16 +148,24 @@ window.onload = function(){
         }
     });
     $.speaker.addEventListener("click", function(){
-	  $.player.volume = 0.00;
-	  $.styles($.volumeSlider)
-	    ("border-left","0")
-	    ("width", ($.fullSliderWidth * $.adjustRem()) + "px")
-
-    ;
-	  $.speakerImage(0);
+      if($.speakerIsClicked){
+      	$.speakerIsClicked = false;
+      	$.player.volume = $.mutedVolume;//restore the muted volume
+      }
+      else{
+      	$.mutedVolume = $.player.volume;//save current volume
+      	$.speakerIsClicked = true;
+		$.player.volume = 0.00; //"mute" the volume
+      }
 	});
 	window.addEventListener("resize", $.adjustRem);
 	window.addEventListener("mousemove", function(e){
+		if($.timeMouseIsDown || $.volumeMouseIsDown){
+			//cursor: ew-resize;
+			$.styles($.volumeSlider)("cursor","ew-resize");
+			$.styles($.timeSlider)("cursor","ew-resize");
+			$.styles(document.body)("cursor","ew-resize");
+		}
 		var mouseX = e.clientX;
 		var fullWidth = parseInt($.fullSliderWidth * $.adjustRem(), 10);
 		var leftMargin = 0;
@@ -177,6 +187,7 @@ window.onload = function(){
 			}
 	  	  }
 		  if($.volumeMouseIsDown){
+		  	$.speakerIsClicked = false;
 			var volLeft = $.volumeSlider.getBoundingClientRect().left;
 			var volRight = $.volumeSlider.getBoundingClientRect().right;
 			var notPassedLeft = mouseX >= volLeft;
@@ -198,6 +209,7 @@ window.onload = function(){
 	window.addEventListener("mouseup", function(e){
 	  $.timeMouseIsDown = false;
 	  $.volumeMouseIsDown = false;
+	  
 	});	
 	//timeSlider
 	$.timeSlider.addEventListener("mousedown", function(e){
@@ -233,10 +245,12 @@ window.onload = function(){
 		var mouseX = e.clientX;
 		var volLeft = $.volumeSlider.getBoundingClientRect().left;
 		var leftMargin = parseInt(mouseX - volLeft, 10);
+		if(leftMargin > 0){$.speakerIsClicked = false;}
 		var fullWidth = parseInt($.fullSliderWidth * $.adjustRem(), 10);//$.getRem()		
 		$.styles($.volumeSlider)
 			("border-left",leftMargin +"px solid #aaa")
-			("width",(fullWidth - leftMargin) + "px");				
+			("width",(fullWidth - leftMargin) + "px");
+
 			//inform player of new volume
 			var vol = $.quickVolume(leftMargin / fullWidth);
 			$.player.volume = vol;

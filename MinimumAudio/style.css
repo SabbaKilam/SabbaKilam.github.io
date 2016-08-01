@@ -41,6 +41,7 @@ body{
   vertical-align: bottom;
   padding-top: 0.75rem;
   cursor: pointer;
+  transition: all 0.05s ease;
 
 }
 
@@ -54,11 +55,12 @@ body{
   padding-top: 0;
   padding-bottom: 0.18rem;
 	font-size: 3rem;
-	cursor: ew-resize;
+	cursor: pointer;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow */
   white-space: nowrap;
   overflow: hidden; 
   text-overflow: clip;
+  transition: all 0.05s ease;
 }
 #volumeSlider{
   overflow: visible;
