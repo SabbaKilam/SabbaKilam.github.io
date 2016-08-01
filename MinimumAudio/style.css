@@ -60,7 +60,6 @@ body{
   white-space: nowrap;
   overflow: hidden; 
   text-overflow: clip;
-  transition: all 0.05s ease;
 }
 #volumeSlider{
   overflow: visible;

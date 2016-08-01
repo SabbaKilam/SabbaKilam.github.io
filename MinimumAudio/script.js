@@ -160,16 +160,11 @@ window.onload = function(){
 	});
 	window.addEventListener("resize", $.adjustRem);
 	window.addEventListener("mousemove", function(e){
-		if($.timeMouseIsDown || $.volumeMouseIsDown){
-			//cursor: ew-resize;
-			$.styles($.volumeSlider)("cursor","ew-resize");
-			$.styles($.timeSlider)("cursor","ew-resize");
-			$.styles(document.body)("cursor","ew-resize");
-		}
 		var mouseX = e.clientX;
 		var fullWidth = parseInt($.fullSliderWidth * $.adjustRem(), 10);
 		var leftMargin = 0;
 	  	  if($.timeMouseIsDown){
+			$.styles($.timeSlider)("cursor","ew-resize");	  	  	
 			var left = $.timeSlider.getBoundingClientRect().left;
 			var right = $.timeSlider.getBoundingClientRect().right;
 			var notTooFarLeft = mouseX >= left;
@@ -187,6 +182,7 @@ window.onload = function(){
 			}
 	  	  }
 		  if($.volumeMouseIsDown){
+			$.styles($.volumeSlider)("cursor","ew-resize");		  	
 		  	$.speakerIsClicked = false;
 			var volLeft = $.volumeSlider.getBoundingClientRect().left;
 			var volRight = $.volumeSlider.getBoundingClientRect().right;
@@ -230,10 +226,16 @@ window.onload = function(){
 		}	
 	});
 	$.timeSlider.addEventListener("mouseover", function(e){
-	    $.styles(this)("opacity","0.85");	    
+	    $.styles(this)
+	    	("opacity","0.85")
+	    	("cursor","pointer")	
+    	;	    
 	});
 	$.timeSlider.addEventListener("mouseout", function(e){
-	    $.styles(this)("opacity","1");	    	    
+	    $.styles(this)
+	    	("opacity","1")
+	    	("cursor","pointer")	
+    	;	
 	});
 	$.timeSlider.addEventListener("click", function(e){});
 	
@@ -261,10 +263,14 @@ window.onload = function(){
 	});
 	$.volumeSlider.addEventListener("mouseup", function(e){});
 	$.volumeSlider.addEventListener("mouseover", function(e){
-	    $.styles(this)("opacity","0.8");
+	    $.styles(this)
+	    	("opacity","0.8")
+	    	("cursor","pointer");
 	});
 	$.volumeSlider.addEventListener("mouseout", function(e){
-	    $.styles(this)("opacity","1");	    
+	    $.styles(this)
+	    	("opacity","1")
+	    	("cursor","pointer");	    
 	});
 	$.volumeSlider.addEventListener("click", function(e){});
 
