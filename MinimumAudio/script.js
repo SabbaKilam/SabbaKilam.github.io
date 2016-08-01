@@ -50,10 +50,6 @@ $.adjustRem = function adjustRem(){
 };
     // e.) Assemble browser prefixes to be used for CSS styling
 $.browserPrefixes = ["","-webkit-","-moz-","-ms-","-o-"];
-$.quickVolume = function(fraction){
-    //return 1-Math.pow(16, -fraction);
-    return fraction;
-};
 //=======| App BEGINS here |========//
 window.onload = function(){
 	document.body.appendChild($.player);
@@ -63,9 +59,11 @@ window.onload = function(){
 	//$.urlImages = "https://SabbaKilam.github.io/apps/music/img/";
 	$.urlImages = "img/";//local path
 	$.speakers = ["speakerMute","speakerSoft","speakerMedium","speakerLoud"];
-	$.player.src = $.url + "Allman Brothers Band - Blue Sky.mp3";
+	//$.player.src = $.url + "Allman Brothers Band - Blue Sky.mp3";
 	//$.player.src = $.url + "Chicago - Introduction.mp3";	
 	//$.player.src = $.url + "childrendarkness.mp3";
+	$.player.src = $.url + "Geoff  Nunberg - Trump, Race, Law & Order.mp3";	
+	//Geoff  Nunberg - Trump, Race, Law & Order.mp3
 	monitorModel();
 	$.player.volume = 1/3;
 	//attach all elements by id to the global $:
