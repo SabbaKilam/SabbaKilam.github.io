@@ -7,7 +7,24 @@ var $ = {
   playIcon: "Play &#9658;",
   playRequested: true,
   speakerIsClicked: false,
-  mutedVolume: 1/3
+  mutedVolume: 1/3,
+  secToMinSec: function secToMinSec(seconds){
+  	//-----------------------
+  	if(typeof seconds !== "number"){
+  		throw new Error("Numeric arguement required.");
+  	}
+  	//-----------------------
+  	var minSec = "";
+  	var minutes = parseInt(seconds / 60, 10);
+  	var seconds = parseInt(seconds % 60, 10);
+  	if(seconds < 10){
+  		minSec = minutes + ":0" + seconds; 
+  	}
+  	else{
+		minSec = minutes + ":" + seconds; 
+  	}
+  	return minSec;
+  }
 };	
 // Add methods for DOM and CSS chores:
     // a.) Make a shortcut for document.getElementById():
@@ -46,8 +63,8 @@ window.onload = function(){
 	//$.urlImages = "https://SabbaKilam.github.io/apps/music/img/";
 	$.urlImages = "img/";//local path
 	$.speakers = ["speakerMute","speakerSoft","speakerMedium","speakerLoud"];
-	//$.player.src = $.url + "Allman Brothers Band - Blue Sky.mp3";
-	$.player.src = $.url + "Chicago - Introduction.mp3";	
+	$.player.src = $.url + "Allman Brothers Band - Blue Sky.mp3";
+	//$.player.src = $.url + "Chicago - Introduction.mp3";	
 	//$.player.src = $.url + "childrendarkness.mp3";
 	monitorModel();
 	$.player.volume = 1/3;
@@ -89,6 +106,8 @@ window.onload = function(){
         $.btnNext = $.id("btnNext");
         $.btnBack = $.id("btnBack");
         $.reverse = $.id("reverse");
+        $.timePrefix = $.id("timePrefix");
+        $.timeSuffix = $.id("timeSuffix");
 	}
 	$.speakerImage = function speakerImage(index){
 	  $.styles($.speaker)
@@ -178,8 +197,7 @@ window.onload = function(){
             		//inform the player of the new time:
             		if(!isNaN($.player.duration)){
             		    $.player.currentTime = $.player.duration * leftMargin/fullWidth;
-	    		        $.timeSlider.innerHTML = "&nbsp;" + ($.player.currentTime).toFixed(2);
-            		}
+	    	        }
 			}
 	  	  }
 		  if($.volumeMouseIsDown){
@@ -196,10 +214,6 @@ window.onload = function(){
 					("width",(fullWidth - leftMargin) + "px");				
 				//inform player of new volume
 				$.player.volume = $.quickVolume(leftMargin / fullWidth);
-		        //$.volumeSlider.innerHTML = ($.player.volume).toFixed(2);
-		        var pct = "&nbsp;" + parseInt($.player.volume * 100,10) + "%";
-		        $.volumeSlider.innerHTML = pct;
-		        $.adjustSpeakerImage();
 			  }
 		  }
 	});
@@ -223,7 +237,6 @@ window.onload = function(){
 		//inform the player of the new time:
 		if(!isNaN($.player.duration)){
 		    $.player.currentTime = $.player.duration * leftMargin/fullWidth;
-	    	$.timeSlider.innerHTML = "&nbsp;" + ($.player.duration* leftMargin/fullWidth).toFixed(2);
 		}	
 	});
 	$.timeSlider.addEventListener("mouseover", function(e){
@@ -286,18 +299,21 @@ window.onload = function(){
 	        $.styles($.timeSlider)
 	            ("border-left", timeLeftBorder + "px solid #aaa")
 	            ("width", (fullSliderWidth - timeLeftBorder)+"px")
-          ;
-    	    	$.timeSlider.innerHTML = "&nbsp;" + ($.player.currentTime).toFixed(2);
-    	      //adjust volume slider	
+        		;
+ 	    	$.timeSlider.innerHTML = "&nbsp;" + $.secToMinSec($.player.currentTime);
+ 	    	$.timePrefix.innerHTML =  $.secToMinSec($.player.currentTime);
+ 	    	if(!isNaN($.player.duration)){
+ 	    		$.timeSuffix.innerHTML =  $.secToMinSec($.player.duration);
+ 	    	}
+    	    //adjust volume slider	
             $.styles($.volumeSlider) 
                 ("border-left", volumeLeftBorder + "px solid #aaa")
                 ("width", (fullSliderWidth - volumeLeftBorder)+ "px")
-            ;
-      	    //$.volumeSlider.innerHTML = ($.player.volume).toFixed(2);
+            	;
 	        var pct = "&nbsp;" + parseInt($.player.volume * 100,10) + "%";
 	        $.volumeSlider.innerHTML = pct;      	    
       	    $.adjustSpeakerImage(); 
-	    }, 100);
+	    }, 50);
 	}
 };
 //=======| App ENDS here |==========//
