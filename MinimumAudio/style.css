@@ -42,9 +42,7 @@ body{
   padding-top: 0.75rem;
   cursor: pointer;
   transition: all 0.05s ease;
-
 }
-
 .touch:active{
   box-shadow: 1px 1px 1px white;
   background: linear-gradient(gray, lightgray);  

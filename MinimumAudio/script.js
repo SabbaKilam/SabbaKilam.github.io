@@ -44,14 +44,25 @@ $.getRem = function getRem(){
 };
     // d.) A function that adjusts the root em according to screen font-size:
 $.adjustRem = function adjustRem(){
-    var newRootEm = $.getRem();
-	  document.documentElement.style.fontSize = newRootEm + "px";
-	  return newRootEm;
+	var pseudoWidth = 640; //try this one first
+	var newRootEm = 16; //default system value to start with
+	if (window.innerWidth < pseudoWidth){
+		newRootEm = (5 + window.innerWidth/50);//use real window.innerWidth
+		$.styles($.app)("width", window.innerWidth + "px");
+	}
+	else{
+		newRootEm = (5 + pseudoWidth/50);//use the narrower width for larger screens
+		$.styles($.app)("width", pseudoWidth + "px");
+	}
+	document.documentElement.style.fontSize =  newRootEm +"px";	
+	return newRootEm;
 };
     // e.) Assemble browser prefixes to be used for CSS styling
 $.browserPrefixes = ["","-webkit-","-moz-","-ms-","-o-"];
 //=======| App BEGINS here |========//
 window.onload = function(){
+	//attach all elements by id to the global $:
+	attachElements();	
 	document.body.appendChild($.player);
 	$.adjustRem();
 	$.fullSliderWidth = 20.8; //in rem;
@@ -60,19 +71,16 @@ window.onload = function(){
 	$.urlImages = "img/";//local path
 	$.speakers = ["speakerMute","speakerSoft","speakerMedium","speakerLoud"];
 	//$.player.src = $.url + "Allman Brothers Band - Blue Sky.mp3";
-	//$.player.src = $.url + "Chicago - Introduction.mp3";	
+	$.player.src = $.url + "Chicago - Introduction.mp3";	
 	//$.player.src = $.url + "childrendarkness.mp3";
-	$.player.src = $.url + "Geoff  Nunberg - Trump, Race, Law & Order.mp3";	
+	//$.player.src = $.url + "Geoff  Nunberg - Trump, Race, Law & Order.mp3";	
 	//Geoff  Nunberg - Trump, Race, Law & Order.mp3
 	monitorModel();
 	$.player.volume = 1/3;
-	//attach all elements by id to the global $:
-	attachElements();
     //reverse the "back" arrows (like rewind arrows):
     $.browserPrefixes.forEach(function(m){
         $.styles($.reverse)(m + "transform", "rotateY(180deg)");        
     });
-
 	$.allSliders = document.getElementsByClassName("slider");
 	styleThese($.allSliders);
 	//____________| Helper Functions |______________//
@@ -106,6 +114,7 @@ window.onload = function(){
         $.reverse = $.id("reverse");
         $.timePrefix = $.id("timePrefix");
         $.timeSuffix = $.id("timeSuffix");
+        $.app = $.id("app");
 	}
 	$.speakerImage = function speakerImage(index){
 	  $.styles($.speaker)
