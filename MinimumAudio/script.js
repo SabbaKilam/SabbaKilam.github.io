@@ -183,11 +183,39 @@ window.onload = function(){
             $.player.play();
             $.playRequested = false;
             $.btnPlay.innerHTML = $.pauseIcon;
+            /*
+				  box-shadow: 1px 1px 1px white;
+				  background: linear-gradient(gray, lightgray);  
+				  font-size: 1.48rem;
+            */
+            $.styles(this)
+            	("box-shadow","1px 1px 1px white")
+            	("font-size","1.48rem")
+            ;
+            $.browserPrefixes.forEach(function(prefix){
+            	$.styles($.btnPlay)
+            		("background", prefix + "linear-gradient(gray, lightgray)")
+        		;
+            });
         }
         else{
             $.player.pause();
             $.playRequested = true;
             $.btnPlay.innerHTML = $.playIcon;
+            /*
+				  background: linear-gradient(#ddd, #aaa, #ddd);
+				  box-shadow:1px 1px 1px black; 
+				  font-size: 1.5rem;            
+            */
+            $.styles(this)
+            	("box-shadow","1px 1px 1px black")
+            	("font-size","1.5rem")
+            ;
+            $.browserPrefixes.forEach(function(prefix){
+            	$.styles($.btnPlay)
+            		("background", prefix + "linear-gradient(#ddd, #aaa, #ddd)")
+        		;
+            });            
         }
     });
     $.speaker.addEventListener("click", function(){
