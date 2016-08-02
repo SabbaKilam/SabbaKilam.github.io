@@ -46,13 +46,28 @@ $.adjustRem = function adjustRem(){
 		newRootEm = (5 + window.innerWidth/50);//use real window.innerWidth
 		$.styles($.app)("width", window.innerWidth + "px");
 		$.styles($.topBanner)("width", window.innerWidth + "px");
-		
+		$.styles($.holder)("width", window.innerWidth + "px");
+		var top = $.topBanner.getBoundingClientRect().bottom;
+		var bottom = $.app.getBoundingClientRect().top;
+		var height = document.body.getBoundingClientRect().height;//top - bottom;
+		$.styles($.holder)
+			("padding-bottom",  height + "px")
+		;
 	}
 	else{
-		newRootEm = (5 + pseudoWidth/50);//use the narrower width for larger screens
+		newRootEm = (5 + pseudoWidth/50);//use a fixed width for larger screens
 		$.styles($.app)("width", pseudoWidth + "px");
 		$.styles($.topBanner)("width", pseudoWidth + "px");
-		
+		$.styles($.holder)("width", pseudoWidth + "px");
+		top = $.topBanner.getBoundingClientRect().bottom;
+		bottom = $.app.getBoundingClientRect().top;
+		height = document.body.getBoundingClientRect().height;//top - bottom;
+		$.styles($.holder)
+			("padding-bottom",  height + "px")
+		;
+		$.styles($.holder)
+			("padding-bottom",  height + "px")
+		;
 	}
 	document.documentElement.style.fontSize =  newRootEm +"px";	
 	return newRootEm;
@@ -115,6 +130,7 @@ window.onload = function(){
         $.timeSuffix = $.id("timeSuffix");
         $.app = $.id("app");
         $.topBanner = $.id("topBanner");
+        $.holder = $.id("holder");
 	}
 	$.speakerImage = function speakerImage(index){
 	  $.styles($.speaker)

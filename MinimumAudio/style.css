@@ -7,16 +7,23 @@ body{
   padding: 0;
   margin: 0;
   user-select: none;
-  background: #5a5a5a;
+  background: black;/*background: #5a5a5a;*/
   font-family: sans-serif;
   line-height: 180%;
   vertical-align: top;
+  overflow: hidden;
 }
-#wholeThing{
-  border-left: 10px solid red;
-  border-right: 10px solid red;
-  box-sizing: border-box;
-  width: 80%;
+#holder{
+  margin: 0 auto;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: auto;
+  padding-top: 100%;
+  background: url(gray.png) no-repeat center;
+  background-size: cover;
+  z-index: -3;
+  overflow: hidden;
 }
 #app{
   padding-top: 0.25rem;
@@ -26,7 +33,7 @@ body{
   bottom: 0;
   left: 0;
   right: 0;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
   overflow: hidden;
   background: lightgray;
 }
