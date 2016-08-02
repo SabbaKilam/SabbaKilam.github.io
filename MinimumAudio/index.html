@@ -14,20 +14,30 @@
     <script src="prefixfree.js"></script>
 	</head>
 	<body>
+	<div id="wholeThing">
+		<div id="topBanner">
+		  <table id="tblTopBanner">
+		  	<tr>
+		  		<td colspan="2">
+		  		  	<div id="songTitle"> Adele - Some Corney Song</div>
+		  		</td>
+		  	</tr>
+			<tr>
+				<td>
+					<div id="speaker"></div>
+				</td>
+				<td>
+					<div id="volumeSlider" class="slider"></div>			
+				</td>
+			</tr>
+		</table>
+		</div> <!-- END of topBanner -->		
 	  <div id="app">
 	    <div class="line"></div>
 	    	<br>
 		    <div class="sliders">
 		        <table id="timeTable">
-		        	<tr>
-		        		<td>
-		        			<div id="speaker"></div>
-		        		</td>
-		        		<td>
-			        		<div id="volumeSlider" class="slider"></div>
-		        		</td>
-		        		<td></td>
-		        	</tr>
+
 		        	<tr>
 		        		<td><span id="timePrefix">0:00</span>&nbsp;</td>
 		        		<td>
@@ -44,8 +54,8 @@
 	      <div class="touch" id="btnNext" >Next&nbsp;<span style="letter-spacing: -0.3rem;">&#9658;&#9658;</span></div>
 	    </div>
 	    <div class="line"></div>
-	    
 	  </div>
+	 </div>	<!-- END of wholeThing--> 
 	<script src="script.js"></script>
 	</body>
 </html>

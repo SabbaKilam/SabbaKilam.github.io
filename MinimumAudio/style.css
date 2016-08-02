@@ -12,6 +12,12 @@ body{
   line-height: 180%;
   vertical-align: top;
 }
+#wholeThing{
+  border-left: 10px solid red;
+  border-right: 10px solid red;
+  box-sizing: border-box;
+  width: 80%;
+}
 #app{
   padding-top: 0.25rem;
   padding-bottom: 1.5rem;
@@ -24,6 +30,25 @@ body{
   overflow: hidden;
   background: lightgray;
 }
+#topBanner{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  position: fixed;
+  top: 0;
+  bottom: auto;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  overflow: hidden;
+  background: lightgray; 
+  text-align: center;
+	font-size: 1.22rem;   
+}
+#tblTopBanner{
+  margin: 0 auto;
+  text-align: center;
+}
+
 .touchPanel{
   margin: 0.5rem auto 0.5rem auto;
   text-align: center;

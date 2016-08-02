@@ -38,32 +38,32 @@ $.styles = function styles(object){
 		return style;
 	};
 };
-    // c.) A method that returns the adjusted root em:	
-$.getRem = function getRem(){
-	return 5 + window.innerWidth/50;
-};
-    // d.) A function that adjusts the root em according to screen font-size:
+    // c.) A function that adjusts the root em according to screen font-size:
 $.adjustRem = function adjustRem(){
 	var pseudoWidth = 640; //try this one first
 	var newRootEm = 16; //default system value to start with
 	if (window.innerWidth < pseudoWidth){
 		newRootEm = (5 + window.innerWidth/50);//use real window.innerWidth
 		$.styles($.app)("width", window.innerWidth + "px");
+		$.styles($.topBanner)("width", window.innerWidth + "px");
+		
 	}
 	else{
 		newRootEm = (5 + pseudoWidth/50);//use the narrower width for larger screens
 		$.styles($.app)("width", pseudoWidth + "px");
+		$.styles($.topBanner)("width", pseudoWidth + "px");
+		
 	}
 	document.documentElement.style.fontSize =  newRootEm +"px";	
 	return newRootEm;
 };
-    // e.) Assemble browser prefixes to be used for CSS styling
+    // d.) Assemble browser prefixes to be used for CSS styling
 $.browserPrefixes = ["","-webkit-","-moz-","-ms-","-o-"];
 //=======| App BEGINS here |========//
 window.onload = function(){
 	//attach all elements by id to the global $:
 	attachElements();	
-	document.body.appendChild($.player);
+	document.body.appendChild($.player);//to let device have some control
 	$.adjustRem();
 	$.fullSliderWidth = 20.8; //in rem;
 	$.url = "https://SabbaKilam.github.io/music/";
@@ -74,7 +74,6 @@ window.onload = function(){
 	$.player.src = $.url + "Chicago - Introduction.mp3";	
 	//$.player.src = $.url + "childrendarkness.mp3";
 	//$.player.src = $.url + "Geoff  Nunberg - Trump, Race, Law & Order.mp3";	
-	//Geoff  Nunberg - Trump, Race, Law & Order.mp3
 	monitorModel();
 	$.player.volume = 1/3;
     //reverse the "back" arrows (like rewind arrows):
@@ -115,6 +114,7 @@ window.onload = function(){
         $.timePrefix = $.id("timePrefix");
         $.timeSuffix = $.id("timeSuffix");
         $.app = $.id("app");
+        $.topBanner = $.id("topBanner");
 	}
 	$.speakerImage = function speakerImage(index){
 	  $.styles($.speaker)
@@ -227,7 +227,7 @@ window.onload = function(){
 	$.timeSlider.addEventListener("mousedown", function(e){
 		$.timeMouseIsDown = true;
 		$.volumeMouseIsDown = false;
-		var fullWidth = parseInt($.fullSliderWidth * $.adjustRem(), 10);//$.getRem()
+		var fullWidth = parseInt($.fullSliderWidth * $.adjustRem(), 10);
 		var left = this.getBoundingClientRect().left;
 		var mouseX = e.clientX;
 		var leftMargin = parseInt(mouseX - left, 10);
