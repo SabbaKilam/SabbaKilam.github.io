@@ -114,7 +114,7 @@ window.onload = function(){
 		});
 		$.styles($.volumeSlider)
 			("color","white")
-			("text-shadow","0 1px 0 black")
+			//("text-shadow","0 1px 0 black")
 		;
 	}
 	//____________________________________________//
@@ -321,11 +321,17 @@ window.onload = function(){
  	    		$.timeSuffix.innerHTML =  $.secToMinSec($.player.duration);
  	    	}
  	    	
-    	    //adjust volume slider	
+    	    //adjust volume slider
+    	    //var borderColor = " hsl(" + (100*(1-$.player.volume)) +", 50%, 75%)";
+    	    var textColor = " hsl(" + (180 - 100*(1-$.player.volume)) +", 100%, 30%)";
+    	    var backColor = " hsl(" + (100*(1-$.player.volume)) +", 100%, 30%)";
             $.styles($.volumeSlider) 
-                ("border-left", volumeLeftBorder + "px solid #aaa")
+                //("border-left", volumeLeftBorder + "px solid #aaa")
+                ("border-left", volumeLeftBorder + "px solid " + backColor)
+                ("color", "black")
                 ("width", (fullSliderWidth - volumeLeftBorder)+ "px")
-            	;
+                ("background-color","lightgray")
+        	;
 	        var pct = "&nbsp;" + parseInt($.player.volume * 100,10) + "%";
 	        $.volumeSlider.innerHTML = pct;
 	        
