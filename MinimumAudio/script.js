@@ -171,7 +171,19 @@ window.onload = function(){
 		$.player.pause();
 		$.player.currentTime = 0;
 		$.btnPlay.innerHTML = $.playIcon;
-		$.playRequested = true;		
+		$.playRequested = true;
+		//----restore the play button
+		$.btnPlay.innerHTML = $.playIcon;
+		$.styles(this)
+			("box-shadow","1px 1px 1px black")
+			("font-size","1.5rem")
+		;
+		$.browserPrefixes.forEach(function(prefix){
+			$.styles($.btnPlay)
+				("background", prefix + "linear-gradient(#ddd, #aaa, #ddd)")
+			;
+		}); 		
+		
 	});
 	$.player.addEventListener("ended", function(){
 		$.btnPlay.innerHTML = $.playIcon;
@@ -182,40 +194,10 @@ window.onload = function(){
         if($.playRequested){
             $.player.play();
             $.playRequested = false;
-            $.btnPlay.innerHTML = $.pauseIcon;
-            /*
-				  box-shadow: 1px 1px 1px white;
-				  background: linear-gradient(gray, lightgray);  
-				  font-size: 1.48rem;
-            */
-            $.styles(this)
-            	("box-shadow","1px 1px 1px white")
-            	("font-size","1.48rem")
-            ;
-            $.browserPrefixes.forEach(function(prefix){
-            	$.styles($.btnPlay)
-            		("background", prefix + "linear-gradient(gray, lightgray)")
-        		;
-            });
         }
         else{
             $.player.pause();
             $.playRequested = true;
-            $.btnPlay.innerHTML = $.playIcon;
-            /*
-				  background: linear-gradient(#ddd, #aaa, #ddd);
-				  box-shadow:1px 1px 1px black; 
-				  font-size: 1.5rem;            
-            */
-            $.styles(this)
-            	("box-shadow","1px 1px 1px black")
-            	("font-size","1.5rem")
-            ;
-            $.browserPrefixes.forEach(function(prefix){
-            	$.styles($.btnPlay)
-            		("background", prefix + "linear-gradient(#ddd, #aaa, #ddd)")
-        		;
-            });            
         }
     });
     $.speaker.addEventListener("click", function(){
@@ -327,6 +309,7 @@ window.onload = function(){
 	        var fullSliderWidth = parseInt( $.fullSliderWidth * $.adjustRem(), 10 );
 	        var timeLeftBorder = parseInt(timeFraction * fullSliderWidth, 10);
 	        var volumeLeftBorder = parseInt($.player.volume * fullSliderWidth, 10);
+	        
 	        //move timeSlider
 	        $.styles($.timeSlider)
 	            ("border-left", timeLeftBorder + "px solid #aaa")
@@ -337,13 +320,41 @@ window.onload = function(){
  	    	if(!isNaN($.player.duration)){
  	    		$.timeSuffix.innerHTML =  $.secToMinSec($.player.duration);
  	    	}
+ 	    	
     	    //adjust volume slider	
             $.styles($.volumeSlider) 
                 ("border-left", volumeLeftBorder + "px solid #aaa")
                 ("width", (fullSliderWidth - volumeLeftBorder)+ "px")
             	;
 	        var pct = "&nbsp;" + parseInt($.player.volume * 100,10) + "%";
-	        $.volumeSlider.innerHTML = pct;      	    
+	        $.volumeSlider.innerHTML = pct;
+	        
+	        //adjust play button
+	        if($.playRequested){
+	            $.btnPlay.innerHTML = $.playIcon;
+	            $.styles($.btnPlay)
+	            	("box-shadow","1px 1px 1px black")
+	            	("font-size","1.5rem")
+	            ;
+	            $.browserPrefixes.forEach(function(prefix){
+	            	$.styles($.btnPlay)
+	            		("background", prefix + "linear-gradient(#ddd, #aaa, #ddd)")
+	        		;
+	            }); 	        	
+	        }
+	        else{
+	            $.btnPlay.innerHTML = $.pauseIcon;
+	            $.styles($.btnPlay)
+	            	("box-shadow","1px 1px 1px white")
+	            	("font-size","1.48rem")
+	            ;
+	            $.browserPrefixes.forEach(function(prefix){
+	            	$.styles($.btnPlay)
+	            		("background", prefix + "linear-gradient(gray, lightgray)")
+	        		;
+	            });
+	        }
+	        //choose proper speaker image
       	    $.adjustSpeakerImage(); 
 	    }, 50);
 	}
