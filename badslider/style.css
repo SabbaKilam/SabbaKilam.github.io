@@ -18,7 +18,6 @@ body{
 
 .slider{
     display: block;
-    outline: 2px solid black;
     width: 15rem;
     height: 2rem;
     left: 0;
@@ -26,21 +25,25 @@ body{
     margin: 0 auto;
 }
 
-#customVolume{
-    border: 1px solid green;
-}
 
-#customSlider{
-
+#player{
+    display: block;
+    position: fixed;
+    margin: 0 auto;
+    bottom: 10rem;
+    left: 0;
+    right: 0;
+    
 }
 
 #realSlider{
-    outline: 2px solid blue;
     margin-top: -2.25rem;
     width: 15rem;
     height: 3rem;
-    opacity: 0;
+    opacity: 0.5;
 }
 
-
+#customSlider{
+    outline: 2px solid black;
+}
 
