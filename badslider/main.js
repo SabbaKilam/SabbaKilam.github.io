@@ -12,8 +12,10 @@ $.attach = function attach(idString){
 $.attach("realSlider");
 $.attach("customSlider");
 $.attach("player");
+$.attach("songTitle");
+$.attach("customButton");
 $.player.src = $.url + "eyesface.mp3";
-$.customSlider.innerHTML = $.player.src;
+$.songTitle.innerHTML = $.player.src;
 $.realSlider.onmousedown = function(e){
     $.realSliderMouseIsDown = true;
     var sizeInfo = e.target.getBoundingClientRect();
@@ -21,9 +23,13 @@ $.realSlider.onmousedown = function(e){
     var width = sizeInfo.width;
     var distance = e.clientX - left;
     var pct = distance /width;
+    $.player.volume = pct;
     pct = parseInt(100 * pct, 10);
     $.realSlider.value = pct;
-    $.customSlider.innerHTML = pct + "%";    
+    //$.customSlider.innerHTML = pct + "%";  
+    //$.customButton.style.left = e.target.value + "px";  
+    $.customButton.style.left = $.leftFromPct($.customSlider, e.target.value/100) + "px";
+    $.player.volume = e.target.value /100;    
 };
 $.realSlider.onmouseup = function(e){
     $.realSliderMouseIsDown = false;
@@ -46,5 +52,13 @@ $.realSlider.onmousemove = function(e){
 };
 */
 $.realSlider.oninput  = function(e){
-    $.customSlider.innerHTML = e.target.value + "%";
+    //$.customSlider.innerHTML = e.target.value + "%";
+    $.customButton.style.left = $.leftFromPct($.customSlider, e.target.value/100) + "px";
+    $.player.volume = e.target.value /100;  
+};
+$.leftFromPct = function(parent, pct){
+    var sizeInfo = parent.getBoundingClientRect();
+    var width = sizeInfo.width;
+    var left = width * pct;
+    return left;
 };

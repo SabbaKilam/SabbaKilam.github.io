@@ -30,7 +30,7 @@ body{
     display: block;
     position: fixed;
     margin: 0 auto;
-    bottom: 10rem;
+    bottom: 0;
     left: 0;
     right: 0;
     
@@ -45,5 +45,12 @@ body{
 
 #customSlider{
     outline: 2px solid black;
+    position: relative;
 }
 
+#customButton{
+    position: absolute;
+    display: inline-block;
+    right: auto;
+    left: 0;
+}
