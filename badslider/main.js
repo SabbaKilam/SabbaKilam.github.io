@@ -31,10 +31,10 @@ $.realSlider.onmouseup = function(e){
 $.realSlider.onmousemove = function(e){
     var sizeInfo = e.target.getBoundingClientRect();
     var left = sizeInfo.left;
-    var right = sizeInfo.right    
+    var right = sizeInfo.right;   
     var leftIsGood = left <= e.clientX;
     var rightIsGood = right >= e.clientX;
-    if($.realSliderMouseIsDown && leftIsGood && rightIsGood){;
+    if($.realSliderMouseIsDown && leftIsGood && rightIsGood){
         var width = sizeInfo.width;
         var distance = e.clientX - left;
         var pct = distance /width;
@@ -42,4 +42,19 @@ $.realSlider.onmousemove = function(e){
         $.realSlider.value = pct;
         $.customSlider.innerHTML = pct + "%";
     }
+};
+$.realSlider. oninput  = function(e){
+    var sizeInfo = e.target.getBoundingClientRect();
+    var left = sizeInfo.left;
+    var right = sizeInfo.right;   
+    var leftIsGood = left <= e.clientX;
+    var rightIsGood = right >= e.clientX;
+    if($.realSliderMouseIsDown && leftIsGood && rightIsGood){
+        var width = sizeInfo.width;
+        var distance = e.clientX - left;
+        var pct = distance /width;
+        pct = parseInt(100 * pct, 10);
+        $.realSlider.value = pct;
+        $.customSlider.innerHTML = pct + "%";
+    }    
 };
