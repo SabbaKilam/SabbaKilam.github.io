@@ -37,8 +37,9 @@ body{
 #realSlider{
     outline: 2px solid blue;
     margin-top: -2.25rem;
-    width: 16rem;
-    height: 3rem;    
+    width: 15rem;
+    height: 3rem;
+    opacity: 0;
 }
 
 
