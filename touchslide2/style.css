@@ -1,0 +1,181 @@
+html{
+  padding: 0;
+  margin: 0;  
+}
+
+body{
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  background: black;/*background: #5a5a5a;*/
+  font-family: sans-serif;
+  line-height: 180%;
+  vertical-align: top;
+  overflow: hidden;
+  text-shadow: 0 1px 0 white;
+}
+#holder{
+  margin: 0 auto;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: auto;
+  padding-top: 100%;
+  background: url(gray.png) no-repeat center;
+  background-size: cover;
+  z-index: -3;
+  overflow: hidden;
+}
+#app{
+  padding-top: 0.25rem;
+  padding-bottom: 0.5rem;
+  position: fixed;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  overflow: hidden;
+  background: lightgray;
+  text-shadow: 0 1px 0 white;
+}
+#topBanner{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  position: fixed;
+  top: 0;
+  bottom: auto;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  overflow: hidden;
+  background: lightgray; 
+  text-align: center;
+	font-size: 1.22rem;   
+}
+#tblTopBanner{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.touchPanel{
+  margin: 0.5rem auto 0.5rem auto;
+  text-align: center;
+}
+.touch{
+  display: inline-block;
+  width: 32%;
+  height: 3rem;
+  border-radius: 0.25rem;
+  color: black;
+  text-shadow: 0 1px 0 #ddd;
+  background: linear-gradient(#ddd, #aaa, #ddd);
+  box-shadow:1px 1px 1px black; 
+  font-size: 1.5rem;
+  vertical-align: bottom;
+  padding-top: 0.75rem;
+  cursor: pointer;
+  transition: all 0.05s ease;
+}
+.touch:active{
+  box-shadow: 1px 1px 1px white;
+  background: linear-gradient(gray, lightgray);  
+  font-size: 1.48rem;
+}
+
+.slider{
+  padding-top: 0;
+  padding-bottom: 0.18rem;
+	font-size: 1.22rem;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow */
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: clip;
+}
+#volumeSlider{
+  overflow: visible;
+  color: #555;
+}
+
+.line{
+  width: 100%;
+  height: 1px;
+  background: gray;
+  box-shadow: 0 1px 0 white;
+}
+
+#speaker{
+  width: 2.1rem;
+  padding-bottom: 2.1rem;
+  background: url(img/speakerMedium.png) no-repeat center;
+  background-size: contain;
+  margin: 0.25rem auto 0.5rem auto;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;  
+}
+
+#reverse{
+    display: inline-block;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+#timeTable{
+  margin: 0 auto;
+  text-align: center;
+	font-size: 1.22rem;  
+}
+
+/*
+<div id="sliderOverlay">
+	<div id="proxySlider" class="stealth">&#x029BF; </div>
+	<input id="hiddenSlider" type="range" class="stealth"> 
+</div>
+*/
+#sliderOverlay{
+  position: relative;
+  margin: 0 auto 3rem;
+  text-align: center;
+  height: 1.6rem;
+}
+.stealth{
+  display: block;  
+  position: absolute;
+  bottom: 0;
+  width: 95%;
+  left:0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#hiddenSlider{
+  outline: 2px solid green;
+  height: 2rem;
+  width: 20.5rem;
+  cursor: pointer; 
+  opacity: 0;
+  z-index: 5;
+  bottom: -1rem;
+  left: 2.7rem;
+  
+}
+#proxySlider{
+  z-index: 4;
+  font-size: 1rem;
+  border-radius: 1rem;
+  background: #55a;
+  box-shadow: inset 2px 1px 6px black;
+  height: 1.5rem;
+  color: white;
+  font-weight: lighter;
+  padding-bottom: 0.1rem;
+}
+
+#volumeButton{
+  display: inline-block;
+  left: 0;
+  margin-top: -5rem;
+}

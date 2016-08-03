@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,
+			minimum-scale=1,
+            maximum-scale=1,
+            initial-scale=1,
+            user-scalable=no"
+    >
+	<title>Touch & Slide</title>
+	<link rel="stylesheet" href="style.css">
+	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script> -->
+    <script src="prefixfree.js"></script>
+	</head>
+	<body>
+	<div id="holder">
+		<div id="topBanner">
+		  <table id="tblTopBanner">
+		  	<tr>
+		  		<td colspan="3">
+		  		  	<div id="songTitle"> Chicago - Introduction</div>
+		  		</td>
+		  	</tr>
+  			<!-- =============================== -->		        	
+        	<tr>
+        		<td><span id="timePrefix">0:00</span>&nbsp;</td>
+        		<td>
+        			<div id="timeSlider" class="slider"></div>
+        		</td>
+        		<td>&nbsp;<span id="timeSuffix">0:00</span></td>
+        	</tr>
+	  		<!-- =============================== -->		  	
+			
+		</table>
+	    <div class="line"></div>		
+		</div> <!-- END of topBanner -->
+	
+	  <div id="app">
+	  	<div id="sliderOverlay">
+	  				    <div class="sliders">
+		        <table id="timeTable">
+				  	<!-- =============================== -->
+					<tr>
+						<td>
+							<div id="speaker"></div>
+						</td>
+						<td>
+							<input id="hiddenSlider" type="range" class="stealth">
+							<div id="volumeSlider" class="slider"></div>			
+						</td>
+					</tr>
+				  	<!-- =============================== -->			  		
+			  		
+		        </table>
+		    </div>
+	  		<!--
+	  		<div id="proxySlider" class="stealth">
+	  			<span id="volumeButton">Volume</span>
+  			</div>
+  			-->
+	  	</div>
+	    <div class="line"></div>
+
+	    <div class="line"></div>
+	    <div class="touchPanel">
+	      <div class="touch" id="btnBack"><span id="reverse" style="letter-spacing: -0.3rem;">&#9658;&#9658;</span>&nbsp;Back</div>
+	      <div class="touch" id="btnPlay">Play &#9658;</div>
+	      <div class="touch" id="btnNext" >Next&nbsp;<span style="letter-spacing: -0.3rem;">&#9658;&#9658;</span></div>
+	    </div>
+	    <div class="line"></div>
+	  </div>
+	 </div>	<!-- END of holder--> 
+	<script src="script.js"></script>
+	</body>
+</html>
