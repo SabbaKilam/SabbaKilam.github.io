@@ -4,5 +4,12 @@ $.id = function id(idString){
 };
 $.realSlider = $.id("realSlider");
 $.realSlider.onclick = function(e){
-    alert(e.clientX);
+    var sizeInfo = e.target.getBoundingClientRect();
+    var left = sizeInfo.left;
+    var width = sizeInfo.width;
+    var distance = e.clientX - left;
+    var pct = distance /width;
+    pct = parseInt(100 * pct, 10);
+    $.realSlider.value = pct;
+    alert(pct);
 };
