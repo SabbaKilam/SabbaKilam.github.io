@@ -11,5 +11,5 @@ $.realSlider.onclick = function(e){
     var pct = distance /width;
     pct = parseInt(100 * pct, 10);
     $.realSlider.value = pct;
-    alert(pct);
+    //alert(pct);
 };
