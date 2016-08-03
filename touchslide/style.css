@@ -157,6 +157,7 @@ body{
   cursor: pointer; 
   opacity: 0;
   z-index: 5;
+  bottom: -0.45rem;
 }
 #proxySlider{
   z-index: 4;
@@ -169,10 +170,7 @@ body{
   font-weight: lighter;
   padding-bottom: 0.1rem;
 }
-#proxySlider:hover{
-  font-weight: bolder;
-  opacity: 0.85;
-}
+
 #volumeButton{
   display: inline-block;
   left: 0;
