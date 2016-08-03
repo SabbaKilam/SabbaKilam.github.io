@@ -1,0 +1,41 @@
+#holder{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 1px solid red;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+}
+#customVolume{
+    border: 1px solid green;
+}
+
+.slider{
+    display: block;
+    outline: 2px solid black;
+    width: 15rem;
+    height: 2rem;
+    left: 0;
+    right:0;
+    margin: 0 auto;
+}
+
+#customVolume{
+    border: 1px solid green;
+}
+
+#customSlider{
+    width: 15.5rem;
+    height: 2.5rem;
+}
+
+#realSlider{
+    outline: 2px solid blue;
+    margin-top: -2.25rem;
+}
+
+
+
