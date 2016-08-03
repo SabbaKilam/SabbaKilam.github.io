@@ -28,7 +28,7 @@ body{
 }
 #app{
   padding-top: 0.25rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
   position: fixed;
   top: auto;
   bottom: 0;
