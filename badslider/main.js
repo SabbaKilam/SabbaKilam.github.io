@@ -38,7 +38,8 @@ window.onload = function(){
         var buttonWidth = $.customButton.getBoundingClientRect().width;
         var halfWidth = buttonWidth/2;
         $.customButton.style.left = ($.leftFromPct($.customSlider, e.target.value/100) - halfWidth)/$.adjustRem() + "rem";
-        $.player.volume = e.target.value /100;    
+        $.player.volume = e.target.value /100;
+        $.songTitle.innerHTML = $.player.volume;        
     };
     $.realSlider.onmouseup = function(e){
         $.realSliderMouseIsDown = false;
@@ -47,7 +48,8 @@ window.onload = function(){
         var buttonWidth = $.customButton.getBoundingClientRect().width;
         var halfWidth = buttonWidth/2;
         $.customButton.style.left = ($.leftFromPct($.customSlider, e.target.value/100) - halfWidth)/$.adjustRem() + "rem";
-        $.player.volume = e.target.value /100;    
+        $.player.volume = e.target.value /100; 
+        $.songTitle.innerHTML = $.player.volume;
     };
     $.leftFromPct = function(parent, pct){
         var sizeInfo = parent.getBoundingClientRect();
