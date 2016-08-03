@@ -168,6 +168,7 @@ window.onload = function(){
 	  }
 	};
 	//____________| User Events Group (Updates Model and player) |___________
+	/*
 	$.hiddenSlider.onmouseover = function(){
 		$.styles($.proxySlider)
 			("font-size", "1.05rem")
@@ -179,7 +180,8 @@ window.onload = function(){
 			("font-size", "1rem")
 			("opacity", "1")
 		;
-	};	
+	};
+	*/
  	
 	$.hiddenSlider.addEventListener("input", function(){
 		$.player.volume = this.value / 100;
