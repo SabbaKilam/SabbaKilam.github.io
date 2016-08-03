@@ -1,3 +1,6 @@
+body{
+    user-select: none;
+}
 #holder{
     position: fixed;
     left: 0;
@@ -28,13 +31,14 @@
 }
 
 #customSlider{
-    width: 15.5rem;
-    height: 2.5rem;
+
 }
 
 #realSlider{
     outline: 2px solid blue;
     margin-top: -2.25rem;
+    width: 16rem;
+    height: 3rem;    
 }
 
 
