@@ -109,20 +109,10 @@ window.onload = function(){
 				("text-align","left")
 				("border-radius","1.5rem")
 				("background","#55a")
-				("font-size","1.22rem")
+				("font-size","1.1rem")
 			;
 		});
-		/*
-		$.styles($.volumeSlider)
-			("color","white")
-			("height","1.5rem")			
-			("font-size","1.22rem")
-			//("padding-bottom", "0.5rem")
-			("", "")
-			("", "")
-			("", "")
-		*/	
-		;
+
 	}
 	//____________________________________________//
 	function attachElements(){
