@@ -37,7 +37,7 @@ window.onload = function(){
         
         var buttonWidth = $.customButton.getBoundingClientRect().width;
         var halfWidth = buttonWidth/2;
-        $.customButton.style.left = $.leftFromPct($.customSlider, e.target.value/100) - halfWidth + "px";
+        $.customButton.style.left = ($.leftFromPct($.customSlider, e.target.value/100) - halfWidth)/$.adjustRem() + "rem";
         $.player.volume = e.target.value /100;    
     };
     $.realSlider.onmouseup = function(e){
@@ -46,7 +46,7 @@ window.onload = function(){
     $.realSlider.oninput  = function(e){
         var buttonWidth = $.customButton.getBoundingClientRect().width;
         var halfWidth = buttonWidth/2;
-        $.customButton.style.left = $.leftFromPct($.customSlider, e.target.value/100) - halfWidth + "px";
+        $.customButton.style.left = ($.leftFromPct($.customSlider, e.target.value/100) - halfWidth)/$.adjustRem() + "rem";
         $.player.volume = e.target.value /100;    
     };
     $.leftFromPct = function(parent, pct){
