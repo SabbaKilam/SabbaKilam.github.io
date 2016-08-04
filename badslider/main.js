@@ -2,7 +2,7 @@ var $ = {
     realSliderMouseIsDown: false,
     url: "https://SabbaKilam.github.io/music/",
     adjustRem: function adjustRem(){
-        var newRem = 5 + window.innerWidth/50;
+        var newRem = 6 + window.innerWidth/45;
         document.documentElement.style.fontSize = newRem + "px";
         return newRem;
     }
@@ -12,20 +12,30 @@ $.id = function id(idString){
 };
 $.attach = function attach(idString){
     //depends on $.id method
-    $[idString] = $.id(idString);
+    if(typeof idString === "string" && arguments[1]=== undefined){
+        $[idString] = $.id(idString);        
+    }
+    //account for multiple strings
+    else if(typeof idString === "string" && arguments.length > 1){
+        Array.prototype.forEach.call(arguments, arg=>{
+            $.attach(arg);
+        });
+    }
+    else if(Object.prototype.toString.call(idString) == "[object Array]"){
+        idString.forEach(m=>{
+            $.attach(m);
+        });
+    }
 };
 window.onload = function(){
     $.adjustRem();
-    window.onresize = $.adjustRem;
-    $.attach("realSlider");
-    $.attach("customSlider");
-    $.attach("player");
-    $.attach("songTitle");
-    $.attach("customButton");
+    $.attach("realSlider","customSlider","player","songTitle","customButton");
     $.player.src = $.url + "eyesface.mp3";
     $.songTitle.innerHTML = $.player.src;
     $.player.volume = 0.5;
     $.customButton.style.left = $.customSlider.getBoundingClientRect().width/2+ "px";
+    //---------------------------------------
+    window.onresize = $.adjustRem;    
     $.realSlider.onmousedown = function(e){
         $.realSliderMouseIsDown = true;
         var sizeInfo = e.target.getBoundingClientRect();
