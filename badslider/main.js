@@ -50,7 +50,7 @@ window.onload = function(){
         var halfWidth = buttonWidth/2;
         $.customButton.style.left = ($.leftFromPct($.customSlider, e.target.value/100) - halfWidth)/$.adjustRem() + "rem";
         $.player.volume = e.target.value /100;
-        $.songTitle.innerHTML = $.player.volume;        
+        $.songTitle.innerHTML = $.player.volume.toFixed(2);        
     };
     $.realSlider.onmouseup = function(e){
         $.realSliderMouseIsDown = false;
@@ -60,7 +60,7 @@ window.onload = function(){
         var halfWidth = buttonWidth/2;
         $.customButton.style.left = ($.leftFromPct($.customSlider, e.target.value/100) - halfWidth)/$.adjustRem() + "rem";
         $.player.volume = e.target.value /100; 
-        $.songTitle.innerHTML = $.player.volume;
+        $.songTitle.innerHTML = $.player.volume.toFixed(2);
     };
     $.leftFromPct = function(parent, pct){
         var sizeInfo = parent.getBoundingClientRect();
