@@ -24,6 +24,8 @@ window.onload = function(){
     $.attach("customButton");
     $.player.src = $.url + "eyesface.mp3";
     $.songTitle.innerHTML = $.player.src;
+    $.player.volume = 0.5;
+    $.customButton.style.left = $.customSlider.getBoundingClientRect().width/2+ "px";
     $.realSlider.onmousedown = function(e){
         $.realSliderMouseIsDown = true;
         var sizeInfo = e.target.getBoundingClientRect();
@@ -34,7 +36,6 @@ window.onload = function(){
         $.player.volume = pct;
         pct = parseInt(100 * pct, 10);
         $.realSlider.value = pct;
-        
         var buttonWidth = $.customButton.getBoundingClientRect().width;
         var halfWidth = buttonWidth/2;
         $.customButton.style.left = ($.leftFromPct($.customSlider, e.target.value/100) - halfWidth)/$.adjustRem() + "rem";
