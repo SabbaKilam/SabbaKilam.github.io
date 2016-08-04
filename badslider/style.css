@@ -60,4 +60,5 @@ body{
     margin-top: -1.75rem;
     color: #666;
     text-shadow: 2px 2px 5px black;
+    transition: all 0.15s ease;
 }
