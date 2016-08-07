@@ -1,12 +1,13 @@
 /**
 * Author: Abbas Abdulmalik
 * Creation Date: March 16, 2016
-* Revised: March 17, 2016
+* Revised: March 30, 2016
 * Project Name: module.js
 * Purpose:  Attempt to make a simple commonJS-like module
             with jQuery-like functionality
-* Notes:
-*
+* Notes: Added custom (bespoke) start() method which returns
+* a "thenable" queue whose then() function can chain call 
+* functions that are waitng for he result of the start's callback.
 */
 exports = main;
 function main(param){
@@ -15,23 +16,13 @@ function main(param){
 }
 var base = 'https://dl.dropboxusercontent.com/u/21142484/modules/';
 /*global rekwire*/
-var $ = rekwire(base + "aQuery.js");//to be eliminated later by manually attaching aQuery methods
+var $ = rekwire(base + "aQuery.js");
 var elem = {};
 var array = [];
 var toggleOn = true;    // Flag for an element's toggle method.
 var arrayToggleOn = []; // Flags for array objects' toggle method.
 
 //===| exposed data and methods |===
-
-//-------importing from aQuery ($)-----
-/*
-    should eventually manually attach these methods
-    and no longer "rekwire" aQuery.js    
-*/
-main.makeDraggable = $.makeDraggable;
-main.symDiff = $.sym;
-main.sizeFactory = $.liquidPixelFactory;
-//------------------
 main.getElement = function getElement(){
     return elem;
 };
@@ -135,12 +126,12 @@ main.hover = function hover(overHandler, outHandler){
     }
     else if(array.length !== 0){
         array.forEach(function(m){
-            m.onmouseover = function(e){
+          m.onmouseover = function(e){
                 overHandler(e,m);
-            };
-            m.onmouseout = function(e){
+          };
+          m.onmouseout = function(e){
                 outHandler(e,m);
-            };
+          };
         });
     }
     return exports;
@@ -168,7 +159,7 @@ main.styles = function styles(property, value){
   else if(array.length !== 0){
     a(property, value);
   }
-  //----helpers---
+  //----helper---
   function e(p,v){
      elem.style[p] = v;
   }
@@ -179,7 +170,7 @@ main.styles = function styles(property, value){
   }
   //-----------
   return styles;//returns itself for chaining    
-};
+ };
 
 main.get = function get(url, handler){
   try{
@@ -344,6 +335,228 @@ main.curry = function curry(f){
         }
     };
 };//==END of curry()==
+//========================================
+main.start = function start(asynchFunction, optionalArgument){
+    /*
+      Pass an asynchronous (slow) function to start(),
+      and perhaps an additional argument, which is optional.
+      
+      The asynchronous function must be written to expect 
+      the queue object as its sole argument.
+      When the asynch is finished, it calls queue's
+      flush function (queue.flush()) to release the collecion of funtions
+      wating to execute. The flush method can take any argument,
+      but the argument is tradionally the result of
+      the asynch function, such as ajax.response, or xhr.responseText. 
+    
+    */
+		//------------------------------------
+		var flushing = false;
+		var queuedFunctions = [];
+		var asynchResponse;
+		var queue = {
+			then(f){
+				if(flushing){
+					f(asynchResponse);
+				}
+				else{
+					queuedFunctions.push(f);
+				}
+				return queue;
+			},
+			flush(r){
+				if(flushing)return;
+				asynchResponse = r;
+				flushing = true;
+				while(queuedFunctions[0]){
+					queuedFunctions.pop()(asynchResponse);
+				}
+			},
+			option: null
+		};
+		queue.option = optionalArgument;
+		asynchFunction(queue);
+		//------------------------------------
+		return queue;
+	};
+//===| END of start() |====
+
+main.attach = function attach(idString){
+    if(typeof idString === "string" && arguments[1]=== undefined){
+        main[idString] = document.getElementById(idString);        
+    }
+    //account for multiple string arguments (comma-separated strings)
+    else if(typeof idString === "string" && arguments.length > 1){
+        Array.prototype.forEach.call(arguments, arg=>{
+            main.attach(arg);
+        });
+    }
+    //account for an array (of strings, hopefully DOM element id strings)
+    else if(Object.prototype.toString.call(idString) == "[object Array]"){
+        idString.forEach(m=>{
+            main.attach(m);
+        });
+    }
+};
+//===| END of attach() method |===
+//===| START of makeDraggable() method |===
+main.makeDraggable = function makeDraggable(obj){
+    var mousePressed = false
+    ,   mouseMoving = false
+    ,   xyOffsets = {x:0, y:0}
+    ;
+    obj.style.userSelect = "none";
+    obj.style.display = "block";
+    
+    //save its original position
+    var originalPosition = [obj.offsetLeft, obj.offsetTop];
+    
+    obj.style.position = "absolute";
+    
+    //after position absolute, attempt to restore original
+    obj.style.left = originalPosition[0]+"px";
+    obj.style.top = originalPosition[1]+"px";
+    
+    //======event handlers===========
+    obj.addEventListener("mouseout",function(e){
+        e = e ? e : window.event;
+        var from = e.relatedTarget || e.toElement;
+        if (!from || from.nodeName == "HTML") {
+            mousePressed = false; 
+        }
+    });
+    //--------------------------------
+    obj.addEventListener("mousedown",function(e){
+        mousePressed = true;
+        saveOffsets(e);
+    });
+    //--------------------------------     
+    obj.addEventListener("mouseup", function(){
+        mousePressed = false;
+        mouseMoving = false;
+    });   
+    //-----------------------------------
+    obj.addEventListener("mousemove",function(e){
+        mouseMoving = true;    
+        if(mousePressed){
+            positionCursor(e);
+        }
+    });
+    //---------------------------------
+    document.body.addEventListener("mousemove", function(e){
+        if(mouseMoving && mousePressed){
+            positionCursor(e);
+        }
+    });
+    //----------helpers for handlers--------------
+    function positionCursor(e){
+        obj.style.left = (e.clientX - xyOffsets.x) + 0 + "px";//scrollLeft()         
+        obj.style.top = (e.clientY - xyOffsets.y) + 0 + "px"; // scrollTop()
+    }
+    //---------------------------------------------
+    function saveOffsets(e){
+        xyOffsets.x = e.clientX - obj.offsetLeft;
+        xyOffsets.y = e.clientY - obj.offsetTop;
+    }
+    //------------------------------------------ 
+    return main;
+};
+//===| END of makeDraggable() method |===
+//===| START of sizeFactory() method |===
+main.sizeFactory = function sizeFactory(minWidth, maxWidth){
+  return  function setPixelValue(minPx, maxPx){        
+            var pixelValue = 0;
+    
+            if ( window.innerWidth < minWidth ){
+              pixelValue = minPx;
+            }
+            else if ( window.innerWidth > maxWidth ){
+              pixelValue = maxPx;
+            }
+            else{
+              // y = mx + b, where m = delta y / delta dx ... 
+              // and b = Yo - mXo (for any valid pair of x & y):
+              pixelValue = (maxPx - minPx)*window.innerWidth/(maxWidth - minWidth) +
+              minPx - (maxPx - minPx)*minWidth/(maxWidth - minWidth);
+            }
+            return pixelValue;
+          };
+};
+//===| END of sizeFactory() method |===
+//===| START of symDiff() method |===
+//(returns the symmetric difference among arrays provided)
+//any number of arrays can be provided as arguments
+main.symDiff = function symDiff(){
+    var partialSymDiff = [],   
+        argsArray = arguments
+    ;
+    //============THE CRUX=================
+    return findSymDiff(partialSymDiff,0);
+    //============UNDER THE HOOD===========
+    function findSymDiff(partialSymDiff,index){
+        if (argsArray[index] === undefined){
+            return partialSymDiff;
+        }
+        else{
+            partialSymDiff = sd(partialSymDiff, argsArray[index] );
+            return findSymDiff( partialSymDiff, index + 1 );
+        }
+    }    
+    //=====================================
+    function sd(arrayI, arrayJ){
+        var diff = [],
+            blackList = [],
+            i = 0,
+            j = 0,
+            maxI = arrayI.length,
+            maxJ = arrayJ.length
+        ;
+        //-------------------------------------------------
+        //1.) Combine the arrays into a third array.
+        //2.) Find the matched elements and place them into a blacklist array.
+        //3.) Pull blacklisted elements from the combined array.
+        //4.) return the "reduced" combined array.
+        //---------------------------------------------------
+        // 1.) Combine the arrays into a third array.
+        diff = arrayI.concat(arrayJ);        
+        //---------------------------------------------------
+        // 2.) Find the matched elements and place them into a blacklist array.
+        for ( i=0; i < maxI; i++ ){
+            for( j=0; j< maxJ; j++ ){
+                if(arrayI[i] === arrayJ[j]){
+                    blackList.push(arrayI[i] );
+                }                
+            }  
+        }
+        //----------------------------------------------------
+        // 3.) Pull blacklisted elements from the combined array.
+            diff = diff.filter(function(element){
+                if ( blackList.indexOf(element) === -1 ){//if not on  blacklist ...
+                    return true; // we keep it
+                }
+                else{
+                    return false; //if on blacklist, discard it
+                }
+            });
+        //----------------------------------------------------
+        // 4.) return the "reduced" combined array.        
+        return killDupes(diff);
+    }
+    //========================================================
+    function killDupes(array){
+        var kept = []; // Record of the "keepers"
+        return array.filter(function(element){
+            if ( kept.indexOf(element) === -1 ){ //if not already retained ...
+                kept.push(element); // Record it as retained now, and...
+                return true;  // allow this element to be kept (true)
+            }
+            else{
+                return false; // otherwise, don't keep it (already kept)
+            }
+        });
+    }      
+};
+//===| END of symDiff() method |===
 
 main.type = type; //type is a private function being made a public method.
 
@@ -381,6 +594,11 @@ function setElementOrArray(s){
             array.push(elements[j]);
         }
         fillToggleArray();
+    }
+    //added August 6, 2016: default to id selector
+    //if just a string
+    else if(typeof s === 'string'){
+        elem = document.getElementById(s);
     }
 }
 //----function to pre-fill the arrayToggleOn array
@@ -437,3 +655,79 @@ function type(aValue){
 //===| end of private helper functions |===
 
 return exports;
+//=======| END of entire module |============
+
+/*
+
+$.sym = function sym(){
+    var partialSymDiff = [],   
+        argsArray = arguments
+    ;
+    //============THE CRUX=================
+    return findSymDiff(partialSymDiff,0);
+    //============UNDER THE HOOD===========
+    function findSymDiff(partialSymDiff,index){
+        if (argsArray[index] === undefined){
+            return partialSymDiff;
+        }
+        else{
+            partialSymDiff = sd(partialSymDiff, argsArray[index] );
+            return findSymDiff( partialSymDiff, index + 1 );
+        }
+    }    
+    //=====================================
+    function sd(arrayI, arrayJ){
+        var diff = [],
+            blackList = [],
+            i = 0,
+            j = 0,
+            maxI = arrayI.length,
+            maxJ = arrayJ.length
+        ;
+        //-------------------------------------------------
+        //1.) Combine the arrays into a third array.
+        //2.) Find the matched elements and place them into a blacklist array.
+        //3.) Pull blacklisted elements from the combined array.
+        //4.) return the "reduced" combined array.
+        //---------------------------------------------------
+        // 1.) Combine the arrays into a third array.
+        diff = arrayI.concat(arrayJ);        
+        //---------------------------------------------------
+        // 2.) Find the matched elements and place them into a blacklist array.
+        for ( i=0; i < maxI; i++ ){
+            for( j=0; j< maxJ; j++ ){
+                if(arrayI[i] === arrayJ[j]){
+                    blackList.push(arrayI[i] );
+                }                
+            }  
+        }
+        //----------------------------------------------------
+        // 3.) Pull blacklisted elements from the combined array.
+            diff = diff.filter(function(element){
+                if ( blackList.indexOf(element) === -1 ){//if not on  blacklist ...
+                    return true; // we keep it
+                }
+                else{
+                    return false; //if on blacklist, discard it
+                }
+            });
+        //----------------------------------------------------
+        // 4.) return the "reduced" combined array.        
+        return killDupes(diff);
+    }
+    //========================================================
+    function killDupes(array){
+        var kept = []; // Record of the "keepers"
+        return array.filter(function(element){
+            if ( kept.indexOf(element) === -1 ){ //if not already retained ...
+                kept.push(element); // Record it as retained now, and...
+                return true;  // allow this element to be kept (true)
+            }
+            else{
+                return false; // otherwise, don't keep it (already kept)
+            }
+        });
+    }      
+};
+    
+*/

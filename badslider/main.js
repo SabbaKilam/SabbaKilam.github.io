@@ -21,12 +21,45 @@ $.attach = function attach(idString){
             $.attach(arg);
         });
     }
+    //account for an array (of strings, hopefully DOM element id strings)
     else if(Object.prototype.toString.call(idString) == "[object Array]"){
         idString.forEach(m=>{
             $.attach(m);
         });
     }
 };
+// A chainable styles method:
+$.styles = function styles(object){
+	return function style(property, value){
+		object.style[property] = value;
+		return style;
+	};
+};
+$.leftFromPct = function(parent, pct){
+    var sizeInfo = parent.getBoundingClientRect();
+    var width = sizeInfo.width;
+    var left = width * pct;
+    return left;
+};
+$.slideLeftBorder = function slideLeftBorder(element, pct, color){
+    /*
+        1. Get element's current width
+        2. Use the given percentage from its left (pct) to get the left border's size
+        3. Subtract that amount from the current with to get the new width of the element
+        4. apply them both
+    */
+    // 1. Get element's current width
+    var currentWidth = parseInt(element.getBoundingClientRect().width, 10); //in pixels
+    var borderLeft = parseInt(pct * currentWidth, 10);
+    var newWidth = currentWidth - borderLeft;
+    //apply new left border and width
+    $.styles(element)
+        ("border-left", borderLeft+"px solid " + color)
+        ("width", newWidth+"px")
+    ;
+    return borderLeft;
+};
+//====================| Here's the App |=========================
 window.onload = function(){
     $.adjustRem();
     $.attach("realSlider","customSlider","player","songTitle","customButton");
@@ -44,15 +77,15 @@ window.onload = function(){
         var distance = e.clientX - left;
         var pct = distance /width;
         $.player.volume = pct;
-        pct = parseInt(100 * pct, 10);
-        $.realSlider.value = pct;
+        //adjust customSliderSize
+        $.realSlider.value = parseInt(100 * pct, 10);
         var buttonWidth = $.customButton.getBoundingClientRect().width;
         var halfWidth = buttonWidth/2;
-        $.customButton.style.left = ($.leftFromPct($.customSlider, e.target.value/100) - halfWidth)/$.adjustRem() + "rem";
+        var newButtonLeft = ($.leftFromPct($.customSlider, e.target.value/100) - halfWidth)/$.adjustRem();
+        $.customButton.style.left = newButtonLeft + "rem";
         $.player.volume = e.target.value /100;
         $.songTitle.innerHTML = $.player.volume.toFixed(2);
-        //adjust customSliderSize
-        $.customSlider.style.BorderLeft = parseInt(pct * $.customSlider.getBoundingClientRect().width, 10) + "px solid #aaa";
+
     };
     $.realSlider.onmouseup = function(e){
         $.realSliderMouseIsDown = false;
@@ -64,11 +97,4 @@ window.onload = function(){
         $.player.volume = e.target.value /100; 
         $.songTitle.innerHTML = $.player.volume.toFixed(2);
     };
-    $.leftFromPct = function(parent, pct){
-        var sizeInfo = parent.getBoundingClientRect();
-        var width = sizeInfo.width;
-        var left = width * pct;
-        return left;
-    };    
-    
 };

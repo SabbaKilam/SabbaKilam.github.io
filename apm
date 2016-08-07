@@ -24,9 +24,10 @@ fi
   echo "Base path is ${BASE}" 
 if [[ ! -d "modules" && ! -f "modules"  ]];
  then
-
   echo "making modules directory"
-  sudo mkdir modules	
+  sudo mkdir modules
+  sudo chown ubuntu modules
+  sudo chgrp ubuntu modules
   echo
 fi
 if [ -f "modules" ];
@@ -36,4 +37,15 @@ if [ -f "modules" ];
   echo
   exit 1
 fi  
-sudo wget -O modules/${1}.js "${BASE}${1}.js"
+for MODULE in $@;
+ do
+  sudo wget -O modules/${MODULE}.js "${BASE}${MODULE}.js"
+  if [ $? -ne 0 ];
+   then sudo rm modules/${MODULE}.js
+  fi
+  if [ -f "modules/${MODULE}.js" ];
+   then
+      sudo chown ubuntu modules/${MODULE}.js
+      sudo chgrp ubuntu modules/${MODULE}.js
+  fi
+ done

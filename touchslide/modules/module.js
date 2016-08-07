@@ -1,12 +1,13 @@
 /**
 * Author: Abbas Abdulmalik
 * Creation Date: March 16, 2016
-* Revised: March 17, 2016
+* Revised: March 30, 2016
 * Project Name: module.js
 * Purpose:  Attempt to make a simple commonJS-like module
             with jQuery-like functionality
-* Notes:
-*
+* Notes: Added custom (bespoke) start() method which returns
+* a "thenable" queue whose then() function can chain call 
+* functions that are waitng for he result of the start's callback.
 */
 exports = main;
 function main(param){
@@ -14,8 +15,7 @@ function main(param){
   return main;
 }
 var base = 'https://dl.dropboxusercontent.com/u/21142484/modules/';
-/*global rekwire*/
-var $ = rekwire(base + "aQuery.js");//to be eliminated later by manually attaching aQuery methods
+var $ = rekwire(base + "aQuery.js");
 var elem = {};
 var array = [];
 var toggleOn = true;    // Flag for an element's toggle method.
@@ -24,22 +24,18 @@ var arrayToggleOn = []; // Flags for array objects' toggle method.
 //===| exposed data and methods |===
 
 //-------importing from aQuery ($)-----
-/*
-    should eventually manually attach these methods
-    and no longer "rekwire" aQuery.js    
-*/
 main.makeDraggable = $.makeDraggable;
 main.symDiff = $.sym;
 main.sizeFactory = $.liquidPixelFactory;
 //------------------
 main.getElement = function getElement(){
     return elem;
-};
+}
 main.elem = main.getElement;
 
 main.getArray = function getArray(){
     return array;
-};
+}
 main.array = main.getArray;
 
 main.html = function html(string){
@@ -135,12 +131,12 @@ main.hover = function hover(overHandler, outHandler){
     }
     else if(array.length !== 0){
         array.forEach(function(m){
-            m.onmouseover = function(e){
+          m.onmouseover = function(e){
                 overHandler(e,m);
-            };
-            m.onmouseout = function(e){
+          };
+          m.onmouseout = function(e){
                 outHandler(e,m);
-            };
+          };
         });
     }
     return exports;
@@ -166,9 +162,9 @@ main.styles = function styles(property, value){
     e(property, value); 
   }
   else if(array.length !== 0){
-    a(property, value);
+    a(property, value)
   }
-  //----helpers---
+  //----helper---
   function e(p,v){
      elem.style[p] = v;
   }
@@ -179,7 +175,7 @@ main.styles = function styles(property, value){
   }
   //-----------
   return styles;//returns itself for chaining    
-};
+ };
 
 main.get = function get(url, handler){
   try{
@@ -262,7 +258,7 @@ main.log = function log(){
         return false;
 	}
     return true;
-};
+}
 //-------------------------------
 main.createList =  function createList(){
     //-----head and tail pointers---------
@@ -322,7 +318,7 @@ main.createList =  function createList(){
     };
     //---------------------
     return listObject;
-};//--END of createList function
+}//--END of createList function
 main.makeList = main.createList;
 
 main.curry = function curry(f){
@@ -343,7 +339,54 @@ main.curry = function curry(f){
             return curriedF;                // Not enough arguments, so return to get 'em
         }
     };
-};//==END of curry()==
+}//==END of curry()==
+//========================================
+main.start = function	start(asynchFunction, optionalArgument){
+    /*
+      Pass an asynchronous (slow) function to start(),
+      and perhaps an additional argument, which is optional.
+      
+      The asynchronous function must be written to expect 
+      the queue object as its sole argument.
+      When the asynch is finished, it calls queue's
+      flush function (queue.flush()) to release the collecion of funtions
+      wating to execute. The flush method can take any argument,
+      but the argument is tradionally the result of
+      the asynch function, such as ajax.response, or xhr.responseText. 
+    
+    */
+		//------------------------------------
+		var flushing = false;
+		var queuedFunctions = [];
+		var asynchResponse;
+		var queue = {
+			then(f){
+				if(flushing){
+					f(asynchResponse);
+				}
+				else{
+					queuedFunctions.push(f);
+				}
+				return queue;
+			},
+			flush(r){
+				if(flushing)return;
+				asynchResponse = r;
+				flushing = true;
+				while(queuedFunctions[0]){
+					queuedFunctions.pop()(asynchResponse);
+				}
+			},
+			option: null
+		};
+		queue.option = optionalArgument;
+		asynchFunction(queue);
+		//------------------------------------
+		return queue;
+	}
+};//===| END of start() |====
+
+
 
 main.type = type; //type is a private function being made a public method.
 
@@ -434,6 +477,7 @@ function type(aValue){
 
   return realType;
 }
+
 //===| end of private helper functions |===
 
 return exports;
