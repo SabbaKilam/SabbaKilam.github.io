@@ -14,8 +14,7 @@
   is the width, in pixels, of an upper-case "M" in the root element (the html element)
   on the webpage. I would argue that an upper-case "W" is wider, but ...
 */
-/*global rekwire*/
-var _ = rekwire("module");
+/*global _*/
 _.adjustRem = function adjustRem(){
   //This initial equation can be modified to taste.
   var newRem = 5 + window.innerWidth / 50;

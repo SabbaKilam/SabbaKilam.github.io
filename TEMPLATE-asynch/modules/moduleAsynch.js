@@ -3,18 +3,18 @@
 * Creation Date: March 16, 2016
 * Revised: August 6, 2016
 * Project Name: module.js
-* Purpose:  Attempt to make a simple commonJS-like module
-            with jQuery-like functionality
+* Purpose: Attempt to make an asynch module not requiring rekwire 
 * Notes: Added makeDraggable, symDiff and sizeFactory from aQuery
 */
-exports = main;
+(function(){
 function main(param){
   setElementOrArray(param);
   return main;
 }
-var base = 'https://dl.dropboxusercontent.com/u/21142484/modules/';
-/*global rekwire*/
-var $ = rekwire(base + "aQuery.js");
+//=====IMPORTANT======================
+//attach "main" as "_" on global object
+this._ = main;
+//====================================
 var elem = {};
 var array = [];
 var toggleOn = true;    // Flag for an element's toggle method.
@@ -40,7 +40,7 @@ main.html = function html(string){
             m.innerHTML = string;
         });
     }
-    return exports;
+    return main;
 };
 
 main.addHtml = function addHtml(string){
@@ -52,7 +52,7 @@ main.addHtml = function addHtml(string){
             m.innerHTML += string;
         });
     }
-    return exports;
+    return main;
 };
 
 main.click = function click(handler){
@@ -67,7 +67,7 @@ main.click = function click(handler){
             });
         });
     }
-    return exports;
+    return main;
 };
 
 main.on = function on(event, handler){
@@ -81,7 +81,7 @@ main.on = function on(event, handler){
             });
         });
     }
-    return exports;
+    return main;
 };
 
 main.toggle = function toggle(onHandler, offHandler){
@@ -114,7 +114,7 @@ main.toggle = function toggle(onHandler, offHandler){
           };
         });
     }
-    return exports;
+    return main;
 };//---END of toggle() method
 
 main.hover = function hover(overHandler, outHandler){
@@ -132,7 +132,7 @@ main.hover = function hover(overHandler, outHandler){
           };
         });
     }
-    return exports;
+    return main;
 };
 main.overAndOut = main.hover;
 
@@ -145,7 +145,7 @@ main.css = function css(property, value){
       m.style[property] = value;
     });
   }
-  return exports;
+  return main;
 };
 main.style = main.css;//style (singular, not styles) being made an alias for css method
 
@@ -184,7 +184,7 @@ main.get = function get(url, handler){
     alert(error);
     console.log(error);
   }
-  return exports;
+  return main;
 };
 
 main.keyPressed = function keyPressed(e){
@@ -236,7 +236,7 @@ main.showProps = function showProps(object, target){
     propsString += ( m + "<br/>");       
   } 
   //----------------
-  return exports;  
+  return main;  
 };//===END of showProps=====
 
 main.log = function log(){
@@ -652,80 +652,8 @@ function type(aValue){
 }
 //===| end of private helper functions |===
 
-return exports;
-//=======| END of entire module |============
+return main;
+//=======| END of entire module |============    
+})();
 
-/*
 
-$.sym = function sym(){
-    var partialSymDiff = [],   
-        argsArray = arguments
-    ;
-    //============THE CRUX=================
-    return findSymDiff(partialSymDiff,0);
-    //============UNDER THE HOOD===========
-    function findSymDiff(partialSymDiff,index){
-        if (argsArray[index] === undefined){
-            return partialSymDiff;
-        }
-        else{
-            partialSymDiff = sd(partialSymDiff, argsArray[index] );
-            return findSymDiff( partialSymDiff, index + 1 );
-        }
-    }    
-    //=====================================
-    function sd(arrayI, arrayJ){
-        var diff = [],
-            blackList = [],
-            i = 0,
-            j = 0,
-            maxI = arrayI.length,
-            maxJ = arrayJ.length
-        ;
-        //-------------------------------------------------
-        //1.) Combine the arrays into a third array.
-        //2.) Find the matched elements and place them into a blacklist array.
-        //3.) Pull blacklisted elements from the combined array.
-        //4.) return the "reduced" combined array.
-        //---------------------------------------------------
-        // 1.) Combine the arrays into a third array.
-        diff = arrayI.concat(arrayJ);        
-        //---------------------------------------------------
-        // 2.) Find the matched elements and place them into a blacklist array.
-        for ( i=0; i < maxI; i++ ){
-            for( j=0; j< maxJ; j++ ){
-                if(arrayI[i] === arrayJ[j]){
-                    blackList.push(arrayI[i] );
-                }                
-            }  
-        }
-        //----------------------------------------------------
-        // 3.) Pull blacklisted elements from the combined array.
-            diff = diff.filter(function(element){
-                if ( blackList.indexOf(element) === -1 ){//if not on  blacklist ...
-                    return true; // we keep it
-                }
-                else{
-                    return false; //if on blacklist, discard it
-                }
-            });
-        //----------------------------------------------------
-        // 4.) return the "reduced" combined array.        
-        return killDupes(diff);
-    }
-    //========================================================
-    function killDupes(array){
-        var kept = []; // Record of the "keepers"
-        return array.filter(function(element){
-            if ( kept.indexOf(element) === -1 ){ //if not already retained ...
-                kept.push(element); // Record it as retained now, and...
-                return true;  // allow this element to be kept (true)
-            }
-            else{
-                return false; // otherwise, don't keep it (already kept)
-            }
-        });
-    }      
-};
-    
-*/

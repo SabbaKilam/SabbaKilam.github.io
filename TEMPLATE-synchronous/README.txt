@@ -6,7 +6,7 @@ Notes:
     the synchronous nature of my "rekwire" function has been "verbally" deprecated
     by the W3C. Actual deprecation will likely take years, affording me time
     to play around with simulating an NPM and CommonJS style development environment
-    for the front end browser. Projects that use this folder as a template will
+    for the front end (browser). Projects that use this folder as a template will
     use the rekwire function unless refactored to eliminate its use.
     
     The ~/bin directory has two executable bash files, apm (Abbas' package manager),
@@ -15,7 +15,7 @@ Notes:
     Then a small collection of JavaScript files are loaded into the module folder
     from my remote "repository," a public Dropbox folder. At minimum, the two main files
     loaded will be: 
-        1.) rekwire.js which contains a function name rekwire which simulates (I suppose)
+        1.) rekwire.js which contains a function named rekwire which simulates (I suppose)
         the node.js require module loader, which provides an 'exports' object that would be 
         recognized by any commonJS module that is called.
         2.) module.js which is a commonJS-like module containg my personal library

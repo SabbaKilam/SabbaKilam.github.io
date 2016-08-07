@@ -1,0 +1,23 @@
+body{
+    user-select: none;
+}
+#holder{
+    font-size: 1.5rem;
+    text-align: center;
+    /*
+        The follwing lines should
+        make the app fill the screen
+        and keep it from moving
+        when touched or swiped
+    */
+    position: fixed;    
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+#app{
+    position: relative;
+}
