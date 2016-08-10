@@ -737,7 +737,6 @@ function storeListsToBrowser() {
     }
 }
 //----------
-
 function addPlaylistNamesToBox() {
     for (var userName in lists) {
         addNameToBox(userName);

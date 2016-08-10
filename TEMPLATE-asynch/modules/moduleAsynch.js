@@ -43,17 +43,7 @@ main.html = function html(string){
     return main;
 };
 
-main.addHtml = function addHtml(string){
-    if(elem !== null){
-        elem.innerHTML += string;
-    }
-    else if(array.length !== 0){
-        array.forEach(function(m){
-            m.innerHTML += string;
-        });
-    }
-    return main;
-};
+main.addHtml = main.html;
 
 main.click = function click(handler){
     //elem.addEventListener("click",handler);
@@ -135,6 +125,26 @@ main.hover = function hover(overHandler, outHandler){
     return main;
 };
 main.overAndOut = main.hover;
+
+//===| START of touchHover |===
+main.touchHover = function touchHover(downHandler, upHandler){
+	if(elem !== null){
+    	elem.onmousedown = downHandler;
+        elem.onmouseup = upHandler;
+    }
+    else if(array.length !== 0){
+        array.forEach(function(m){
+          m.onmousedown = function(e){
+                downHandler(e,m);
+          };
+          m.onmouseup = function(e){
+                upHandler(e,m);
+          };
+        });
+    }
+    return main;
+};
+//===| END of touchHover |===
 
 main.css = function css(property, value){
   if(elem !== null){
@@ -240,11 +250,12 @@ main.showProps = function showProps(object, target){
 };//===END of showProps=====
 
 main.log = function log(){
+    //make a real array from arguments (an "array-like" structure)
     var args = [].map.call(arguments, function(argument){
 		return argument;
 	});
 	try{
-		console.log.apply(console,args);		
+		console.log.apply(console, args);		
 	}
 	catch(error){
 		console.log(error.toString());
@@ -557,6 +568,25 @@ main.symDiff = function symDiff(){
 //===| END of symDiff() method |===
 
 main.type = type; //type is a private function being made a public method.
+//===| START of trueType |===//
+
+main.trueType = function trueType(aValue){
+  //Sometimes better than typeof because
+  //it returns a string describing x's true type.
+  //If x is an array, "Array" is returned
+  //(whereas typeof array would return "object")
+  // better that main.type (above) because it preserves case
+
+  var realType = {}.toString.call(aValue);//same as Object.prototype.toString.call(x);
+  var prefix = "[Object ";
+  realType = realType.slice(prefix.length, realType.length-1);
+  realType = realType.trim();//preserve case!
+
+  return realType;
+}
+
+//===| END of trueType |===//
+
 
 //===| End of exposed methods and data |===
 

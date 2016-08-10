@@ -54,6 +54,7 @@ window.onload = function(){
     //("margin"," 0 auto")
     ("background","cyan")
     ("opacity", "0.5")
+    ("font-size","1rem")    
   ;
   
   _(_.div2).styles
@@ -63,14 +64,59 @@ window.onload = function(){
     ("margin"," 0 auto")
     ("background","yellow")     
     ("opacity", "0.5")
+    ("font-size","1rem")
   ; 
   _.makeDraggable(_.div2);
   _.makeDraggable(_.div1);
   
+  
   var a1 = [0,1,2,3,4,5];
   var a2 = [3,4,5,6,7,8];
   var a3 = [6,7,8,9,10,11];
-  alert(_.symDiff(a2,a3,a1));
+ //alert(_.symDiff(a2,a3,a1));
+  var list = _.makeList();
+  list.addData(a1);
+  list.addData(a2);
+  list.addData(a3);
+  alert(list.getHead().next.data);
+  alert(list.length());
+  
+  (function(){
+    _("#div1").toggle(down, up);
+    //---| handlers |---//
+    function down(){
+      _(_.div1).html("Click 1");
+    }
+    function up(){
+      _(_.div1).html("Click 2");
+    }
+  })(); 
+
+  (function(){
+    _("#div2").touchHover(down, up);
+    //---| handlers |---//
+    function down(){
+      _(_.div2).html("Touching");
+    }
+    function up(){
+      _(_.div2).html("Not Touching");
+    }
+  })();
+  
+    (function(){
+    _("#div2").hover(down, up);
+    //---| handlers |---//
+    function down(){
+      _(_.div2).html("Hovering");
+    }
+    function up(){
+      _(_.div2).html("Not Hovering");
+    }
+  })();
+
+  _.log("This", "is", "a", "test");
+  alert(_.trueType(_.div2));
+  
   
 };
 //==========| App ends here |===============
