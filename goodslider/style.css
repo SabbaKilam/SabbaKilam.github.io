@@ -19,7 +19,6 @@
 
 .sliders{
     position: relative;
-    border: 1px solid red;
     margin: auto;
     width: 75%;
     left: 0;
@@ -41,22 +40,21 @@
 }
 
 #realSlider{
-    //outline: 2px dashed green;
     height: 5rem;
-  
+    opacity: 0;
 }
 #faceSlider{
-    //outline: 1px solid black;
     height: 1rem;
     background: lightgray;
     border-radius: 0.75rem;
-
 }
 
 #btn{
     display: block;
-    font-size: 9rem;
-    margin-top: -5rem;
+    position: absolute;
+    font-size: 5rem;
+    margin-top: -3rem;
+    color: darkgray;
 }
 
 
