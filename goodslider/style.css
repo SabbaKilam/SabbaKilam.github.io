@@ -15,6 +15,7 @@
     top: 0;
     bottom: 0;
     text-align: center;
+    user-select: none;
 }
 
 .sliders{
@@ -45,16 +46,17 @@
 }
 #faceSlider{
     height: 1rem;
-    background: lightgray;
+    background: darkgray;
     border-radius: 0.75rem;
 }
 
 #btn{
     display: block;
     position: absolute;
-    font-size: 5rem;
-    margin-top: -3rem;
+    font-size: 9rem;
+    margin-top: -5.2rem;
     color: darkgray;
+    text-shadow: 0 2px 5px black;
 }
 
 

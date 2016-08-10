@@ -8,8 +8,12 @@ var realSlider = id("realSlider");
 var btn = id("btn");
 //----------------------
 realSlider.oninput = moveBtn;
+realSlider.onmousedown = moveBtn;
+realSlider.onchange = moveBtn;
+
 window.onload = moveBtn;
 window.onresize = moveBtn;
+
 //----------------------
 function moveBtn(){
     var buttonWidth = btn.getBoundingClientRect().width;
