@@ -46,8 +46,9 @@
 }
 #faceSlider{
     height: 1rem;
-    background: darkgray;
+    background: linear-gradient(darkgray, lightgray);
     border-radius: 0.75rem;
+    box-shadow: inset 0 1px 5px gray;
 }
 
 #btn{
@@ -56,7 +57,7 @@
     font-size: 9rem;
     margin-top: -5.2rem;
     color: darkgray;
-    text-shadow: 0 2px 5px black;
+    text-shadow: 0 1px 5px black;
 }
 
 
