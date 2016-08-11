@@ -7,6 +7,9 @@
     </div>
 </div>
 */
+html{
+    tap-highlight-color: rgba(0,0,0,0);  
+}
 #app{
     position: fixed;
     margin: auto;
