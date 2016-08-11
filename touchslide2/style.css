@@ -1,6 +1,8 @@
 html{
   padding: 0;
-  margin: 0;  
+  margin: 0; 
+  tap-highlight-color: rgba(0,0,0,0);
+  /* This is a test */
 }
 
 body{
