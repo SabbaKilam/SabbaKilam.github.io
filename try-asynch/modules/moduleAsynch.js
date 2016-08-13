@@ -1,11 +1,10 @@
 /**
 * Author: Abbas Abdulmalik
 * Creation Date: March 16, 2016
-* Revised: August 13, 2016
+* Revised: August 6, 2016
 * Project Name: module.js
 * Purpose: Attempt to make an asynch module not requiring rekwire 
 * Notes: Added makeDraggable, symDiff and sizeFactory from aQuery
-*       Added adjustRem and its closure variables remMinimum & remDivisor    
 */
 (function(){
 function main(param){
@@ -16,7 +15,7 @@ function main(param){
 //attach "main" as "_" on global object
 this._ = main;
 //====================================
-var elem = {};
+var elem = null;
 var array = [];
 var toggleOn = true;    // Flag for an element's toggle method.
 var arrayToggleOn = []; // Flags for array objects' toggle method.
@@ -56,7 +55,7 @@ main.adjustRem = function adjustRem(newMinimum, newDivisor){
         remMinimum = newMinimum;
         remDivisor = newDivisor;
     }
-    //This equation can be modified 
+    //This initial equation can be modified 
     // by the function's new arguments above.
     var newRem = remMinimum + window.innerWidth / remDivisor;
     //document.documentElement is the html (root) element of a webpage
@@ -64,34 +63,13 @@ main.adjustRem = function adjustRem(newMinimum, newDivisor){
     return newRem;
 };
 
+//---| Proposed addition to our global object |---//
 //----------------
-/*
-Attach a reference for each of the elements of the DOM
-that we will be accessing in our code.
-
-I don't like to use document.getElementById("idString"),
-and I dont want to use a '#' selector for each one
-as would be used in a jQuery selector. So I attach them by
-their unquoted string id, and set them all at once to a global dummy
-variable, domElements (that is previousily defined). Then I use the method
-  _.attachDomElements() to make the references point to their proper DOM element.
-Here are the advantages for me:
-    * I don't explicitly use document.getElementById("idString")
-    * I don't use the "#" prefix as a selector
-    * I don't have to type quotes (" ") around each id string. Internally,
-      I let Object.keys() do that for me.
-    * I introduce each element, one at a time, where I can describe 
-      each one more fully with an accompanying comment if necessary.
-    * I let the method _.attachDomElements() attach them to the main
-      global variable all at once. Attaching them to the
-      global object reduces litter in the global scope.
-*/
 main.domElements = "domElements"; //
 main.attachDomElements = function attachDomElements(){
     main.attachByGroupName(main.domElements);
 };
 //----------------
-//---| Proposed addition to our global object |---//
 main.attachByGroupName = function attachByGroupName(groupName){
     Object.keys(main).forEach(key=>{
       if(main[key] === groupName){
@@ -100,6 +78,8 @@ main.attachByGroupName = function attachByGroupName(groupName){
     });
 };
 //----------------
+//---| END ofProposed addition to our global object |---//
+
 main.click = function click(handler){
     //elem.addEventListener("click",handler);
     if(elem !== null){
@@ -283,7 +263,7 @@ main.showProps = function showProps(object, target){
           return (i+1) + ".) " + p + " is " + main.trueType(object[p]) +" (is typeof " + typeof object[p] +")";
       });
       var propsString = "";
-      var id = (object.id)? object.id : "(name unknown)";
+      var id = (typeof object.id === "string") ? object.id : "(name unknown)";
       console.log( numberedProps.length + " properties for " + "'"+ id +"'");
       numberedProps.forEach(function(m,i){
           console.log(m);
@@ -638,7 +618,7 @@ main.trueType = function trueType(aValue){
   realType = realType.trim();//preserve case!
 
   return realType;
-}
+};
 
 //===| END of trueType |===//
 
@@ -655,7 +635,7 @@ function setElementOrArray(s){
     //object already?
     if(typeof (s) === 'object' && type(s) !== 'array'){
         elem = s;
-        array = [];
+        array=[];
         //the type() function (defined below) returns the true type
         //by calling Object.prototype's toString() method on s
     }
