@@ -641,6 +641,7 @@
     },
     "Adele - Rolling in the Deep" :{
         "title" : "Rolling in the Deep",
-        "artist" : "Adele"
+        "artist" : "Adele",
+        "picture": "adele.jpg"
     }
 }
