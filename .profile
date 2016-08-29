@@ -40,6 +40,7 @@ alias cd..="cd .."
 alias LS="ls -lap"
 export MYNAME=Abbas
 export GRACE=0
+export TZ="/usr/share/zoneinfo/America/New_York"
 echo Welcome back ${MYNAME}!
 date
 cal

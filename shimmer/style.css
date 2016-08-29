@@ -1,0 +1,68 @@
+body{
+    user-select: none;
+    background: black;
+    //background: lightgray;
+    
+}
+#holder{
+    font-size: 1.5rem;
+    text-align: center;
+    /*
+        The follwing lines should
+        make the app fill the screen
+        and keep it from moving
+        when touched or swiped
+    */
+    position: fixed;    
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    
+    background: url(img/sunrays.gif) no-repeat center;
+    background-size: contain;
+}
+#app{
+    position: relative;
+}
+#front{
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    font-size: 0.25rem;
+ 
+    width: 100%;
+    cursor:pointer;    
+}
+#top{
+    height: 50%;
+    background: lightgray;
+    top: 0;
+    //border-bottom: 1px solid #aaa;
+    box-shadow: 0 1px 3px #ccc;
+}
+#bottom{
+    border-top: 1px solid #aaa;
+    height: 54%;
+    background: lightgray;
+    bottom:0;
+    margin: auto;
+}
+#slot{
+    width: 100%;
+    border-right: 10rem solid teal;
+    margin: auto;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    text-align: left;
+    text-shadow: 0 0.05rem 0 white;
+    color: black;
+    box-shadow: inset 2px 2px 8px white;
+}

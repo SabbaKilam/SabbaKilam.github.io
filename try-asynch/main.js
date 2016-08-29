@@ -23,38 +23,37 @@ _.initialize = function(){
 //==========| App starts here |============
 window.onload = function(){
   _.initialize();
-  _.div1 = //name of outer div
   _.div2 = //name of app div
-  _.div3 = // target for 
+  _.div3 = // target for
+  _.div4 =
   _.domElements;
   _.attachDomElements(_.domElements);
   //---------------------------
-  /*
- _(_.div3).styles
-    ("overflow","scroll")
-    ("font-size","0.5rem")
-    ("text-align","left")
-    ("min-height","100%")
-    ("display","inline-block")
-    ("padding-left","5%")
-    ("","")
- ;
- */
   _(".divs").styles
     ("overflow","scroll")
     ("font-size","0.5rem")
     ("text-align","left")
     ("min-height","100%")
     ("display","inline-block")
-    ("padding-left","0.5%")
+    ("padding-left","1%")
     ("width","30%")
+    ("float","left")
  ;
  _(".divs").getArray().forEach(m=>{
    if(m.className === "divs"){
     m.innerHTML+=m.id;
    }
  });
- _.showProps(_.div3, _.div2);
+
+ _.get("modules/moduleAsynch.js", function(r){
+   _.div4.innerHTML += "<pre>" + r + "</pre>";
+ });
+  _.get("style.css", function(r){
+   _.div2.innerHTML += "<pre>" + r + "</pre>";
+ });
+   _.get("main.js", function(r){
+   _.div3.innerHTML += "<pre>" + r + "</pre>";
+ });
   window.onresize = _.adjustRem; 
 };
 //==========| App ends here |===============

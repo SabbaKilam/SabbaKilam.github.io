@@ -638,5 +638,9 @@
         "title" : "Does Anybody Really Know What Time It Is",
         "artist" : "Chicago",
         "picture" : "cta.jpg"
+    },
+    "Adele - Rolling in the Deep" :{
+        "title" : "Rolling in the Deep",
+        "artist" : "Adele"
     }
 }

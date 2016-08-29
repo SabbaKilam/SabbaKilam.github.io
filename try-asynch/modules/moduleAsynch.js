@@ -1,10 +1,11 @@
 /**
 * Author: Abbas Abdulmalik
 * Creation Date: March 16, 2016
-* Revised: August 6, 2016
+* Revised: August 13, 2016
 * Project Name: module.js
 * Purpose: Attempt to make an asynch module not requiring rekwire 
 * Notes: Added makeDraggable, symDiff and sizeFactory from aQuery
+*       Added adjustRem with its remMinimum and RemDivisor data    
 */
 (function(){
 function main(param){
