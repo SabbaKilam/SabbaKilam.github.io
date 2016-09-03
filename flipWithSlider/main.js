@@ -37,9 +37,6 @@ window.onload = function(){
   _.twoPages = [_.div1, _.div2];
   _.flipTime = 1;
   _.busyFlipping = false;
-  _.mouseIsMoving = false;
-  _.mouseIsDown = false;
-  _.mouseMoveTimer = 0;
   
   _(".slider").styles
     ("height", window.innerWidth + "px")
@@ -47,16 +44,6 @@ window.onload = function(){
   ;  
   //====| handle all the events |====//
   window.onresize = _.adjustRem;
-  _(".slider").on("mousemove", function(){
-    clearTimeout(_.mouseMoveTimer);
-    _.mouseMoveTimer = setTimeout(()=>{
-      _.mouseIsMoving = false;
-    },1);
-    _.mouseIsMoving = true;});
-  _(".slider").on("mousedown", function(){_.mouseIsDown = true;});
-  _(".slider").on("mouseup", function(){
-    _.mouseIsDown = false;
-  });
 
   _.app.onresize = function(){
     _(".slider").styles
@@ -80,7 +67,7 @@ window.onload = function(){
             m.value = 0;
           });
         //----| handle flip |----//
-          if( _.busyFlipping  || !(_.mouseIsDown && _.mouseIsMoving) ) return;
+          if( _.busyFlipping  ) return;
           _.busyFlipping = true;
           
           // restore transition time to both pages
