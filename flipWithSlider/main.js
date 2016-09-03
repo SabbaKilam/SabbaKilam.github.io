@@ -98,7 +98,7 @@ window.onload = function(){
               ("transform", "rotateX(0deg)")
             ;
             _.busyFlipping = false;
-          },1000*_.flipTime);
+          },1000*_.flipTime + 10);
         //---------------------------------//
       }
     });
