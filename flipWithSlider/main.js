@@ -55,6 +55,7 @@ window.onload = function(){
   };
   
   _(".slider").on("input", handleSlide);
+  
   //====| under the hood |====//
   //----| Handle slide |----//
   function handleSlide(e){
@@ -64,17 +65,28 @@ window.onload = function(){
       if( newValue < initialY - 5){
           initialY = 0;
           _(".slider").getArray().forEach(function(m){
-              m.value = 0;
+            m.value = 0;
           });
-        //=================================//
+        //----| handle flip |----//
           if( _.busyFlipping ) return;
           _.busyFlipping = true;
           
-          _.twoPages[0].style.transition = "all " + _.flipTime +"s ease" ; 
-          _.twoPages[1].style.transition = "all " + _.flipTime +"s ease" ; 
+          // restore transition time to both pages
+          _.twoPages.forEach(m=>{
+              m.style.transition = "all " + _.flipTime +"s ease" ; 
+          });
           
-          _.twoPages[0].style.opacity = "1";    
+          // prepare back page for viewing
+          _.twoPages[0].style.opacity = "1";
+          
+          // flip front page out of view (this is the main action of the app)
           _.twoPages[1].style.transform = "rotateX(270deg)";
+          
+          /*
+            Let the back page now be up front, and ...
+            restore the new back page to 0 degrees (unflipped),
+            quickly ("transition","all 0s ease") and invisibly ("opacity", "0").
+          */
           setTimeout(()=>{
             //swap pages in array
             _.twoPages.unshift(_.twoPages.pop());
@@ -87,11 +99,11 @@ window.onload = function(){
               ("transform", "rotateX(0deg)")
             ;
             _.busyFlipping = false;
-
           },1000*_.flipTime);
-        //==================================//
+        //---------------------------------//
       }
     });
+
   }
 //==========| App ends here |===============
 };//This '};' closes the app. Do not accidentally remove it.
