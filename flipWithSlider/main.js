@@ -61,10 +61,10 @@ window.onload = function(){
     var initialY = e.target.value;
     _(".slider").on("input", function(slideEvent){
       var newValue = slideEvent.target.value;
-      if( newValue <= initialY - 5){
+      if( newValue < initialY - 5){
           initialY = 0;
-          _().getArray().forEach(function(m){
-              m.value = newValue;
+          _(".slider").getArray().forEach(function(m){
+              m.value = 0;
           });
         //=================================//
           if( _.busyFlipping ) return;
