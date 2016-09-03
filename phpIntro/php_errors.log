@@ -1,0 +1,56 @@
+[31-Aug-2016 21:18:40 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:18:40 UTC] PHP Stack trace:
+[31-Aug-2016 21:18:40 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:18:40 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:20:32 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:20:32 UTC] PHP Stack trace:
+[31-Aug-2016 21:20:32 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:20:32 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:21:28 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/BibiBarryBestOfFriends.png): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:21:28 UTC] PHP Stack trace:
+[31-Aug-2016 21:21:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:21:28 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:24:41 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:24:41 UTC] PHP Stack trace:
+[31-Aug-2016 21:24:41 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:24:41 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:25:17 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:25:17 UTC] PHP Stack trace:
+[31-Aug-2016 21:25:17 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:25:17 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:28:05 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:28:05 UTC] PHP Stack trace:
+[31-Aug-2016 21:28:05 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:28:05 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:29:07 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:29:07 UTC] PHP Stack trace:
+[31-Aug-2016 21:29:07 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:29:07 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:29:37 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:29:37 UTC] PHP Stack trace:
+[31-Aug-2016 21:29:37 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:29:37 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:31:11 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:31:11 UTC] PHP Stack trace:
+[31-Aug-2016 21:31:11 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:31:11 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:31:46 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:31:46 UTC] PHP Stack trace:
+[31-Aug-2016 21:31:46 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:31:46 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:32:29 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 16
+[31-Aug-2016 21:32:29 UTC] PHP Stack trace:
+[31-Aug-2016 21:32:29 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:32:29 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:16
+[31-Aug-2016 21:40:13 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 17
+[31-Aug-2016 21:40:13 UTC] PHP Stack trace:
+[31-Aug-2016 21:40:13 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:40:13 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:17
+[31-Aug-2016 21:41:42 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 18
+[31-Aug-2016 21:41:42 UTC] PHP Stack trace:
+[31-Aug-2016 21:41:42 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:41:42 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:18
+[31-Aug-2016 21:42:32 UTC] PHP Warning:  file_put_contents(/phpIntro/uploads/Abbas.jpg): failed to open stream: No such file or directory in /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php on line 18
+[31-Aug-2016 21:42:32 UTC] PHP Stack trace:
+[31-Aug-2016 21:42:32 UTC] PHP   1. {main}() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:0
+[31-Aug-2016 21:42:32 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/phpIntro/phpfiles/getFile.php:18

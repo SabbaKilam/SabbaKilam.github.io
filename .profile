@@ -32,7 +32,9 @@ unset npm # end hack
 [ -s "/home/ubuntu/.nvm/nvm.sh" ] && . "/home/ubuntu/.nvm/nvm.sh" # This loads nvm
 unset npm # end hack
 unset npm # end hack
+
 #=======| My Stuff |========
+
 clear
 alias c=clear
 alias cls=clear

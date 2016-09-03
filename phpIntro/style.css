@@ -1,0 +1,11 @@
+#progressBar{
+    position: absolute;
+    width: 100%;
+    right: 0;
+    margin: auto;
+    height: 3px;
+    background-color: lightgray;
+}
+#message{
+    text-align: center;
+}
