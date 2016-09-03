@@ -37,6 +37,9 @@ window.onload = function(){
   _.twoPages = [_.div1, _.div2];
   _.flipTime = 1;
   _.busyFlipping = false;
+  _.mouseIsMoving = false;
+  _.mouseIsDown = false;
+  _.mouseMoveTimer = 0;
   
   _(".slider").styles
     ("height", window.innerWidth + "px")
@@ -44,7 +47,16 @@ window.onload = function(){
   ;  
   //====| handle all the events |====//
   window.onresize = _.adjustRem;
-
+  _(".slider").on("mousemove", function(){
+    clearTimeout(_.mouseMoveTimer);
+    _.mouseMoveTimer = setTimeout(()=>{
+      _.mouseIsMoving = false;
+    },1);
+    _.mouseIsMoving = true;});
+  _(".slider").on("mousedown", function(){_.mouseIsDown = true;});
+  _(".slider").on("mouseup", function(){
+    _.mouseIsDown = false;
+  });
 
   _.app.onresize = function(){
     _(".slider").styles
@@ -62,13 +74,13 @@ window.onload = function(){
     var initialY = e.target.value;
     _(".slider").on("input", function(slideEvent){
       var newValue = slideEvent.target.value;
-      if( newValue < initialY - 5){
+      if( (newValue < initialY - 5) ){
           initialY = 0;
           _(".slider").getArray().forEach(function(m){
             m.value = 0;
           });
         //----| handle flip |----//
-          if( _.busyFlipping ) return;
+          if( _.busyFlipping  || !(_.mouseIsDown && _.mouseIsMoving) ) return;
           _.busyFlipping = true;
           
           // restore transition time to both pages
@@ -103,7 +115,6 @@ window.onload = function(){
         //---------------------------------//
       }
     });
-
   }
 //==========| App ends here |===============
 };//This '};' closes the app. Do not accidentally remove it.
