@@ -1,0 +1,234 @@
+//==================================================
+/*
+    A Suite of three common DOM utilities from Robin Nixon.
+    1.  A wrapper for document.getElementById(obj)
+        Clever: you can use the object reference or its id string.
+    2.  Wrapper for style property; again obj or id can be used.
+    3.  C(className) returns a collection (array) of all elements in the DOM with class name className.
+        Objects with multiple classes have only the first assigned class returned.
+*/
+function O(obj){
+    if (typeof obj == 'object') return obj;
+    else return document.getElementById(obj);
+}
+
+function S(obj){
+    return O(obj).style;
+}
+
+function C(className){
+    var elements = document.getElementsByTagName('*');
+    var objects = [];
+    for (var i = 0 ; i < elements.length ; ++i){
+        if (elements[i].className == className){
+            objects.push(elements[i]);
+        }
+    }
+    return objects;
+}
+//=================================================================
+/*
+    A seemingly "saner" alternative to DnD in AbbasLib.js
+*/
+function makeDraggable(obj){
+    var mousePressed = false;
+    
+    //attempt save its original position
+    var originalPosition = [obj.offsetLeft, obj.offsetTop];
+    
+    obj.style.position = "absolute";
+    
+    //after position absolute, attempt to restore original
+    obj.style.left = originalPosition[0]+"px";
+    obj.style.top = originalPosition[1]+"px";
+    
+    //======event handlers===========
+    obj.addEventListener("mousedown",function(e){
+        mousePressed = true;
+        e.preventDefault();        
+    });
+    //--------------------------------     
+    obj.addEventListener("mouseup", function(){
+        mousePressed = false;
+    });   
+    //-----------------------------------
+    obj.addEventListener("click",function(e){
+        //e.preventDefault();
+        centerCursor(e);
+    });
+    //--------------------------------
+    obj.addEventListener("mousemove",function(e){
+        e.preventDefault();            
+        if(mousePressed){
+            centerCursor(e);  
+        }
+    });
+    //---------------------------------
+    obj.addEventListener("mouseout", function(){
+        mousePressed = false;
+    });
+    //----------helpers for handlers--------------
+    function centerCursor(e){
+        //browser-dependent scrollTop & scrollLeft:                    
+        var scrollTop = (document.documentElement && document.documentElement.scrollTop) || 
+            document.body.scrollTop;
+        var scrollLeft = (document.documentElement && document.documentElement.scrollLeft) || 
+            document.body.scrollLeft;
+        //--------------------------------------------
+        obj.style.top = (e.clientY - (1/2)*obj.offsetHeight)+ scrollTop + "px";
+        obj.style.left = (e.clientX - (1/2)*obj.offsetWidth)+ scrollLeft + "px";
+    }
+    //---------------------------------------------        
+}
+//-----------------------offsets left and top from scroll bars---------------
+    function scrollTop(){
+        var scrolltop = (document.documentElement && document.documentElement.scrollTop) || 
+            document.body.scrollTop;
+        return scrolltop;
+    };
+    //---------------------------------------------
+    function scrollLeft(){
+        var scrollleft = (document.documentElement && document.documentElement.scrollLeft) || 
+            document.body.scrollLeft;
+        return scrollleft;
+    }
+    //---------------------------------------------
+//==========================================================
+/**
+ * linkedList() returns an  
+ * object that owns a "growable" collection of
+ * data objects, each of which contains two 
+ * properties: "data", and "next". The "data" property
+ * holds any data the user may wish, and "next" property holds 
+ * a reference to the next object in the collection.
+ * 
+ * The returned object has the closure (private) properties,
+ * firstListObject and lastListObject, that can be used 
+ * to access the members of the linked link collection. 
+ * As their names indicate, they hold references to the first and
+ * last members of the collection of linked list objects.
+ * Another private closure property, listLength holds the 
+ * count of the linked list items. It can be read by the
+ * length() method.
+ * 
+ * The returned object has these methods so far:
+ * addToList(newData), addToTop(newData),
+ * getHead(), getTail(), showAllData(), length()
+ */
+ //=============================
+ function linkedList(){
+    //-----head and tail pointers---------
+    var firstListObject = null
+    ,   lastListObject = null
+    ,   listLength = 0
+    ;    
+    //-----helper------------
+    function createListObject(newData){
+        return {data: newData, next: null};
+    }
+    //---------------------
+    var listObject = {
+        //---methods---
+        addToList: function addToList(newData){
+           var newListObject = createListObject(newData);
+           if(firstListObject === null){
+            firstListObject = newListObject;
+           }
+           if(lastListObject !== null){
+            lastListObject.next = newListObject;
+           }
+           lastListObject = newListObject;
+           listLength++;
+        },
+        //------------------------------------------
+        addToTop: function addToTop(newData){
+           var newListObject = createListObject(newData);
+           if(lastListObject === null){
+            lastListObject = newListObject;
+           }
+           newListObject.next = firstListObject;
+           firstListObject = newListObject;
+           listLength++;
+        },
+        //-------------------------------------------
+        showAllData: function showAllData(){
+            var obj = firstListObject;
+            while(obj){
+                console.log(obj.data);
+                obj = obj.next;
+            }
+            console.log("");
+        },
+        //-------------------------------------------
+        getHead: function getHeadData(){
+            return firstListObject;
+        },
+        //-------------------------------------------
+        getTail: function getTailData(){
+            return lastListObject;
+        },
+        //-------------------------------------------
+        length: function length(){
+            return listLength;
+        },
+    };
+    //---------------------
+    return listObject;
+}
+//===============================
+//----------------------------------------------------------
+/**
+ * curry(function):
+ * Attempt to build a JS curry function.
+ * Pass it any function, and it returns the "curried" version.
+ * The curried version of the function can now receive an incorrect
+ * number of arguments and accumulate them on successive calls until
+ * the correct number are collected. Only then will the arguments be used
+ * to calculate the originally intended answer as a return value.
+ * 1.) If the required number of arguments is LESS THAN the expected number,
+ * the curried function collects those and returns the curried function.
+ * 2.) If the required number of arguments is EQUAL TO the expected number,
+ * whether initially, or after subsequent calls that collect them,
+ * the curried function returns the originally intended calculated answer.
+ * 3.) If the required number of arguments is GREATER THAN the expected number,
+ * the excess arguments are ignored and the curried function
+ * returns the originally intended calculated answer. 
+ * 
+*/
+//----------------------------------------------------------
+function curry(f){
+    var i = 0                   // count used to collect curried function's args
+    ,   rightSize = f.length    // the number of originally expected args
+    ,   argsArray = []          // holder of growing args collection
+    ;
+    return function curriedF(){ // collect args provided by curried function
+        for ( i = 0; i < arguments.length ; i++ ){
+            argsArray.push(arguments[i]);
+        }
+        if ( argsArray.length >= rightSize ){
+            var fullArray = argsArray;      // Save 'em before you...
+            argsArray = [];                 // kill 'em (to start over again)
+            return f.apply(null,fullArray); // return the originally intended result
+        }
+        else{
+            return curriedF;                // Not enough arguments, so return to get 'em
+        }
+    };
+}
+//=========show() shorthand for console.log==========================================
+/**
+ * show() function, hopefully same as console.log()
+ */
+//------------------------------------------
+function show(){
+    var args = [].map.call(arguments, function(e){
+		return e;
+	});
+	try{
+		console.log.apply(console,args);		
+	}
+	catch(error){
+		console.log(error.toString());
+	}
+}
+//=====================================

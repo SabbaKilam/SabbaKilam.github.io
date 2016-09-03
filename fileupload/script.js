@@ -45,7 +45,7 @@ window.onload = function(){
         bar.style.borderLeft = parseInt(fraction * barWidth, 10) + "px solid red";
         bar.style.width = (1 - fraction) * barWidth + "px"; 
         //----| adjust room em size |---//
-        document.documentElement.style.fontSize = 5 + window.innerWidth/75 + "px";
+        document.documentElement.style.fontSize = 5 + window.innerWidth/100 + "px";
     }
 };
 

@@ -10,8 +10,8 @@ $filename = $_SERVER['HTTP_FILENAME'];
 $destination = $root . $app . $uploadFolder . $filename;
 
 $source = file_get_contents("php://input");
-exit("" . file_put_contents($destination, $source) . " bytes at \n" . $destination);
-//file_put_contents($destination, $source);
-//exit($app . $uploadFolder . $filename);
+//exit("" . file_put_contents($destination, $source) . " bytes at \n" . $destination);
+file_put_contents($destination, $source);
+exit($app . $uploadFolder . $filename);
 
 ?>
