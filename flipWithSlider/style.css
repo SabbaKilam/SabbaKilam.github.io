@@ -1,6 +1,6 @@
 html{
     user-select: none;
-    background: radial-gradient(white, black);
+    background: lightgray;/*radial-gradient(white, black);*/
     margin: 0;
     padding: 0;
     width: 100%;

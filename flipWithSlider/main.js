@@ -27,9 +27,9 @@ window.onload = function(){
   _.initialize();
 
   //====| gather all the players |====//
-  _.div1 = //id first flipper page
-  _.div2 = //id second flipper page
-  _.app = // the outer wrapper for the entire app
+  _.div1 =  //id first flipper page
+  _.div2 =  //id second flipper page
+  _.app =   // the outer wrapper for the entire app
   //add more here as "_.domElement = //comment"
   //_.domElement = //comment"
   _.domElements;
@@ -44,15 +44,12 @@ window.onload = function(){
   ;  
   //====| handle all the events |====//
   window.onresize = _.adjustRem;
-
   _.app.onresize = function(){
     _(".slider").styles
       ("height", window.innerWidth + "px")
       ("width", _.div1.offsetHeight + "px")
-      ("", "")
     ;
   };
-  
   _(".slider").on("input", handleSlide);
   
   //====| under the hood |====//
@@ -62,10 +59,12 @@ window.onload = function(){
     _(".slider").on("input", function(slideEvent){
       var newValue = slideEvent.target.value;
       if( (newValue < initialY - 5) ){
-          initialY = 0;
+        //----------//
+        initialY = 0;
           _(".slider").getArray().forEach(function(m){
-            m.value = 0;
-          });
+          m.value = 0;
+        });
+        //----------//
         //----| handle flip |----//
           if( _.busyFlipping  ) return;
           _.busyFlipping = true;
@@ -98,6 +97,7 @@ window.onload = function(){
               ("transform", "rotateX(0deg)")
             ;
             _.busyFlipping = false;
+
           },1000*_.flipTime + 10);
         //---------------------------------//
       }
