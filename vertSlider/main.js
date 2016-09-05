@@ -51,17 +51,16 @@ window.onload = function(){
   _.attachDomElements();// Object.keys() is used to attach DOM elements
   //====| DO NOT DELETE the two lines above |====//
   _.flipThePage = flipThePage;
+  _.autoFlip = autoFlip;
   _.angle = 0;        // initial flip angle (page starts down)
   _.fippingUp = true;
   _.busyFlipping = false;
+  _.slidingTimerId = 0;
 
    //====| handle the events |====//
   window.onresize = resizeAll;
   _(_.slider).on("input", _.flipThePage);
-  _(_.slider).on("click", autoFlip);
-  
 
-  
   //====| under the hood |====//
   function resizeAll(){
     _.adjustRem();
@@ -90,6 +89,10 @@ window.onload = function(){
   }//----| END of resizeAll() |----//
   
 function flipThePage(e){
+    clearTimeout(_.slidingTimerId);
+      _.slidingTimerId = setTimeout(()=>{
+        _.autoFlip();
+      },200);      
     var angle = _.slider.value;
     var direction = "";
     if( (180 - angle) >= (180 - _.angle) ){
@@ -109,11 +112,15 @@ function flipThePage(e){
     else{
       _.msg2.innerHTML = window.innerWidth + " px";
     }
+    
+    
     _(_.flipPage).styles
-      ("transform", "rotateX("+ (180-_.slider.value) +"deg)")
+      ("transform", "rotateX("+ (180 - _.angle) +"deg)")
     ;
+    
+    
     if(_.slider.value >= 90){
-      var addedLight = 30 * (180 - _.slider.value)/90 ; 
+      var addedLight = 30 * (180 - _.angle)/90 ; 
       _(_.stripePage).styles
         ("background", "hsl(0, 0%, " + (70 + addedLight) +"%)" )
       ;
@@ -123,30 +130,40 @@ function flipThePage(e){
         ("background", "hsl(0, 0%, 100%)" )
       ;      
     }
+    
   }//----| END of flipThePAge() |----//
 
   function autoFlip(){
-    _(_.msg2).html("Mouse button is UP");
     var canAutoFlipUp = _.flippingUp && (_.angle <= 135) ||
       !_.flippingUp && (_.angle < 45);
     var canAutoFlipDown = !_.flippingUp && (_.angle >= 45 ) ||
       _.flippingUp && (_.angle > 135);
     
     if(canAutoFlipUp){
-      _.msg2.innerHTML = "Wiil flip UP";
+      _.busyFlipping = true;
       var stopper1 = setInterval(()=>{
-        _.slider.value -= 1;
+        var value = 1 * _.slider.value; // convert text to number;
+        value -= 1;
+        _.slider.value = value;
         _.flipThePage();
-        if(_.angle <= 0)clearInterval(stopper1);
-      },2);
+        if(_.angle <= 0){
+          clearInterval(stopper1);
+          _.busyFlipping = false;
+        }
+      },1);
     }
     if(canAutoFlipDown){
-      _.msg2.innerHTML = "Wiil flip DOWN";
+      _.busyFlipping = true;
       var stopper2 = setInterval(()=>{
-        _.slider.value += 1;
+        var value = 1 * _.slider.value; // convert text to number;
+        value += 1;
+        _.slider.value = value;
         _.flipThePage();
-        if(_.angle >= 180)clearInterval(stopper2);
-      },2);      
+        if(_.angle >= 180){
+          clearInterval(stopper2);
+          _.busyFlipping = false;
+        }
+      },1);      
     }
     
     
