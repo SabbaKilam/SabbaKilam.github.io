@@ -136,7 +136,7 @@ function flipThePage(e){
   }//----| END of flipThePAge() |----//
 
   function autoFlip(){
-    _(_.msg2).html("autoflip was called");
+    if(_.busyFlipping) return;
     var canAutoFlipUp = _.flippingUp && (_.angle <= 135) ||
       !_.flippingUp && (_.angle < 45);
     var canAutoFlipDown = !_.flippingUp && (_.angle >= 45 ) ||
