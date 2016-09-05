@@ -31,7 +31,7 @@ window.onload = function(){
   _.flipPage =        // the page that will flip
   _.sliderDiv =       // div holds the vertical slider
   _.slider =          // the slider that wil be transformed to the vertical
-  _.msg = // place to show results on the page
+  _.msg =             // place to show results on the page
   _.domElements;
   _.attachDomElements();
   _.angle = 0;        // initial flip angle (page starts down)
@@ -51,6 +51,17 @@ window.onload = function(){
       ("width", window.innerHeight + "px")
       ("height", window.innerWidth + "px")
     ;
+    if(window.innerWidth <= 320){
+      _(".notepad").styles
+        ("width", "100%")
+      ;
+    }
+    else{
+      _(".notepad").styles
+        ("width", "80%")
+      ;      
+    }
+    _.msg.innerHTML = window.innerWidth + "px";
   }
   function flipThePage(e){
     if(_.busyFlipping)return;

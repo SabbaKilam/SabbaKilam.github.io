@@ -45,37 +45,26 @@ body{
     outline: 1px dashed red;
     opacity: 0;
 }
-
-#flipPage{
+.notepad{
     position: fixed;
     transform-origin: top;
     padding-top: 2rem;
     height: 50%;
-    width: 50%;
+    width: 80%;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
+    border-radius: 0.25rem;    
+    box-sizing: border-box;    
+}
+#flipPage{
     border-top: 10px solid black;
     background: teal;
-    border-radius: 0.25rem;
     color: white;
-    box-sizing: border-box;
-    
 }
 #stripePage{
-    position: fixed;
-    transform-origin: top;
-    padding-top: 2rem;
-    height: 50%;
-    width: 50%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border-radius: 0.25rem;
     color: black;
-    box-sizing: border-box;    
     background: white;
 }
 .line{
