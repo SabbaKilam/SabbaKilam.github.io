@@ -1,8 +1,8 @@
 /*
   Author: Abbas Abdulmalik
-  Created:
+  Created: August 4, 2016
   Revised: N/A
-  Title:
+  Title: vertSlider: Flip up with invisible slider
   Purpose:
   Notes:
 */
@@ -12,9 +12,10 @@
   adjust the root em according to screen size upon loading,
   and whenever the screen size changes; I understand that the root em 
   is the width, in pixels, of an upper-case "M" in the root element (the html element)
-  on the webpage (I would argue that an upper-case "W" is wider, but ...).
+  on the webpage.
 */
 /*global _*/
+var $ = _; // Not really going to use jQuery so I'll use $ sometimes for my stuff
 _.initialize = function(){
   _.adjustRem(10,100);
   
@@ -50,10 +51,11 @@ window.onload = function(){
   _.domElements;        // predefined dummy value
   _.attachDomElements();// Object.keys() is used to attach DOM elements
   //====| DO NOT DELETE the two lines above |====//
-  _.flipThePage = flipThePage;
-  _.autoFlip = autoFlip;
-  _.angle = 0;        // initial flip angle (page starts down)
-  _.fippingUp = true;
+  
+  _.flipThePage = flipThePage; // handler that reponds to slider input
+  _.autoFlip = autoFlip;       // function that "handles"  end of slider input called by flipThePage
+  _.angle = 0;          // initial flip angle (page starts down)
+  _.flippingUp = true;
   _.busyFlipping = false;
   _.slidingTimerId = 0;
 
@@ -78,7 +80,7 @@ window.onload = function(){
       ;
     }
     else{
-      _(".notepad").styles
+      $(".notepad").styles  // testing _ as $
         ("width", "80%")
       ;      
     }
