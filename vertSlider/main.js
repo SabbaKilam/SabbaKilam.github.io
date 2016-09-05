@@ -90,9 +90,9 @@ window.onload = function(){
   
 function flipThePage(e){
     clearTimeout(_.slidingTimerId);
-      _.slidingTimerId = setTimeout(()=>{
+      _.slidingTimerId = setTimeout( function(){
         _.autoFlip();
-      },200);      
+      },100);      
     var angle = _.slider.value;
     var direction = "";
     if( (180 - angle) >= (180 - _.angle) ){
@@ -134,6 +134,7 @@ function flipThePage(e){
   }//----| END of flipThePAge() |----//
 
   function autoFlip(){
+    _(_.msg2).html("autoflip was called");
     var canAutoFlipUp = _.flippingUp && (_.angle <= 135) ||
       !_.flippingUp && (_.angle < 45);
     var canAutoFlipDown = !_.flippingUp && (_.angle >= 45 ) ||
@@ -144,10 +145,14 @@ function flipThePage(e){
       var stopper1 = setInterval(()=>{
         var value = 1 * _.slider.value; // convert text to number;
         value -= 1;
-        _.slider.value = value;
-        _.flipThePage();
-        if(_.angle <= 0){
+        if(value > 0){
+          _.slider.value = value;
+          _.flipThePage();          
+        }
+        else {
           clearInterval(stopper1);
+          _.slider.value = 0;
+          _.angle = 0;
           _.busyFlipping = false;
         }
       },1);
@@ -157,17 +162,19 @@ function flipThePage(e){
       var stopper2 = setInterval(()=>{
         var value = 1 * _.slider.value; // convert text to number;
         value += 1;
-        _.slider.value = value;
-        _.flipThePage();
-        if(_.angle >= 180){
-          clearInterval(stopper2);
+        if(value < 180){
+          _.slider.value = value;
+          _.flipThePage();
+        }
+        else{
+          clearInterval(stopper2);          
+          _.slider.value = 180;
+          _.angle = 180;
           _.busyFlipping = false;
         }
       },1);      
     }
-    
-    
-  }  
+  }//----| END of autoFlip() |----//  
 //==========| App ends here |===============
 };//This '};' closes the app. Do not accidentally remove thi line.
 //==========| App ends here |===============
