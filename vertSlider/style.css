@@ -59,10 +59,10 @@ body{
     box-sizing: border-box;    
 }
 #flipPage{
-    border-top: 10px solid black;
+    border-top: 10px solid #444;
     background: teal;
     color: white;
-    box-shadow: 0 3px 6px black;
+    box-shadow: 0 3px 15px black;
 }
 #stripePage{
     color: black;
