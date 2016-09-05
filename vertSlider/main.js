@@ -43,6 +43,7 @@ window.onload = function(){
   _.sliderDiv =       // div holds the vertical slider
   _.slider =          // the slider that wil be transformed to the vertical
   _.msg =             // place to show results on the page
+  _.stripePage =      // the page behind the flipPage
   _.domElements;
   _.attachDomElements();
   _.angle = 0;        // initial flip angle (page starts down)
@@ -92,6 +93,12 @@ window.onload = function(){
     _(_.flipPage).styles
       ("transform", "rotateX("+ (180-_.slider.value) +"deg)")
     ;
+    if(_.slider.value >= 90){
+      var addedLight = 30 * (180 - _.slider.value)/90 ; 
+      _(_.stripePage).styles
+        ("background", "hsl(0, 0%, " + (70 + addedLight) +"%)" )
+      ;
+    }
 
   }
 //==========| App ends here |===============
