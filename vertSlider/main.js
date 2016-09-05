@@ -21,7 +21,18 @@ _.initialize = function(){
   _(".overlap").styles
     ("width", window.innerHeight + "px")
     ("height", window.innerWidth+ "px")
-  ;  
+  ;
+  //----| adjust notepad page width |----//
+      if(window.innerWidth <= 320){
+      _(".notepad").styles
+        ("width", "100%")
+      ;
+    }
+    else{
+      _(".notepad").styles
+        ("width", "80%")
+      ;      
+    }
 };
 //==========| App starts here |============
 window.onload = function(){
