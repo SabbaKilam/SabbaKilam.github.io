@@ -17,6 +17,7 @@
 /*global _*/
 _.initialize = function(){
   _.adjustRem(10,100);
+  
   //----| adjust slider size |----//
   _(".overlap").styles
     ("width", window.innerHeight + "px")
@@ -38,14 +39,18 @@ _.initialize = function(){
 window.onload = function(){
   _.initialize();
   //====| gather all the players |====//
-  _.app =             // the outer app div
-  _.flipPage =        // the page that will flip
-  _.sliderDiv =       // div holds the vertical slider
-  _.slider =          // the slider that wil be transformed to the vertical
-  _.msg =             // place to show results on the page
+  _.app =             // the outer div of the app
+  _.flipPage =        // the page that flips
+  _.sliderDiv =       // div that holds the vertical slider
+  _.slider =          // the slider that will be transformed to the vertical
+  _.msg =             // place to show results on the front page
+  _.msg2 =            // place to show results on the 2nd page
   _.stripePage =      // the page behind the flipPage
-  _.domElements;
-  _.attachDomElements();
+  //====| The DOM elements above are attached using two statements: |====//
+  _.domElements;        // predefined dummy value
+  _.attachDomElements();// Object.keys() is used to attach DOM elements
+  //====| DO NOT DELETE the two lines above |====//
+  
   _.angle = 0;        // initial flip angle (page starts down)
   _.fippingUp = true;
   _.busyFlipping = false;
@@ -58,11 +63,14 @@ window.onload = function(){
   //====| under the hood |====//
   function resizeAll(){
     _.adjustRem();
+    
     //----| adjust slider size |----//
     _(".overlap").styles
       ("width", window.innerHeight + "px")
       ("height", window.innerWidth + "px")
     ;
+    
+    //----| adjust notepad page width |----//    
     if(window.innerWidth <= 360){
       _(".notepad").styles
         ("width", "100%")
@@ -73,7 +81,11 @@ window.onload = function(){
         ("width", "80%")
       ;      
     }
-    _.msg.innerHTML = window.innerWidth + "px";
+    
+    //====| show new width |====//
+    _.msg.innerHTML = window.innerWidth + " px";
+    _.msg2.innerHTML = window.innerWidth + " px";
+
   }
   function flipThePage(e){
     if(_.busyFlipping)return;
@@ -90,6 +102,12 @@ window.onload = function(){
     _.angle = angle;
     
     _(_.msg).html((180 - _.slider.value) + " &#x000B0; " + direction);
+    if(angle <= 90){
+      _(_.msg2).html((180 - _.slider.value) + " &#x000B0; " + direction);      
+    }
+    else{
+      _.msg2.innerHTML = window.innerWidth + " px";
+    }
     _(_.flipPage).styles
       ("transform", "rotateX("+ (180-_.slider.value) +"deg)")
     ;
@@ -105,7 +123,7 @@ window.onload = function(){
       ;      
     }
 
-  }
+  }//----| END of flipThePAge() |----//
 //==========| App ends here |===============
-};//This '};' closes the app. Do not accidentally remove it.
+};//This '};' closes the app. Do not accidentally remove thi line.
 //==========| App ends here |===============
