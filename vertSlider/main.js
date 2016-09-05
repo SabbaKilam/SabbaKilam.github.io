@@ -58,8 +58,8 @@ window.onload = function(){
    //====| handle the events |====//
   window.onresize = resizeAll;
   _(_.slider).on("input", _.flipThePage);
-  _(_.slider).on("mousedown", showMousedown);
-  _(_.slider).on("mouseup", showMouseup);
+  _(_.slider).on("click", autoFlip);
+  
 
   
   //====| under the hood |====//
@@ -124,18 +124,13 @@ function flipThePage(e){
       ;      
     }
   }//----| END of flipThePAge() |----//
-  
-  function showMousedown(){
-    _(_.msg2).html("Mouse button is DOWN");
-  }
-  
-  function showMouseup(){
+
+  function autoFlip(){
     _(_.msg2).html("Mouse button is UP");
     var canAutoFlipUp = _.flippingUp && (_.angle <= 135) ||
       !_.flippingUp && (_.angle < 45);
     var canAutoFlipDown = !_.flippingUp && (_.angle >= 45 ) ||
-      _.flippingUp && (_.angle > 135)
-      ;
+      _.flippingUp && (_.angle > 135);
     
     if(canAutoFlipUp){
       _.msg2.innerHTML = "Wiil flip UP";
