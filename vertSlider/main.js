@@ -147,7 +147,7 @@ function flipThePage(e){
       var stopper1 = setInterval(()=>{
         var value = 1 * _.slider.value; // convert text to number;
         value -= 1;
-        if(value > 0){
+        if(value >= 0){
           _.slider.value = value;
           _.flipThePage();          
         }
@@ -164,7 +164,7 @@ function flipThePage(e){
       var stopper2 = setInterval(()=>{
         var value = 1 * _.slider.value; // convert text to number;
         value += 1;
-        if(value < 180){
+        if(value <= 180){
           _.slider.value = value;
           _.flipThePage();
         }
