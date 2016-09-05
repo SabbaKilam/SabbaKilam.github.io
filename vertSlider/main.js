@@ -34,10 +34,13 @@ window.onload = function(){
   _.msg = // place to show results on the page
   _.domElements;
   _.attachDomElements();
+  _.angle = 0;        // initial flip angle (page starts down)
+  _.fippingUp = true;
+  _.busyFlipping = false;
 
    //====| handle the events |====//
   window.onresize = resizeAll;
-  _(_.slider).on("input", flipPage);
+  _(_.slider).on("input", flipThePage);
 
   
   //====| under the hood |====//
@@ -49,11 +52,25 @@ window.onload = function(){
       ("height", window.innerWidth + "px")
     ;
   }
-  function flipPage(e){
-    _(_.msg).html((180 - _.slider.value) + " &#x000B0;");
+  function flipThePage(e){
+    if(_.busyFlipping)return;
+    var angle = _.slider.value;
+    var direction = "";
+    if( (180 - angle) >= (180 - _.angle) ){
+      _.flippingUp = true;
+      direction = "up";
+    }
+    else{
+      _.flippingUp = false;
+      direction = "down";
+    }
+    _.angle = angle;
+    
+    _(_.msg).html((180 - _.slider.value) + " &#x000B0; " + direction);
     _(_.flipPage).styles
       ("transform", "rotateX("+ (180-_.slider.value) +"deg)")
     ;
+
   }
 //==========| App ends here |===============
 };//This '};' closes the app. Do not accidentally remove it.
