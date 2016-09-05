@@ -23,7 +23,7 @@ _.initialize = function(){
     ("height", window.innerWidth+ "px")
   ;
   //----| adjust notepad page width |----//
-      if(window.innerWidth <= 320){
+      if(window.innerWidth <= 360){
       _(".notepad").styles
         ("width", "100%")
       ;
@@ -62,7 +62,7 @@ window.onload = function(){
       ("width", window.innerHeight + "px")
       ("height", window.innerWidth + "px")
     ;
-    if(window.innerWidth <= 320){
+    if(window.innerWidth <= 360){
       _(".notepad").styles
         ("width", "100%")
       ;
