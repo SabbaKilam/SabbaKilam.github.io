@@ -99,6 +99,11 @@ window.onload = function(){
         ("background", "hsl(0, 0%, " + (70 + addedLight) +"%)" )
       ;
     }
+    else{
+      _(_.stripePage).styles
+        ("background", "hsl(0, 0%, 100%)" )
+      ;      
+    }
 
   }
 //==========| App ends here |===============
