@@ -50,14 +50,16 @@ window.onload = function(){
   _.domElements;        // predefined dummy value
   _.attachDomElements();// Object.keys() is used to attach DOM elements
   //====| DO NOT DELETE the two lines above |====//
-  
+  _.flipThePage = flipThePage;
   _.angle = 0;        // initial flip angle (page starts down)
   _.fippingUp = true;
   _.busyFlipping = false;
 
    //====| handle the events |====//
   window.onresize = resizeAll;
-  _(_.slider).on("input", flipThePage);
+  _(_.slider).on("input", _.flipThePage);
+  _(_.slider).on("mousedown", showMousedown);
+  _(_.slider).on("mouseup", showMouseup);
 
   
   //====| under the hood |====//
@@ -85,10 +87,9 @@ window.onload = function(){
     //====| show new width |====//
     _.msg.innerHTML = window.innerWidth + " px";
     _.msg2.innerHTML = window.innerWidth + " px";
-
-  }
-  function flipThePage(e){
-    if(_.busyFlipping)return;
+  }//----| END of resizeAll() |----//
+  
+function flipThePage(e){
     var angle = _.slider.value;
     var direction = "";
     if( (180 - angle) >= (180 - _.angle) ){
@@ -122,8 +123,39 @@ window.onload = function(){
         ("background", "hsl(0, 0%, 100%)" )
       ;      
     }
-
   }//----| END of flipThePAge() |----//
+  
+  function showMousedown(){
+    _(_.msg2).html("Mouse button is DOWN");
+  }
+  
+  function showMouseup(){
+    _(_.msg2).html("Mouse button is UP");
+    var canAutoFlipUp = _.flippingUp && (_.angle <= 135) ||
+      !_.flippingUp && (_.angle < 45);
+    var canAutoFlipDown = !_.flippingUp && (_.angle >= 45 ) ||
+      _.flippingUp && (_.angle > 135)
+      ;
+    
+    if(canAutoFlipUp){
+      _.msg2.innerHTML = "Wiil flip UP";
+      var stopper1 = setInterval(()=>{
+        _.slider.value -= 1;
+        _.flipThePage();
+        if(_.angle <= 0)clearInterval(stopper1);
+      },2);
+    }
+    if(canAutoFlipDown){
+      _.msg2.innerHTML = "Wiil flip DOWN";
+      var stopper2 = setInterval(()=>{
+        _.slider.value += 1;
+        _.flipThePage();
+        if(_.angle >= 180)clearInterval(stopper2);
+      },2);      
+    }
+    
+    
+  }  
 //==========| App ends here |===============
 };//This '};' closes the app. Do not accidentally remove thi line.
 //==========| App ends here |===============
