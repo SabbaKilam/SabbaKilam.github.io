@@ -160,7 +160,7 @@ function flipThePage(e){
         }
       },1);
     }
-    if(canAutoFlipDown){
+    else if(canAutoFlipDown){
       _.busyFlipping = true;
       var stopper2 = setInterval(()=>{
         var value = 1 * _.slider.value; // convert text to number;
