@@ -51,7 +51,7 @@ html{
 
 .slider{
     position: absolute;
-    /*outline: 1px solid white;*/
+    outline: 1px solid red;
     transform: rotateZ(90deg);  
     left: 0;
     right: 0;

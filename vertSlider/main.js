@@ -15,12 +15,12 @@
   on the webpage.
 */
 /*global _*/
-var $ = _; // Not really going to use jQuery so I'll use $ sometimes for my stuff
+var $ = _; // Not really going to use jQuery, so I'll use $ sometimes for my stuff
 _.initialize = function(){
   _.adjustRem(10,100);
   
   //----| adjust slider size |----//
-  _(".overlap").styles
+  _("#sliderDiv").styles
     ("width", window.innerHeight + "px")
     ("height", window.innerWidth+ "px")
   ;
@@ -52,9 +52,9 @@ window.onload = function(){
   _.attachDomElements();// Object.keys() is used to attach DOM elements
   //====| DO NOT DELETE the two lines above |====//
   
-  _.flipThePage = flipThePage; // handler that reponds to slider input
-  _.autoFlip = autoFlip;       // function that "handles"  end of slider input called by flipThePage
-  _.angle = 0;          // initial flip angle (page starts down)
+  _.flipThePage = flipThePage;  // handler that reponds to slider input
+  _.autoFlip = autoFlip;        // function that "handles" end of slider input called by flipThePage
+  _.angle = 0;                  // initial flip angle (page starts down)
   _.flippingUp = true;
   _.busyFlipping = false;
   _.slidingTimerId = 0;
@@ -68,7 +68,7 @@ window.onload = function(){
     _.adjustRem();
     
     //----| adjust slider size |----//
-    _(".overlap").styles
+    _(_.sliderDiv).styles
       ("width", window.innerHeight + "px")
       ("height", window.innerWidth + "px")
     ;
@@ -91,10 +91,12 @@ window.onload = function(){
   }//----| END of resizeAll() |----//
   
 function flipThePage(e){
+    //----| detects and handles "no more slider input" events |----//
     clearTimeout(_.slidingTimerId);
-      _.slidingTimerId = setTimeout( function(){
-        _.autoFlip();
-      },100);      
+    _.slidingTimerId = setTimeout( function(){
+      _.autoFlip();
+    },100); 
+    //------------------------------------------------------------//
     var angle = _.slider.value;
     var direction = "";
     if( (180 - angle) >= (180 - _.angle) ){
@@ -108,6 +110,7 @@ function flipThePage(e){
     _.angle = angle;
     
     _(_.msg).html((180 - _.slider.value) + " &#x000B0; " + direction);
+    
     if(angle <= 90){
       _(_.msg2).html((180 - _.slider.value) + " &#x000B0; " + direction);      
     }
@@ -115,12 +118,10 @@ function flipThePage(e){
       _.msg2.innerHTML = window.innerWidth + " px";
     }
     
-    
     _(_.flipPage).styles
       ("transform", "rotateX("+ (180 - _.angle) +"deg)")
     ;
-    
-    
+
     if(_.slider.value >= 90){
       var addedLight = 30 * (180 - _.angle)/90 ; 
       _(_.stripePage).styles
