@@ -1,0 +1,63 @@
+body{
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	font-family: sans-serif;
+	background: hsl(240, 50%, 97%);
+	font-size: 1rem;
+	line-height: 150%;
+	user-select: none;
+}
+#wrapper{
+	position: fixed;
+	overflow-y: scroll;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	padding: 7%;
+	padding-top: 0;
+}
+#header{
+	position: absolute;
+	color: black;
+	text-align: left;
+	top: -1rem;
+	left: 0;
+	margin: auto;
+	background: url(img/GreenHillsTree.jpg) no-repeat center;
+	background-size: cover;
+	width: 100%;
+	padding-bottom: 2rem;
+	padding-left: 0.75rem;
+	text-shadow: 0 1px 0 white;
+}
+pre{
+	background: #f4f4f4;
+	overflow-x: scroll;
+	user-select: text;
+}
+#endBlock{
+	float: right;
+}
+#header a{
+	color: white;
+}
+#header a:link {
+    text-decoration: none;
+}
+#header a:hover{
+	color: lightblue;
+}
+#header a:visited {
+    text-decoration: none;
+}
+
+.rubberPicture{
+	width: 100%;
+	padding-top: 50%;
+	background-size: contain;
+	border: 2px sold gray;
+}

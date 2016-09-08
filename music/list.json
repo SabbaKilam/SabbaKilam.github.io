@@ -643,5 +643,9 @@
         "title" : "Rolling in the Deep",
         "artist" : "Adele",
         "picture": "adele.jpg"
+    },
+    "Chris Isaak - Wicked Game" :{
+        "title" : "Wicked Game",
+        "artist" : "Chris Isaak"
     }
 }
