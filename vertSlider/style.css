@@ -70,7 +70,7 @@ body{
 }
 #stripePage{
     color: black;
-    background: hsl(0, 0%, 70%);
+    background: hsl(0, 0%, 40%);
 }
 .line{
     line-height: 500%;

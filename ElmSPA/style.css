@@ -39,9 +39,7 @@ pre{
 	overflow-x: scroll;
 	user-select: text;
 }
-#endBlock{
-	float: right;
-}
+
 #header a{
 	color: white;
 }
@@ -59,5 +57,10 @@ pre{
 	width: 100%;
 	padding-top: 50%;
 	background-size: contain;
-	border: 2px sold gray;
+	border: 1px solid gray;
+}
+
+#endLink{
+	margin: 0 auto;
+	text-align: center;
 }

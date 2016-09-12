@@ -123,9 +123,9 @@ function flipThePage(e){
     ;
 
     if(_.slider.value >= 90){
-      var addedLight = 30 * (180 - _.angle)/90 ; 
+      var addedLight = 60 * (180 - _.angle)/90 ; 
       _(_.stripePage).styles
-        ("background", "hsl(0, 0%, " + (70 + addedLight) +"%)" )
+        ("background", "hsl(0, 0%, " + (40 + addedLight) +"%)" )
       ;
     }
     else{

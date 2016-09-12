@@ -43,7 +43,6 @@ I am writing this series with the assumption that you are familiar with JavaScri
 <strong>What is This Application you Speak Of?</strong><br/>
 I want the application we write to be of enough complexity as to be a reasonable representation of the kind of code you would write for a production app, but obviously simple enough to complete in a relatively limited amount of time. With that in mind, we are going to write a simple blogging application. There will be a list view for browsing posts, a detail view for reading posts and an edit view for writing posts. We'll implement a few features that go a bit beyond the basics. We'll support auto-save. We'll support markdown. We'll support saved drafts. And we'll support off-line editing. We'll also implement some simple authentication for the edit view. First though, we need to learn what Elm is and how to use it.<br/>
 <br/>
- <br/>
 <br/>
 <strong>So, What is Elm?</strong><br/>
 Elm is a compile-to-JS language that has been around for a while, but has been getting more attention lately. The ideas it presents are interesting and its influence beyond its own community is rather astounding. Even if you are not familiar with Elm you have probably been influenced by Elm in some way, particularly if you are working with React. Redux and Cycle.js are attempts to bring the Elm Architecture to JavaScript. Elm code is very declarative and makes many problems much easier to reason.<br/>
@@ -53,10 +52,10 @@ Elm is unique to other popular compile-to-JS languages in that it does not aim t
 There are several things a JavaScript developer may find to be a barrier when trying Elm for the first time. The first thing is the syntax. Elm fits under the umbrella of ML-family or ML-derivative languages. Which means the syntax is completely different than C-based languages you are most likely used to. Unless you are familiar with Standard ML, Haskell, OCaml, or some other language in that tree of programming languages, the syntax is going to be something new to you. I've seen this be very frustrating for some people. Even when you've switched between languages before syntax has likely been very similar. JavaScript, Java, C, Swift, php, Python... all look very similar. Your eyes are trained to a certain syntax when reading code.<br/>
 <br/>
 Just to get our feet wet, this is an add function written in JavaScript:<br/>
-<img src="img/FeetWetJS.png">
+<div class="rubberPicture" style="background: url(img/FeetWetJS.png) no-repeat left; background-size: contain; width: 100%; padding-top: 18%" ></div>
 <br/>
 The same function in Elm:<br/>
-<img src="img/FeetWetElm.png">
+<div class="rubberPicture" style="background: url(img/FeetWetElm.png) no-repeat left; background-size: contain; width: 100%; padding-top: 11%" ></div>
 <br/>
 Note: Elm is statically typed, but the type declaration is optional. Elm will infer types for you. However, the type declarations are great documentation and are considered good practice.<br/>
 <br/>
@@ -71,34 +70,36 @@ Even if we take a look and decide it's not for us. We are likely to come away fr
 <br/>
 <strong>Setting up Your Elm Environment</strong><br/>
 Before we get into how Elm code actually works, we need to set up our machines know about Elm code and how to deal with it. Everything you need is available in convenient installer form on the elm-lang website: <a href="http://elm-lang.org/" target="_blank">elm-lang.org.<br/><br/>
-<div class="rubberPicture" style="background: url(img/SettingUpElm.png) no-repeat left; background-size: contain; " ></div>
+<div class="rubberPicture" style="background: url(img/SettingUpElm.png) no-repeat left; background-size: contain; width: 100%; padding-top: 50%" ></div>
 </a>
 <br/>
 <br/>
 The "try" link will take you to an online environment that will allow you to jump in and start playing with the language immediately. There's even some sample code for you to look at and play with. <br/>
+<a href="http://elm-lang.org/try" target="_blank"><div class="rubberPicture" style="background: url(img/OnlineEditor.png) no-repeat left; background-size: contain; width: 100%; padding-top: 50%" ></div></a>
 <br/>
 The install link will guide you through choosing the correct installer for your OS. For this tutorial we are using version 0.17 of the Elm Platform. The Elm Platform is all of the dev tools you need for Elm bundled up nicely for you.<br/>
+<a href="http://guide.elm-lang.org/get_started.html" target="_blank"><div class="rubberPicture" style="background: url(img/Install.png) no-repeat left; background-size: contain; width: 100%; padding-top: 26%" ></div></a>
 <br/>
 <br/>
+<i>Note: You don't have to install Elm globally. You'll notice you can use NPM to install Elm. You can use this to install Elm locally in a project directory just as you would a JavaScript dependency.
+</i>
 <br/>
-Note: You don't have to install Elm globally. You'll notice you can use NPM to install Elm. You can use this to install Elm locally in a project directory just as you would a JavaScript dependency.<br/>
 <br/>
 Once installation is complete you will have a few new commands available to you globally through the terminal. Well, really you'll have one new command, "elm". The elm command doesn't do anything by itself. It is used to run other useful tools that were installed as part of the Elm Platform. To get started, open a terminal and type in "elm". Hit enter and you will see a message like this:<br/>
-<br/>
+<div class="rubberPicture" style="background: url(img/ElmCommandLine.png) no-repeat left; background-size: contain; width: 100%; padding-top: 50%" ></div>
 <br/>
 <br/>
 Okay, so, a sneak peak at what we can do. When we installed the Elm Platform we were given four tools: make, package, reactor and repl.<br/>
 <br/>
- <br/>
 <br/>
-Time to Setup our Project<br/>
-We need a place to start writing some code, or this isn't going to make a whole lot of sense. There are two ways to proceed. You can clone the repo from my github link (Elm Tutorial) and just follow along, or you can do everything manually along with me here. The choice is yours. I will continue as if you are doing all these steps with me.<br/>
+<strong>Time to Setup our Project</strong><br/>
+We need a place to start writing some code, or this isn't going to make a whole lot of sense. There are two ways to proceed. You can clone the repo from my github link (<a href="https://github.com/kevinbgreene/elm-tutorial/tree/part-one" target="_blank">Elm Tutorial</a>) and just follow along, or you can do everything manually along with me here. The choice is yours. I will continue as if you are doing all these steps with me.<br/>
 <br/>
-Elm Package<br/>
+<strong>Elm Package</strong><br/>
 The first thing we need to do is make a directory for our new Elm project. Name it whatever you like. There are things I care about. This is not one of them. Once you have a new directory, navigate into that directory from the terminal. From here we are going to use the first of our Elm tools. Run "elm package install" from your terminal.<br/>
 <br/>
-Note: If you are following from the git repo you should still run "elm package install" to download all dependencies.<br/>
-<br/>
+<i>Note: If you are following from the git repo you should still run "elm package install" to download all dependencies.</i><br/>
+<div class="rubberPicture" style="background: url(img/ElmPackageInstall.png) no-repeat left; background-size: contain; width: 100%; padding-top: 33%" ></div>
 <br/>
 <br/>
 This is similar to running "npm install". This did a couple of things for you. First, the upgrade plan it asked you to approve was simply to download the core libraries for Elm. Yes, we will need those. These were downloaded into a new "elm-stuff" directory within your project directory. "elm-stuff" is analogous to "node_modules". Second, you are no doubt familiar with the package.json in your JavaScript projects. Elm has the very similar elm-package.json. It has the same primary purpose, manage dependencies, for our Elm project. This file was created for us during "elm package install". If the elm-package.json file already existed "elm package install" would not have overwritten it. Instead it would have looked to the existing file to know what dependencies to install. Open elm-package.json in your text editor. You should see something much like this:<br/>
@@ -108,16 +109,15 @@ In the dependencies we have the core libraries we approved of in the upgrade pla
 There is another package we are guaranteed to need, "elm-lang/html". Before moving along, let's install that: "elm package install elm-lang/html". This will install the latest version. If you want to install a specific version you would type the command like this: "elm package install elm-lang/html 1.1.0".<br/>
 <br/>
 This automatically updated our elm-package.json for us. We do not explicitly need "--save" or "--save-dev". We now have two dependencies.<br/>
+<div class="rubberPicture" style="background: url(img/ElmPackageJson.png) no-repeat left; background-size: contain; width: 100%; padding-top: 40%" ></div>
 <br/>
 <br/>
+<i>Note: Semantic versioning. The Elm package manager does a very good job of enforcing that no breaking API changes occur in an Elm package update without a major version bump. That is you shouldn't have to worry about some developer pushing a package update to version 2.0.5 as version 2.1.0 if there are breaking changes. The package manager will force them to bump to 3.x. That's why in our elm-package.json we have versions pinned to less than next major version bump. This should always be safe.</i><br/>
 <br/>
-Note: Semantic versioning. The Elm package manager does a very good job of enforcing that no breaking API changes occur in an Elm package update without a major version bump. That is you shouldn't have to worry about some developer pushing a package update to version 2.0.5 as version 2.1.0 if there are breaking changes. The package manager will force them to bump to 3.x. That's why in our elm-package.json we have versions pinned to less than next major version bump. This should always be safe.<br/>
 <br/>
- <br/>
-<br/>
-It's About Time for "Hello World"<br/>
-I want to see some code run. Do you want to see some code run? If I was writing this yesterday I would've probably been a little more motivated to not just use "hello world", but today I'm feeling lazy. The first thing we need to do is make our first Elm file. Make a new directory called "src". Inside of that create a new file called "Main.elm". It is convention in Elm to start file names with capital letters. Files equal modules in Elm. Do you mean I don't have to wrap everything in an IIFE to keep everything locally scoped? Yes, everything you write is scoped to the file you are in unless you explicitly export it. We'll cover module syntax later. Open your new file in a text editor and type this in. We'll learn what it all means soon enough, but for now trust the narrator.<br/>
-<br/>
+<strong>It's About Time for "Hello World"</strong><br/>
+I want to see some code run. Do you want to see some code run? If I was writing this yesterday I would've probably been a little more motivated to not just use "hello world", but today I'm feeling lazy. The first thing we need to do is make our first Elm file. Make a new directory called "src". Inside of that create a new file called "Main.elm". It is convention in Elm to start file names with capital letters. Files equal modules in Elm. Do you mean I don't have to wrap everything in an IIFE to keep everything locally scoped? Yes, everything you write is scoped to the file you are in unless you explicitly export it. We'll cover module syntax later. Open your new file in a text editor and type this in. We'll learn what it all means soon enough, but for now trust the narrator.<br/><br/>
+<div class="rubberPicture" style="background: url(img/ImportHtml.png) no-repeat left; background-size: contain; width: 100%; padding-top: 12%" ></div>
 <br/>
 <br/>
 When we write JavaScript we can just run code anywhere. Everything is an entry point. Like most compiled languages, Elm has a "main" entry point. If your Elm app doesn't have a "main" entry point the compiler will complain. The main entry point can have a few acceptable types. Here our main entry point has the type "main : Html". It is just the HTML to display on the page. As we start building more complex applications our main entry point will have the type "main : Program".<br/>
@@ -126,18 +126,22 @@ The HTML we build in Elm is actually virtual DOM, very similar to React. HTML in
 <br/>
 Elm Make<br/>
 We shouldn't need more than one guess to figure out what this does. Elm make will compile our Elm code into JavaScript. If you run "elm make <path-to-source-file>" without any options you'll see something like this:<br/>
+<div class="rubberPicture" style="background: url(img/ElmMake.png) no-repeat left; background-size: contain; width: 100%; padding-top: 12%" ></div>
 <br/>
 It generated an index.html file. All of the JavaScript is included in script tags on this HTML page. This is assuming you will be creating an Elm application that will be running by itself on the page and you will be assigning all CSS styles in your Elm code. For me, this is almost never the case. However, for our "hello world" app this is just fine. Open your new index.html in your favorite browser.<br/>
+<div class="rubberPicture" style="background: url(img/HelloWorld.png) no-repeat left; background-size: contain; width: 100%; padding-top: 18%" ></div>
 <br/>
 Well, that was exciting. If you look at your index.html you'll find it's really a lot of stuff to produce this. The compiler includes all of the libraries needed to support our application. The way things are working now, every time we run "elm make" this index.html file will be overwritten. Usually I want to include some external CSS and sometimes I want to include some external JavaScript (Elm will play nice with JavaScript).<br/>
 <br/>
 If you don't want to generate an HTML page, or you want to generate an HTML page not named "index.html", you'll want to use the "--output" flag for the "elm make" command.<br/>
 <br/>
-<br/>
+<div class="rubberPicture" style="background: url(img/ElmMakeOutput.png) no-repeat left; background-size: contain; width: 100%; padding-top: 12%" ></div>
 <br/>
 You can tell elm-make to output either an HTML file or a JavaScript file. If you output a JavaScript file you'll need to make your own HTML page to support this file. You'll want something like this:<br/>
+<div class="rubberPicture" style="background: url(img/HtmlTemplate.png) no-repeat left; background-size: contain; width: 100%; padding-top: 41%" ></div>
 <br/>
 We include the app.js file as we would any JavaScript file. The other thing we need to do is tell Elm how to launch our app. "Elm.Main.fullscreen();" tells Elm to load our app into the document body. You can also tell Elm to embed the app into some DOM node on the page. That would look like this:<br/>
+<div class="rubberPicture" style="background: url(img/ElmDomNode.png) no-repeat left; background-size: contain; width: 100%; padding-top: 43%" ></div>
 <br/>
 This allows you to embed an Elm app into an existing website. You don't have to switch everything to Elm. It will play nicely with what you have already built.<br/>
 <br/>
@@ -145,308 +149,17 @@ There is a third option. That is we want Elm to do some computations for us, but
 <br/>
 The application we are building in this tutorial will use the first option and create a fullscreen Elm application.<br/>
 <br/>
-Elm Reactor<br/>
+<strong>Elm Reactor</strong><br/>
 The third tool that the Elm Platform gave us was something called "reactor". What exactly is reactor? Reactor is a tool that will start a web server on your machine and recompile your code for you.<br/>
+<div class="rubberPicture" style="background: url(img/ElmReactor.png) no-repeat left; background-size: contain; width: 100%; padding-top: 20%" ></div>
 <br/>
 Now if I navigate to localhost:8000 I get a page like this:<br/>
-<br/>
+<div class="rubberPicture" style="background: url(img/ElmLocalhost.png) no-repeat left; background-size: contain; width: 100%; padding-top: 38%" ></div>
 <br/>
 <br/>
 Ah cool, it's the contents of our directory with some info about our project. But what's so special about this? The magic happens when you use the "File Navigation" to navigate to an Elm file. Navigate to src/Main.elm. Yes, the file we made earlier. You should see "hello world" on the screen again. Your running Elm application. Now, go to the Main.elm file in your text editor and change the file in some way. A suggestion would be to make a non-breaking change, like change the text from "hello world" to something else. To keep with my creativity so far, I'm going with "hello world 2". If you then go back to your web browser and refresh the page you'll see your changes. Elm reactor recompiles our code on page refresh without us having to use "elm make". Sweet, this should make iterating on our code a little quicker.<br/>
 <br/>
-Okay, let's "control-c" and take a look at the last of our Elm Platform tools.<br/>
-<br/>
-<br/>
-<br/>
-Elm REPL<br/>
-You should already be familiar with read-evaluate-print loops. This is the one for Elm. Run "elm repl":<br/>
-<br/>
-At the prompt we can type in any Elm expression and it will be evaluated.<br/>
-<br/>
-Oooo, math, things aren't that different after all. We can also import any modules that have been installed in our directory.<br/>
-<br/>
-If we want to reset the environment inside the REPL (remove any imported modules) there is a command for that:<br/>
-<br/>
-Right there at the top it tells you about the help and exit commands. Those are pretty self-explanatory.<br/>
-<br/>
-Leave the REPL open. We're going to start playing with the language and it'll be helpful.<br/>
-<br/>
-Note: For more information on getting started with the Elm Platform you can visit the getting started page on elm-lang.org: Getting Started.<br/>
-<br/>
- <br/>
-<br/>
-The Elm Language<br/>
-This will be a quick general overview of the language. We'll be filling things in as we go. To start with, let's take a look at Elm values and types by just typing some stuff into the REPL and seeing how it's interpreted.<br/>
-<br/>
-Strings<br/>
-Elm has strings. Big surprise there I know. Strings are much the same as in other languages. Let's try concatenating two Strings. In JavaScript something like "hello" + " elm" would work:<br/>
-<br/>
-Okay, well that didn't work at all. However, this is our first taste of the very polite and helpful Elm compiler errors. Yeah, so we have a type error. Read to the bottom it tells us if we are trying to concatenate strings in Elm we have to use the (++) operator.<br/>
-<br/>
-When you type expressions into the REPL the REPL will give you the types of those expressions. We see the (+) operator is just for numbers, whereas the (++) operator is used for the much more generic sounding appendable. And yes, it works.<br/>
-<br/>
-The more you use Elm the more you will find its compiler to be very helpful. You will not get long, cryptic Java-style stack traces. The compiler errors will usually be very helpful and point you straight to the problem, often with great suggestions about how to fix the problem.<br/>
-<br/>
-Note: The official documentation for Elm Strings: Strings.<br/>
-<br/>
-Operators and Infix Functions<br/>
-Did you notice that (+) is actually a function? Elm is a functional language. It makes sense most things are functions. Do you know what else is a function? The (==) operator. Yes, (==) is for comparison.<br/>
-<br/>
-Why are the (+) and (==) operators wrapped in parenthesis? This indicates that these are infix functions. That is they are binary functions that are used between their two arguments instead of before their two arguments. The names of infix functions are typically not alpha-numeric. We'll see other examples of infix functions as we move along.<br/>
-<br/>
-We can apply infix functions as normal functions by wrapping them in parenthesis. Both methods of function application are equivalent:<br/>
-<br/>
-Remember function arguments are separated by spaces in Elm.<br/>
-<br/>
-If you were to type the + symbol into the REPL by itself without the parenthesis you would get an error because of the missing first argument:<br/>
-<br/>
-<br/>
-<br/>
-Any binary function can be made into an infix function by wrapping it in backticks " ` ". This is not the single quote " ' ". The backtick is usually above the tab key.<br/>
-<br/>
-<br/>
-<br/>
-Numbers<br/>
-Let's look back at the type declaration of the (+) operator.<br/>
-<br/>
-Elm has some type called number. This is a little misleading. Elm, unlike JavaScript, makes a distinction between Ints and Floats. Check this out:<br/>
-<br/>
-<br/>
-<br/>
-5.66 can't be anything other than a Float, so that's what it is. 5 is interpreted as a number because it could still be treated as Float (5.0) or an Int (5). The number type can be thought of as a type that says Int or Float. In truth all types in Elm are supposed to be capitalized. The fact that number, and previously appendable, are not capitalized is a clue that these are special. We won't go too much into it, but when you see something like this it means Elm is expecting a value with particular characteristics rather than a particular type. Here, with number, Elm is just expecting some numeric type (Float or Int).<br/>
-<br/>
-Elm then makes a distinction between integer and float division:<br/>
-<br/>
-<br/>
-<br/>
-Just something to note, a product of Elm's static types.<br/>
-<br/>
-Automatic Currying<br/>
-Looking closer at the type declarations for the functions we've seen so far you'll notice at least one arrow (->) in each declaration. For the (+) function we saw something like this: "<function> : number -> number -> number". The arrows actually represent function return. Or, thinking back to the fact we are in a pure functional environment, the arrow represents mapping some input to some result. If we take this bit of information and then look back to the type declaration for (+) how do we interpret the function's type? What we are seeing is (+) is a function that takes a number then returns another function that takes a number and when that function receives its argument then we get a result.<br/>
-<br/>
-All functions in Elm only take one argument. A function like (+) that is a binary function is really the composition of two functions that each take one argument. The first function takes a number and returns a function. The second function takes a number and returns a result.<br/>
-<br/>
-To illustrate this let's look back at the add function we introduced early on:<br/>
-<br/>
-<br/>
-<br/>
-Here we take advantage of the fact that all functions are curried to create a new function from an existing function. Taking add and only giving it its first argument returns a new function to receive the second argument. Because operators in Elm are also functions, we could also write the above as:<br/>
-<br/>
-<br/>
-<br/>
-In JavaScript that would look like this:<br/>
-<br/>
-The nice thing about currying in Elm is that it is automatic. In JavaScript we have to manually nest functions to produce currying. Also because arguments are applied to functions by spaces, and not parenthesis and commas, the syntax for applying curried functions is transparent.<br/>
-<br/>
-Applying a curried function in JavaScript would look like this:<br/>
-<br/>
-<br/>
-<br/>
-Note: For more on currying, here is an earlier post I wrote: Curry me This: Partial Application in JavaScript.<br/>
-<br/>
-Type Variables<br/>
-Continuing to look at type declarations we are going to look at something called type variables. If you are familiar with Java this is going to feel somewhat similar to generics in Java.<br/>
-<br/>
-Take a look again at the (==) function:<br/>
-<br/>
-Huh? Single, lowercase characters in a type declaration are type variables. This means that the function does not care what type it receives for this argument. In this case, where both arguments are represented by the letter "a", the types of both arguments are expected to be the same. If the types appeared as "a" and "b" that would indicate that the types could (but don't have to) be different. If we were to partially apply this with a number the type variable would go away.<br/>
-<br/>
-Now we have a function that expects a number. The type variable was filled in with the type of the first argument, a number in this case.<br/>
-<br/>
-Lists<br/>
-You will see type variables in places other than functions. Let's look at lists:<br/>
-<br/>
-The first thing is the empty list "[]". This has the type of "List a" indicating that it has no concrete type contained within it. In Elm all elements inside of a list must have the same type. When a list is created with values its type is filled in with the type of its values, "List number" and "List String" in the above examples.<br/>
-<br/>
-The compiler will not let you mix types inside of a list:<br/>
-<br/>
-Something to remind ourselves of is that we are not in object-oriented land anymore. In JavaScript when we are dealing with arrays we have a lot of Array.prototype methods that make working with the values inside of the array easier. In functional programming we are dealing with values and functions. Behavior is not mixed with data. The List module from Elm core exports a lot of helpful functions to help us work with lists.<br/>
-<br/>
-The familiar map function:<br/>
-<br/>
-List.map is a function that works on lists instead of being a method on a List object. The type tells us it takes a function from some type "a" to some type "b" and a List of some type "a" and returns a List of some type "b". Remember the type variables "a" and "b" mean the types can be different, but don't have to be.<br/>
-<br/>
-We try this out with a curried application of the (+) function. We wrap the curried application of (+) in parenthesis "((+) 1)" so that the compiler will see this as one argument to the List.map function. Without the wrapping parenthesis List.map would see "(+)" as its first argument and "1" as its second.<br/>
-<br/>
-Let's take a look at another infix function "::". This function is often called "cons".<br/>
-<br/>
-Can you guess what this does based on its type? It is a function that takes a value of some type "a", a List of the same type and returns a List of that type. A likely assumption would be that this adds a value to a list. That is exactly what it does. Also base on the type, can we guess whether this function appends or prepends the value? Remember that this is an infix function.<br/>
-<br/>
-That makes sense. Which is equivalent to:<br/>
-<br/>
-Or:<br/>
-<br/>
-<br/>
-<br/>
-In JavaScript arrays are really just objects with numeric keys. That's why the typeof operator is not reliable for testing arrays. Under the hood JavaScript engines will make optimizations that differentiate arrays and objects, but to the JavaScript developer they are the same. This is not the case in Elm. As with other functional languages, Lists are unsurprisingly a functional data type. What does this mean? It means that bracket notation ([1,2,3]) is really just syntactic sugar for "1 :: 2 :: 3 :: []".<br/>
-<br/>
-While this may seem like an arbitrary implementation detail, lists are very important in Elm. Becoming familiar with them will be key to becoming a good Elm developer. Later we will take advantage of what we now know about lists in order to deconstruct and pattern match against them.<br/>
-<br/>
-Note: Checkout the official Elm documentation for Lists: List.<br/>
-<br/>
-Records<br/>
-Records are most analogous to object literals in JavaScript.<br/>
-<br/>
-Cool, this seems familiar. You'll also notice the type of this record makes sense. Even though we just declared a value and this specific type didn't exist, Elm still understands the type.<br/>
-<br/>
-In JavaScript we are used to accessing object keys with dot notation:<br/>
-<br/>
-We can do the same thing in Elm:<br/>
-<br/>
-However, we also have accessor functions. If you use the notation ".<some-string>" it creates a function that looks for the given key on a Record. Like this:<br/>
-<br/>
-So, ".name kevin" pulls the value of the name key off of the kevin Record. You'll also notice if we just type ".foo" that is already a function. It doesn't matter if there is a Record anywhere with a "foo" key.<br/>
-<br/>
-What about updating values? We need to do that all the time, right? In Elm all data is immutable. Once you declare a value you can't change it. That goes for everything, all types. What we have to do then when we need to update a value is create a copy of the object in which we update what we need to update. For Records that looks like this:<br/>
-<br/>
-We created a new Record, bob, by updating the name field in the kevin Record. The kevin Record was not changed. So the form for a record update is this: "{ <Record-to-update> | <field-to-update> = <new-value> }".<br/>
-<br/>
-Note: The Elm docs for Records: Records.<br/>
-<br/>
-Type Aliases<br/>
-This is a good time to discuss type aliases. Say you have a function that takes a Record, a complex Record. Do you really want to type out the type declaration for that function on one line? No. What about the type of a function, if we pass a function to another function and want to include a type declaration that is going to get very messy. Very often it is going to make your code more semantic and easier to read if you use type aliases.<br/>
-<br/>
-Type aliases are exactly what they sound like. You alias one type to another name. Working from our example Record:<br/>
-<br/>
-Now anywhere we want to use a Record of that form we can use "Employee". To illustrate this, let's return to the Main.elm file:<br/>
-<br/>
-<br/>
-<br/>
-We added a couple interesting pieces of new syntax here. The if expression should be familiar. Key differences with JavaScript are the "else" branch is required and the condition must evaluate to a Bool (True | False). Elm doesn't work with the vague notions of "truthy" and "falsy" we see in JavaScript. If you need to "else if" this is done by nesting if expressions.<br/>
-<br/>
-The other interesting thing is in the body of the isKevin function. We're using destructuring syntax ({name}) to say, "yes, this function takes an Employee, but we only want the name field." The name field is then bound to the word "name" for the body of the function.<br/>
-<br/>
-We can also give simple types more semantic names if we think that will help:<br/>
-<br/>
-<br/>
-<br/>
-Union Types<br/>
-Another very useful type in Elm that doesn't have an analogous type in JavaScript is the Union type. Unions, also known as algebraic data types, are used to represent types that can have some finite set of predefined values.<br/>
-<br/>
-Let's look at an example type that describes some physical activity:<br/>
-<br/>
-<br/>
-<br/>
-Now Action is a new type with two accepted values "Run" or "Walk". Anywhere an Action is accepted we can use either of these values.<br/>
-<br/>
-The values we define when we define the type are actually type constructors. In our example the type is Action. The constructors for this type are Run and Walk.<br/>
-<br/>
-We can associate data with the type constructors of a given type. In our example type say we wanted to associate some additional data with the Run constructor. Specifically I want some description of how fast we are running.<br/>
-<br/>
-Of course, this allows for any arbitrary description as long as it is a String. We could also do something like this:<br/>
-<br/>
-<br/>
-<br/>
-The example used in the Elm documentation is that of a user who can be either anonymous or authenticated:<br/>
-<br/>
-<br/>
-<br/>
-In this case if a user is anonymous we'll have no more information about them. In the case of an authenticated user we'll associate extra information with the user. Here we add a name. We could add more information (email, phone number...). That would look like this: "Authenticated Name Email Phone".<br/>
-<br/>
-Note: More on Union Types from the Elm Gitbook: Union Types.<br/>
-<br/>
-Pattern Matching with Case Expressions<br/>
-To really start looking at the value of union types we are going to start looking at pattern matching and case expressions. Syntactically,  case expressions are much like the switch statements you are used to in JavaScript. The difference is you are matching against types while simultaneously destructuring the object you are matching against. Okay, and if you think those words mean squat you greatly overestimate your command of the English language. So, examples then?<br/>
-<br/>
-Let's go back to Main.elm. I'm updating my Main.elm to look like this:<br/>
-<br/>
-The case expression in the howFast function pattern matches against the Action passed in and chooses the correct branch based on the shape of the Action passed in. In the case that the Action is a Run it uses destructuring to assign the value of our string description to the variable name "speed".<br/>
-<br/>
-If you've used Redux this may be feeling familiar. Redux uses this pattern with switch statements to implement the Elm architecture in JavaScript. Doing something like this in JavaScript would take this form:<br/>
-<br/>
-<br/>
-<br/>
-This pattern of having related, but awkwardly formed, data that you act on in a uniform way makes logical sense in many situations. It's just that JavaScript does't really give you the tools to do it cleanly. Union Types and pattern matching in Elm make this pattern extremely valuable.<br/>
-<br/>
-You can also pattern match against Lists:<br/>
-<br/>
-<br/>
-<br/>
-Look at the last case. We are using the list constructor to pull the list apart and match against it further. Instead of using the variables "a" and "b" we could match against specific values in the list if we wanted to. The underscore on the end means we don't care what comes after. That might feel more natural to you if you thought of it as a star "*". Match everything else. If we were to use bracket notation for this last case ([a,b,_]) the pattern would only match a list with three elements. Can you tell why that is? In the bracket notation the underscore is matching against any single element. In the expanded notation the underscore is matching against another list. It doesn't care how many elements are in that list. If you don't get this, review our discussion on lists above.<br/>
-<br/>
-In Elm you can use case expressions and pattern matching with most types. This is an incredibly valuable feature of the language and will make your code easy-to-read in a way languages without this feature can't.<br/>
-<br/>
-Here is an excellent article on destructuring and pattern matching for you to pick up more of the ins and outs of this: Destructuring.<br/>
-<br/>
-Note: As we go through building our app we will continue to discuss Elm syntax. You would do well though to checkout the information on the Elm website: Elm Syntax.<br/>
-<br/>
-Note: In JavaScript there is often a lot of discussion around coding style guides. Many companies have their own. Many developers passionately hold their own opinions. With Elm there is an officially accepted style guide you should check out: Elm Style Guide.<br/>
-<br/>
- <br/>
-<br/>
-The Elm Architecture<br/>
-If you have spent much time as a software engineer it is likely that at some point it has been violently beaten into you that MVC (Model View Controller) is the way to build front-ends. The Elm Architecture is what we could call Model View Update. This seems suspiciously close to the MVC. I think you will find the Elm Architecture a little more different than the naming might suggest. The Elm Architecture will be simpler and more explicit. Often in MVC there's discussion and disagreement about where to draw the lines and where the lines are drawn from framework to framework are slightly different. This is what results in people using the phrasing MV*. Do we really mean MVP or MVVM? No, for now we're using Model View Update.<br/>
-<br/>
-Let's briefly overview each of the three parts of this architecture. We are really talking about one data value, our model, and two functions, view and update.<br/>
-<br/>
-Model<br/>
-Really what we're talking about here is state. The current state of the module and the current state of the application. We're not talking about some separate data store that we talk to through a controller, or some pub/sub pattern. Very often this is going to be represented by a Record. What we're dealing with here is dumb data. If our app is sufficiently simple this could just be a String.<br/>
-<br/>
-View<br/>
-When we say view, we mean a function that knows how to take the model and display it. That is a function that takes our application state and returns HTML. We are talking about a function that would have this type declaration: "view : Model -> Html". Easy enough, right?<br/>
-<br/>
-Update<br/>
-Update is a function that responds to events by updating the model and requesting side-effects. In the Elm Architecture we add a level of abstraction to events and model them with Union Types. We will call these messages. The simple type declaration of our update function would be: "update : Msg -> Model -> Model". That is it is a function that takes a message and the old model and returns a new model.<br/>
-<br/>
-Updating our "Hello World" Application<br/>
-Because this architecture is so explicit, we can start almost every module we create with this template (taken from the Elm Gitbook):<br/>
-<br/>
-Note: Here we're seeing Elm comments for the first time. "--" is a single-line comment. "{--" starts a multi-line comment and "--}" ends a multi-line comment.<br/>
-<br/>
-One interesting thing you'll notice is the type of the view function is actually: "view : Model -> Html Msg". What does this mean? This means that yes, we are generating HTML, but this HTML can also produce messages our app will need to listen to. These messages are of course user events (clicks, changes, resizes...).<br/>
-<br/>
-Copy this template into your Main.elm file, replacing the code we have previously written.<br/>
-<br/>
-Starting from the top, "import Html exposing (..)" means import everything from the Html module. We are going to qualify this and only import the things we need. Change the import statements to:<br/>
-<br/>
-From Html we are now importing Html, input, label, div and text. "Html" is capitalized. That means it's a type. We import this so that the type declaration of the view function knows about the type it should be returning. The others are functions for building DomNodes. Yes, each function builds the DomNode that corresponds to its name.<br/>
-<br/>
-The Html module has a submodule called "Events". This module contains a bunch of helpers for working with DOM events. Here we import the onInput function. This function creates an attribute to add to a DomNode. This particular function may not be exactly what you expect in that its type is: "onInput : (String -> msg) -> Attribute msg". It takes a function that takes a String and outputs a message and returns an Attribute. No where in any of that did I see event object. The String the function takes is the value of the input this is applied to. So this function does a little extra work for us under the hood to optimize for a common use case. You give onInput the function you want to handle input events. It's just instead of that function getting the event object it gets the input value. If you need more control over the input event there are more generic functions to help you with that.<br/>
-<br/>
-For our "Hello World" app our Model is just going to be a String. Change the type alias for Model to String.<br/>
-<br/>
-We also need to define an initial model (or initial state) for our application:<br/>
-<br/>
-Ok, so what are we going to do with this thing? We are going to add an input field that asks you to input your name. When you input your name the "Hello World" text will update with your name, or whatever random text you put in the input, like "Hello Kevin" or "Hello siajdsujawjehtioa". So, what message do we need for this? How about "UpdateName"? Let's keep things as descriptive as possible.<br/>
-<br/>
-Our Msg is a Union Type with only one value, "UpdateName". UpdateName will have some associated data with it, a String to update the name to.<br/>
-<br/>
-Now for our view. Our view will need to display the current value of our model. It will also need to listen to input events on the text input so we know when to update the name.<br/>
-<br/>
-Okay, this bit probably needs a little more explanation. All of the DomNodes that we import from Elm Html are functions. All of them, with the exception of text, take two arguments. The first is an list of attributes to apply to the node and the second is an list of children. If a given node has no attributes or has no children you must pass an empty list to represent this. Here, our wrapping div has no attributes, but it has three children. TextNodes take only one argument, a String to display.<br/>
-<br/>
-Also, remember that UpdateName is actually a type constructor for our Msg type. It is a function. It is a function that takes one parameter, the String to carry as data. When input occurs onInput will call this function to create the Msg associated with our Html.<br/>
-<br/>
-Now, we have our Model, our View and our Update. What do we do with them? This doesn't really do anything yet, does it? No, no it doesn't. We haven't defined our main entry point yet. Also, how does it happen that we know when an event occurs in the view, so we can call update? This is all wiring that will be handled for us by another Elm Module. In fact, another submodule of Html call "App". Update you imports again:<br/>
-<br/>
-Then we will add our main entry point. This has the type of "main : Program Never". Never is a special type in Elm that signifies no value is here.<br/>
-<br/>
-There are a few different types of programs available through the App module. We're, fittingly enough, starting with the beginnerProgram. All you need to do is give it the initial model, function to render the view and function to update the model. The program will know how to read messages from the view in order to call the update function.<br/>
-<br/>
-At this point you can use "elm make" or "elm reactor" to see your work. I'm using Elm reactor so I can play around with things a bit more and see how they work.<br/>
-<br/>
-What do we have?<br/>
-<br/>
-<br/>
-<br/>
-Exciting, at least it works.<br/>
-<br/>
-The Elm Gitbook<br/>
-There is an excellent official Gitbook on Elm maintained by Elm's creator: Elm Gitbook. I recommend checking it out to get more info about the language and fill in the holes in my description of things. It has a very good tutorial on the basics of the Elm Architecture: Elm Architecture.<br/>
-<br/>
- <br/>
-<br/>
-Conclusion<br/>
-We've covered a lot in this post. Hopefully I gave you enough to peak your interest and allow you to explore on your own. I would certainly work through the official Elm Architecture tutorial.<br/>
-<br/>
-Next time we will continue by planning our app and look into routing in Elm.<br/>
-<br/>
-Further Reading<br/>
-Here is another good tutorial for those familiar with JavaScript but not Elm, on the NoRedInk Engineering Blog: Building a Live-Validated Signup Form in Elm.<br/>
-<br/>
-	
-	
-	<div id="endBlock">&#x02588;</div><br/><br/>
+	<div id="endLink">(<a href="https://www.linkedin.com/pulse/single-page-web-apps-elm-part-one-getting-started-new-kevin-greene" target="_blank">continue reading at the original posting &#x02022;&nbsp;&#x02022;&nbsp;&#x02022;&nbsp; </a>)</div><br/><br/>
 
 	</div><!-- END of wrapper div-->
 <script src="script.js"></script>
