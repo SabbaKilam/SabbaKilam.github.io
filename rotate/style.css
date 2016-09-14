@@ -1,0 +1,50 @@
+body{
+    user-select: none;
+}
+#app{
+    font-size: 1.5rem;
+    text-align: center;
+    /*
+        The follwing lines should
+        make the app fill the screen
+        and keep it from moving
+        when touched or swiped
+    */
+    position: fixed;    
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+#needle{
+    position: absolute;
+    transform-origin: left;
+    -webkit-transform: rotateZ(-90deg);
+    transform: rotateZ(-90deg);
+    
+    height: 3px;
+    width: 300px;
+    
+    background: brown;
+    left:500px;
+    top: 0;
+    bottom:0;
+    margin: auto;
+    z-index: 0;
+    overflow: hidden;  
+}
+#hub{
+    position: fixed;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background: brown;
+    left: -3px;
+    top: -6px;
+    bottom: 0;
+    margin: 0;
+    z-index: 1;
+    
+}
