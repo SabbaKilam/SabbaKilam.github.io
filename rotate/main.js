@@ -36,29 +36,29 @@ window.onload = function(){
   $.initialize();
   setInterval(rotate, 16.6667); // 60fps = 16.666etc. mS
   function rotate(){
-      //maximize circle clockFace
+      //maximize circle clockFace with 5px margin of safety
       if($.model.windowHeight < $.model.windowWidth){
         $($.clockFace).styles
-          ("width", $.model.windowHeight + "px")
-          ("height", $.model.windowHeight + "px")
+          ("width", ($.model.windowHeight - 5) + "px")
+          ("height", ($.model.windowHeight - 5) + "px")
         ;        
       }
       else{
         $($.clockFace).styles
-          ("width", $.model.windowWidth + "px")
-          ("height", $.model.windowWidth + "px")
+          ("width", ($.model.windowWidth - 5) + "px")
+          ("height", ($.model.windowWidth - 5) + "px")
         ;        
       }
 
       //center needle horizontally
       $($.needle).style("left", $.model.windowWidth/2  + "px");
       
-      //adjust needle width, not to exceed closest edge;
+      //adjust needle width, not to exceed closest edge by 7px;
       if($.model.windowHeight < $.model.windowWidth){
-        $($.needle).style("width", ($.model.windowHeight/2 - 5) + "px");
+        $($.needle).style("width", ($.model.windowHeight/2 - 7) + "px");
       }
       else{
-        $($.needle).style("width", ($.model.windowWidth/2 - 5) + "px");
+        $($.needle).style("width", ($.model.windowWidth/2 - 7) + "px");
       }
     
       //update model with time and angle
