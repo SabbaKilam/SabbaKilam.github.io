@@ -18,8 +18,9 @@ $.initialize = function(){
   };
   $.browserPrefix = ["","-webkit-","-moz-","-ms-","-o-",];
   //---------------------
-  $.needle =  //rotating needle
-  $.hub =     // hub of needle
+  $.clockFace = // background circle of clock
+  $.needle =    //rotating needle
+  $.hub =       // hub of needle
   $.domElements;
   $.attachDomElements();
   //-------------------------------
@@ -35,6 +36,20 @@ window.onload = function(){
   $.initialize();
   setInterval(rotate, 16.6667); // 60fps = 16.666etc. mS
   function rotate(){
+      //maximize circle clockFace
+      if($.model.windowHeight < $.model.windowWidth){
+        $($.clockFace).styles
+          ("width", $.model.windowHeight + "px")
+          ("height", $.model.windowHeight + "px")
+        ;        
+      }
+      else{
+        $($.clockFace).styles
+          ("width", $.model.windowWidth + "px")
+          ("height", $.model.windowWidth + "px")
+        ;        
+      }
+
       //center needle horizontally
       $($.needle).style("left", $.model.windowWidth/2  + "px");
       

@@ -46,5 +46,18 @@ body{
     bottom: 0;
     margin: 0;
     z-index: 1;
+}
+#clockFace{
+    z-index: -1;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 50%;
+    width: 500;
+    height: 500;
+    border: 3px solid lightgray;
     
 }
