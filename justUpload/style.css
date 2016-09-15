@@ -23,7 +23,6 @@ body{
     width: 100%;
     height: 2px;
     background-color: lightgray;
-    border-left: 200px solid red;
 }
 #fileElement{
     width: 30%;

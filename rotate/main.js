@@ -24,18 +24,20 @@ $.initialize = function(){
   $.domElements;
   $.attachDomElements();
   //-------------------------------
-  window.onresize = adjustAllSizes;  
-  function adjustAllSizes(){
+  window.onresize = $.adjustAllSizes;  
+  $.adjustAllSizes = function(){
     $.adjustRem(5,50);
     $.model.windowHeight = window.innerHeight;
     $.model.windowWidth = window.innerWidth;
-  }
+  };
 };
 //==========| App starts here |============
 window.onload = function(){
   $.initialize();
   setInterval(rotate, 16.6667); // 60fps = 16.666etc. mS
   function rotate(){
+      $.adjustAllSizes();
+      
       //maximize circle clockFace with 5px margin of safety
       if($.model.windowHeight < $.model.windowWidth){
         $($.clockFace).styles
@@ -50,7 +52,7 @@ window.onload = function(){
         ;        
       }
 
-      //center needle horizontally
+      //center needle horizontally with 7 pix margin of safety
       $($.needle).style("left", $.model.windowWidth/2  + "px");
       
       //adjust needle width, not to exceed closest edge by 7px;

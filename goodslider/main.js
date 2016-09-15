@@ -5,18 +5,20 @@ function id(idString){
 //---------------------
 var faceSlider = id("faceSlider");
 var realSlider = id("realSlider");
-var btn = id("btn");
+var bead = id("bead");
 //----------------------
-realSlider.oninput = moveBtn;
-realSlider.onmousedown = moveBtn;
-realSlider.onchange = moveBtn;
+realSlider.oninput = moveBead;
+realSlider.onmousedown = moveBead;
+realSlider.onchange = moveBead;
 
-window.onload = moveBtn;
-window.onresize = moveBtn;
+window.onload = moveBead;
+window.onresize = moveBead;
 
 //----------------------
-function moveBtn(){
-    var buttonWidth = btn.getBoundingClientRect().width;
+function moveBead(){
+    //var buttonWidth = btn.getBoundingClientRect().width;
+    var buttonWidth = bead.getBoundingClientRect().width;
+    
     /*
         Use the value of the realSlider
         to calculate the left margin of the button
@@ -28,5 +30,7 @@ function moveBtn(){
     var sliderWidth = faceInfo.width;
     var btnMarginLeft = realSlider.value/100 * sliderWidth  - buttonWidth/2 ;
     
-    btn.style.marginLeft = btnMarginLeft + "px";
+    //btn.style.marginLeft = btnMarginLeft + "px";
+    bead.style.marginLeft = btnMarginLeft + "px";
+    
 }
