@@ -35,20 +35,7 @@ body{
     z-index: 0;
     overflow: hidden;  
 }
-#hub{
-    position: fixed;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    background: brown;
-    left: -3px;
-    top: -6px;
-    bottom: 0;
-    margin: 0;
-    z-index: 1;
-}
-#clockFace{
-    z-index: -1;
+.centered{
     position: absolute;
     margin: auto;
     left: 0;
@@ -56,9 +43,19 @@ body{
     top: 0;
     bottom: 0;
     border-radius: 50%;
+}
+
+#hub{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background: brown;
+    z-index: 1;
+}
+
+#clockFace{
+    z-index: -1;
     width: 500;
     height: 500;
     border: 3px solid lightgray;
-    //background: radial-gradient(white, teal);
-    
 }
