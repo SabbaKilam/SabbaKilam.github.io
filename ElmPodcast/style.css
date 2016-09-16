@@ -33,7 +33,9 @@ body{
     left: 0;
     right: 0;
 }
-
+.time{
+    display: inline-block;
+}
 .slider{
     position: absolute;
     width: 100%;

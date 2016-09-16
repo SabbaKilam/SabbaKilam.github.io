@@ -12,25 +12,22 @@ $.initialize = function(){
   $.adjustRem(5, 50);
   //----| Create the model |----//
   //original audio source:
-  //http://cdn.5by5.tv/audio/broadcasts/changelog/2016/changelog-218.mp3
-  //https://SabbaKilam.github.io/ElmPodcast/podcast/EvanRichard.mp3
+  $.remoteSource ="http://cdn.5by5.tv/audio/broadcasts/changelog/2016/changelog-218.mp3";
+  $.localSource ="https://SabbaKilam.github.io/ElmPodcast/podcast/EvanRichard.mp3";
   $.model = {
     windowWidth: window.innerWidth,
     windowHeight: window.innerHeight,
     audioPlayer: document.createElement("audio"),
-    audioSource: "http://cdn.5by5.tv/audio/broadcasts/changelog/2016/changelog-218.mp3",
+    audioSource: $.remoteSource,
     updateBusy: false,
     windowResized: false,
     playButtonTouched: false,
     sliderTouched: false,
-    progressNumber: 0 // 0 through 1000 ?
+    progressNumber: 0 // 0 through 100 ?
   };
   $.model.audioPlayer.setAttribute("src", $.model.audioSource);  
   // Attach the player to the DOM so that the local devices knows about it.
-  document.getElementById("temp").appendChild($.model.audioPlayer);
-  // Shows default controls. Will hide later when our controls work.
-  //$.model.audioPlayer.setAttribute("controls","true");
-
+  document.getElementById("playerHolder").appendChild($.model.audioPlayer);
 };
 //==========| App starts here |============
 window.onload = function(){
@@ -42,8 +39,9 @@ window.onload = function(){
   $.playButton = // play-pause button
   $.hiddenSlider = // The slider out front that feels the user input
   $.progressSlider = //The visible slider that shows music progress
-  $.testTarget = // a place to show test results
-  $.temp = // temporay place to show default audio player
+  $.timeHolder = //div that holds the follwong two time data:
+  $.currentTime = // amount of podcast plyed so far in minutes
+  $.duration = // total time of podcast
   $.domElements;
   $.attachDomElements();
   
@@ -78,14 +76,16 @@ window.onload = function(){
       var adjustedWidth = ($.model.windowWidth > 640) ? "75%" : "100%";
       $.adjustRem();
       $($.app).style("width", adjustedWidth);
-      //$($.testTarget).html("Width: " + $.model.windowWidth + ", Height: " + $.model.windowHeight);
       $.model.windowResized = false;
     }
     
     if($.model.playButtonTouched){
       //handle here:
       if($.model.audioPlayer.paused){
-        $.model.audioPlayer.play();
+        var source = $.model.audioPlayer.src;
+        if ( source === $.localSource || source === $.remoteSource ){
+          $.model.audioPlayer.play();
+        }
         //then show pause icon
         $($.playButton).html("&#10074;&#10074;");
       }
@@ -101,14 +101,15 @@ window.onload = function(){
       $.model.progressNumber = $.hiddenSlider.value;
       var newTime = ($.model.progressNumber/100) * $.model.audioPlayer.duration;
       $.model.audioPlayer.currentTime = newTime;
-      $($.testTarget).html($.model.audioPlayer.currentTime);
+      $($.currentTime).html( ($.model.audioPlayer.currentTime / 60).toFixed(2) );
+      $($.duration).html( ($.model.audioPlayer.duration / 60).toFixed(2) );
+      
       $.model.sliderTouched = false;
     }
 
     //----| Report that the view update is no longer busy |----//
     $.model.updateBusy = false;
   }
-
 //==========| App ends here |===============
 };//This '};' closes the app. Do not accidentally remove it.
 //==========| App ends here |===============
