@@ -35,6 +35,8 @@ body{
 }
 .time{
     display: inline-block;
+    font-family:  monospace;
+    font-weight: bold;
 }
 .slider{
     position: absolute;

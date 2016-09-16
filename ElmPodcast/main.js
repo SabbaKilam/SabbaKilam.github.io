@@ -28,6 +28,8 @@ $.initialize = function(){
   $.model.audioPlayer.setAttribute("src", $.model.audioSource);  
   // Attach the player to the DOM so that the local devices knows about it.
   document.getElementById("playerHolder").appendChild($.model.audioPlayer);
+  $($.currentTime).html( $.secToMinSec($.model.audioPlayer.currentTime) );
+  $($.duration).html( $.secToMinSec($.model.audioPlayer.duration) );  
 };
 //==========| App starts here |============
 window.onload = function(){
@@ -46,7 +48,12 @@ window.onload = function(){
   $.attachDomElements();
   
   
-  $($.playButton).html("&#9658;"); 
+  //show initial times and play icon
+  $($.playButton).html("&#9658;");
+  $($.currentTime).html( $.secToMinSec($.model.audioPlayer.currentTime) );
+  $($.duration).html( $.secToMinSec($.model.audioPlayer.duration) ); 
+  $.hiddenSlider.value = 0;
+  
   //====| Handle all events |====//
   window.onresize = reportResize;
   $.playButton.onclick = reportPlayTouched;
@@ -72,6 +79,10 @@ window.onload = function(){
     $.model.updateBusy = true;
     
     //----| Test for model changes & update the view |----//
+    if(!isNaN($.model.audioPlayer.duration)){
+      $($.duration).html( $.secToMinSec($.model.audioPlayer.duration) );
+    }
+    
     if($.model.windowResized){
       var adjustedWidth = ($.model.windowWidth > 640) ? "75%" : "100%";
       $.adjustRem();
@@ -101,10 +112,16 @@ window.onload = function(){
       $.model.progressNumber = $.hiddenSlider.value;
       var newTime = ($.model.progressNumber/100) * $.model.audioPlayer.duration;
       $.model.audioPlayer.currentTime = newTime;
-      $($.currentTime).html( ($.model.audioPlayer.currentTime / 60).toFixed(2) );
-      $($.duration).html( ($.model.audioPlayer.duration / 60).toFixed(2) );
-      
+      //$($.currentTime).html( ($.model.audioPlayer.currentTime / 60).toFixed(2) );
+      $($.currentTime).html( $.secToMinSec($.model.audioPlayer.currentTime) );
       $.model.sliderTouched = false;
+    }
+    if(! $.model.audioPlayer.paused && ! $.model.audioPlayer.ended ){
+      $($.currentTime).html( $.secToMinSec($.model.audioPlayer.currentTime) );
+      $.hiddenSlider.value = 100 * ($.model.audioPlayer.currentTime / $.model.audioPlayer.duration);
+    }
+    else{
+      $($.playButton).html("&#9658;");       
     }
 
     //----| Report that the view update is no longer busy |----//

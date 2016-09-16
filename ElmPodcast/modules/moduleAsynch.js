@@ -642,6 +642,16 @@ main.trueType = function trueType(aValue){
 
 //===| END of trueType |===//
 
+//====| secToMinSec() returns text like 10:34 when given seconds as number |====//
+main.secToMinSec = function secToMinSec(seconds){
+    var min = Math.floor(seconds / 60);
+    var sec = Math.floor(seconds % 60);
+    if(isNaN(min)){min = 0}
+    if(isNaN(sec)){sec = 0}
+    var time = min + ":" +  ((sec < 10) ? ("0" + sec) : ("" + sec));
+    return time;
+};
+//====| END of secToMinSec |====//
 
 //===| End of exposed methods and data |===
 
