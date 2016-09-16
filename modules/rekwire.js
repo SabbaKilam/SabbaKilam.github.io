@@ -2,7 +2,7 @@
 /*
     Author: Abbas Abdulmalik
     Creation Date: October 3, 2015
-    Revised: March 8, 2016
+    Revised: August 6, 2016
     Purpose: Attempt to make a "require-like" synchronous module loader
              using presumably a CommonJS format for the modules.
              
@@ -167,21 +167,21 @@
       function wrapApiInExports(r){
           //--try to see if the function is its own exports;
           try{
-              var f2 = new Function("imports", r);
-              var imports = null;              
-              exports = f2(imports);
+              var f2 = new Function("functionObject", r);
+              var functionObject = null;              
+              exports = f2(functionObject);
               //if no errors, exports was undefined within the function
               //...so, the function was its own exports
               return;
-          }catch(doNothing){
+          }catch(handleExports){
               //reference to exports are caught
+              //--conventional exports to be mutated below  
+              var f = new Function("exports", r);
+              f(exports);              
           }
-          //--conventional exports to be mutated below  
-          var f = new Function("exports", r);
-          f(exports);
       }
       //------------------
-   }//--END of require function
+   };//--END of rekwire function
    this.rekwire.getValue = function getValue(key){
      return CACHE[key];
    };
