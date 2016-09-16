@@ -29,7 +29,7 @@ $.initialize = function(){
   // Attach the player to the DOM so that the local devices knows about it.
   document.getElementById("temp").appendChild($.model.audioPlayer);
   // Shows default controls. Will hide later when our controls work.
-  $.model.audioPlayer.setAttribute("controls","true");
+  //$.model.audioPlayer.setAttribute("controls","true");
 
 };
 //==========| App starts here |============
@@ -77,7 +77,7 @@ window.onload = function(){
       var adjustedWidth = ($.model.windowWidth > 640) ? "75%" : "100%";
       $.adjustRem();
       $($.app).style("width", adjustedWidth);
-      $($.testTarget).html("Width: " + $.model.windowWidth + ", Height: " + $.model.windowHeight);
+      //$($.testTarget).html("Width: " + $.model.windowWidth + ", Height: " + $.model.windowHeight);
       $.model.windowResized = false;
     }
     
@@ -96,7 +96,7 @@ window.onload = function(){
     
     if($.model.sliderTouched){
       $.model.progressNumber = $.hiddenSlider.value;
-      $($.testTarget).html($.model.progressNumber);
+      //$($.testTarget).html($.model.progressNumber);
       $.model.sliderTouched = false;
     }
 
