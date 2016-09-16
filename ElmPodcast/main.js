@@ -64,7 +64,6 @@ window.onload = function(){
     $.model.playButtonTouched = true;
   }
   function reportSliderTouched(e){
-    
     $.model.sliderTouched = true;
   }
   
@@ -100,7 +99,9 @@ window.onload = function(){
     
     if($.model.sliderTouched){
       $.model.progressNumber = $.hiddenSlider.value;
-      //$($.testTarget).html($.model.progressNumber);
+      var newTime = ($.model.progressNumber/100) * $.model.audioPlayer.duration;
+      $.model.audioPlayer.currentTime = newTime;
+      $($.testTarget).html($.model.audioPlayer.currentTime);
       $.model.sliderTouched = false;
     }
 
