@@ -13,11 +13,12 @@ $.initialize = function(){
   //----| Create the model |----//
   //original audio source:
   //http://cdn.5by5.tv/audio/broadcasts/changelog/2016/changelog-218.mp3
+  //https://SabbaKilam.github.io/ElmPodcast/podcast/EvanRichard.mp3
   $.model = {
     windowWidth: window.innerWidth,
     windowHeight: window.innerHeight,
     audioPlayer: document.createElement("audio"),
-    audioSource: "https://SabbaKilam.github.io/ElmPodcast/podcast/EvanRichard.mp3",
+    audioSource: "http://cdn.5by5.tv/audio/broadcasts/changelog/2016/changelog-218.mp3",
     updateBusy: false,
     windowResized: false,
     playButtonTouched: false,
@@ -45,7 +46,6 @@ window.onload = function(){
   $.temp = // temporay place to show default audio player
   $.domElements;
   $.attachDomElements();
-
   
   //====| Handle all events |====//
   window.onresize = reportResize;
