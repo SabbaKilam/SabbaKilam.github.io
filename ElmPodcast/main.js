@@ -47,6 +47,8 @@ window.onload = function(){
   $.domElements;
   $.attachDomElements();
   
+  
+  $($.playButton).html("&#9658;"); 
   //====| Handle all events |====//
   window.onresize = reportResize;
   $.playButton.onclick = reportPlayTouched;
@@ -86,10 +88,12 @@ window.onload = function(){
       if($.model.audioPlayer.paused){
         $.model.audioPlayer.play();
         //then show pause icon
+        $($.playButton).html("&#10074;&#10074;");
       }
       else{
        $.model.audioPlayer.pause();
        //then show play icon
+        $($.playButton).html("&#9658;");       
       }
       $.model.playButtonTouched = false;
     }
