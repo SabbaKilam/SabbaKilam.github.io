@@ -65,6 +65,22 @@ body{
     background: hsla(0, 0%, 0%, 0.6);
     
 }
+#info{
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 2%;
+    background: rgb(50, 50, 50);        
+    background: hsla(0, 0%, 0%, 0.6);
+    border-radius: 0.5rem;
+    border: 1px solid lightgray;
+    box-shadow: 0 2px 3px gray;
+    width: 90%; 
+    box-sizing: border-box;
+}
+
 .sliders{
     position: absolute;
     margin: auto;
@@ -115,4 +131,18 @@ body{
 #hiddenSlider{
     outline: 2px dashed red;    
     opacity: 0;
+}
+
+a{
+    color: red;
+    font-weight: bold;
+}
+a:active{
+    color: white;
+}
+a:hover{
+    color: white;
+}
+a:visted{
+    color: red;
 }
