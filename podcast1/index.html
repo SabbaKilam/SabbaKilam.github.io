@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content"width=device-width initial-scale=1 user-scalable=no">
+        <title>Podcast 1</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="prefixfree.js"></script>
+        <script src="$api.js"></script>
+    </head>
+    <body>
+        <div id="holder">
+            
+           <div id="app">
+               
+               <div id="times">
+                   <div id="currentTime" class="times">0:00</div>
+                   <div id="timeDivider" class="times">/</div>
+                   <div id="duration" class="times">0:00</div>
+               </div>
+               
+               <div id="topControls">
+                   <div id="backButton" class="controls"></div>
+                   <div id="playButton" class="controls">&#9658;</div>
+                   <div id="advertSkipper" class="controls">Skip Advert</div>
+               </div>
+               
+               <div class="sliders" id="sliderHolder">
+                   <div class="slider" id="progressBar">
+                       <div id="bead"></div>
+                   </div>
+                   <input class="slider" type="range" id="hiddenSlider">
+               </div>
+               
+           </div>
+           
+        </div>
+    <script src="main.js"></script>
+    </body>
+</html>
