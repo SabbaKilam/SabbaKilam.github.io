@@ -67,6 +67,7 @@ body{
 }
 #info{
     position: absolute;
+    font-size: 1.25rem;
     bottom: 15%;
     left: 0;
     right: 0;
