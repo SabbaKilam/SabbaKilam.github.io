@@ -98,7 +98,7 @@ window.onload = function(){
           $.model.audioPlayer.play();
         }
         //then show pause icon
-        $($.playButton).html("&#10074;&#10074;");
+        $($.playButton).html("&#10074;&nbsp;&#10074;");
       }
       else{
        $.model.audioPlayer.pause();
