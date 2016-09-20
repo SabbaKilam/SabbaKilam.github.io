@@ -71,4 +71,14 @@
         domElement.addEventListener(eventString, handler);
         return api;
     };
+    //====| secToMinSec() returns text like 10:34 when given seconds as number |====//
+    main.secToMinSec = function secToMinSec(seconds){
+        var min = Math.floor(seconds / 60);
+        var sec = Math.floor(seconds % 60);
+        if(isNaN(min)){min = 0}
+        if(isNaN(sec)){sec = 0}
+        var minSec = min + ":" +  ((sec < 10) ? ("0" + sec) : ("" + sec));
+        return minSec;
+    };
+    //====| END of secToMinSec |====//    
 })();

@@ -647,5 +647,10 @@
     "Chris Isaak - Wicked Game" :{
         "title" : "Wicked Game",
         "artist" : "Chris Isaak"
+    },
+    "Loreena Mckennitt - The Bonny Swans" :{
+        "title" : "The Bonny Swans",
+        "artist" : "Loreena Mckennitt",
+        "picture": "loreenamaskmirror.jpg"
     }
 }

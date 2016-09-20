@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Root Em</title>
+        <style>
+            html{
+                font-size: 50px;
+            }
+            #message{
+                position: fixed;
+                margin: auto;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 75%;
+                height: 25%;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="holder">
+            <div id="app">
+                <span id="message">MMMWWWsized with root em</span>
+            </div>
+        </div>
+    <script>
+        window.onresize = twentieth;
+        window.onload = twentieth;
+        //=====| handler below |=======//
+        function twentieth(){
+            //make the size of the root em window width / 20
+            var rem = document.documentElement;
+            rem.style.fontSize = window.innerWidth / 20 + "px";            
+        }
+    </script>        
+    </body>
+</html>
