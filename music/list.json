@@ -446,7 +446,8 @@
     },
     "Wim Mertens - Often A Bird" :{
         "title" : "Often A Bird",
-        "artist" : "Wim Mertens"
+        "artist" : "Wim Mertens",
+        "picture": "mertensbird.jpg"
     },
     "Susan Tedeschi - Angel From Montgomery" :{
         "title" : "Angel From Montgomery",
