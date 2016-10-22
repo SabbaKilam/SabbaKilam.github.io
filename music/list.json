@@ -655,5 +655,10 @@
         "title" : "The Bonny Swans",
         "artist" : "Loreena Mckennitt",
         "picture": "loreenamaskmirror.jpg"
+    },
+    "Ministry - Work for Love" :{
+        "title" : "Work for Love",
+        "artist" : "Ministry",
+        "picture" : "ministrysympathy.png"
     }
 }
