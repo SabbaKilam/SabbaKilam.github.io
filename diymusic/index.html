@@ -12,14 +12,23 @@
         <title>D.I.Y. Music</title>
         <link rel="stylesheet" href="style.css">
         <script src="prefixfree.js"></script> 
-        <script src="CreateListMixer.js"></script> 
-        
-
-        <img src="changelog.png" alt="changelog logo" style="visibility: hidden; position: absolute; height: 0; top: 0;">
+        <script src="CreateListMixer.js"></script>
         <script src="$api.js"></script>
     </head>
     <body>
-    
+        <div id="preloadedImages">
+            <img src="img/speakerLoud.png">
+            <img src="img/speakerMedium.png">
+            <img src="img/speakerSoft.png">
+            <img src="img/speakerOff.png">
+            <img src="img/shuffle1.png">
+            <img src="img/shuffle2.png">
+            <img src="img/shuffle3.png">
+            <img src="img/shuffle4.png">
+            <img src="img/shuffleBlack.png">
+            <img src="img/shuffleWhite.png">
+            <img src="img/shuffleBlue.png">            
+        </div>
         <div id="holder"> 
             <div id="splash2" class="splashScreen"></div>           
            <div id="splash1" class="splashScreen">
@@ -30,13 +39,14 @@
            <div id="app">
               
            <div id="songListHolder">
-                <center>
-                    <div>Choose a Song &nbsp;&nbsp;
-                        <span style="color: rgb(255,50,50 ); font-weight: bold; text-shadow: 0 1px 0 lightgray; cursor: pointer;">&cross;</span>
-                    </div></center>          
                 <select id="songSelector">
                     <option>Song Option</option>
                 </select>
+                <center>
+                    <div>&#8679;&nbsp;Choose a Song&nbsp;&#8679;&nbsp;&nbsp;
+                        <span style="color: rgb(255,50,50 ); font-weight: bold; text-shadow: 0 1px 0 lightgray; cursor: pointer;">&cross;</span>
+                    </div>
+                </center>
            </div>  
            
                <div id="bottomMusicInfo">
@@ -69,16 +79,16 @@
                     <div id="menuButton" class="button">&#9776;&#x022EE; </div>
                </div>
                <div id="controls3">
-                   <div id="muteButton" ><span id="muteButtonSpan">M</span></div>
+                   <div id="muteButton" class="button"><span id="muteButtonSpan">M</span></div>
                </div>
                    
-                <audio id="audioPlayer" 
-                    controls 
-                    src="silent.mp3" 
-                >
-                </audio>               
+                <audio id="audioPlayer" controls src="silent.mp3"></audio>               
           
                <!--<div id="message"></div-->
+               <div id="pictureFrame" class="slidingPicture"></div>
+               <input type="range" id="pictureSlider" class="slidingPicture">
+               
+               <input type="text" id="newGithubId" size="10">
            </div><!-- END of app-->
 
         </div>

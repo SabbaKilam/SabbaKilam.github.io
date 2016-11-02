@@ -1,5 +1,4 @@
 /*global $*/
-/*global CreateListMixer*/
 /*global scrammbleThis*/
 //====| Gather DOM elements, then make a global data model for the app |====//
 $.holder =  // outer div of the project
@@ -7,6 +6,9 @@ $.app =     // the app div holds audio player and custom controls
 $.splash1 = // first flash screen
 $.splash2 = // 2nd splash screen
 $.controls = // holds custom control buttons
+$.controls2 = //
+$.controls3 = //
+$.bottomMusicInfo = //
 $.audioPlayer = // html5 audio element on the webpage
 $.backButton =    // the back button
 $.backButtonSpan = // the span that holds the back button icon entities
@@ -29,6 +31,9 @@ $.hiddenSlider = //
 $.topic = //text that describes the page
 $.songListHolder = // div that holds selection list
 $.songSelector = // select element to be filled with song choices
+$.pictureFrame = //primary holder of song photo (splash2 is the secondsry holder)
+$.pictureSlider = //hidden range input element over pictureFrame used to slide picture
+$.newGithubId = //text input for another github user's music list
 //$.etc =   // describe each DOM object to be accessed in this app project
 "domObjects";// dummy string variable
 $.attachDomObjects();
@@ -40,9 +45,12 @@ $.githubId = "SabbaKilam";
 
 //====| Make the global data model object that holds the app's state variables |====//
 var model = {
-     audioPlayer: $.audioPlayer
+    startingUp: true
+    ,noPictureFiles: ["img/StarSphere.gif", "img/WarpSpeed.gif"]
+    ,audioPlayer: $.audioPlayer
     ,introAudioSource: "http://sabbakilam.github.io/gitmusicapp/silent.mp3" 
     ,audioSource: ""
+    ,picturePath: ""
     ,currentMusicPath: "https://" + $.githubId + ".github.io/music/list.json"
     ,baseUrl: "https://" + $.githubId + ".github.io/music/"
     ,musicListObject: {}
@@ -80,20 +88,41 @@ var model = {
     ,playing: false // starts true if autoplay is enabled
     ,newList: false
     ,songListHolderTouched: false
+    ,appTouched: false
+    ,splash2Touched: false
     ,songSelectedManually: false
-    ,goodTimes: [256.25, 1348, 3315.5 ]
-    
+    //----| picture sliding state variables |----//
+    ,pictureSliderTouched: false
+    ,delayNextTouchResponse: false
+    ,firstSliderValue: 50
+    ,lastSliderValue: 50
+    ,sliderTravelAmount: 0
+    ,sliderTimerId: 0
+    ,picWidth: $.pictureFrame.getBoundingClientRect().width
+    ,picLeft: 0
+    ,sliding: false
+    ,firstPress: true
+    ,appInStartupMode: true
 };
 //====================| END of Model |===================//
 
 $.initialize = function initialize(){
+    var OSName="Unknown OS";
+    if (window.navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+    if (window.navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+    if (window.navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+    if (window.navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+    model.OSName = OSName;
+    alert(model.OSName);
     //gather shuffle images
-    for(let i=1; i<=4;i++){
-        model.shuffleImages.push("shuffle"+i+".png");
+    for(var i=1; i<=4; i++){
+        model.shuffleImages.push("shuffle" + i + ".png");
     }
+    
+    //fill dropdown list
     getMusicList(fillSelectOptions);
     
-    //swap and kill flash screens
+    //swap and kill opening splash screens, then load first picture in spalsh 2.
     $($.splash1).styles("visibility: visible")("opacity: 1"); 
     setTimeout(function(){
         // kill first splash screen and show next one (css eases in 2seconds)
@@ -103,10 +132,20 @@ $.initialize = function initialize(){
             // kill second screen.
             $($.splash2).styles("visibility: hidden")("opacity: 0");
             $($.app).styles("visibility: visible")("opacity: 1");
+            model.startingUp = false;
+            setTimeout(function(){
+                //okay now time to replace the spalsh screen2 image with current song's picture
+                $.splash2.style.background = "url(" + model.picturePath + ") no-repeat top";
+                $.splash2.style.backgroundSize = "cover";
+                model.appInStartupMode = false;  
+            },1000);
         },1500);
     },1500);
+    
+    //put slider all the way to the left
     document.getElementById("hiddenSlider").value = 0;
-    $.adjustRem(1, 85); // $.adjustRem(1, 90) has worked well so far
+    
+    $.adjustRem(1, 85); // $.adjustRem(1, 85) has worked well so far
     if(window.innerWidth >= model.maximumAppWidth){
         model.windowWidth = model.maximumAppWidth;            
     }else{
@@ -114,19 +153,21 @@ $.initialize = function initialize(){
     }
     model.windowHeight = window.innerHeight;
     model.resized = true;
-    model.audioPlayer.volume = 1.0; //100%. Let local device reduce volume
+    model.audioPlayer.volume = 1.0; //100% volume. Let local device reduce (adjust) volume
 };
 
 //====| app "starts" here |====//
 $(window).on("load", function(){
     $.initialize();
     updateSlider();
-    var btnPlaceAndSize = document.getElementById("playPauseButton").getBoundingClientRect();
-    $($.audioPlayer).styles("top: " + (btnPlaceAndSize.height/2)  + "px");
+    
+    //place local audio player near the top to overlap our playPause button:
+    adjustAudioPlayer();    
     
     //====| Register DOM events into the data model |====//
     // Note: handlers should only change model flags and model data, not the DOM.
     $(window).on("resize", function(){
+        ignoreNewGithubId();       
         if(window.innerWidth >= model.maximumAppWidth){
             model.windowWidth = model.maximumAppWidth;            
         }else{
@@ -137,6 +178,9 @@ $(window).on("load", function(){
     });
     
     $(window).on("click", function(e){
+        if(e.target.id !== "newGithubId"){
+            ignoreNewGithubId();
+        }
         if(e.target.id === 'audioPlayer'){
             model.playPauseButtonTouched = true;
         }
@@ -195,6 +239,59 @@ $(window).on("load", function(){
     $($.songSelector).on("change", function(){
         model.songSelectedManually = true;
     });
+    
+    $($.pictureFrame).on("mousedown", function(){
+        model.appTouched = true;        
+    });
+    
+    $($.splash2).on("mousedown", function(){
+        model.splash2Touched = true;
+    });
+    $($.pictureSlider).on("mousedown", function(){
+        if(model.delayNextTouchResponse)return;
+        model.delayNextTouchResponse = true;
+        setTimeout(function(){
+            model.delayNextTouchResponse = false;            
+        }, 750);
+        model.sliding = false;        
+    });
+    $($.pictureSlider).on("input", function(){
+        model.pictureSliderTouched = true;
+    });
+    $($.newGithubId).on("mousedown", function(){
+        $($.newGithubId).styles("opacity: 1");
+    });
+    $($.newGithubId).on("keyup", function(e){
+        if(e.keyCode && e.keyCode === 13){
+            $.newGithubId.blur();
+            $($.newGithubId).styles("opacity: 0");
+
+                var possibleGithubId = $.newGithubId.value.trim();
+                $.newGithubId.value = "";
+                var possibleListUrl = "https://" + possibleGithubId + ".github.io/music/list.json";
+                var getList = new XMLHttpRequest();
+            try{                
+                getList.open("GET", possibleListUrl);
+                getList.send();
+                getList.onload = function(){
+                    if(getList.status === 200 || getList.status === 0){
+                        if(getList.response.length !== 0){
+                            $.githubId = possibleGithubId;
+                            model.currentMusicPath = "https://" + $.githubId + ".github.io/music/list.json";
+                            model.baseUrl = "https://" + $.githubId + ".github.io/music/";
+                            getMusicList(fillSelectOptions); 
+                        }
+                    }
+                    else{
+                        alert("Trouble getting new music list");
+                    }
+                };//END getList.onload
+            }catch(e){
+                alert(e);
+            }    
+        }
+    });
+    
 
     //=====| UPDATE the view (GUI) with this polling timer |====//
     /* 
@@ -209,13 +306,15 @@ $(window).on("load", function(){
         
         showTimes();
         updateSlider(); 
-
+        // don't attempt to display song duration until that info is available
         if( ! model.durationDiscovered ){ 
             if( !isNaN(model.audioPlayer.duration) && model.audioPlayer.duration !== 0){
                 $.duration.innerHTML = $.secToMinSec(model.audioPlayer.duration);
                 model.durationDiscovered = true;
             }
         }
+        
+        // show proper play/pause icon based on reported play or pause
         if(! model.audioPlayer.paused && ! model.audioPlayer.ended){
             pressIn($.playPauseButton);
             $($.playPauseButton).html(model.pauseIcon);            
@@ -223,6 +322,8 @@ $(window).on("load", function(){
             release($.playPauseButton);
             $($.playPauseButton).html(model.playIcon);             
         }
+        
+        //check for resizing
         if(model.resized){
             if(model.windowWidth >= model.maximumAppWidth){
                 $($.app).styles("width: " + model.maximumAppWidth + "px");
@@ -231,15 +332,42 @@ $(window).on("load", function(){
             else{
                 $($.app).styles("width: 100%");
             }
-            $.adjustRem("", "", model.windowWidth);            
+            $.adjustRem("", "", model.windowWidth); 
+            
             //make audio element track the playPause button
             adjustAudioPlayer();
             
+            //stuff for sliding picture
+            model.picWidth = $.pictureFrame.getBoundingClientRect().width;          
+            
             updateSlider();
+            
+            //----| try this for a better fit (centered) on computer screens |----//
+            let fudgeTerm = 75;
+            let niceHeight =  0;
+            let h1 = $.controls.getBoundingClientRect().height;
+            let h2 = $.controls2.getBoundingClientRect().height;
+            let h3 = $.controls3.getBoundingClientRect().height;
+            let hPic = $.app.getBoundingClientRect().width; //pic height == app width
+            let hInfo = $.bottomMusicInfo.getBoundingClientRect().height;
+            niceHeight = h1 + h2 + h3 + hPic + hInfo + fudgeTerm;
+            if(model.windowHeight > niceHeight){
+              $($.app).styles("height: " + niceHeight + "px");
+            }
+            else{
+              $($.app).styles("height: 100%");              
+            }
+            //---------------------------------------------------------//
+            
             model.resized = false;
+        }        
+        //maybe check for muted condition
+        if(model.audioPlayer.muted || model.audioPlayer.volume === 0){
+            pressInMute();
         }
-        if(model.audioPlayer.muted){
-            model.muted = true;
+        else if(! model.audioPlayer.muted || model.audioPlayer.volume !== 0){
+            releaseMute();          
+            //model.muted = false;          
         }
         
         if(model.backButtonTouched){
@@ -272,18 +400,16 @@ $(window).on("load", function(){
             model.backButtonTouched = false;            
         }
         
-        if(model.playPauseButtonTouched && model.audioPlayer.paused){// && ! model.playing){
+        if(model.playPauseButtonTouched && model.audioPlayer.paused){
             model.audioPlayer.play();
             pressIn($.playPauseButton);
             $($.playPauseButton).html(model.pauseIcon);
-            //model.playing = true;
             model.playPauseButtonTouched = false;
         }
-        else if(model.playPauseButtonTouched && ! model.audioPlayer.paused){// && model.playing){
+        else if(model.playPauseButtonTouched && ! model.audioPlayer.paused){
             model.audioPlayer.pause();
             release($.playPauseButton);
             $($.playPauseButton).html(model.playIcon);
-            //model.playing = false;
             model.playPauseButtonTouched = false;            
         }
         if(model.menuButtonTouched){
@@ -322,7 +448,7 @@ $(window).on("load", function(){
             }else{
                 model.audioPlayer.muted = false;
                 model.muted = false;
-                releaseMute();                
+                releaseMute();
             }
             model.muteButtonTouched = false;
         }
@@ -330,12 +456,20 @@ $(window).on("load", function(){
             if(model.nonStop){
                 model.audioPlayer.removeAttribute("autoplay");
                 release($.nonStopButton);
-                model.nonStop = false;
+                 if(model.shuffling){
+                    toggleShuffleImages(false);
+                    model.shuffling = true;
+                    staticShuffle();
+                }
+                model.nonStop = false;                
             }
             else{
                 model.audioPlayer.setAttribute("autoplay", "autoplay");
                 pressIn($.nonStopButton);
-                model.nonStop = true;
+                if(model.shuffling){
+                    toggleShuffleImages(true);
+                }
+                model.nonStop = true;                
             }
             model.nonStopButtonTouched = false;
         }
@@ -351,13 +485,10 @@ $(window).on("load", function(){
                 model.shuffling = false;
             }
             else{
-                pressIn($.shuffleButton);
-                $($.shuffleButton).styles("color: transparent");
-                $($.shuffleButtonSpan).styles
-                  ("background: url(img/shuffleBlack.png) no-repeat center")
-                  ("background-size: contain")
-                ;
-                toggleShuffleImages(true);
+                staticShuffle();
+                if(model.nonStop){
+                    toggleShuffleImages(true);
+                }
                 model.currentSongsArray = $.scrammbleThis(model.masterSongsArray);
                 fillSelectOptions(model.currentSongsArray, $.songSelector);
                 $.songSelector.selectedIndex = model.currentSongIndex;
@@ -387,37 +518,162 @@ $(window).on("load", function(){
             //update index, play selected song
             hide($.songListHolder);
             model.currentSongIndex = $.songSelector.selectedIndex;
-            model.audioPlayer.pause();
             model.audioPlayer.load();
+            //model.audioPlayer.pause();
+            model.audioPlayer.play();
+            //---| Per Ryan Linehan's suggestion to immediately play chosen song |----//
+            //model.playPauseButtonTouched = true;           
+            /**
+              This works* because we paused the player (above);
+              When the playPauseButtonTouched is checked, model.player.paused
+              is checked as well. If both are true (as is the case here), play will result.
+              
+              *It fails if non-stop is active: load, pause, and play interrupt each other.              
+            */
+            //---| END of suggested change |----// 
             cueNextSong(model.currentSongIndex);
-            model.songSelectedManually = false;
-            
+            //let cueNextSong  change model.songSelectedManually = false;
+            //model.songSelectedManually = false;
+        }
+
+        if(model.splash2Touched){
+            $($.splash2).styles("visibility: hidden")("opacity: 0");
+            model.splash2Touched = false;
+        }
+        
+        /*********************************************
+        ==========| Picture Slider Handler |==========
+        **********************************************/
+        if(model.pictureSliderTouched){
+            if(model.firstPress){
+                model.firstSliderValue = 1* $.pictureSlider.value;
+                model.firstPress = false;
+            }
+            var entryValue = 1 * $.pictureSlider.value;
+            clearTimeout(model.sliderTimerId);
+            model.sliderTimerId = setTimeout(function(){
+                model.lastSliderValue = entryValue;
+                $.pictureSlider.value = 50;
+                $($.pictureFrame).styles("left: 0");
+                model.picLeft = 0;                
+                model.firstPress = true;
+                model.sliding = false;                 
+                if(model.firstSliderValue === model.lastSliderValue){
+                  enlargePicture();
+                }
+
+            },500);
+            //---------------------//
+              model.sliderTravelAmount =  entryValue - model.firstSliderValue;
+              model.picLeft = parseInt(model.picWidth * model.sliderTravelAmount / 100, 10);
+              var goodSlideConditions = (model.firstSliderValue <= 45 &&  entryValue  >= model.firstSliderValue) ||
+                  (model.firstSliderValue >= 55 && entryValue <= model.firstSliderValue);
+              if(model.sliding){
+                if(goodSlideConditions){
+                  if(model.picLeft >= 0){
+                    $($.pictureFrame).styles("left: " + model.picLeft + "px");
+                    if(model.picLeft > 0.75 * $.pictureFrame.getBoundingClientRect().width){
+                        clearTimeout(model.sliderTimerId);
+                        model.firstPress = true; //crucial! to prevent fast forwarding.
+                        model.backButtonTouched = true;
+                        slideSlowlyFromLeft();
+                    }
+                  }else{
+                    $($.pictureFrame).styles("left: " +  2 * model.picLeft + "px");
+                    if( Math.abs(model.picLeft) > 0.75 * Math.abs($.pictureFrame.getBoundingClientRect().width) ){
+                        clearTimeout(model.sliderTimerId);
+                        model.firstPress = true; //crucial! to prevent fast forwarding.
+                        model.nextButtonTouched = true;
+                        slideSlowlyFromRight();                        
+                    }  
+                  } 
+                }
+              }else{
+                model.sliding = true;    
+              }
+            //---------------------//
+            model.pictureSliderTouched = false;
         }
         if(true){}
         if(true){}
-        if(true){}
-        if(true){}
-        
         
         //etc.
         //====| helper functions |====//
+        
+        //===| staticShuffle |==========//
+        function staticShuffle(){
+            model.shuffle = true;
+            pressIn($.shuffleButton);
+            $($.shuffleButton).styles("color: transparent");
+            $($.shuffleButtonSpan).styles
+              ("background: url(img/shuffleBlue.png) no-repeat center")
+              ("background-size: contain")
+            ;
+        }
+        //===| END of staticShuffle |===//
+        
+        function slideSlowlyFromLeft(){
+            $($.pictureFrame).styles("transition: left 0s ease");            
+            var left = -2 * $.pictureFrame.getBoundingClientRect().width;
+            $($.pictureFrame).styles
+                ("left: " + left + "px");
+            setTimeout(function(){
+                $($.pictureFrame).styles("transition: left 0.75s ease")("left: 0");
+                    setTimeout(function(){
+                    $($.pictureFrame).styles("transition: left 0s ease");
+                    }, 700);                
+            }, 10); 
+        }
+        function slideSlowlyFromRight(){
+            var left = $.pictureFrame.getBoundingClientRect().width;
+            $($.pictureFrame).styles
+                ("left: " + left + "px");
+            setTimeout(function(){
+                $($.pictureFrame).styles("transition: left 0.75s ease")("left: 0");
+                    setTimeout(function(){
+                    $($.pictureFrame).styles("transition: left 0s ease");
+                    }, 700);                
+            }, 10);
+        }
+        function enlargePicture(){
+            $($.splash2).styles("visibility: visible")("opacity: 1");            
+        }        
         function pressInMute(){
             $($.muteButtonSpan).styles
                 ("background: url("+ model.speakerMuteIconPath +") no-repeat top")
-                ("background-size: contain")
+                ("background-size: 80% 75%")               
             ;
             $($.muteButton).styles
-                ("background: radial-gradient(at top left, black, white)")
+                ("border: none")
+                ("box-shadow: none")
+                ("border-top: 1px solid black")
+                ("border-left: 1px solid black")
+                ("box-shadow: 1px 1px 1px #aaa")
+                ("font-size: 0.895rem")
+                ("color: transparent")
             ;
+            $.browserPrefix.forEach(prefix=>{
+                $($.muteButton).styles("background: " + prefix + "linear-gradient(#3a3a3a, #666)");
+            });
+            
         }
         function releaseMute(){
             $($.muteButtonSpan).styles
                 ("background: url("+ model.speakerLoudIconPath +") no-repeat top")
-                ("background-size: contain")
+                ("background-size: 80% 75%")
             ;
             $($.muteButton).styles
-                ("background: radial-gradient(at top left, white, black)")
-            ;            
+                ("border: none")
+                ("box-shadow: none")                    
+                ("border-top: 1px solid #aaa")
+                ("border-left: 1px solid #666")
+                ("box-shadow: 1px 1px 2px black")
+                ("font-size: 0.90rem")
+                ("color: transparent")
+            ;
+            $.browserPrefix.forEach(prefix=>{
+                $($.muteButton).styles("background: " + prefix + "linear-gradient(#666, #3a3a3a)");
+            });
         }
         function driveSlider(){
             if(!isNaN(model.audioPlayer.duration) && model.audioPlayer.duration !== 0){
@@ -465,14 +721,9 @@ $(window).on("load", function(){
                 $(domObject).styles("background: " + prefix + "linear-gradient(#666, #3a3a3a)");
             });
         }
-        function adjustAudioPlayer(){
-           //make native (& hidden) audio element track the playPause button
-           var btnPlaceAndSize = document.getElementById("playPauseButton").getBoundingClientRect();
-           $($.audioPlayer).styles("top: " + (btnPlaceAndSize.height/2)  + "px");
-        }
-        //----------------------------------//
+        //----------------------------------//        
         model.updatingView = false;
-        }
+    }
         function updateSlider(){
             var width = parseInt(0.92 * model.windowWidth, 10);
             var leftBorder = parseInt(model.fractionLeft * width, 10);
@@ -489,7 +740,7 @@ $(window).on("load", function(){
         }
 });
 //====| app "ends" here |====//
-function getMusicList(callback){
+function getMusicList(fillSelectOptions){
     var listGetter = new XMLHttpRequest();
     listGetter.open("GET", model.currentMusicPath);
     listGetter.send();
@@ -508,8 +759,8 @@ function getMusicList(callback){
             model.currentSongIndex = Math.floor( model.currentSongsArray.length * Math.random() );
  
             cueNextSong(model.currentSongIndex);
-            if(typeof callback === "function"){
-                callback(model.currentSongsArray, $.songSelector);
+            if(typeof fillSelectOptions === "function"){
+                fillSelectOptions(model.currentSongsArray, $.songSelector);
             }
         }
         else{
@@ -517,15 +768,16 @@ function getMusicList(callback){
         }
     }
 }
+
 function toggleShuffleImages(doIt){
-    if(doIt === false && model.shuffling){
+    if(doIt === false){// && model.shuffling){
         //--------------------------------
         clearInterval(model.shuffleTimerId);
         $.shuffleButtonSpan.style.background = "url(img/shuffleWhite.png) no-repeat center";
         $.shuffleButtonSpan.style.backgroundSize = "contain";
         model.shuffling = false;
         //--------------------------------
-    }else if(doIt === true && ! model.shuffling){
+    }else if(doIt === true ){
         model.shuffleTimerId = setInterval(()=>{
             model.shuffleImages.unshift(model.shuffleImages.pop());
             $.shuffleButtonSpan.style.background = "url(img/" + model.shuffleImages[0]  + ") no-repeat center";
@@ -539,24 +791,50 @@ function cueNextSong(index){
     var pictureFile;
     if(model.musicListObject[model.currentSongsArray[index]].picture){
         pictureFile = model.musicListObject[model.currentSongsArray[index]].picture;
-        $.app.style.background = "url(" + model.baseUrl + "pictures/" + pictureFile + ") no-repeat center";
-        $.app.style.backgroundSize = "contain";                
+        model.picturePath = model.baseUrl + "pictures/" + pictureFile;
+        $.pictureFrame.style.background = "url(" + model.picturePath + ") no-repeat top";
+        $.pictureFrame.style.backgroundSize = "contain";
+        
+        if(!model.startingUp){
+            //place picture in splash screen #2 to be brought forward if required (by user request)
+            $.splash2.style.background = "url(" + model.picturePath + ") no-repeat top";
+            $.splash2.style.backgroundSize = "cover";              
+        }
     }
     else{
-        pictureFile = "img/WarpSpeed.gif";
-        $.app.style.background = "url(" + pictureFile + ") no-repeat center";
-        $.app.style.backgroundSize = "contain";                
+        pictureFile = swapNoPictures();//"img/WarpSpeed.gif";
+        model.picturePath = pictureFile;
+        $.pictureFrame.style.background = "url(" + model.picturePath + ") no-repeat top";
+        $.pictureFrame.style.backgroundSize = "contain";
+        
+        if(!model.startingUp){
+            //place picture in splash screen #2 to be brought forward if required (by user request)
+            $.splash2.style.background = "url(" + model.picturePath + ") no-repeat top";
+            $.splash2.style.backgroundSize = "cover";               
+        }
     }
-    pictureFile = model.musicListObject[model.currentSongsArray[index]].picture;
     var artist = model.musicListObject[model.currentSongsArray[index]].artist;
     var title = model.musicListObject[model.currentSongsArray[index]].title;
     model.audioSource = model.baseUrl + audioFilename;
+    
+    //pause audioPlayer before loading new source:
+    model.audioPlayer.pause();
     model.audioPlayer.src = model.audioSource;
+    
     $($.topic).html(artist + "<br/>");
     $($.topic).addhtml(title);
-    if(model.nonStop){
+    if(! model.appInStartupMode ){
+      if(model.songSelectedManually){
         model.audioPlayer.play();
+        model.songSelectedManually = false;
+      }
     }
+    //---| a helper function swapNoPictures() |----//
+    function swapNoPictures(){
+      model.noPictureFiles.push(model.noPictureFiles.shift());
+      return model.noPictureFiles[0];
+    }
+    //--------------------------------------------//
 }
 function show(element){
    $(element).styles
@@ -583,3 +861,18 @@ function fillSelectOptions(array, selectionTarget){
         });
     }
 }
+function adjustAudioPlayer(){
+   //make native (& hidden) audio element track the playPause button
+   var btnPlaceAndSize = document.getElementById("playPauseButton").getBoundingClientRect();
+   //$($.audioPlayer).styles("top: " + (btnPlaceAndSize.height/0.65)  + "px");
+   $($.audioPlayer).styles("top: 4.1rem"); 
+}
+function ignoreNewGithubId(){
+  //$.newGithubId.blur();
+  $($.newGithubId).styles("opacity: 0");
+}
+
+
+
+
+

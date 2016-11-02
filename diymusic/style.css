@@ -18,6 +18,20 @@ body{
     overflow: hidden;
     background-color: transparent;
 }
+#preloadedImages{
+    position: absolute;
+    visibility: hidden;
+}
+#newGithubId{
+    position: fixed;
+    bottom:0;
+    left:0;
+    margin: auto;
+    opacity: 0;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
 #songListHolder{
     position: absolute;
     width: 100%;
@@ -51,6 +65,7 @@ body{
     height: 100%;
     overflow-x: hidden;
     overflow-y: hidden; 
+    background: radial-gradient(#393939,black);
 }
 
 #app{
@@ -64,11 +79,28 @@ body{
     margin: auto;
     background-color: black;
     font-family: sans-serif;
+    border-radius: 0.5rem;
     visibility: hidden;
     opacity: 0;
     transition: opacity 1s , visibility 1s, background 0.5s ease;
-    border: 2px solid #111;
+    border: 3px solid #111;
+    overflow: hidden;
 }
+.slidingPicture{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 12.5rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    cursor: pointer;    
+}
+
+#pictureSlider{
+    opacity: 0.0;
+}
+
 .splashScreen{
     position: absolute;
     width: 100%;
@@ -86,7 +118,7 @@ body{
 #splash1{
     background-color: rgb(51, 43, 51);
     background: url(img/FlashingIpod.gif) no-repeat;  
-    transition: opacity 2s ease, visibility 2s ease;
+    transition: opacity 1.5s ease, visibility 1.5s ease;
     background-size: cover;
     visibility: visible;
     opacity: 1;    
@@ -97,11 +129,13 @@ body{
   right: 0;
   margin: 0;
   width: 100%;
-  height: 1.75rem;
+  /*height: 1.75rem;*/
+  height: 2.5rem;
   background-color: black;  
 }
 #topVisor{
- top: 0; 
+ top: 0;
+ /*height: 2rem; */
 }
 #bottomVisor{
   bottom: 0;
@@ -110,9 +144,11 @@ body{
 #splash2{
     background: url(img/YourMusic.png) no-repeat center;
     background-size: contain;
-    transition: opacity 2s ease, visibility 2s ease;    
+    transition: opacity 1.5s ease, visibility 1.5s ease;    
     visibility: hidden;
     opacity: 0;
+    cursor: pointer;
+    z-index: 10;
 }
 
 audio{
@@ -134,18 +170,20 @@ audio{
 #controls{
     position: absolute;
     width: 100%;
-    top: 0.125Rem;
+    top: 2.4rem;    
+
 }
 #controls2{
     position: absolute;
-    width: 100%;    
-    top: 2.4rem;
+    width: 100%;
+    top: 0.125Rem;    
+    z-index: 7;
 }
 #controls3{
     position: absolute;
     width: 100%;    
     top: 4.68rem;
-    z-index: 4;
+    z-index: 7;
 }
 
 .button{
@@ -168,21 +206,15 @@ audio{
     color: white; 
     opacity: 0.95;
 }
+
 #muteButton{
     position: absolute;
-    left: 0;/*left: 64%;*/
-    right: 0;
+    left:0;
+    right:0;
     margin: auto;
-    width:  1.65rem;/*7.3%;*/
-    height:  1.32rem;/*1.07rem;    */
     padding-top: 0.3rem;
-    
     cursor: pointer;
-    
-    border-radius: 50%;
-    
     color: transparent;
-    background: radial-gradient(at top left, white, black);
     opacity: 1.0;
     transition: background 0.5s ease;
 }
@@ -191,13 +223,12 @@ audio{
     position: relative;
     display:inline-block;
     background: url(img/speakerLoud.png) no-repeat top ;
-    background-size: contain;
-    width: 0.88rem;
-    right: -0.05rem;
-    bottom: -0.1rem;
-    top: 0.1rem ;
+    background-size: 80% 75%;
+    width: 1.8rem;
+    top: 0.075rem;
     margin: auto;
 }
+
 
 #backButtonSpan{
     display: inline-block;
@@ -210,7 +241,6 @@ audio{
     letter-spacing: -0.1rem;
     line-height: 200%;    
     z-index: 2;
-    transition: color 1.5s ease;
     cursor: pointer;     
 }
 
@@ -228,7 +258,6 @@ audio{
     background-size: contain;
     display: inline-block;
     width: 1.5rem;
-    //stransition: background 0.5s ease;
 }
 
 #message{
@@ -253,7 +282,7 @@ audio{
     left: 0;
     right: 0;
     margin: auto;
-    bottom: 0.25rem;
+    top: 7.5rem;
     z-index: 0;
     
     background-color: rgba(0, 0, 0, 0.7);
@@ -275,12 +304,6 @@ audio{
     padding-bottom: 0.1rem;
     left:0;
     right:0;
-    /*
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 0.4rem;
-    box-shadow: 0.1rem 0.1rem 0.4rem black;
-    text-shadow: 0 1px 0 black;
-    */
     z-index: 5;
 }
 
@@ -345,7 +368,7 @@ audio{
     font-family: monospace;
     width: 100%;
     height: 1rem;/*1rem;*/
-    font-size: 0.70rem;
+    font-size: 0.85rem;
 
     font-weight: bold;
     text-shadow: 0 1px 0 black;
@@ -355,13 +378,6 @@ audio{
     bottom: 0;
     margin: auto;
     color: white;
-
-    /*
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 0.2rem;
-    box-shadow: 0.1rem 0.1rem 0.4rem black;   
-    */
-    
 }
 #timeRack{
     position: absolute;
