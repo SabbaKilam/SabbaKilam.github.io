@@ -1,0 +1,11 @@
+cd ~/workspace/.git
+sudo chgrp -R ubuntu .
+sudo chmod -R g+rwX .
+sudo find . -type d -exec chmod g+s '{}' +
+
+then
+
+git pull
+
+Source1: http://stackoverflow.com/questions/6448242/git-push-error-insufficient-permission-for-adding-an-object-to-repository-datab
+Source2: https://git-scm.com/docs/git-pull
