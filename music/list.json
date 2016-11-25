@@ -56,7 +56,8 @@
     },
     "Quicksilver Messenger Service - Fresh Air": {
         "title": "Fresh Air",
-        "artist": "Quicksilver Messenger Service"
+        "artist": "Quicksilver Messenger Service",
+        "picture" : "freshair.jpg"
     },
     "Elton John - Come Down in Time": {
         "title": "Come Down in Time",
