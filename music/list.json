@@ -54,7 +54,7 @@
         "artist": "Tower of Power",
         "picture" : "TOPbumpcity.jpg"
     },
-    "quickfreshair": {
+    "Quicksilver Messenger Service - Fresh Air": {
         "title": "Fresh Air",
         "artist": "Quicksilver Messenger Service"
     },
@@ -336,7 +336,8 @@
     },
     "Quicksilver Messenger Service - What About Me" :{
         "title" : "What About Me",
-        "artist" : "Quicksilver Messenger Service"
+        "artist" : "Quicksilver Messenger Service",
+        "picture": "whataboutme.jpg"
     },
     "Joni Mitchell - River" :{
         "title" : "River",
