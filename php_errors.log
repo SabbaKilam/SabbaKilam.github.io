@@ -1,0 +1,4 @@
+[22-Nov-2016 19:12:09 UTC] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 204090937 bytes) in /home/ubuntu/workspace/YiheyisUpload/getFile.php on line 14
+[22-Nov-2016 19:12:09 UTC] PHP Stack trace:
+[22-Nov-2016 19:12:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/YiheyisUpload/getFile.php:0
+[22-Nov-2016 19:12:09 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/YiheyisUpload/getFile.php:14

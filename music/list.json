@@ -660,5 +660,10 @@
         "title" : "Work for Love",
         "artist" : "Ministry",
         "picture" : "ministrysympathy.png"
+    },
+    "The Who - Eminence Front" :{
+        "title" : "Eminence Front",
+        "artist" : "The Who",
+        "picture" : "whofront.png"
     }
 }
