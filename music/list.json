@@ -668,5 +668,10 @@
         "title" : "Eminence Front",
         "artist" : "The Who",
         "picture" : "whofront.jpg"
+    },
+    "Nelly Furtado - Remember the Days" :{
+        "title" : "Remember the Days",
+        "artist" : "Nelly Furtado",
+        "picture" : "NellyFurtado.jpg"
     }
 }
