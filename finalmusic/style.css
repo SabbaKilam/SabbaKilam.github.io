@@ -47,7 +47,7 @@ body{
   text-align: center;  
   height: 49%;
   width: 99%;
-  transition: all 0.25s ease;  
+  transition: all 0.10s ease;  
 }
 
 .horizontal{
@@ -55,7 +55,7 @@ body{
   display: inline-block;
   height: 99%;
   width: 47%;
-  transition: all 0.25s ease;  
+  transition: all 0.10s ease;  
 }
 #picture{
 	background: url(pictures/JourneyFaith.png) no-repeat center;
