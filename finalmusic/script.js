@@ -1,14 +1,40 @@
 var divs = document.getElementsByTagName('div');
 var boxes = document.getElementsByClassName('box');
+var choices = document.getElementById('choices');
+var picture = document.getElementById('picture');
+var player = document.getElementById('player');
+var songTitle = document.getElementById('songTitle')
+
 var app = divs[0];
 var controls = divs[1];
-var picture = divs[2];
 
 // have window object handle resize event and load event
 window.addEventListener("load", flipFlop);
 window.addEventListener("resize", flipFlop);
 
+choices.addEventListener("change", playSongShowPicture);
 
+
+/*
+	Event Handler functions below:
+*/
+function playSongShowPicture(e){
+	//choose the correct picture
+	var pathToPicture = "pictures/";
+	var index = choices.selectedIndex;
+	pathToPicture += songs[index].picture + ".png";
+	picture.style.background = "url(" + pathToPicture + ") no-repeat center";
+	picture.style.backgroundSize = "100% 100%";
+	
+	//play the correct song
+	var pathToSong = "songs/";
+	pathToSong += songs[index].song + ".mp3";
+	player.src = pathToSong;
+	player.play();
+	
+	//show the correct song title
+	songTitle.innerHTML = songs[index].song;
+}
 //make a resize handler
 function flipFlop(evtObj){
   var winWidth = window.innerWidth;
