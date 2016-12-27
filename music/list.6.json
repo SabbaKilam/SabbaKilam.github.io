@@ -4,7 +4,7 @@
         "artist": "Bjork",
         "picture": "bjork-venus.png"
     },
-    "Billy Idol - Eyes Without a Face": {
+    "eyesface": {
         "title": "Eyes Without a Face",
         "artist": "Billy Idol"
     },
@@ -18,7 +18,7 @@
         "artist": "Joan Baez",
         "picture": "joan.png"
     },
-    "Unknown - Vientos De Los Andes-Track 1": {
+    "vientostrack1": {
         "title": "Vientos De Los Andes-Track 1",
         "artist": "Unknown"
     },
@@ -31,7 +31,7 @@
         "artist": "Citizen Cope",
         "picture": "cope-lee.png"
     },
-    "Paul Simon - Mother & Child Reunion": {
+    "motherchild": {
         "title": "Mother & Child Reunion",
         "artist": "Paul Simon"
     },
