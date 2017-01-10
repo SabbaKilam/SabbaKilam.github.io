@@ -1,0 +1,36 @@
+#holder{
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    
+    background: gray;
+    color: white;
+    
+    user-select: none;
+    -moz-user-select: none;
+    
+}
+
+#app{
+    height: 85%;
+    width: 100%;
+    background: black;
+    
+    /* center the app window*/
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;   
+}
+
+select{
+    width: 100%;
+    text-align: center;
+}
