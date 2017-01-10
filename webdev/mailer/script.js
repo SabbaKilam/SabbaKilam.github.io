@@ -6,7 +6,7 @@ document.getElementById("chooser").onchange = sendEmail;
 function sendEmail(eventObject){
     var source = eventObject.target;
     var index = source.selectedIndex;
-    var options = source.options
+    var options = source.options;
     var email = options[index].value;
     window.location = "mailto: "+email;
 }
