@@ -8,5 +8,5 @@ function sendEmail(eventObject){
     var index = source.selectedIndex;
     var options = source.options;
     var email = options[index].value;
-    window.location.href = "mailto: "+email;
+    window.location.href = "mailto://"+email;
 }
