@@ -36,3 +36,6 @@ select{
     text-align: center;
     font-size: 3rem;
 }
+option{
+    text-align: center;    
+}
