@@ -45,9 +45,8 @@ $.githubId = "SabbaKilam";
 
 //====| Make the global data model object that holds the app's state variables |====//
 var model = {
-  //"img/StarSphere.gif", 
     startingUp: true
-    ,noPictureFiles: ["img/WarpSpeed.gif", "img/StarGlobe.gif"]
+    ,noPictureFiles: ["img/StarSphere.gif", "img/WarpSpeed.gif"]
     ,audioPlayer: $.audioPlayer
     ,introAudioSource: "http://sabbakilam.github.io/gitmusicapp/silent.mp3" 
     ,audioSource: ""
@@ -108,50 +107,13 @@ var model = {
 //====================| END of Model |===================//
 
 $.initialize = function initialize(){
-    //*================================================================//
-    $.adjustRem(1, 85); // $.adjustRem(1, 85) has worked well so far
-    if(window.innerWidth >= model.maximumAppWidth){
-        model.windowWidth = model.maximumAppWidth;            
-    }else{
-        model.windowWidth = window.innerWidth;
-    }
-    model.windowHeight = window.innerHeight;
-    model.resized = true;
-    //==================================================================*/
-    if(window.innerWidth >= model.maximumAppWidth){
-        $($.app).styles("width: " + model.maximumAppWidth + "px");
-        model.windowWidth = model.maximumAppWidth;
-        //==================================================================//
-        let appDimensions = $.app.getBoundingClientRect();
-        let width = appDimensions.width;
-        let height = appDimensions.height;    
-        var splashScreens = document.querySelectorAll(".splashScreen"); 
-
-        [].forEach.call(splashScreens, screen=>{
-            $(screen)
-                .styles
-                    ("width: " + width + "px")
-                    ("height: " + height + "px")
-            ;         
-        }); //==================================================================//
-    }
-    else{
-        $($.app).styles("width: 100%");
-        //==================================================================//
-        let appDimensions = $.app.getBoundingClientRect();
-        let width = appDimensions.width;
-        let height = appDimensions.height;    
-        var splashScreens = document.querySelectorAll(".splashScreen"); 
-
-        [].forEach.call(splashScreens, screen=>{
-            $(screen)
-                .styles
-                    ("width: 100%")
-                    ("height: 100%")
-            ;         
-        }); //==================================================================//
-    }
-    $.adjustRem("", "", model.windowWidth);     
+    var OSName="Unknown OS";
+    if (window.navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+    if (window.navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+    if (window.navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+    if (window.navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+    model.OSName = OSName;
+    alert(model.OSName);
     //gather shuffle images
     for(var i=1; i<=4; i++){
         model.shuffleImages.push("shuffle" + i + ".png");
@@ -161,7 +123,7 @@ $.initialize = function initialize(){
     getMusicList(fillSelectOptions);
     
     //swap and kill opening splash screens, then load first picture in spalsh 2.
-    //$($.splash1).styles("visibility: visible")("opacity: 1"); 
+    $($.splash1).styles("visibility: visible")("opacity: 1"); 
     setTimeout(function(){
         // kill first splash screen and show next one (css eases in 2seconds)
         $($.splash1).styles("visibility: hidden")("opacity: 0");
@@ -180,19 +142,17 @@ $.initialize = function initialize(){
         },1500);
     },1500);
     
-    //restore splash screen 2 to full size
-    setTimeout(function(){
-        //=====================//
-        $($.splash2)
-            .styles
-                ("width: 100%")
-                ("height: 100%")
-        ;         
-        //=====================//        
-    },4200);
-    
     //put slider all the way to the left
     document.getElementById("hiddenSlider").value = 0;
+    
+    $.adjustRem(1, 85); // $.adjustRem(1, 85) has worked well so far
+    if(window.innerWidth >= model.maximumAppWidth){
+        model.windowWidth = model.maximumAppWidth;            
+    }else{
+        model.windowWidth = window.innerWidth;
+    }
+    model.windowHeight = window.innerHeight;
+    model.resized = true;
     model.audioPlayer.volume = 1.0; //100% volume. Let local device reduce (adjust) volume
 };
 
@@ -202,7 +162,7 @@ $(window).on("load", function(){
     updateSlider();
     
     //place local audio player near the top to overlap our playPause button:
-    //adjustAudioPlayer();    
+    adjustAudioPlayer();    
     
     //====| Register DOM events into the data model |====//
     // Note: handlers should only change model flags and model data, not the DOM.
@@ -222,7 +182,7 @@ $(window).on("load", function(){
             ignoreNewGithubId();
         }
         if(e.target.id === 'audioPlayer'){
-            //model.playPauseButtonTouched = true;
+            model.playPauseButtonTouched = true;
         }
     });
     
@@ -364,7 +324,7 @@ $(window).on("load", function(){
         }
         
         //check for resizing
-        if(model.resized){            
+        if(model.resized){
             if(model.windowWidth >= model.maximumAppWidth){
                 $($.app).styles("width: " + model.maximumAppWidth + "px");
                 model.windowWidth = model.maximumAppWidth;
@@ -373,9 +333,9 @@ $(window).on("load", function(){
                 $($.app).styles("width: 100%");
             }
             $.adjustRem("", "", model.windowWidth); 
-           
+            
             //make audio element track the playPause button
-            //adjustAudioPlayer();
+            adjustAudioPlayer();
             
             //stuff for sliding picture
             model.picWidth = $.pictureFrame.getBoundingClientRect().width;          
@@ -901,14 +861,12 @@ function fillSelectOptions(array, selectionTarget){
         });
     }
 }
-
 function adjustAudioPlayer(){
    //make native (& hidden) audio element track the playPause button
    var btnPlaceAndSize = document.getElementById("playPauseButton").getBoundingClientRect();
    //$($.audioPlayer).styles("top: " + (btnPlaceAndSize.height/0.65)  + "px");
-   //$($.audioPlayer).styles("top: 4.1rem"); 
+   $($.audioPlayer).styles("top: 4.1rem"); 
 }
-
 function ignoreNewGithubId(){
   //$.newGithubId.blur();
   $($.newGithubId).styles("opacity: 0");

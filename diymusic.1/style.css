@@ -117,11 +117,28 @@ body{
 }
 #splash1{
     background-color: rgb(51, 43, 51);
-    background: url(img/FlashingIpod.gif) no-repeat center;  
+    background: url(img/FlashingIpod.gif) no-repeat;  
     transition: opacity 1.5s ease, visibility 1.5s ease;
     background-size: cover;
     visibility: visible;
     opacity: 1;    
+}
+.visor{
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: 0;
+  width: 100%;
+  /*height: 1.75rem;*/
+  height: 2.5rem;
+  background-color: black;  
+}
+#topVisor{
+ top: 0;
+ /*height: 2rem; */
+}
+#bottomVisor{
+  bottom: 0;
 }
 
 #splash2{
@@ -134,10 +151,27 @@ body{
     z-index: 10;
 }
 
+audio{
+    position: fixed;
+    z-index: 4;
+    left: 50%;
+    width: 100px;
+    transform-origin: left;
+    transform: rotateZ(-90deg);
+    top: 50px;
+    opacity: 0;
+    outline: 1px dashed red;
+    cursor: pointer;
+}
+#audioPlayer{
+    cursor: pointer;   
+}
+
 #controls{
     position: absolute;
     width: 100%;
-    top: 2.4rem;
+    top: 2.4rem;    
+
 }
 #controls2{
     position: absolute;
@@ -146,22 +180,11 @@ body{
     z-index: 7;
 }
 #controls3{
-    position: relative;
+    position: absolute;
     width: 100%;    
-    top: 5.1rem;   
+    top: 4.68rem;
     z-index: 7;
 }
-#audioPlayer{
-    position: absolute;
-    z-index: 20;
-    width: 98%;
-    left: 0;
-    right: 0;
-    margin: auto;
-    cursor: pointer;
-    background-color: transparent;
-}
-
 
 .button{
     width: 31%;
@@ -276,8 +299,7 @@ body{
     margin: auto;
     width: 100%;
     height: 1.75rem;
-    /*bottom: 0;*/
-    top: 0;
+    bottom: 0;
     padding-top: 0;
     padding-bottom: 0.1rem;
     left:0;
@@ -295,8 +317,6 @@ body{
     top:0;
     margin: auto;
     text-align: center;
-    visibility: hidden;
-    opacity: 0;
 }
 .slider{
     position: absolute;
@@ -357,8 +377,6 @@ body{
     right:0;
     bottom: 0;
     margin: auto;
-    margin-top: 0.5rem;
-    margin-bottom: 0.25rem;    
     color: white;
 }
 #timeRack{
@@ -387,10 +405,4 @@ a:hover{
 }
 a:active{
     color: hsl(195, 100%, 50%);
-}
-
-
-#muteButton{
-    visibility: hidden;
-    opacity: 0;
 }
