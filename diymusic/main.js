@@ -284,6 +284,10 @@ $(window).on("load", function(){
         model.appTouched = true;        
     });
     
+    $($.pictureFrame).on("touchend", function(){
+        model.appTouched = true;        
+    });
+    
     $($.splash2).on("mousedown", function(){
         model.splash2Touched = true;
     });
@@ -294,10 +298,14 @@ $(window).on("load", function(){
             model.delayNextTouchResponse = false;            
         }, 750);
         model.sliding = false;        
-    });
+    });    
     $($.pictureSlider).on("input", function(){
         model.pictureSliderTouched = true;
     });
+    $($.pictureSlider).on("touchend", function(){
+        model.pictureSliderTouched = true;
+    });
+    
     $($.newGithubId).on("mousedown", function(){
         $($.newGithubId).styles("opacity: 1");
     });

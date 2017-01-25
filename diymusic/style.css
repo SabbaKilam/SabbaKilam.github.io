@@ -85,6 +85,7 @@ body{
     transition: opacity 1s , visibility 1s, background 0.5s ease;
     border: 3px solid #111;
     overflow: hidden;
+    box-shadow: 0.25rem 0.25rem 0.5rem black;
 }
 .slidingPicture{
     position: absolute;
@@ -114,6 +115,7 @@ body{
     z-index: 7;
     opacity: 0;
     visibility: hidden;
+    box-shadow: 0.5rem 0.5rem 1rem black;    
 }
 #splash1{
     background-color: rgb(51, 43, 51);
