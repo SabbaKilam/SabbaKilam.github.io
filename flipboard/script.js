@@ -5,8 +5,8 @@
 window.onload = function(){
  c.initialize();
  [
- 	//'touchstart',
- 	//'touchend',
+ 	'touchstart',
+ 	'touchend',
   	'touchmove',
 	'mousedown',
  	'mouseup',
