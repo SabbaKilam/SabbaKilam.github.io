@@ -54,7 +54,7 @@ c.updateModel = function updateModel(eventObject, updateView){
     let source = eventObject.target;
     let type = eventObject.type;
     let id = source.id;
-    let y = eventObject.clientY;
+    let y = eventObject.clientY || eventObject.touches[0].clientY;
     
     // Check on movement
     if(type === "mousemove" || type === "touchmove"){
