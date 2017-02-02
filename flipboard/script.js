@@ -55,10 +55,11 @@ c.updateModel = function updateModel(eventObject, updateView){
     let source = eventObject.target;
     let type = eventObject.type;
     let id = source.id;
-    let y = eventObject.clientY || eventObject.touches[0].clientY;
+
     
     // Check on movement
     if(type === "mousemove" || type === "touchmove"){
+        let y = eventObject.clientY || eventObject.touches[0].clientY;        
         m.priorY = m.currentY;
         m.currentY = y;
         if(m.currentY < m.priorY){
@@ -89,6 +90,7 @@ c.updateModel = function updateModel(eventObject, updateView){
         m.pressed = true;
     }
     else if(type === "mouseup" || type === "touchend"){
+        m.pressed = false;        
         if(m.pressed && m.direction === m.UP &&  m.currentAngle > 45){
             L(v.mover).styles("transform: rotateX(180deg)")("transition: all 0.2s ease");
             m.currentAngle = 180;
@@ -97,14 +99,15 @@ c.updateModel = function updateModel(eventObject, updateView){
             L(v.mover).styles("transform: rotateX(0deg)")("transition: all 0.2s ease");
             m.currentAngle = 0;
         }
-        m.pressed = false;
         setTimeout(function(){
             L(v.mover).styles("transition: all 0.0s ease");
             if(m.currentAngle >= 90 && m.currentAngle <= 180 ){
                 L(v.msg).styles("transform: rotateX(180deg)");
+                m.currentAngle = 180;                
             }
             else{
-                L(v.msg).styles("transform: rotateX(0deg)");                
+                L(v.msg).styles("transform: rotateX(0deg)");
+                m.currentAngle = 0;                
             }            
         },100);
     }
