@@ -14,6 +14,7 @@ window.onload = function(){
  	'resize'	 	
   ].forEach(eventType=>{
   	window.addEventListener(eventType, eventObject=>{
+  	    eventObject.preventDefault();
   		eventObject.stopPropagation();
 		c.updateModel(eventObject, c.updateView);
   	}, true);
