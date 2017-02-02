@@ -1,0 +1,56 @@
+html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(-45deg, orange, pink);
+}
+
+#carrier{
+    position: absolute;
+    height: 50%;
+    width: 40%;
+    margin: auto;
+    border-radius: 0.5rem;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    box-shadow: 5px 5px 20px black;
+    background-color: lightgray;
+    overflow-y: scroll;
+
+    font-size: 1.5rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    line-height: 150%;
+    
+    padding-left: 10%;
+    padding-top: 2%;
+    
+    box-sizing: border-box;
+    
+    user-select: none;
+}
+
+.circleDiv{
+    display: inline-block;
+    /*color: green;*/
+    color: transparent;
+    font-weight: bold;
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid gray;
+    text-align: center;
+    border-radius: 50%;
+}
+.todoDiv{
+    display: inline-block;
+}
