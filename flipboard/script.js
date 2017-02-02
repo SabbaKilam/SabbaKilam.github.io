@@ -84,7 +84,7 @@ c.updateModel = function updateModel(eventObject, updateView){
     }
     // check on pressed
     else if((type === "mousedown" || type === "touchstart") &&
-            source === v.mover){
+            source === v.mover || source === v.msg){
         m.pressed = true;
     }
     else if(type === "mouseup" || type === "touchend"){
