@@ -46,8 +46,14 @@ let c = {};
 
 //-----| INITIALIZE |------//
 c.initialize = function (){
+	L.attachAllElementsById(v);    
     L.adjustRem(8,24);
-	L.attachAllElementsById(v);
+    if(window.innerWidth <= 640){
+        L(v.app).styles("width: 100%");
+    }else{
+        L(v.app).styles("width: 60%");
+    }    
+
 };
 
 //-----| UPDATE MODEL |------//
@@ -113,6 +119,11 @@ c.updateModel = function updateModel(eventObject, updateView){
     }
     else if(type === "resize"){
         L.adjustRem();
+        if(window.innerWidth <= 640){
+            L(v.app).styles("width: 100%");
+        }else{
+            L(v.app).styles("width: 60%");
+        }
     }
     else if(false){}
     else if(false){}
