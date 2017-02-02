@@ -90,7 +90,6 @@ c.updateModel = function updateModel(eventObject, updateView){
         m.pressed = true;
     }
     else if(type === "mouseup" || type === "touchend"){
-        m.pressed = false;        
         if(m.pressed && m.direction === m.UP &&  m.currentAngle > 45){
             L(v.mover).styles("transform: rotateX(180deg)")("transition: all 0.2s ease");
             m.currentAngle = 180;
@@ -99,6 +98,7 @@ c.updateModel = function updateModel(eventObject, updateView){
             L(v.mover).styles("transform: rotateX(0deg)")("transition: all 0.2s ease");
             m.currentAngle = 0;
         }
+        m.pressed = false;        
         setTimeout(function(){
             L(v.mover).styles("transition: all 0.0s ease");
             if(m.currentAngle >= 90 && m.currentAngle <= 180 ){
