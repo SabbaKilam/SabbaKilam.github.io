@@ -119,7 +119,7 @@ c.updateModel = function updateModel(eventObject, updateView){
 
 //-----| UPDATE VIEW |------//
 c.updateView = function updateView(eventObject){
- 	L.showEvent(eventObject, v.msg);
+ 	//L.showEvent(eventObject, v.msg);
 };
 
 //==============================//
