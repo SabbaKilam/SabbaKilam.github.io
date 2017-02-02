@@ -7,7 +7,7 @@ window.onload = function(){
  [
  	//'touchstart',
  	//'touchend',
-  	//'touchmove',
+  	'touchmove',
 	'mousedown',
  	'mouseup',
  	'mousemove',
