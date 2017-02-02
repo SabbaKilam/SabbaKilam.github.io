@@ -170,12 +170,14 @@ L.clientYToDeg = function clientYToDeg(currentY, screenHeight, direction){
     let radians = Math.asin(rawSin);
     let offsetAngle = 90;
     let degrees = 180 * radians / Math.PI  + offsetAngle;
+    /*
     if(degrees >= 86 && degrees < 92 && m.direction === m.UP){
         degrees = 92;
     }
     else if(degrees <= 92 &&  degrees > 86  && m.direction === m.DOWN ){
         degrees = 86;
     }
+    */
     return degrees;
 };
  
