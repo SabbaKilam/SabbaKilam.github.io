@@ -12,7 +12,8 @@ html{
 }
 body{
 	position: fixed;
-	background: lightgray;
+	background: #f06;
+	background: linear-gradient(135deg, yellow, #f06);
 	height: 100%;
 	width: 100%;
 	padding: 0;

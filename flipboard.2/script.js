@@ -56,7 +56,6 @@ c.initialize = function (){
         L(v.app).styles("width: 60%");
     }    
 
-    //just in case words appear upsidedown
     setInterval(function(){
         if(m.flipperPosition === m.DOWN) { L(v.msg).styles('transform: rotateX(0deg)') }
         else if(m.flipperPosition === m.UP) { L(v.msg).styles('transform: rotateX(180deg)') }
