@@ -59,7 +59,7 @@ c.initialize = function (){
     setInterval(function(){
         if(m.flipperPosition === m.DOWN) { L(v.msg).styles('transform: rotateX(0deg)') }
         else if(m.flipperPosition === m.UP) { L(v.msg).styles('transform: rotateX(180deg)') }
-    },16.666);
+    },10);
 };
 
 //-----| UPDATE MODEL |------//
@@ -207,7 +207,7 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
                 m.currentAngle = 0;
                 m.flipperPosition = m.DOWN;
             }            
-        },120);
+        },100);
     }    
 };
 
