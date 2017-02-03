@@ -32,6 +32,7 @@ m.pressed = false;
 m.priorY = window.innerHeight;
 m.currentY = m.priorY;
 m.currentAngle = 0; //in degrees
+m.flipperPosition = m.DOWN
 
 
 //==============================//
@@ -46,7 +47,8 @@ let c = {};
 
 //-----| INITIALIZE |------//
 c.initialize = function (){
-	L.attachAllElementsById(v);    
+	L.attachAllElementsById(v);
+	
     L.adjustRem(8,24);
     if(window.innerWidth <= 360){
         L(v.app).styles("width: 100%");
@@ -54,6 +56,10 @@ c.initialize = function (){
         L(v.app).styles("width: 60%");
     }    
 
+    setInterval(function(){
+        if(m.flipperPosition === m.DOWN) { L(v.msg).styles('transform: rotateX(0deg)') }
+        else if(m.flipperPosition === m.UP) { L(v.msg).styles('transform: rotateX(180deg)') }
+    },16.666);
 };
 
 //-----| UPDATE MODEL |------//
@@ -161,27 +167,30 @@ L.clientYToDeg = function clientYToDeg(currentY, screenHeight){
 
 //--------------------//
 L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
-    let source = eventObject.target;
+
     let type = eventObject.type;
-    let angleWhenCalled = m.currentAngle;  
     
     if(type === "mouseup" || type === "touchend"){
         //If flipper is slid enough, continue to flip, or back off otherwise
         if(m.pressed && m.direction === m.UP &&  m.currentAngle > 60){
             L(v.mover).styles("transform: rotateX(180deg)")("transition: all 0.2s ease");
             m.currentAngle = 180;
+            m.flipperPosition = m.UP;
         }
         else if(m.pressed && m.direction === m.UP &&  m.currentAngle <= 60) {
             L(v.mover).styles("transform: rotateX(0deg)")("transition: all 0.2s ease");
             m.currentAngle = 0;
+            m.flipperPosition = m.DOWN;
         }
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle < 120){
             L(v.mover).styles("transform: rotateX(0deg)")("transition: all 0.2s ease");
             m.currentAngle = 0;
+            m.flipperPosition = m.DOWN;            
         }
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle >= 120){
             L(v.mover).styles("transform: rotateX(180deg)")("transition: all 0.2s ease");
             m.currentAngle = 180;
+            m.flipperPosition = m.UP;            
         }
         
         m.pressed = false;
@@ -190,11 +199,13 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
             L(v.mover).styles("transition: all 0.0s ease");// 'zero' seconds
             if(m.currentAngle >= 90 && m.currentAngle <= 180  && m.direction === m.UP){
                 L(v.msg).styles("transform: rotateX(180deg)");
-                m.currentAngle = 180;                
+                m.currentAngle = 180;
+                m.flipperPosition = m.UP;
             }
             if(m.currentAngle < 90 && m.direction === m.DOWN){
                 L(v.msg).styles("transform: rotateX(0deg)");
-                m.currentAngle = 0;                
+                m.currentAngle = 0;
+                m.flipperPosition = m.DOWN;
             }            
         },120);
     }    
@@ -213,9 +224,11 @@ L.moveFlipper = function moveFlipper(eventObject){
         ;
         if(degrees >= 90 && degrees <= 180 ){
             L(v.msg).styles("transform: rotateX(180deg)");
+            m.flipperPosition = m.UP;
         }
         else{
-            L(v.msg).styles("transform: rotateX(0deg)");                
+            L(v.msg).styles("transform: rotateX(0deg)");
+            m.flipperPosition = m.DOWN;
         }
     }    
 };
