@@ -1,0 +1,92 @@
+/**
+ * Primitive Flip Board;
+*/
+html{
+	min-height: 100%;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;	
+}
+body{
+	position: fixed;
+	background: #f06;
+	background: linear-gradient(135deg, yellow, #f06);
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;	
+	user-select: none;
+}
+#holder{
+	position: fixed;
+	margin: auto;
+	height: 100%;
+	width: 100%;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+#app{
+    box-shadow: 10px 10px 50px black;
+	position: absolute;
+	margin: auto;
+	height: 100%;
+	width: 60%;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+}
+.halfPage{
+	position: absolute;
+	margin: auto;
+	height: 50%;
+	width: 100%;
+
+	left:0;
+	right:0;	
+	background: lightgray;
+	text-align: center;
+    box-shadow: 5px 5px 15px black;
+    text-shadow: 0 0.5px 0 #ddd;
+    font-weight: bold;
+}
+#top{
+	top: 0;
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+}
+#bottom{
+	bottom: 0;
+	border-bottom-left-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;	
+}
+#mover{
+	bottom:0;
+	background: gray;
+	transform-origin: top;
+	border-bottom-left-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;	
+	font-size: 1.5rem;
+	overflow: hidden;
+	opacity: 0.95;
+}
+#msg{
+    display: inline-block;
+	position: absolute;
+	width: 50%;
+	height: 3rem;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left:0;
+	right:0;
+}
