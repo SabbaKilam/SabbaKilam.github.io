@@ -69,7 +69,7 @@ body{
 }
 #mover{
 	bottom:0;
-	background: lightgray;
+	background: #ddd;
 	transform-origin: top;
 	border-bottom-left-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;	
