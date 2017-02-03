@@ -134,7 +134,11 @@ c.updateView = function updateView(eventObject){
             L(v.app).styles("width: 600px");
             L.adjustRem("", "", 600);
         }
-    } 	
+    }
+    
+    if(type === 'orientationchange'){
+        alert(window.screen.orientation);
+    }
 };
 
 //======================================//
