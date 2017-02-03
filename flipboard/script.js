@@ -11,7 +11,8 @@ window.onload = function(){
 	'mousedown',
  	'mouseup',
  	'mousemove',
- 	'resize'	 	
+ 	'resize',
+ 	'orientationchange'
   ].forEach(eventType=>{
   	window.addEventListener(eventType, eventObject=>{
   	    eventObject.preventDefault();
