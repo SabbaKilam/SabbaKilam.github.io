@@ -33,7 +33,7 @@ m.priorY = window.innerHeight;
 m.currentY = m.priorY;
 m.currentAngle = 0; //in degrees
 m.flipperPosition = m.DOWN
-
+m.BACKGROUND_COLOR =  '#ddd';
 
 //==============================//
 //=========| VIEW |=============//
@@ -49,7 +49,7 @@ let c = {};
 c.initialize = function (){
 	L.attachAllElementsById(v);
 	
-    L.adjustRem(8,24);
+    L.adjustRem(5,20);
     if(window.innerWidth <= 360){
         L(v.app).styles("width: 100%");
     }else{
@@ -207,7 +207,8 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
                 L(v.msg).styles("transform: rotateX(0deg)");
                 m.currentAngle = 0;
                 m.flipperPosition = m.DOWN;
-            }            
+            }
+            L(v.mover).styles("background-color: " + m.BACKGROUND_COLOR);
         },100);
     }    
 };
@@ -216,21 +217,28 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
 L.moveFlipper = function moveFlipper(eventObject){
     let type = eventObject.type;
     
-    if(m.pressed && (type === "mousemove" || type === "touchmove")){
-        let degrees = L.clientYToDeg(m.currentY, window.innerHeight, m.direction);
-        m.currentAngle = degrees;
-        L(v.mover)
-            .styles
-                ("transform: rotateX(" + degrees +"deg)")
-        ;
-        if(degrees >= 90 && degrees <= 180 ){
-            L(v.msg).styles("transform: rotateX(180deg)");
-            m.flipperPosition = m.UP;
+    if (type === "mousemove" || type === "touchmove" ){
+        if(m.pressed){
+            L(v.mover).styles("background-color: lightgray");
+            let degrees = L.clientYToDeg(m.currentY, window.innerHeight, m.direction);
+            m.currentAngle = degrees;
+            L(v.mover)
+                .styles
+                    ("transform: rotateX(" + degrees +"deg)")
+            ;
+            if(degrees >= 90 && degrees <= 180 ){
+                L(v.msg).styles("transform: rotateX(180deg)");
+                m.flipperPosition = m.UP;
+            }
+            else{
+                L(v.msg).styles("transform: rotateX(0deg)");
+                m.flipperPosition = m.DOWN;
+            }            
         }
-        else{
-            L(v.msg).styles("transform: rotateX(0deg)");
-            m.flipperPosition = m.DOWN;
+        else if(!m.pressed){
+            L(v.mover).styles("background-color: " + m.BACKGROUND_COLOR);            
         }
+
     }    
 };
  
