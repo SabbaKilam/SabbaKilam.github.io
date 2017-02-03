@@ -32,8 +32,11 @@ m.pressed = false;
 m.priorY = window.innerHeight;
 m.currentY = m.priorY;
 m.currentAngle = 0; //in degrees
-m.flipperPosition = m.DOWN
+m.flipperPosition = m.DOWN;
 m.BACKGROUND_COLOR =  '#ddd';
+
+
+
 
 //==============================//
 //=========| VIEW |=============//
@@ -49,12 +52,15 @@ let c = {};
 c.initialize = function (){
 	L.attachAllElementsById(v);
 	
-    L.adjustRem(5,20);
-    if(window.innerWidth <= 360){
+
+    L.adjustRem(9,27);
+    if(window.innerWidth <= 600){
         L(v.app).styles("width: 100%");
+        L.adjustRem();            
     }else{
-        L(v.app).styles("width: 60%");
-    }    
+        L(v.app).styles("width: 600px");
+        L.adjustRem("", "", 600);
+    }   
 
     //just in case words appear upsidedown
     setInterval(function(){
@@ -170,7 +176,7 @@ L.clientYToDeg = function clientYToDeg(currentY, screenHeight){
 L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
 
     let type = eventObject.type;
-    
+
     if(type === "mouseup" || type === "touchend"){
         //If flipper is slid enough, continue to flip, or back off otherwise
         if(m.pressed && m.direction === m.UP &&  m.currentAngle > 60){
@@ -198,12 +204,12 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
         
         setTimeout(function(){
             L(v.mover).styles("transition: all 0.0s ease");// 'zero' seconds
-            if(m.currentAngle >= 90 && m.currentAngle <= 180  && m.direction === m.UP){
+            if(m.pressed && m.currentAngle >= 90 && m.currentAngle <= 180  && m.direction === m.UP){
                 L(v.msg).styles("transform: rotateX(180deg)");
                 m.currentAngle = 180;
                 m.flipperPosition = m.UP;
             }
-            if(m.currentAngle < 90 && m.direction === m.DOWN){
+            if(m.pressed && m.currentAngle < 90 && m.direction === m.DOWN){
                 L(v.msg).styles("transform: rotateX(0deg)");
                 m.currentAngle = 0;
                 m.flipperPosition = m.DOWN;

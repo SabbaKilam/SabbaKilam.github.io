@@ -31,15 +31,12 @@ body{
     font-family: sans-serif;
     font-weight: bold;
     line-height: 150%;
-
     
     padding-left: 10%;
     padding-top: 2%;
     
     box-sizing: border-box;
     user-select: none;
-    
-    transition: all 5s ease;
 }
 
 .circleDiv{
@@ -52,14 +49,11 @@ body{
     border: 1px solid gray;
     text-align: center;
     border-radius: 50%;
-    transition: all 5s ease;    
 }
 .todoDiv{
     display: inline-block;
     opacity: 1;
-    text-decoration: none;
-    text-shadow: 0 0.5px 0 white; 
-    transition: all 5s ease;    
+    text-decoration: none;    
 }
 
 .circleDivCompleted{
@@ -71,13 +65,10 @@ body{
     border: 1px solid gray;
     text-align: center;
     border-radius: 50%;
-    transition: all 5s ease;    
 }
 
 .todoDivCompleted{
     display: inline-block;
     opacity: 0.3;
     text-decoration: line-through;
-    text-shadow: 0 0.5px 0 white;  
-    transition: all 5s ease;    
 }
