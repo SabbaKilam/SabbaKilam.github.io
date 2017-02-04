@@ -62,7 +62,6 @@ body{
 	left:0;
 	right:0;
 }
-
 .halfPage{
 	position: absolute;
 	margin: auto;
@@ -74,19 +73,16 @@ body{
 	text-align: center;
     text-shadow: 0 0.5px 0 #ddd;
 }
-
 #top{
 	top: 0;
 	border-top-left-radius: 0.5rem;
 	border-top-right-radius: 0.5rem;
-
 }
 #bottom{
 	bottom: 0;
 	border-bottom-left-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;	
 }
-
 #flipper{
 	bottom:0;
 	background: white;
@@ -98,7 +94,6 @@ body{
 	box-shadow: none;
 	border-bottom: 1px solid gray;
 }
-
 #msg{
     display: inline-block;
 	position: absolute;
@@ -110,7 +105,6 @@ body{
 	left:0;
 	right:0;
 }
-
 .contentHolder{
 	position: relative;
 	margin: auto;
@@ -129,6 +123,19 @@ body{
 	font-family:'Bookman Old Style', Bookman, 'URW Bookman L', 'Palatino Linotype', serif;	
 }
 
+/*
+#topContent{
+	position: absolute;
+	margin: auto;
+	width: 85%;
+	height: 85%;
+	bottom:0;
+	left:0;
+	right:0;
+	margin-bottom: 0;
+}
+*/
+
 .topContent{
 	position: absolute;
 	margin: auto;
@@ -137,9 +144,20 @@ body{
 	bottom:0;
 	left:0;
 	right:0;
-	margin-bottom: 0;
+	margin-bottom: 0;	
 }
 
+/*
+#bottomContent{
+	position: absolute;
+	margin: auto;
+	width: 85%;
+	left:0;
+	right:0;
+	top:0;
+	margin-top: 0;
+}
+*/
 .bottomContent{
 	position: absolute;
 	margin: auto;
@@ -148,11 +166,12 @@ body{
 	left:0;
 	right:0;
 	top:0;
-	margin-top: 0;
+	margin-top: 0;	
 }
 
 #flipperContent{
 	margin-top: 0;
+	
 }
 
 p{

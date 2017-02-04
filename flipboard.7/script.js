@@ -70,8 +70,6 @@ c.initialize = function (){
     
     //just in case words appear upsidedown
     setInterval(function(){
-        L(v.flipper).styles("transition: all 0.0s linear");           // 'zero' seconds
-        L(v.flipperContent).styles("transition: all 0.0s linear");    // zero seconds         
         if(m.flipperPosition === m.DOWN) {
             L(v.msg).styles('transform: rotateX(0deg)');
             L(v.flipperContent).styles('transform: rotateX(0deg)');
@@ -82,9 +80,9 @@ c.initialize = function (){
         }
         if(m.finalPosition){
             L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-            //L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);
+            L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);
         }
-    },50);
+    },10);
 };
 
 //-----| UPDATE MODEL |------//
@@ -209,31 +207,26 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
     if(type === "mouseup" || type === "touchend"){
         m.finalPosition = true;
         //If flipper is slid enough, continue to flip, or back off otherwise
-        
-        // Go up
         if(m.pressed && m.direction === m.UP &&  m.currentAngle > 60){
-            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all 0.2s linear");
+            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all 0.2s ease");
             m.currentAngle = 180;
             m.flipperPosition = m.UP;
             v.flipperContent.innerHTML = m.topContent;
         }
-        // Stay Down
         else if(m.pressed && m.direction === m.UP &&  m.currentAngle <= 60) {
-            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all 0.2s linear");
+            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all 0.2s ease");
             m.currentAngle = 0;
             m.flipperPosition = m.DOWN;
             v.flipperContent.innerHTML = m.bottomContent;            
         }
-        // Go Down
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle < 120){
-            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all 0.2s linear");
+            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all 0.2s ease");
             m.currentAngle = 0;
             m.flipperPosition = m.DOWN;
             v.flipperContent.innerHTML = m.bottomContent;             
         }
-        // Stay Up
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle >= 120){
-            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all 0.2s linear");
+            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all 0.2s ease");
             m.currentAngle = 180;
             m.flipperPosition = m.UP; 
             v.flipperContent.innerHTML = m.topContent;            
@@ -242,8 +235,7 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
         m.pressed = false;
         
         setTimeout(function(){
-            L(v.flipper).styles("transition: all 0.0s linear");           // 'zero' seconds
-            L(v.flipperContent).styles("transition: all 0.0s linear");    // zero seconds          
+            L(v.flipper).styles("transition: all 0.0s ease");// 'zero' seconds
             if(m.pressed && m.currentAngle >= 90 && m.currentAngle <= 180  && m.direction === m.UP){
                 L(v.msg).styles("transform: rotateX(180deg)");
                 L(v.flipperContent).styles('transform: rotateX(180deg)');                
@@ -256,9 +248,8 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
                 m.currentAngle = 0;
                 m.flipperPosition = m.DOWN;
             }
-        }, 100);
-        L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-        L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);        
+            L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
+        },100);
     }    
 };
 
@@ -327,11 +318,9 @@ L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
 L.positionFlipper = function positionFlipper(eventObject){
     let source = eventObject.target;
     let type = eventObject.type;
-    
-    let paneTouched = source === v.topPane || source === v.bottomPane;
-    
+    let pageTouched = source === v.topPane || source === v.bottomPane;
     if (type === 'mousedown' || type === 'touchstart'){
-        if (paneTouched){
+        if (pageTouched){
             m.finalPosition = false;
             m.pressed = true;
         }
@@ -340,7 +329,7 @@ L.positionFlipper = function positionFlipper(eventObject){
             m.flipperPosition = m.UP;
             L.addContentToFlipper();            
         }
-        else if ( source === v.bottomPane ){
+        else if ( source === v.bottomPane){
             L(v.flipper).styles("transform: rotateX(0deg)");
             m.flipperPosition = m.DOWN;
             L.addContentToFlipper();            
