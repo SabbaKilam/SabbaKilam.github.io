@@ -34,6 +34,23 @@ body{
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
+.pane{
+	position: absolute;
+	margin: auto;
+	height: 50%;
+	width: 100%;
+	left: 0;
+	right: 0;
+	background: gray;
+	opacity: 0;
+}
+#topPane{
+	top: 0;
+}
+#bottomPane{
+	bottom:0;
+}
+
 #app{
     box-shadow: 10px 10px 50px black;
 	position: absolute;
@@ -155,7 +172,6 @@ body{
 	margin-top: 0;
 	
 }
-
 
 p{
 	line-height: 112%;

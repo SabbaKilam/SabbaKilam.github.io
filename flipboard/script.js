@@ -317,24 +317,19 @@ L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
 L.positionFlipper = function positionFlipper(eventObject){
     let source = eventObject.target;
     let type = eventObject.type;
-    let pageTouched =   source === v.top ||
-                        source === v.bottom ||
-                        source === v.flipper ||                        
-                        source === v.topContent ||
-                        source === v.bottomContent ||
-                        source === v.flipperContent
+    let pageTouched = source === v.topPane || source === v.bottomPane
     ;
     if (type === 'mousedown' || type === 'touchstart'){
         if (pageTouched){
             m.finalPosition = false;
             m.pressed = true;
         }
-        if( source === v.top  || source === v.topContent ){
+        if( source === v.topPane ){
             L(v.flipper).styles("transform: rotateX(180deg)");
             m.flipperPosition = m.UP;
             L.addContentToFlipper();            
         }
-        else if (source === v.bottom || source === v.bottomContent){
+        else if ( source === v.bottomPane){
             L(v.flipper).styles("transform: rotateX(0deg)");
             m.flipperPosition = m.DOWN;
             L.addContentToFlipper();            
