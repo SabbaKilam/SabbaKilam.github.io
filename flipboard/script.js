@@ -318,8 +318,7 @@ L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
 L.positionFlipper = function positionFlipper(eventObject){
     let source = eventObject.target;
     let type = eventObject.type;
-    let pageTouched = source === v.topPane || source === v.bottomPane
-    ;
+    let pageTouched = source === v.topPane || source === v.bottomPane;
     if (type === 'mousedown' || type === 'touchstart'){
         if (pageTouched){
             m.finalPosition = false;

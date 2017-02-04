@@ -162,6 +162,7 @@ body{
 	position: absolute;
 	margin: auto;
 	width: 85%;
+	height: 85%;
 	left:0;
 	right:0;
 	top:0;
@@ -174,7 +175,7 @@ body{
 }
 
 p{
-	line-height: 112%;
+	line-height: 114%;
 	margin-top: 0.1rem;
 	padding-top: 0.1rem ;	
 }
