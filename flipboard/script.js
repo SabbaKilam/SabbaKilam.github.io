@@ -58,7 +58,7 @@ c.initialize = function (){
     
 	L.attachAllElementsById(v);
 
-    L.adjustRemByArea(12,22);
+    L.adjustRemByArea(14,24);
     if(window.innerWidth <= 600){
         L(v.app).styles("width: 100%");
         L.adjustRemByArea();            
