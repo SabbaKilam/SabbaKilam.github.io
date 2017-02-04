@@ -35,8 +35,9 @@ m.currentY = m.priorY;
 m.currentAngle = 0; //in degrees
 m.flipperPosition = m.DOWN;
 m.finalPosition = true;
-m.BACKGROUND_COLOR =  '#eee';
-m.CONTENT_COLOR =  '#eee';
+m.BACKGROUND_COLOR =  "white";
+m.CONTENT_COLOR =  "white";
+m.COLOR_WHILE_FLIPPING = "#dbdbdb";
 m.topContent = document.getElementById("topContent").innerHTML;
 //document.getElementById("topContent").innerHTML = "";
 m.bottomContent = document.getElementById("bottomContent").innerHTML;
@@ -259,8 +260,8 @@ L.moveFlipper = function moveFlipper(eventObject){
     if (type === "mousemove" || type === "touchmove" ){
         if(m.pressed){
             m.finalPosition = false;
-            L(v.flipper).styles("background-color: #dbdbdb");
-            L(v.flipperContent).styles("background-color: #dbdbdb");
+            L(v.flipper).styles("background-color: " + m.COLOR_WHILE_FLIPPING);
+            L(v.flipperContent).styles("background-color: " + m.COLOR_WHILE_FLIPPING);
             
             let degrees = L.clientYToDeg(m.currentY, window.innerHeight, m.direction);
             m.currentAngle = degrees;
