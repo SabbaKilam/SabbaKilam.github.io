@@ -73,7 +73,7 @@ body{
 	transform-origin: top;
 	border-bottom-left-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;	
-	//font-size: 1.5rem;
+	font-size: 1.5rem;
 	overflow: hidden;
 	opacity: 0.95;
 	box-shadow: none;
@@ -82,34 +82,11 @@ body{
 #msg{
     display: inline-block;
 	position: absolute;
-	width: 60%;
+	width: 50%;
 	height: 3rem;
 	margin: auto;
 	top: 0;
 	bottom: 0;
 	left:0;
 	right:0;
-	
-}
-.contentHolder{
-	position: absolute;
-	margin: auto;
-	height: 90%;
-	width: 85%;
-	top:0;
-	bottom:0;
-	left:0;
-	right:0;
-	padding: 1%;
-	background: #eee;
-	text-align: left;
-}
-#topContent{
-	margin-bottom: 0;
-}
-#bottomContent{
-	margin-top: 0;
-}
-#flipperContent{
-	margin-top: 0;
 }
