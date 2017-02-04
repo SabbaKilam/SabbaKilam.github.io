@@ -58,7 +58,7 @@ c.initialize = function (){
     
 	L.attachAllElementsById(v);
 
-    L.adjustRemByArea(14,24);
+    L.adjustRemByArea(13,23);
     if(window.innerWidth <= 600){
         L(v.app).styles("width: 100%");
         L.adjustRemByArea();            
@@ -79,9 +79,7 @@ c.initialize = function (){
         }
         if(m.finalPosition){
             L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-            //L(v.flipper).styles("visibility: hidden");            
             L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);
-            //L(v.flipper).styles("visibility: hidden");
         }
     },10);
 };
