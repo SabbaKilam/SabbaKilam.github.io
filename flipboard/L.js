@@ -4,7 +4,9 @@
     var elements = [];
     
     var minimumRem = 10; //used by the main.adjustRem(min, max) method;
-    var maximumRem = 30; //used by the main.adjustRem(min, max) method; 
+    var maximumRem = 30; //used by the main.adjustRem(min, max) method;
+    this.minimumRem = minimumRem;
+    this.maximumRem = maximumRem;
     
     var libraryObject = {};
     
