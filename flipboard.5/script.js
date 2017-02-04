@@ -58,6 +58,16 @@ c.initialize = function (){
     
 	L.attachAllElementsById(v);
 
+    /*
+    L.adjustRem(9,27);
+    if(window.innerWidth <= 600){
+        L(v.app).styles("width: 100%");
+        L.adjustRem();            
+    }else{
+        L(v.app).styles("width: 600px");
+        L.adjustRem("", "", 600);
+    }   
+    */
     L.adjustRemByArea(9,27);
     if(window.innerWidth <= 600){
         L(v.app).styles("width: 100%");
@@ -65,8 +75,7 @@ c.initialize = function (){
     }else{
         L(v.app).styles("width: 600px");
         L.adjustRemByArea("", "", 600);
-    }
-    
+    }     
     //just in case words appear upsidedown
     setInterval(function(){
         if(m.flipperPosition === m.DOWN) {
@@ -79,9 +88,7 @@ c.initialize = function (){
         }
         if(m.finalPosition){
             L(v.mover).styles("background-color: " + m.BACKGROUND_COLOR);
-            //L(v.mover).styles("visibility: hidden");            
-            L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);
-            //L(v.mover).styles("visibility: hidden");
+            L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);              
         }
     },10);
 };
@@ -139,15 +146,19 @@ c.updateView = function updateView(eventObject){
     //---------------------------------------------------//   
     L.moveFlipper(eventObject);
     
-    //---------------------------------------------------// 	
-    //--| Handle positioning flipper to top or bottom |--//
-    //---------------------------------------------------//     
-    L.positionFlipper(eventObject);
-    
     //----------------------------------------------------// 	
     //-------------|  Handle screen resizing |------------//
     //----------------------------------------------------//    
     if(type === "resize"){
+        /*
+        if(window.innerWidth <= 600){
+            L(v.app).styles("width: 100%");
+            L.adjustRem();            
+        }else{
+            L(v.app).styles("width: 600px");
+            L.adjustRem("", "", 600);
+        }
+        */
         if(window.innerWidth <= 600){
             L(v.app).styles("width: 100%");
             L.adjustRemByArea();            
@@ -301,6 +312,7 @@ L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
         L.minimumRem = min;
         L.maximumRem = max;
     }
+    
     const maxArea = 1920 * 900;
     var windowHeight = window.innerHeight;
     var windowArea;
@@ -317,27 +329,6 @@ L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
     return rootEm;
 };
 
-//--| Handle positioning flipper to top or bottom |--//
-L.positionFlipper = function positionFlipper(eventObject){
-    let source = eventObject.target;
-    let type = eventObject.type;
-    if (type === 'mousedown' || type === 'touchstart'){
-        if (source === v.top){
-            L(v.mover).styles("transform: rotateX(180deg)");            
-            L(v.mover).styles("visibility: visible");
-            m.finalPosition = false;
-            m.flipperPosition = m.UP
-            m.pressed = true;
-        }
-        else if (source === v.bottom){
-            L(v.mover).styles("transform: rotateX(0deg)");            
-            L(v.mover).styles("visibility: visible");
-            m.finalPosition = false;
-            m.flipperPosition = m.DOWN;
-            m.pressed = true;
-        }
-    }
-};
 //====| END of adjustRemByArea |====//
 
 //====================================//
