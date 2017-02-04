@@ -20,7 +20,8 @@ body{
 	overflow-x: hidden;
 	overflow-y: hidden;	
 	user-select: none;
-}
+	color: #444;
+}	
 #holder{
 	position: fixed;
 	margin: auto;
@@ -49,13 +50,11 @@ body{
 	margin: auto;
 	height: 50%;
 	width: 100%;
-
 	left:0;
 	right:0;	
-	background: #ddd;
+	background: #eee;
 	text-align: center;
     text-shadow: 0 0.5px 0 #ddd;
-    font-weight: bold;
 }
 #top{
 	top: 0;
@@ -67,9 +66,9 @@ body{
 	border-bottom-left-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;	
 }
-#mover{
+#flipper{
 	bottom:0;
-	background: #ddd;
+	background: #eee;
 	transform-origin: top;
 	border-bottom-left-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;	
@@ -88,28 +87,76 @@ body{
 	bottom: 0;
 	left:0;
 	right:0;
-	
 }
 .contentHolder{
-	position: absolute;
+	position: relative;
 	margin: auto;
 	height: 90%;
-	width: 85%;
+	width: 90%;
 	top:0;
 	bottom:0;
 	left:0;
-	right:0;
-	padding: 1%;
+	right:0;;
 	background: #eee;
 	text-align: left;
 	font-family: sans-serif;
+
+	font-family:Constantina, Georgia, 'Nimbus Roman No9 L', serif;		
+	font-family:'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
+	font-family:'Bookman Old Style', Bookman, 'URW Bookman L', 'Palatino Linotype', serif;	
 }
+
+
 #topContent{
+	position: absolute;
+	margin: auto;
+	width: 85%;
+	height: 85%;
+	bottom:0;
+	left:0;
+	right:0;
 	margin-bottom: 0;
 }
+
+.topContent{
+	position: absolute;
+	margin: auto;
+	width: 85%;
+	height: 85%;	
+	bottom:0;
+	left:0;
+	right:0;
+	margin-bottom: 0;	
+}
+
 #bottomContent{
+	position: absolute;
+	margin: auto;
+	width: 85%;
+	left:0;
+	right:0;
+	top:0;
 	margin-top: 0;
 }
+
+.bottomContent{
+	position: absolute;
+	margin: auto;
+	width: 85%;
+	left:0;
+	right:0;
+	top:0;
+	margin-top: 0;	
+}
+
 #flipperContent{
 	margin-top: 0;
+	
+}
+
+
+p{
+	line-height: 106%;
+	margin-top: 0.1rem;
+	padding-top: 0.1rem ;	
 }
