@@ -56,6 +56,7 @@ let v = {};
 let c = {};
 //-----| INITIALIZE |------//
 c.initialize = function (){
+    window.screen.orientation.lock('portrait');    
     
 	L.attachAllElementsById(v);
 
