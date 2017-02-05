@@ -1,3 +1,4 @@
+//https://developers.google.com/web/updates/2014/11/Support-for-installable-web-apps-with-webapp-manifest-in-chrome-38-for-Android
 /*global L*/
 //=====================================//
 //==========| *** STARTUP ***|=========//
