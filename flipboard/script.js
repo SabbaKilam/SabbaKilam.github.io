@@ -160,10 +160,11 @@ c.updateView = function updateView(eventObject){
         }        
     }
     
-    
+    /*
     if(type === 'orientationchange'){
         alert(window.screen.orientation);
     }
+    */
 };
 
 //======================================//
