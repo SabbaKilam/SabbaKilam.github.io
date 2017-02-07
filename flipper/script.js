@@ -145,14 +145,14 @@ c.updateModel = function updateModel(eventObject, updateView){
       L(v.flipper)
         .styles
           ("transform: rotateX(180deg)")
-          ("transition: all 0.25s ease")
+          ("transition: all 0.15s ease")
       ;
     }
     else if(m.directionY === m.DOWN){
       L(v.flipper)
         .styles
           ("transform: rotateX(0deg)")
-          ("transition: all 0.25s ease")
+          ("transition: all 0.15s ease")
       ;  
     }
     setTimeout(function(){
