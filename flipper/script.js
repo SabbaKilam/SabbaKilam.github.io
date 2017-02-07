@@ -40,6 +40,7 @@ window.onload = function(){
     "touchmove",
     "touchend"].forEach(eventType=>{
       window.addEventListener(eventType, function(eventObject){
+        eventObject.preventDefault();
         eventObject.stopPropagation();
         c.updateModel(eventObject, c.updateView);
       }, true);
