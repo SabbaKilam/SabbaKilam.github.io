@@ -85,7 +85,10 @@ m.directionChangedX = false;
 m.directionX = m.RIGHT;
 m.directionY = m.DOWN;
 
+m.initialDirectionY = m.UP;
+
 m.pressed = false;
+m.moving = false;
 //==============================================//
 //===================| VIEW |===================//
 //==============================================//
@@ -125,6 +128,7 @@ c.updateModel = function updateModel(eventObject, updateView){
   
   if(pressed){
     m.pressed = true;
+    
     m.startX = m.currentX = eventObject.clientX || eventObject.touches[0].clientX;
     m.startY = m.currentX = eventObject.clientY || eventObject.touches[0].clientY;
     m.deltaX = 0;
@@ -132,6 +136,7 @@ c.updateModel = function updateModel(eventObject, updateView){
   }
   if(released){
     m.pressed = false;
+    m.moving = false;
     
     m.priorX = m.currentX;
     m.priorY = m.currentY;
@@ -145,14 +150,14 @@ c.updateModel = function updateModel(eventObject, updateView){
       L(v.flipper)
         .styles
           ("transform: rotateX(180deg)")
-          ("transition: all 0.15s ease")
+          ("transition: all 0.08s ease")
       ;
     }
     else if(m.directionY === m.DOWN){
       L(v.flipper)
         .styles
           ("transform: rotateX(0deg)")
-          ("transition: all 0.15s ease")
+          ("transition: all 0.08s ease")
       ;  
     }
     setTimeout(function(){
@@ -164,6 +169,7 @@ c.updateModel = function updateModel(eventObject, updateView){
     },260);
   }
   if(moving){
+    m.moving = true
     m.priorX = m.currentX;
     m.priorY = m.currentY;
  
@@ -177,6 +183,7 @@ c.updateModel = function updateModel(eventObject, updateView){
     m.deltaY = m.startY - m.currentY;
     
     //determine direction
+
     if(m.currentX <= m.priorX){
       m.directionX = m.LEFT;
     }
@@ -190,19 +197,21 @@ c.updateModel = function updateModel(eventObject, updateView){
     else if(m.currentY > m.priorY){
       m.directionY = m.DOWN;
     }
+
+
     
     //determine if direction changed
-    
     if(m.priorDirectionX != m.directionX){m.directionChangedX = true;}
     else{m.directionChangedX = false;}
     
     if(m.priorDirectionY != m.directionY){
       m.directionChangedY = true;
-      //m.pressed = true;
+      /*
       m.startX = m.currentX = eventObject.clientX || eventObject.touches[0].clientX;
       m.startY = m.currentX = eventObject.clientY || eventObject.touches[0].clientY;
       m.deltaX = 0;
       m.deltaY = 0; 
+      */
       
     }
     else{m.directionChangedY = false;}
@@ -280,22 +289,13 @@ L.adjustRemByArea = function adjustRemByArea(min,max, optionalWindowWidth){
 //====| END of adjustRemByArea |====//
 L.clientYToDeg = function clientYToDeg(currentY, screenHeight){
     let fraction = 0;
-    if(m.directionY === m.UP){
-      fraction = Math.abs(m.deltaY / m.startY);
+    if(m.directionY === m.UP && !m.moving){
+      fraction = (m.deltaY / m.startY);
     }
-    else if(m.directionY === m.DOWN){
-      fraction = Math.abs(m.deltaY / ( window.innerHeight - m.startY));
+    else if(m.directionY === m.DOWN  && !m.moving){
+      fraction = (m.deltaY / ( window.innerHeight - m.startY));
     }
-    
-    /*
-    if(currentY > screenHeight){
-        currentY = screenHeight;
-    }
-    else if(currentY < 0){
-        currentY = 0;
-    }
-    */
-    //let rawSin = 1 - (2 * currentY / screenHeight);
+
     let rawSin = 1 - (2 * fraction);
     
     let radians = Math.asin(rawSin);
