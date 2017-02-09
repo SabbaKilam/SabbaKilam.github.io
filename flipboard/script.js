@@ -39,12 +39,9 @@ m.finalPosition = true;
 m.BACKGROUND_COLOR =  "white";
 m.CONTENT_COLOR =  "transparent";
 m.COLOR_WHILE_FLIPPING = "#eee";
+m.FLIP_TIME = 0.5;
 m.topContent = document.getElementById("topContent").innerHTML;
-//document.getElementById("topContent").innerHTML = "";
 m.bottomContent = document.getElementById("bottomContent").innerHTML;
-//document.getElementById("bottomContent").innerHTML = "";
-
-
 
 //==============================//
 //=========| VIEW |=============//
@@ -124,7 +121,6 @@ c.updateModel = function updateModel(eventObject, updateView){
 
 //-----| UPDATE VIEW |------//
 c.updateView = function updateView(eventObject){
-    let source = eventObject.target;
     let type = eventObject.type;
     
     //---------------------------------------------------// 	
@@ -211,32 +207,36 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
 
     if(type === "mouseup" || type === "touchend"){
         m.finalPosition = true;
-        //If flipper is slid enough, continue to flip, or back off otherwise
+        //If flipper is slid enough, continue to flip, otherwise back-off 
         
         // Go up
         if(m.pressed && m.direction === m.UP &&  m.currentAngle > 60){
-            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all 0.2s ease");
+            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all "+ m.FLIP_TIME +"s ease");
+            L(v.msg).styles("transform: rotateX(180deg)");           
             m.currentAngle = 180;
             m.flipperPosition = m.UP;
             v.flipperContent.innerHTML = m.topContent;
         }
         // Stay Down
         else if(m.pressed && m.direction === m.UP &&  m.currentAngle <= 60) {
-            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all 0.2s ease");
+            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all "+ m.FLIP_TIME +"s ease");
+            L(v.msg).styles("transform: rotateX(0deg)");            
             m.currentAngle = 0;
             m.flipperPosition = m.DOWN;
             v.flipperContent.innerHTML = m.bottomContent;            
         }
         // Go Down
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle < 120){
-            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all 0.2s ease");
+            L(v.flipper).styles("transform: rotateX(0deg)")("transition: all "+ m.FLIP_TIME +"s ease");
+            L(v.msg).styles("transform: rotateX(0deg)");            
             m.currentAngle = 0;
             m.flipperPosition = m.DOWN;
             v.flipperContent.innerHTML = m.bottomContent;             
         }
         // Stay Up
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle >= 120){
-            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all 0.2s ease");
+            L(v.flipper).styles("transform: rotateX(180deg)")("transition: all "+ m.FLIP_TIME +"s ease");
+            L(v.msg).styles("transform: rotateX(180deg)");           
             m.currentAngle = 180;
             m.flipperPosition = m.UP; 
             v.flipperContent.innerHTML = m.topContent;            
@@ -244,9 +244,10 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
         
         m.pressed = false;
         
+        /*
         setTimeout(function(){
-            L(v.flipper).styles("transition: all 0.0s ease");           // 'zero' seconds
-            L(v.flipperContent).styles("transition: all 0.0s ease");    // zero seconds          
+            //L(v.flipper).styles("transition: all 0.0s ease");           // 'zero' seconds
+            //L(v.flipperContent).styles("transition: all 0.0s ease");    // zero seconds          
             if(m.pressed && m.currentAngle >= 90 && m.currentAngle <= 180  && m.direction === m.UP){
                 L(v.msg).styles("transform: rotateX(180deg)");
                 L(v.flipperContent).styles('transform: rotateX(180deg)');                
@@ -260,6 +261,7 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
                 m.flipperPosition = m.DOWN;
             }
         }, 100);
+        */
         L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
         L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);        
     }    
@@ -283,15 +285,28 @@ L.moveFlipper = function moveFlipper(eventObject){
             ;
             if(degrees >= 90 && degrees <= 180 ){
                 L(v.msg).styles("transform: rotateX(180deg)");
+                //delay showing content until rotation is complete
+                //v.flipperContent.innerHTML = "";                 
+                setTimeout(()=>{
+                   // if(v.flipperContent.innerHTML != m.topContent){
+                        v.flipperContent.innerHTML = m.topContent;                          
+                    //}
+                },100);
                 m.flipperPosition = m.UP;
-                v.flipperContent.innerHTML = m.topContent;                
             }
             else{
                 L(v.msg).styles("transform: rotateX(0deg)");
+                //delay showing content until rotation is complete
+               // v.flipperContent.innerHTML = "";                    
+                setTimeout(()=>{
+                    //if(v.flipperContent.innerHTML != m.bottomContent){
+                        v.flipperContent.innerHTML = m.bottomContent;                        
+                    //}
+                },100);                
                 m.flipperPosition = m.DOWN;
-                v.flipperContent.innerHTML = m.bottomContent;                  
             }            
         }
+        //if no longer pressed:
         else if(!m.pressed){
             m.finalPosition = true;
             L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
