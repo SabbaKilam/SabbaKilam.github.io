@@ -244,24 +244,26 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
         
         m.pressed = false;
         
-        /*
+        
         setTimeout(function(){
-            //L(v.flipper).styles("transition: all 0.0s ease");           // 'zero' seconds
-            //L(v.flipperContent).styles("transition: all 0.0s ease");    // zero seconds          
+            L(v.flipper).styles("transition: all 0.0s ease");           // 'zero' seconds
+            L(v.flipperContent).styles("transition: all 0.0s ease");    // zero seconds          
             if(m.pressed && m.currentAngle >= 90 && m.currentAngle <= 180  && m.direction === m.UP){
                 L(v.msg).styles("transform: rotateX(180deg)");
                 L(v.flipperContent).styles('transform: rotateX(180deg)');                
                 m.currentAngle = 180;
                 m.flipperPosition = m.UP;
+                v.flipperContent.innerHTML = m.topContent;
             }
             if(m.pressed && m.currentAngle < 90 && m.direction === m.DOWN){
                 L(v.msg).styles("transform: rotateX(0deg)");
                 L(v.flipperContent).styles('transform: rotateX(0deg)');
                 m.currentAngle = 0;
                 m.flipperPosition = m.DOWN;
+                v.flipperContent.innerHTML = m.bottomContent;
             }
         }, 100);
-        */
+        
         L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
         L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);        
     }    
@@ -270,7 +272,15 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
 //------------------------------//
 L.moveFlipper = function moveFlipper(eventObject){
     let type = eventObject.type;
-    
+    if(m.flipperPosition === m.UP){
+        L(v.flipper).styles("transform: rotateX(180deg)");
+        L(v.msg).styles("transform: rotateX(180deg)");        
+        
+    }
+    else if(m.flipperPosition === m.DOWN){
+        L(v.flipper).styles("transform: rotateX(0deg)");
+        L(v.msg).styles("transform: rotateX(0deg)");        
+    }
     if (type === "mousemove" || type === "touchmove" ){
         if(m.pressed){
             m.finalPosition = false;
