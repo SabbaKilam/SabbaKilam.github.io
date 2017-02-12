@@ -1,0 +1,89 @@
+body{
+    background: gray;
+}
+/* VERICAL-PORTRAIT STYLING */
+.firstHalfVertical{
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ccc;
+    overflow: hidden; 
+    border-top: 2px solid black;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    box-sizing: border-box;
+}
+.secondHalfVertical{
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ccc;
+    overflow: hidden;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;    
+    border-bottom: 2px solid black;
+    box-sizing: border-box;    
+}
+.firstContentVertical{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: url(img/NightMountain-1.jpg) no-repeat bottom;
+    background-size: contain;
+    width: 95%;
+    padding-top: 50%;
+    overflow: hidden;    
+}
+.secondContentVertical{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: url(img/BoatsAerialView-2.jpg) no-repeat top;
+    background-size: contain;
+    width: 95%;
+    padding-top: 50%; 
+    overflow: hidden;   
+}
+.verticalFlipper{
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ccc;
+    overflow: hidden;
+    transform-origin: top; 
+    border-bottom: 2px solid black;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    transition: all 0.5s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+
+}
+.verticalFlipperContent{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: url(img/NightMountain-2.jpg) no-repeat top;
+    background-size: contain;
+    width: 95%;
+    padding-top: 50%; 
+    overflow: hidden;  
+}
