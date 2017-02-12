@@ -4,9 +4,9 @@ let secondHalf= document.querySelector("#secondHalf");
 
 let flipping = false;
 
-flipper.onclick = simpleFlip;
+flipper.onmousedown = simpleFlip;
 flipper.ontouchstart = simpleFlip;
-secondHalf.onclick = resetFlipper;
+secondHalf.onmousedown = resetFlipper;
 
 function resetFlipper(){
     flipperContent.style.transform = "rotateX(0deg)";
