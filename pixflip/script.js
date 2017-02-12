@@ -1,20 +1,27 @@
 let flipperContent = document.querySelector("#flipperContent");
 let flipper = document.querySelector("#flipper");
+let secondHalf= document.querySelector("#secondHalf");
+
 let flipping = false;
 
 flipper.onclick = simpleFlip;
 flipper.ontouchstart = simpleFlip;
+secondHalf.onclick = resetFlipper;
+
+function resetFlipper(){
+    flipperContent.style.transform = "rotateX(0deg)";
+    flipper.style.transform = "rotateX(0deg)";
+    flipper.style.transition = "all 0.0s linear";
+    flipperContent.style.background = "url(img/NightMountain-2.jpg) no-repeat top";
+    flipperContent.style.backgroundSize = "contain";      
+}
 
 function simpleFlip(e){
     e.preventDefault();
     if(flipping){return;}
     flipping = true;
  
-    flipperContent.style.transform = "rotateX(0deg)";
-    flipper.style.transform = "rotateX(0deg)";
-    flipper.style.transition = "all 0.0s linear";
-    flipperContent.style.background = "url(img/NightMountain-2.jpg) no-repeat top";
-    flipperContent.style.backgroundSize = "contain";    
+    resetFlipper();
                 
     let angle = 0;
     setTimeout(function(){
