@@ -12,7 +12,7 @@ function resetFlipper(){
     flipperContent.style.transform = "rotateX(0deg)";
     flipper.style.transform = "rotateX(0deg)";
     flipper.style.transition = "all 0.0s linear";
-    flipperContent.style.background = "url(img/NightMountain-2.jpg) no-repeat top";
+    flipperContent.style.background = "url(img/BrightRoom-2.jpg) no-repeat top";
     flipperContent.style.backgroundSize = "contain";      
 }
 
