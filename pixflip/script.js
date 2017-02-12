@@ -4,7 +4,8 @@ let flipping = false;
 
 flipper.onclick = simpleFlip;
 flipper.ontouchstart = simpleFlip;
-function simpleFlip(){
+function simpleFlip(e){
+    e.preventDefault();
     if(flipping){return;}
     flipping = true;
  
