@@ -2,7 +2,9 @@ let flipperContent = document.querySelector("#flipperContent");
 let flipper = document.querySelector("#flipper");
 let flipping = false;
 
-flipper.onclick = function(){
+flipper.onclick = simpleFlip;
+flipper.ontouchstart = simpleFlip;
+function simpleFlip(){
     if(flipping){return;}
     flipping = true;
  
