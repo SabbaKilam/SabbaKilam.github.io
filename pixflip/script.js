@@ -4,6 +4,7 @@ let flipping = false;
 
 flipper.onclick = simpleFlip;
 flipper.ontouchstart = simpleFlip;
+
 function simpleFlip(e){
     e.preventDefault();
     if(flipping){return;}
@@ -22,7 +23,7 @@ function simpleFlip(e){
             flipper.style.transform = "rotateX(" + angle + "deg)";
             if( angle >= 90){
                 clearInterval(timerId);
-                angle = 90;
+                //angle = 90;
                 flipping = false;
                 flipper.style.visibility = "hidden";
                 setTimeout(function(){
