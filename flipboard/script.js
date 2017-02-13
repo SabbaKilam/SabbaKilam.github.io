@@ -42,6 +42,7 @@ m.COLOR_WHILE_FLIPPING = "#eee";
 m.FLIP_TIME = 0.5;
 m.topContent = document.getElementById("topContent").innerHTML;
 m.bottomContent = document.getElementById("bottomContent").innerHTML;
+m.APP_WIDTH_MAX = 600;
 
 //==============================//
 //=========| VIEW |=============//
@@ -54,36 +55,29 @@ let v = {};
 let c = {};
 //-----| INITIALIZE |------//
 c.initialize = function (){
-    window.screen.orientation.lock('portrait');    
-    
 	L.attachAllElementsById(v);
-
-    L.adjustRemByArea(13,23);
-    if(window.innerWidth <= 600){
-        L(v.app).styles("width: 100%");
-        L.adjustRemByArea();            
-    }else{
-        L(v.app).styles("width: 600px");
-        L.adjustRemByArea("", "", 600);
-    }
+    L.adjustRemByArea(13,23);	
+	L.handleResize(m.APP_WIDTH_MAX);
+	v.flipperContent.innerHTML = m.bottomContent;
+    L(v.flipperContent).attribs("class=bottomContentStyle");
     
     //just in case words appear upsidedown
     setInterval(function(){
         L(v.flipper).styles("transition: all 0.0s ease");           // 'zero' seconds
         L(v.flipperContent).styles("transition: all 0.0s ease");    // zero seconds         
         if(m.flipperPosition === m.DOWN) {
-            L(v.msg).styles('transform: rotateX(0deg)');
             L(v.flipperContent).styles('transform: rotateX(0deg)');
+            v.flipperContent.innerHTML = m.bottomContent;            
         }
         else if(m.flipperPosition === m.UP ) { 
-            L(v.msg).styles('transform: rotateX(180deg)');
             L(v.flipperContent).styles('transform: rotateX(180deg)');
+            v.flipperContent.innerHTML = m.topContent;
         }
         if(m.finalPosition){
             L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-            //L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);
         }
     },50);
+    
 };
 
 //-----| UPDATE MODEL |------//
@@ -94,10 +88,11 @@ c.updateModel = function updateModel(eventObject, updateView){
     // check on pressed
     if(
         (type === "mousedown" || type === "touchstart") &&
-        (source === v.flipper || source === v.msg)
+        (source === v.flipper || source === v.flipperContent)
     )
     {
         m.pressed = true;
+        L(v.flipperContent).attribs("class=bottomContentStyle");        
     }
     
     // Check on movement
@@ -126,7 +121,7 @@ c.updateView = function updateView(eventObject){
     //---------------------------------------------------// 	
     //---------| Option to display current event |-------//
     //---------------------------------------------------//    
- 	L.showEvent(eventObject, v.msg);
+ 	//L.showEvent(eventObject, v.flipperContent);
  	
     //---------------------------------------------------// 	
     //---------| Handle flip request ending 	|--------//
@@ -145,22 +140,8 @@ c.updateView = function updateView(eventObject){
     
     //----------------------------------------------------// 	
     //-------------|  Handle screen resizing |------------//
-    //----------------------------------------------------//    
-    if(type === "resize"){
-        if(window.innerWidth <= 600){
-            L(v.app).styles("width: 100%");
-            L.adjustRemByArea();            
-        }else{
-            L(v.app).styles("width: 600px");
-            L.adjustRemByArea("", "", 600);
-        }        
-    }
-    
-    /*
-    if(type === 'orientationchange'){
-        alert(window.screen.orientation);
-    }
-    */
+    //----------------------------------------------------//
+    L.handleResize(m.APP_WIDTH_MAX);
 };
 
 //======================================//
@@ -206,62 +187,70 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
     let type = eventObject.type;
 
     if(type === "mouseup" || type === "touchend"){
-        m.finalPosition = true;
+        L(v.flipperContent).attribs("class=bottomContentStyle");
+
         //If flipper is slid enough, continue to flip, otherwise back-off 
         
         // Go up
         if(m.pressed && m.direction === m.UP &&  m.currentAngle > 60){
             L(v.flipper).styles("transform: rotateX(180deg)")("transition: all "+ m.FLIP_TIME +"s ease");
-            L(v.msg).styles("transform: rotateX(180deg)");           
+            L(v.flipperContent).styles("transform: rotateX(180deg)");
             m.currentAngle = 180;
             m.flipperPosition = m.UP;
             v.flipperContent.innerHTML = m.topContent;
+            
         }
         // Stay Down
         else if(m.pressed && m.direction === m.UP &&  m.currentAngle <= 60) {
             L(v.flipper).styles("transform: rotateX(0deg)")("transition: all "+ m.FLIP_TIME +"s ease");
-            L(v.msg).styles("transform: rotateX(0deg)");            
+            L(v.flipperContent).styles("transform: rotateX(0deg)");
             m.currentAngle = 0;
             m.flipperPosition = m.DOWN;
-            v.flipperContent.innerHTML = m.bottomContent;            
+            v.flipperContent.innerHTML = m.bottomContent;
+            
         }
         // Go Down
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle < 120){
             L(v.flipper).styles("transform: rotateX(0deg)")("transition: all "+ m.FLIP_TIME +"s ease");
-            L(v.msg).styles("transform: rotateX(0deg)");            
+            L(v.flipperContent).styles('transform: rotateX(0deg)');
             m.currentAngle = 0;
             m.flipperPosition = m.DOWN;
-            v.flipperContent.innerHTML = m.bottomContent;             
+            v.flipperContent.innerHTML = m.bottomContent;
+            
         }
         // Stay Up
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle >= 120){
             L(v.flipper).styles("transform: rotateX(180deg)")("transition: all "+ m.FLIP_TIME +"s ease");
-            L(v.msg).styles("transform: rotateX(180deg)");           
+            L(v.flipperContent).styles('transform: rotateX(180deg)');
             m.currentAngle = 180;
             m.flipperPosition = m.UP; 
-            v.flipperContent.innerHTML = m.topContent;            
+            v.flipperContent.innerHTML = m.topContent;
         }
         
-        m.pressed = false;
+        m.pressed = false; 
+        m.finalPosition = true;        
         
         
         setTimeout(function(){
             L(v.flipper).styles("transition: all 0.0s ease");           // 'zero' seconds
-            L(v.flipperContent).styles("transition: all 0.0s ease");    // zero seconds          
-            if(m.pressed && m.currentAngle >= 90 && m.currentAngle <= 180  && m.direction === m.UP){
-                L(v.msg).styles("transform: rotateX(180deg)");
-                L(v.flipperContent).styles('transform: rotateX(180deg)');                
+            L(v.flipperContent).styles("transition: all 0.0s ease");    // zero seconds 
+            // you're either UP ...
+            if(m.finalPosition && m.currentAngle >= 90 && m.currentAngle <= 180  && m.flipperPosition === m.UP ){
+                L(v.flipperContent).styles('transform: rotateX(180deg)');
+                L(v.flipperContent).attribs("class=bottomContentStyle");
                 m.currentAngle = 180;
                 m.flipperPosition = m.UP;
                 v.flipperContent.innerHTML = m.topContent;
             }
-            if(m.pressed && m.currentAngle < 90 && m.direction === m.DOWN){
-                L(v.msg).styles("transform: rotateX(0deg)");
+            // or you're DOWN ...
+            if(m.finalPosition && m.currentAngle < 90  && m.currentAngle >= 0 && m.flipperPosition === m.DOWN){
                 L(v.flipperContent).styles('transform: rotateX(0deg)');
+                L(v.flipperContent).attribs("class=bottomContentStyle");
                 m.currentAngle = 0;
                 m.flipperPosition = m.DOWN;
                 v.flipperContent.innerHTML = m.bottomContent;
             }
+            
         }, 100);
         
         L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
@@ -272,15 +261,7 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
 //------------------------------//
 L.moveFlipper = function moveFlipper(eventObject){
     let type = eventObject.type;
-    if(m.flipperPosition === m.UP){
-        L(v.flipper).styles("transform: rotateX(180deg)");
-        L(v.msg).styles("transform: rotateX(180deg)");        
-        
-    }
-    else if(m.flipperPosition === m.DOWN){
-        L(v.flipper).styles("transform: rotateX(0deg)");
-        L(v.msg).styles("transform: rotateX(0deg)");        
-    }
+    L(v.flipperContent).attribs("class=bottomContentStyle");
     if (type === "mousemove" || type === "touchmove" ){
         if(m.pressed){
             m.finalPosition = false;
@@ -294,61 +275,25 @@ L.moveFlipper = function moveFlipper(eventObject){
                     ("transform: rotateX(" + degrees +"deg)")
             ;
             if(degrees >= 90 && degrees <= 180 ){
-                L(v.msg).styles("transform: rotateX(180deg)");
-                //delay showing content until rotation is complete
-                //v.flipperContent.innerHTML = "";                 
-                setTimeout(()=>{
-                   // if(v.flipperContent.innerHTML != m.topContent){
-                        v.flipperContent.innerHTML = m.topContent;                          
-                    //}
-                },100);
+                L(v.flipperContent).styles("transform: rotateX(180deg)");
+                v.flipperContent.innerHTML = m.topContent;
                 m.flipperPosition = m.UP;
+            
             }
-            else{
-                L(v.msg).styles("transform: rotateX(0deg)");
-                //delay showing content until rotation is complete
-               // v.flipperContent.innerHTML = "";                    
-                setTimeout(()=>{
-                    //if(v.flipperContent.innerHTML != m.bottomContent){
-                        v.flipperContent.innerHTML = m.bottomContent;                        
-                    //}
-                },100);                
+            else if( degrees < 90 && degrees >=0){
+                L(v.flipperContent).styles("transform: rotateX(0deg)");
+                v.flipperContent.innerHTML = m.bottomContent;
                 m.flipperPosition = m.DOWN;
             }            
         }
         //if no longer pressed:
         else if(!m.pressed){
             m.finalPosition = true;
+            L(v.flipperContent).attribs("class=bottomContentStyle");           
             L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
             L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);            
         }
-
     }    
-};
-//====| adjustRemBySpace(min,max, optionalWindowWidth) called when app loads & when screen size changes |====//
-L.minimumRem = 0;
-L.maximumRem = 18;
-
-L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
-    if(typeof min === 'number' && typeof max === 'number' && max >= min){
-        L.minimumRem = min;
-        L.maximumRem = max;
-    }
-    const maxArea = 1920 * 900;
-    const fudgeFactor = 0.7;
-    var windowHeight = window.innerHeight;
-    var windowArea;
-    var windowWidth;
-    if(optionalWindowWidth !== undefined && typeof optionalWindowWidth === 'number'){
-        windowWidth = optionalWindowWidth;
-    }
-    else{
-        windowWidth = window.innerWidth;
-    }
-    windowArea = windowWidth * windowHeight;
-    var rootEm = (L.minimumRem + (L.maximumRem - L.minimumRem)* windowArea / (maxArea * fudgeFactor) );
-    document.documentElement.style.fontSize = rootEm + "px";
-    return rootEm;
 };
 
 //--| Handle positioning flipper to top or bottom |--//
@@ -378,15 +323,56 @@ L.positionFlipper = function positionFlipper(eventObject){
 //====| END of adjustRemByArea |====//
 
 L.addContentToFlipper = function addContentToFlipper(){
+    L(v.flipperContent).attribs("class=bottomContentStyle");     
     if(m.flipperPosition === m.UP){
-        v.flipperContent.classList.remove("bottomContent");
-        v.flipperContent.classList.add("topContent");        
         v.flipperContent.innerHTML = v.topContent.innerHTML;
     }
     else if(m.flipperPosition === m.DOWN){
-        v.flipperContent.classList.remove("topContent");
-        v.flipperContent.classList.add("bottomContent");        
         v.flipperContent.innerHTML = v.bottomContent.innerHTML;
+    }
+};
+
+//====| adjustRemBySpace(min,max, optionalWindowWidth) called when app loads & when screen size changes |====//
+L.minimumRem = 0;
+L.maximumRem = 18;
+
+L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
+    if(typeof min === 'number' && typeof max === 'number' && max >= min){
+        L.minimumRem = min;
+        L.maximumRem = max;
+    }
+    const maxArea = 1920 * 900;
+    const fudgeFactor = 0.7;
+    var windowHeight = window.innerHeight;
+    var windowArea;
+    var windowWidth;
+    if(optionalWindowWidth !== undefined && typeof optionalWindowWidth === 'number'){
+        windowWidth = optionalWindowWidth;
+    }
+    else{
+        windowWidth = window.innerWidth;
+    }
+    windowArea = windowWidth * windowHeight;
+    var rootEm = (L.minimumRem + (L.maximumRem - L.minimumRem)* windowArea / (maxArea * fudgeFactor) );
+    document.documentElement.style.fontSize = rootEm + "px";
+    return rootEm;
+};
+//-------------|  Handle screen resizing |------------//
+L.handleResize = function handleResize(maxWidth){
+    if(typeof maxWidth != 'number'){
+        console.log("A number is required for maximum app width.");
+        return;
+    }
+    if(window.innerWidth <= maxWidth){
+        L(v.app).styles("width: 100%");
+        L(v.topPane).styles("width: 100%");
+        L(v.bottomPane).styles("width: 100%");
+        L.adjustRemByArea();            
+    }else{
+        L(v.app).styles("width: "+ maxWidth +"px");
+        L(v.topPane).styles("width: "+ maxWidth +"px");
+        L(v.bottomPane).styles("width: "+ maxWidth +"px");            
+        L.adjustRemByArea("", "", maxWidth);
     }
 };
 
