@@ -325,20 +325,20 @@ L.positionFlipper = function positionFlipper(eventObject){
         if( source === v.topPane ){
             L(v.flipper).styles("transform: rotateX(180deg)");
             m.flipperPosition = m.UP;
-            L(v.flipper).styles("opacity: 0");
+            L(v.flipper).styles("visibility: hidden");
             L.addContentToFlipper();
             window.setTimeout(function(){
-                L(v.flipper).styles("opacity: 1");
+                L(v.flipper).styles("visibility: visible");
             },100);
         }
         else if ( source === v.bottomPane ){
             L(v.flipper).styles("transform: rotateX(0deg)");
             m.flipperPosition = m.DOWN;
-            L(v.flipper).styles("opacity: 0");
+            L(v.flipper).styles("visibility: hidden");
             L.addContentToFlipper();
             window.setTimeout(function(){
-                L(v.flipper).styles("opacity: 1");
-            },100);          
+                L(v.flipper).styles("visibility: visible");
+            },100);         
         }
     }
 };
