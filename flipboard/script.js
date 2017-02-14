@@ -329,7 +329,7 @@ L.positionFlipper = function positionFlipper(eventObject){
             L.addContentToFlipper();
             window.setTimeout(function(){
                 L(v.flipper).styles("visibility: visible");
-            },100);
+            },50);
         }
         else if ( source === v.bottomPane ){
             L(v.flipper).styles("transform: rotateX(0deg)");
@@ -338,7 +338,7 @@ L.positionFlipper = function positionFlipper(eventObject){
             L.addContentToFlipper();
             window.setTimeout(function(){
                 L(v.flipper).styles("visibility: visible");
-            },100);         
+            },50);         
         }
     }
 };
