@@ -36,9 +36,9 @@ m.currentY = m.priorY;
 m.currentAngle = 0; //in degrees
 m.flipperPosition = m.DOWN;
 m.finalPosition = true;
-m.BACKGROUND_COLOR =  "white";
+m.BACKGROUND_COLOR = "white";
 m.CONTENT_COLOR =  "transparent";
-m.COLOR_WHILE_FLIPPING = "#eee";
+m.COLOR_WHILE_FLIPPING = "eee";
 m.FLIP_TIME = 0.5;
 m.topContent = document.getElementById("topContent").innerHTML;
 m.bottomContent = document.getElementById("bottomContent").innerHTML;
@@ -56,7 +56,7 @@ let c = {};
 //-----| INITIALIZE |------//
 c.initialize = function (){
 	L.attachAllElementsById(v);
-    L.adjustRemByArea(11.5,24);	
+    L.adjustRemByArea(11,25);	
 	L.handleResize(m.APP_WIDTH_MAX);
 	v.flipperContent.innerHTML = m.bottomContent;
     L(v.flipperContent).attribs("class=bottomContentStyle");
@@ -74,7 +74,7 @@ c.initialize = function (){
             v.flipperContent.innerHTML = m.topContent;
         }
         if(m.finalPosition){
-            L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
+           // L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
         }
     },50);
     
@@ -97,7 +97,11 @@ c.updateModel = function updateModel(eventObject, updateView){
     
     // Check on movement
     if(type === "mousemove" || type === "touchmove"){
-        let y = eventObject.clientY || eventObject.touches[0].clientY;        
+        let y;
+        try{
+            y = eventObject.clientY || eventObject.touches[0].clientY;  
+        }catch(e){}
+      
         m.priorY = m.currentY;
         m.currentY = y;
         m.currentAngle = L.clientYToDeg(m.currentY, window.innerHeight);
@@ -250,11 +254,19 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
                 m.flipperPosition = m.DOWN;
                 v.flipperContent.innerHTML = m.bottomContent;
             }
+            //------------------------------------------//
+            L.browserPrefix.forEach(prefix=>{
+                L(v.bottom).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+            });
+            L.browserPrefix.forEach(prefix=>{
+                L(v.top).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+            });            
+            //------------------------------------------//
             
         }, 100);
         
         L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-        L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);        
+        //L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);        
     }    
 };
 
@@ -266,7 +278,7 @@ L.moveFlipper = function moveFlipper(eventObject){
         if(m.pressed){
             m.finalPosition = false;
             L(v.flipper).styles("background-color: " + m.COLOR_WHILE_FLIPPING);
-            L(v.flipperContent).styles("background-color: " + m.COLOR_WHILE_FLIPPING);
+            //L(v.flipperContent).styles("background-color: " + m.COLOR_WHILE_FLIPPING);
             
             let degrees = L.clientYToDeg(m.currentY, window.innerHeight, m.direction);
             m.currentAngle = degrees;
@@ -274,10 +286,12 @@ L.moveFlipper = function moveFlipper(eventObject){
                 .styles
                     ("transform: rotateX(" + degrees +"deg)")
             ;
+            L.shadePage(degrees);
             if(degrees >= 90 && degrees <= 180 ){
                 L(v.flipperContent).styles("transform: rotateX(180deg)");
                 v.flipperContent.innerHTML = m.topContent;
                 m.flipperPosition = m.UP;
+                
             
             }
             else if( degrees < 90 && degrees >=0){
@@ -290,13 +304,13 @@ L.moveFlipper = function moveFlipper(eventObject){
         else if(!m.pressed){
             m.finalPosition = true;
             L(v.flipperContent).attribs("class=bottomContentStyle");           
-            L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-            L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);            
+           // L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
+            //L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);            
         }
     }    
 };
 
-//--| Handle positioning flipper to top or bottom |--//
+//--| Handle positioning flipper to top or bottom when screen is touched|--//
 L.positionFlipper = function positionFlipper(eventObject){
     let source = eventObject.target;
     let type = eventObject.type;
@@ -333,8 +347,8 @@ L.addContentToFlipper = function addContentToFlipper(){
 };
 
 //====| adjustRemBySpace(min,max, optionalWindowWidth) called when app loads & when screen size changes |====//
-L.minimumRem = 0;
-L.maximumRem = 18;
+L.minimumRem = 11.5;
+L.maximumRem = 25;
 
 L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
     if(typeof min === 'number' && typeof max === 'number' && max >= min){
@@ -342,7 +356,7 @@ L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
         L.maximumRem = max;
     }
     const maxArea = 1920 * 900;
-    const fudgeFactor = 0.7;
+    const fudgeFactor = 0.6;//0.7
     var windowHeight = window.innerHeight;
     var windowArea;
     var windowWidth;
@@ -357,7 +371,7 @@ L.adjustRemByArea = function adjustRemByArea(min, max, optionalWindowWidth){
     document.documentElement.style.fontSize = rootEm + "px";
     return rootEm;
 };
-//-------------|  Handle screen resizing |------------//
+//-------------| Handle screen resizing |------------//
 L.handleResize = function handleResize(maxWidth){
     if(typeof maxWidth != 'number'){
         console.log("A number is required for maximum app width.");
@@ -373,6 +387,31 @@ L.handleResize = function handleResize(maxWidth){
         L(v.topPane).styles("width: "+ maxWidth +"px");
         L(v.bottomPane).styles("width: "+ maxWidth +"px");            
         L.adjustRemByArea("", "", maxWidth);
+    }
+};
+//--------| Handling undershading |----------------//
+L.shadePage = function shadePage(degrees){
+    if(degrees >= 90 && degrees <=180){
+        let fraction =   0.3 + (180 - degrees)  / 90;
+        let expFraction = (1-Math.exp(-fraction/0.35));
+        L.browserPrefix.forEach(prefix=>{
+            L(v.top).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );            
+        });
+        L.browserPrefix.forEach(prefix=>{
+            L(v.bottom).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+        });        
+        
+
+    }
+    else if (degrees < 90 && degrees >=0){
+        let fraction = 0.3 + degrees / 90 ;
+        let expFraction = (1-Math.exp(-fraction/0.35));
+        L.browserPrefix.forEach(prefix=>{
+            L(v.bottom).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );            
+        });
+        L.browserPrefix.forEach(prefix=>{
+            L(v.top).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
+        });        
     }
 };
 

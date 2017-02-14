@@ -32,6 +32,9 @@
         return libraryObject;
     }//----| END of main |-----//
     
+    main.browserPrefix = ["","-webkit-","-moz-","-ms-","-o-"];
+    libraryObject.browserPrefix = ["","-webkit-","-moz-","-ms-","-o-"];    
+    
     libraryObject.getElement = function getElement(){
         return element;
     };
