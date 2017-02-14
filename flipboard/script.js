@@ -38,7 +38,7 @@ m.flipperPosition = m.DOWN;
 m.finalPosition = true;
 m.BACKGROUND_COLOR = "white";
 m.CONTENT_COLOR =  "transparent";
-m.COLOR_WHILE_FLIPPING = "ececec";
+m.COLOR_WHILE_FLIPPING = "ededed";
 m.FLIP_TIME = 0.5;
 m.topContent = document.getElementById("topContent").innerHTML;
 m.bottomContent = document.getElementById("bottomContent").innerHTML;
@@ -403,7 +403,8 @@ L.shadePage = function shadePage(degrees){
         let fraction =   0.3 + ((180 - degrees)  / 90);
         let expFraction = (1-Math.exp(-fraction/0.30));
         L.browserPrefix.forEach(prefix=>{
-            L(v.top).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );            
+            //L(v.top).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );
+            L(v.top).styles("background-color: hsl(0, 0%,"+ fraction * 100 +"%)" );
         });
         L.browserPrefix.forEach(prefix=>{
             L(v.bottom).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
@@ -415,7 +416,9 @@ L.shadePage = function shadePage(degrees){
         let fraction = 0.3 + (degrees / 90) ;
         let expFraction = (1-Math.exp(-fraction/0.30));
         L.browserPrefix.forEach(prefix=>{
-            L(v.bottom).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );            
+            //L(v.bottom).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );
+            L(v.bottom).styles("background-color: hsl(0, 0%,"+ fraction * 100 +"%)" );
+            
         });
         L.browserPrefix.forEach(prefix=>{
             L(v.top).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
