@@ -325,12 +325,20 @@ L.positionFlipper = function positionFlipper(eventObject){
         if( source === v.topPane ){
             L(v.flipper).styles("transform: rotateX(180deg)");
             m.flipperPosition = m.UP;
-            L.addContentToFlipper();            
+            L(v.flipper).styles("opacity: 0");
+            L.addContentToFlipper();
+            window.setTimeout(function(){
+                L(v.flipper).styles("opacity: 1");
+            },100);
         }
         else if ( source === v.bottomPane ){
             L(v.flipper).styles("transform: rotateX(0deg)");
             m.flipperPosition = m.DOWN;
-            L.addContentToFlipper();            
+            L(v.flipper).styles("opacity: 0");
+            L.addContentToFlipper();
+            window.setTimeout(function(){
+                L(v.flipper).styles("opacity: 1");
+            },100);          
         }
     }
 };
@@ -392,8 +400,8 @@ L.handleResize = function handleResize(maxWidth){
 //--------| Handling undershading |----------------//
 L.shadePage = function shadePage(degrees){
     if(degrees >= 90 && degrees <=180){
-        let fraction =   0.3 + (180 - degrees)  / 90;
-        let expFraction = (1-Math.exp(-fraction/0.35));
+        let fraction =   0.3 + ((180 - degrees)  / 90);
+        let expFraction = (1-Math.exp(-fraction/0.30));
         L.browserPrefix.forEach(prefix=>{
             L(v.top).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );            
         });
@@ -404,8 +412,8 @@ L.shadePage = function shadePage(degrees){
 
     }
     else if (degrees < 90 && degrees >=0){
-        let fraction = 0.3 + degrees / 90 ;
-        let expFraction = (1-Math.exp(-fraction/0.35));
+        let fraction = 0.3 + (degrees / 90) ;
+        let expFraction = (1-Math.exp(-fraction/0.30));
         L.browserPrefix.forEach(prefix=>{
             L(v.bottom).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );            
         });
