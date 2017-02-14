@@ -42,7 +42,7 @@ m.COLOR_WHILE_FLIPPING = "#eee";
 m.FLIP_TIME = 0.5;
 m.topContent = document.getElementById("topContent").innerHTML;
 m.bottomContent = document.getElementById("bottomContent").innerHTML;
-m.APP_WIDTH_MAX = 600;
+m.APP_WIDTH_MAX = 500;
 
 //==============================//
 //=========| VIEW |=============//
@@ -56,7 +56,7 @@ let c = {};
 //-----| INITIALIZE |------//
 c.initialize = function (){
 	L.attachAllElementsById(v);
-    L.adjustRemByArea(13,23);	
+    L.adjustRemByArea(11.5,24);	
 	L.handleResize(m.APP_WIDTH_MAX);
 	v.flipperContent.innerHTML = m.bottomContent;
     L(v.flipperContent).attribs("class=bottomContentStyle");
