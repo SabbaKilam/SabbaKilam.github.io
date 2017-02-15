@@ -101,7 +101,6 @@ body{
 	opacity: 0.95;
 	box-shadow: none;
 	border-bottom: 1px solid gray;
-	box-sizing: border-box;
 }
 
 .contentHolder{
@@ -168,9 +167,6 @@ body{
 	font-family:'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
 	font-family:'Bookman Old Style', Bookman, 'URW Bookman L', 'Palatino Linotype', serif;
 	
-
-	height: 50%;
-
-    text-shadow: 0 0.5px 0 #ddd;
+	box-sizing: border-box;	
 }
 

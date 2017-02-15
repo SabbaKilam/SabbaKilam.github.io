@@ -56,12 +56,10 @@ let c = {};
 //-----| INITIALIZE |------//
 c.initialize = function (){
 	L.attachAllElementsById(v);
-    L.adjustRemByArea(11,25);
+    L.adjustRemByArea(11,25);	
 	L.handleResize(m.APP_WIDTH_MAX);
-  
-    L.addBackgroundImageBottom("img/BoatsAerialView-2.jpg", v.bottomContent);
-    v.bottomContent.innerHTML = "";
-    v.flipperContent.innerHTML = m.bottomContent;    
+	v.flipperContent.innerHTML = m.bottomContent;
+    L(v.flipperContent).attribs("class=bottomContentStyle");
     
     //just in case words appear upsidedown
     setInterval(function(){
@@ -69,12 +67,14 @@ c.initialize = function (){
         L(v.flipperContent).styles("transition: all 0.0s ease");    // zero seconds         
         if(m.flipperPosition === m.DOWN) {
             L(v.flipperContent).styles('transform: rotateX(0deg)');
+            v.flipperContent.innerHTML = m.bottomContent;            
         }
         else if(m.flipperPosition === m.UP ) { 
             L(v.flipperContent).styles('transform: rotateX(180deg)');
+            v.flipperContent.innerHTML = m.topContent;
         }
         if(m.finalPosition){
-            L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
+           // L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
         }
     },50);
     
@@ -201,6 +201,8 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
             L(v.flipperContent).styles("transform: rotateX(180deg)");
             m.currentAngle = 180;
             m.flipperPosition = m.UP;
+            v.flipperContent.innerHTML = m.topContent;
+            
         }
         // Stay Down
         else if(m.pressed && m.direction === m.UP &&  m.currentAngle <= 60) {
@@ -208,6 +210,8 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
             L(v.flipperContent).styles("transform: rotateX(0deg)");
             m.currentAngle = 0;
             m.flipperPosition = m.DOWN;
+            v.flipperContent.innerHTML = m.bottomContent;
+            
         }
         // Go Down
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle < 120){
@@ -215,6 +219,8 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
             L(v.flipperContent).styles('transform: rotateX(0deg)');
             m.currentAngle = 0;
             m.flipperPosition = m.DOWN;
+            v.flipperContent.innerHTML = m.bottomContent;
+            
         }
         // Stay Up
         else if(m.pressed && m.direction === m.DOWN &&  m.currentAngle >= 120){
@@ -222,9 +228,9 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
             L(v.flipperContent).styles('transform: rotateX(180deg)');
             m.currentAngle = 180;
             m.flipperPosition = m.UP; 
+            v.flipperContent.innerHTML = m.topContent;
         }
         
-        L.addContentToFlipper();
         m.pressed = false; 
         m.finalPosition = true;        
         
@@ -238,7 +244,7 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
                 L(v.flipperContent).attribs("class=bottomContentStyle");
                 m.currentAngle = 180;
                 m.flipperPosition = m.UP;
-                //v.flipperContent.innerHTML = m.topContent;
+                v.flipperContent.innerHTML = m.topContent;
             }
             // or you're DOWN ...
             if(m.finalPosition && m.currentAngle < 90  && m.currentAngle >= 0 && m.flipperPosition === m.DOWN){
@@ -246,7 +252,7 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
                 L(v.flipperContent).attribs("class=bottomContentStyle");
                 m.currentAngle = 0;
                 m.flipperPosition = m.DOWN;
-                //v.flipperContent.innerHTML = m.bottomContent;
+                v.flipperContent.innerHTML = m.bottomContent;
             }
             //------------------------------------------//
             L.browserPrefix.forEach(prefix=>{
@@ -267,10 +273,13 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
 //------------------------------//
 L.moveFlipper = function moveFlipper(eventObject){
     let type = eventObject.type;
+    L(v.flipperContent).attribs("class=bottomContentStyle");
     if (type === "mousemove" || type === "touchmove" ){
         if(m.pressed){
             m.finalPosition = false;
             L(v.flipper).styles("background-color: " + m.COLOR_WHILE_FLIPPING);
+            //L(v.flipperContent).styles("background-color: " + m.COLOR_WHILE_FLIPPING);
+            
             let degrees = L.clientYToDeg(m.currentY, window.innerHeight, m.direction);
             m.currentAngle = degrees;
             L(v.flipper)
@@ -280,22 +289,24 @@ L.moveFlipper = function moveFlipper(eventObject){
             L.shadePage(degrees);
             if(degrees >= 90 && degrees <= 180 ){
                 L(v.flipperContent).styles("transform: rotateX(180deg)");
+                v.flipperContent.innerHTML = m.topContent;
                 m.flipperPosition = m.UP;
+                
+            
             }
             else if( degrees < 90 && degrees >=0){
                 L(v.flipperContent).styles("transform: rotateX(0deg)");
+                v.flipperContent.innerHTML = m.bottomContent;
                 m.flipperPosition = m.DOWN;
-            } 
-            L.addContentToFlipper();
+            }            
         }
         //if no longer pressed:
-        
         else if(!m.pressed){
             m.finalPosition = true;
-            L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-            L.addContentToFlipper();            
+            L(v.flipperContent).attribs("class=bottomContentStyle");           
+           // L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
+            //L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);            
         }
-        
     }    
 };
 
@@ -314,14 +325,21 @@ L.positionFlipper = function positionFlipper(eventObject){
         if( source === v.topPane ){
             L(v.flipper).styles("transform: rotateX(180deg)");
             m.flipperPosition = m.UP;
+            L(v.flipper).styles("visibility: hidden");
             L.addContentToFlipper();
-         }
+            window.setTimeout(function(){
+                L(v.flipper).styles("visibility: visible");
+            },50);
+        }
         else if ( source === v.bottomPane ){
             L(v.flipper).styles("transform: rotateX(0deg)");
             m.flipperPosition = m.DOWN;
+            L(v.flipper).styles("visibility: hidden");
             L.addContentToFlipper();
+            window.setTimeout(function(){
+                L(v.flipper).styles("visibility: visible");
+            },50);         
         }
-        L.addContentToFlipper();
     }
 };
 //====| END of adjustRemByArea |====//
@@ -329,45 +347,11 @@ L.positionFlipper = function positionFlipper(eventObject){
 L.addContentToFlipper = function addContentToFlipper(){
     L(v.flipperContent).attribs("class=bottomContentStyle");     
     if(m.flipperPosition === m.UP){
-        v.flipperContent.innerHTML = "";
-        L.addBackgroundImageTop("img/BoatsAerialView-1.jpg", L.flipperContent);
+        v.flipperContent.innerHTML = v.topContent.innerHTML;
     }
     else if(m.flipperPosition === m.DOWN){
-        L.addBackgroundImageTop("", L.flipperContent); 
-        L(v.flipperContent).styles("width: 85%");
-        v.flipperContent.innerHTML = m.bottomContent;
+        v.flipperContent.innerHTML = v.bottomContent.innerHTML;
     }
-};
-
-//========| Add background image |=========//
-L.addBackgroundImageTop = function addBackgroundImageTop(url, target){
-    L(v.flipperContent).attribs("class=bottomContentStyle");     
-    let padding = 100;
-    if(url === ""){
-        padding = 0;
-    }
-    L(target)
-        .styles
-            ("background: url("+ url +") no-repeat bottom")
-            ("background-size: contain")
-            ("width: 100%")
-            ("padding-top: " + padding + "%")
-    ;       
-};
-L.addBackgroundImageBottom = function addBackgroundImageBottom(url, target){
-    L(v.flipperContent).attribs("class=bottomContentStyle");     
-    let padding = 100;
-    if(url === ""){
-        padding = 0;
-        L(v.flipperContent).attribs("class=bottomContentStyle");          
-    }    
-    L(target)
-        .styles
-            ("background: url("+ url +") no-repeat top")
-            ("background-size: contain")
-            ("width: 100%")
-            ("padding-bottom: " + padding + "%")            
-    ;     
 };
 
 //====| adjustRemBySpace(min,max, optionalWindowWidth) called when app loads & when screen size changes |====//
@@ -419,16 +403,20 @@ L.shadePage = function shadePage(degrees){
         let fraction =   0.55 + ((180 - degrees)  / 90);
         let expFraction = (1-Math.exp(-fraction/0.30));
         L.browserPrefix.forEach(prefix=>{
+            //L(v.top).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );
             L(v.top).styles("background-color: hsl(0, 0%,"+ fraction * 100 +"%)" );
         });
         L.browserPrefix.forEach(prefix=>{
             L(v.bottom).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
-        }); 
+        });        
+        
+
     }
     else if (degrees < 90 && degrees >=0){
         let fraction = 0.55 + (degrees / 90) ;
         let expFraction = (1-Math.exp(-fraction/0.30));
         L.browserPrefix.forEach(prefix=>{
+            //L(v.bottom).styles("background-color: hsl(0, 0%,"+ expFraction * 100 +"%)" );
             L(v.bottom).styles("background-color: hsl(0, 0%,"+ fraction * 100 +"%)" );
             
         });
