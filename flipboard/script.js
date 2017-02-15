@@ -39,7 +39,7 @@ m.finalPosition = true;
 m.BACKGROUND_COLOR = "white";
 m.CONTENT_COLOR =  "transparent";
 m.COLOR_WHILE_FLIPPING = "ededed";
-m.FLIP_TIME = 0.5;
+m.FLIP_TIME = 0.33;
 m.topContent = document.getElementById("topContent").innerHTML;
 m.bottomContent = document.getElementById("bottomContent").innerHTML;
 m.APP_WIDTH_MAX = 500;
@@ -75,6 +75,7 @@ c.initialize = function (){
         }
         if(m.finalPosition){
             L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
+            L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);
         }
     },50);
     
@@ -260,7 +261,7 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
         }, 100);
         
         L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-        L(v.flipperContent).styles("background-color: " + m.BACKGROUND_COLOR);        
+        L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);        
     }    
 };
 
@@ -293,7 +294,7 @@ L.moveFlipper = function moveFlipper(eventObject){
         else if(!m.pressed){
             m.finalPosition = true;
             L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-            L(v.flipperContent).styles("background-color: " + m.BACKGROUND_COLOR);
+            L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);
             L.addContentToFlipper();            
         }
         
