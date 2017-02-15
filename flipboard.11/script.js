@@ -260,7 +260,7 @@ L.setDirectionAndPosition = function setDirectionAndPosition(eventObject){
         }, 100);
         
         L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-        L(v.flipperContent).styles("background-color: " + m.BACKGROUND_COLOR);        
+        //L(v.flipperContent).styles("background-color: " + m.CONTENT_COLOR);        
     }    
 };
 
@@ -293,7 +293,6 @@ L.moveFlipper = function moveFlipper(eventObject){
         else if(!m.pressed){
             m.finalPosition = true;
             L(v.flipper).styles("background-color: " + m.BACKGROUND_COLOR);
-            L(v.flipperContent).styles("background-color: " + m.BACKGROUND_COLOR);
             L.addContentToFlipper();            
         }
         
