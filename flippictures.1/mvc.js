@@ -9,9 +9,7 @@ m.DOWN = "down";
 m.autoFlipping = false;
 m.fingerFlipping = false;
 m.busyFlipping = false;
-m.finalPosition = true;
 m.started = m.DOWN;
-m.currentLocation = m.DOWN;
 m.direction = m.UP;
 m.firmlyPressed = false;
 m.pressed = false;
@@ -19,14 +17,11 @@ m.currentAngle = 1; // in degrees
 m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
-m.currentPage = 1;
-m.testVersion = 2;
-m.urlTop = "";
-m.urlBottom = "";
+m.testVersion = 
 
 
 //constants in camel case:
-m.flipTransitionTime = 150; //150 in milliseconds
+m.flipTransitionTime = 150; //in milliseconds
 m.angularStep = 4; //in degrees
 m.flipTimerInterval = (m.angularStep / 180) * m.flipTransitionTime; // in milliseconds
 m.offsetAngle = 40; //to keep cursor within the page (not at the edge) while finger flipping
@@ -257,8 +252,6 @@ c.showEvent = function showEvent(eventObject, here){
 };
 
 c.showModelStates = function showModelStates(targetContainer){
-    m.urlTop = m.contents[m.currentPage].topHalf.content;
-    m.urlBottom = m.contents[m.currentPage].bottomHalf.content;
     let currentStates = `
         <br>
         <b>autoFlipping:</b>  ${m.autoFlipping} <br>
@@ -269,12 +262,7 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>currentAngle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
         <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>
-        <b>direction:</b>  ${m.direction} <br>
-        <b>current page:</b> ${m.currentPage}<br>
-        <b>URL top:</b> ${m.urlTop}<br>
-        <b>URL bottom:</b> ${m.urlBottom}<br>
-        <b>current Location:</b> ${m.currentLocation}<br>
-        <b>test version:</b> ${m.testVersion}
+        <b>direction:</b>  ${m.direction} 
     `;
     targetContainer.innerHTML = currentStates;
 };

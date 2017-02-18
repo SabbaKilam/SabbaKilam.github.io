@@ -49,7 +49,7 @@ c.initialize = function (){
     
     L.adjustRemByArea(10,20);
     let fakeEventObject = {};
-    fakeEventObject.type = 'resize';
+    fakeEventObject.type = 'resize'
     c.adjustForScreenSize(fakeEventObject);
     
     //Continually show the model state
@@ -128,14 +128,7 @@ c.updateModel = function updateModel(eventObject, updateView){
         m.direction = (m.currentY >= m.priorY) ? m.DOWN : m.UP;        
     }
 
-    //determine current location
-    if(m.currentAngle >= 90 ){
-        m.currentLocation = m.UP;
-    }
-    else{
-        m.currentLocation = m.DOWN;
-    }
-
+    if(false){}
     if(false){}
     if(false){}
     if(false){}
