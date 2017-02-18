@@ -21,9 +21,9 @@ m.appWidthMax = 500; // in pixels
 
 //constants in camel case:
 m.flipTransitionTime = 150; //in milliseconds
-m.angularStep = 1; //in degrees
+m.angularStep = 2; //in degrees
 m.flipTimerInterval = (m.angularStep / 180) * m.flipTransitionTime; // in milliseconds
-m.offsetAngle = 50; //to keep cursor within the page (not at the edge) while finger flipping
+m.offsetAngle = 40; //to keep cursor within the page (not at the edge) while finger flipping
 m.flipperTimerId = 0 ; //id of flipper interval timer for auto flipping
 m.debounceTimerId = 0 ;
 m.debounceDelayTime = 100;// in milliseconds
