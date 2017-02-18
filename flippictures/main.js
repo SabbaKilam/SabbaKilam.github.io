@@ -135,7 +135,9 @@ c.updateModel = function updateModel(eventObject, updateView){
     else{
         m.currentLocation = m.DOWN;
     }
-
+    
+    //set final position:
+    m.finalPosition = (m.currentAngle === 0 || m.currentAngle === 180);
     if(false){}
     if(false){}
     if(false){}

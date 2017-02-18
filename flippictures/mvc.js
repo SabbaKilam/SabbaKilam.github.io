@@ -20,7 +20,7 @@ m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
 m.currentPage = 1;
-m.testVersion = 2;
+m.testVersion = 3;
 m.urlTop = "";
 m.urlBottom = "";
 
@@ -128,6 +128,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     clearInterval(m.flipperTimerId);
                     m.busyFlipping = false;
                     m.autoFlipping = false;
+                    m.finalPosition = true;
                 }
             }
             else if ( m.direction === m.DOWN){
@@ -138,7 +139,8 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false; 
-                        m.autoFlipping = false;                        
+                        m.autoFlipping = false;
+                        m.finalPosition = true;                        
                     }
                 }
                 else if(m.currentAngle > 120){
@@ -148,7 +150,8 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false;
-                        m.autoFlipping = false;                        
+                        m.autoFlipping = false;
+                        m.finalPosition = true;                        
                     }
                 }
             }
@@ -162,7 +165,8 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     m.currentAngle = 0;
                     clearInterval(m.flipperTimerId);
                     m.busyFlipping = false;
-                    m.autoFlipping = false;                    
+                    m.autoFlipping = false;
+                    m.finalPosition = true;                    
                 }
             }
             else if ( m.direction === m.UP){
@@ -173,7 +177,8 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false;
-                        m.autoFlipping = false;                        
+                        m.autoFlipping = false;
+                        m.finalPosition = true;                        
                     }
                 }
                 else if ( m.currentAngle <= 60){
@@ -183,7 +188,8 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
                         m.busyFlipping = false;
-                        m.autoFlipping = false;                        
+                        m.autoFlipping = false;
+                        m.finalPosition = true;                        
                     }
                 }
             }
@@ -264,8 +270,6 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>autoFlipping:</b>  ${m.autoFlipping} <br>
         <b>fingerFlipping:</b>  ${m.fingerFlipping} <br>
         <b>started:</b>  ${m.started} <br>
-        <b>firmlyPressed:</b>  ${m.firmlyPressed} <br>
-        <b>pressed:</b>  ${m.pressed} <br>
         <b>currentAngle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
         <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>
@@ -274,8 +278,13 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>URL top:</b> ${m.urlTop}<br>
         <b>URL bottom:</b> ${m.urlBottom}<br>
         <b>current Location:</b> ${m.currentLocation}<br>
+        <b>Final Position</b> ${m.finalPosition}<br>
         <b>test version:</b> ${m.testVersion}
     `;
+    /*
+        <b>firmlyPressed:</b>  ${m.firmlyPressed} <br>
+        <b>pressed:</b>  ${m.pressed} <br>
+    */
     targetContainer.innerHTML = currentStates;
 };
 
