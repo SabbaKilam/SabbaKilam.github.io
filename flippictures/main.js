@@ -53,9 +53,11 @@ c.initialize = function (){
     c.adjustForScreenSize(fakeEventObject);
     
     //Continually show the model state
+    
     setInterval(()=>{
         c.showModelStates(v.flipperContentHolder);
     },10);
+    
 };
 //-----| UPDATE MODEL |------//
 c.updateModel = function updateModel(eventObject, updateView){

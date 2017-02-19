@@ -20,7 +20,7 @@ m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
 m.currentPage = 1;
-m.testVersion = 7;
+m.testVersion = 8;
 m.urlTop = "";
 m.urlBottom = "";
 
@@ -76,7 +76,19 @@ m.contents = [
             content: "StreetLanterns-2.jpg",
             type: "halfGraphic"
         }
+    },
+    {
+        topHalf: {
+            content: "Japan-1.jpg",
+            type: "halfGraphic"
+        },
+        bottomHalf: {
+            content: "Japan-2.jpg",
+            type: "halfGraphic"
+        }
     }
+    
+    
 ];
 
 
@@ -125,6 +137,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 c.flipAndShade();                    
                 if (m.currentAngle >= 180){
                     m.currentAngle = 180;
+                    c.flipAndShade();                    
                     clearInterval(m.flipperTimerId);
                     c.setFinalFLipperStatus();
                 }
@@ -135,6 +148,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     c.flipAndShade();                    
                     if (m.currentAngle <=0){
                         m.currentAngle = 0;
+                        c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
                         c.setFinalFLipperStatus();                        
                     }
@@ -144,6 +158,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
+                        c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
                         c.setFinalFLipperStatus();                       
                     }
@@ -157,6 +172,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 c.flipAndShade();                    
                 if (m.currentAngle <= 0){
                     m.currentAngle = 0;
+                    c.flipAndShade();                    
                     clearInterval(m.flipperTimerId);
                     c.setFinalFLipperStatus();                   
                 }
@@ -167,6 +183,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
+                        c.flipAndShade();
                         clearInterval(m.flipperTimerId);
                         c.setFinalFLipperStatus();                        
                     }
@@ -176,6 +193,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     c.flipAndShade();                    
                     if (m.currentAngle <= 0){
                         m.currentAngle = 0;
+                        c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
                         c.setFinalFLipperStatus();
                     }
