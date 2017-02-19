@@ -9,18 +9,18 @@ m.DOWN = "down";
 m.autoFlipping = false;
 m.fingerFlipping = false;
 m.busyFlipping = false;
-m.finalPosition = true;
+m.flipperClosed = true;
 m.started = m.DOWN;
 m.currentLocation = m.DOWN;
 m.direction = m.UP;
 m.firmlyPressed = false;
 m.pressed = false;
-m.currentAngle = 1; // in degrees
+m.currentAngle = 0; // in degrees
 m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
 m.currentPage = 1;
-m.testVersion = 3;
+m.testVersion = 4;
 m.urlTop = "";
 m.urlBottom = "";
 
@@ -126,9 +126,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 if (m.currentAngle >= 180){
                     m.currentAngle = 180;
                     clearInterval(m.flipperTimerId);
-                    m.busyFlipping = false;
-                    m.autoFlipping = false;
-                    m.finalPosition = true;
+                    c.setFinalFLipperStatus();
                 }
             }
             else if ( m.direction === m.DOWN){
@@ -138,9 +136,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     if (m.currentAngle <=0){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false; 
-                        m.autoFlipping = false;
-                        m.finalPosition = true;                        
+                        c.setFinalFLipperStatus();                        
                     }
                 }
                 else if(m.currentAngle > 120){
@@ -149,9 +145,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;
-                        m.autoFlipping = false;
-                        m.finalPosition = true;                        
+                        c.setFinalFLipperStatus();                       
                     }
                 }
             }
@@ -164,9 +158,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 if (m.currentAngle <= 0){
                     m.currentAngle = 0;
                     clearInterval(m.flipperTimerId);
-                    m.busyFlipping = false;
-                    m.autoFlipping = false;
-                    m.finalPosition = true;                    
+                    c.setFinalFLipperStatus();                   
                 }
             }
             else if ( m.direction === m.UP){
@@ -176,9 +168,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;
-                        m.autoFlipping = false;
-                        m.finalPosition = true;                        
+                        c.setFinalFLipperStatus();                        
                     }
                 }
                 else if ( m.currentAngle <= 60){
@@ -187,9 +177,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     if (m.currentAngle <= 0){
                         m.currentAngle = 0;
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;
-                        m.autoFlipping = false;
-                        m.finalPosition = true;                        
+                        c.setFinalFLipperStatus();
                     }
                 }
             }
@@ -203,6 +191,17 @@ c.flipAutomatically = function flipAutomatically(eventObject){
 
     }, m.flipTimerInterval);
     //--------------------------//
+};
+c.setFinalFLipperStatus = function setFinalFLipperStatus(){
+    m.busyFlipping = false;
+    m.autoFlipping = false;
+    m.flipperClosed = true;
+    if(m.currentAngle <  90){
+        m.currentLocation = m.DOWN;
+    }
+    else{
+        m.currentLocation = m.UP;        
+    }
 };
 
 c.moveFlipperWithFinger = function(){
@@ -270,15 +269,15 @@ c.showModelStates = function showModelStates(targetContainer){
         <b>autoFlipping:</b>  ${m.autoFlipping} <br>
         <b>fingerFlipping:</b>  ${m.fingerFlipping} <br>
         <b>started:</b>  ${m.started} <br>
+        <b>direction:</b>  ${m.direction} <br>
+        <b>current Location:</b> ${m.currentLocation}<br>        
         <b>currentAngle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
         <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>
-        <b>direction:</b>  ${m.direction} <br>
         <b>current page:</b> ${m.currentPage}<br>
         <b>URL top:</b> ${m.urlTop}<br>
         <b>URL bottom:</b> ${m.urlBottom}<br>
-        <b>current Location:</b> ${m.currentLocation}<br>
-        <b>Final Position</b> ${m.finalPosition}<br>
+        <b>Flipper Closed:</b> ${m.flipperClosed}<br>
         <b>test version:</b> ${m.testVersion}
     `;
     /*

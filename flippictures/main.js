@@ -137,7 +137,12 @@ c.updateModel = function updateModel(eventObject, updateView){
     }
     
     //set final position:
-    m.finalPosition = (m.currentAngle === 0 || m.currentAngle === 180);
+    if(m.currentAngle === 0 || m.currentAngle === 180){
+        m.flipperClosed = true;
+    }else{
+        m.flipperClosed = false;
+    }
+    
     if(false){}
     if(false){}
     if(false){}

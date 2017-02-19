@@ -26,7 +26,11 @@ body{
 	color: #444;
 	line-height: 150%;
 	
-}	
+}
+#imgPreload{
+	visibility: hidden;
+}
+
 #holder{
 	position: fixed;
 	margin: auto;
