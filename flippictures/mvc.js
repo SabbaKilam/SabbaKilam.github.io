@@ -20,7 +20,7 @@ m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
 m.currentPage = 1;
-m.testVersion = 8;
+m.testVersion = 9;
 m.urlTop = "";
 m.urlBottom = "";
 
@@ -256,7 +256,7 @@ c.shadePage = function shadePage(degrees){
         let modifiedFraction = fraction + offset;
         L.browserPrefix.forEach(prefix=>{
             L(v.topHalf).styles("background-color: hsl(0, 0%,"+ modifiedFraction * 110 +"%)" );
-            L(v.flipper).styles("background-color: hsl(0, 0%,"+ ((1 - fraction)+ 0.65)  * 110 +"%" );
+            L(v.flipper).styles("background-color: hsl(0, 0%,"+ ((1 - fraction)+ 0.65)  * 110 +"%)" );
         });
         L.browserPrefix.forEach(prefix=>{
             L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
