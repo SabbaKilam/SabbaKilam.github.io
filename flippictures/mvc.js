@@ -20,7 +20,7 @@ m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
 m.currentPage = 1;
-m.testVersion = 5;
+m.testVersion = 6;
 m.urlTop = "";
 m.urlBottom = "";
 
