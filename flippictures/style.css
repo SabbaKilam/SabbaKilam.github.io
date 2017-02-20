@@ -110,7 +110,7 @@ body{
 	overflow: hidden;
 	opacity: 1;
 	box-shadow: none;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid gray;
 	box-sizing: border-box;
 }
 

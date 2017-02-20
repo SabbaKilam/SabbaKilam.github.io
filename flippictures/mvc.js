@@ -20,10 +20,13 @@ m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
 m.currentPage = 1;
-m.testVersion = 9;
+m.testVersion = 10;
 m.urlTop = "";
 m.urlBottom = "";
-
+m.pageZeroTop = document.querySelector("#topContentHolder").innerHTML;
+m.pageZeroBottom = document.querySelector("#bottomContentHolder").innerHTML;
+m.flipperCrossedDown = false;
+m.flipperCrossedUp = false;
 
 //constants in camel case:
 m.flipTransitionTime = 150; //150 in milliseconds
@@ -103,6 +106,16 @@ let v = {};
 let c = {};
 
 //===| controller methods |========//
+c.hideFlipper = function hideFlipper(){
+    L(v.flipper).styles("visibility: hidden");
+};
+c.showFlipper = function showFlipper(){
+    L(v.flipper).styles("visibility: visible");
+};
+
+c.addContent = function addContent(){
+    
+};
 c.adjustForScreenSize = function adjustForScreenSize(eventObject){
     if(eventObject.type === 'resize'){
         if(window.innerWidth < m.appWidthMax){
@@ -206,7 +219,7 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 a.) if angle > 60, keep going up
                 b.) if angle <= 60, fall back down
         */
-
+        //if flipping is complete, unshade the pages
     }, m.flipTimerInterval);
     //--------------------------//
 };
@@ -274,6 +287,11 @@ c.shadePage = function shadePage(degrees){
             L(v.topHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
         });        
     }
+    if(degrees === 0 || degrees === 180){
+        m.flipperClosed = true;
+        L(v.topHalf).styles("background-color: hsl(0, 0%, 100%");
+        L(v.bottomHalf).styles("background-color: hsl(0, 0%, 100%");
+    }
 };
 c.showEvent = function showEvent(eventObject, here){
 	here.innerHTML = '<br><center>'+ eventObject.target.id +", "+eventObject.type +'</center><br><br><br><br><br><br>';
@@ -283,15 +301,12 @@ c.showModelStates = function showModelStates(targetContainer){
     m.urlTop = m.contents[m.currentPage].topHalf.content;
     m.urlBottom = m.contents[m.currentPage].bottomHalf.content;
     let currentStates = `
-        <br>
-        <b>autoFlipping:</b>  ${m.autoFlipping} <br>
-        <b>fingerFlipping:</b>  ${m.fingerFlipping} <br>
+        <br><br>
         <b>started:</b>  ${m.started} <br>
         <b>direction:</b>  ${m.direction} <br>
         <b>current Location:</b> ${m.currentLocation}<br>        
         <b>currentAngle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
-        <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>
         <b>current page:</b> ${m.currentPage}<br>
         <b>URL top:</b> ${m.urlTop}<br>
         <b>URL bottom:</b> ${m.urlBottom}<br>
@@ -301,6 +316,9 @@ c.showModelStates = function showModelStates(targetContainer){
     /*
         <b>firmlyPressed:</b>  ${m.firmlyPressed} <br>
         <b>pressed:</b>  ${m.pressed} <br>
+        <b>autoFlipping:</b>  ${m.autoFlipping} <br>
+        <b>fingerFlipping:</b>  ${m.fingerFlipping} <br>  
+        <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>        
     */
     targetContainer.innerHTML = currentStates;
 };

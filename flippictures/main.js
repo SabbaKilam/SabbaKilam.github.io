@@ -44,8 +44,33 @@ window.onload = function(){
 
  //-----| INITIALIZE |------// 
 c.initialize = function (){
-    //all elements which have ids; refer to them by name in the view object v.
+    //all elements which have ids; refer to them by name in the view object v.    
     L.attachAllElementsById(v);
+    
+    
+    v.topContentHolder.innerHTML = m.pageZeroTop;
+    v.bottomContentHolder.innerHTML = m.pageZeroBottom;
+    L(v.flipper).styles("visibility: hidden");
+
+    //add test content
+    let urlTop = m.contents[m.currentPage].topHalf.content;    
+    L(v.topContentHolder)
+        .styles
+            ("background: url(img/" + urlTop + ") no-repeat bottom")
+            ("background-size: contain")
+            ("height: 100%")
+            ("top-padding: 100%")
+        ;
+    v.topContentHolder.innerHTML = "";    
+    let urlBottom = m.contents[m.currentPage].bottomHalf.content;
+    L(v.bottomContentHolder)
+        .styles
+            ("background: url(img/" + urlBottom + ") no-repeat top")
+            ("background-size: contain")
+            ("height: 100%")
+            ("top-padding: 100%")
+        ;          
+    v.bottomContentHolder.innerHTML = "";
     
     L.adjustRemByArea(10,20);
     let fakeEventObject = {};
@@ -79,6 +104,16 @@ c.updateModel = function updateModel(eventObject, updateView){
                         source === v.bottomContentHolder                        
                       );
     let finalAngle = (m.currentAngle === 0 || m.currentAngle === 180);
+    
+    //check if flipper crossed the center
+    if(m.started === m.DOWN && m.currentLocation === m.UP){
+        m.flipperCrossedUp = true;
+        m.flipperCrossedDown = false;        
+    }
+    if(m.started == m.UP && m.currentLocation === m.DOWN){
+        m.flipperCrossedDown = true;
+        m.flipperCrossedUp = false;        
+    }
 
     //Set or clear m.pressed
     if(globallyPressed && validSource){
@@ -145,6 +180,14 @@ c.updateModel = function updateModel(eventObject, updateView){
         m.flipperClosed = false;
     }
     
+    
+    //check to hide closed flipper
+    if(m.flipperClosed){
+        c.hideFlipper();
+    }
+    else{
+        c.showFlipper();
+    }    
     if(false){}
     if(false){}
     if(false){}
