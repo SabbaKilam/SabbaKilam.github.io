@@ -1,21 +1,6 @@
-<!doctype html>
 <html>
-<!--
-/**
-    Author: Abbas Abdulmalik
-    Created: February 18, 2017
-    Revised: (N/A)
-    Title:  Flipboard Simulation
-    Purpose: To create a Flipboard-like evironment
-    for publishing content on a Flipboard magazine and get a 
-    real flipboard effect when "scrolling." The Flipboard
-    website does this only for the "big boys," and not for
-    regular articles blog posts.
-
-*/
--->
 	<head>
-		<title>Postify Flip Pictures</title>
+		<title>Simple FlipBoard</title>
 		<meta charset="utf-8">
         <meta name="viewport" 
             content="width=device-width
@@ -26,13 +11,12 @@
 		<link rel="stylesheet" href="style.css">
 		<script src="prefixfree.js"></script>
 		<script src="L.js"></script>
-        <script src="mvc.js"></script>        
 	</head>
 	<body>
-		<div id="holder" class="fullScreen">
+		<div id="holder">
 	        <div id="app">
-		        <div id="topHalf" class="halfPage">
-		        	<div class="contentHolder topContentHolder" id="topContentHolder">
+		        <div id="top" class="halfPage">
+		        	<div class="contentHolder topContent" id="topContent">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mattis’s visit to Seoul is the first stop in his
 					first overseas trip since he was sworn in as
 					President Trump’s defense secretary last
@@ -43,8 +27,8 @@
 					has been a fundamental aspect of U.S. policy in Asia for decades.<br>
 		        	</div>		        	
 		        </div>
-		        <div id="bottomHalf" class="halfPage">
-		        	<div class="contentHolder bottomContentHolder" id="bottomContentHolder">
+		        <div id="bottom" class="halfPage">
+		        	<div class="contentHolder bottomContent" id="bottomContent">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are almost 30,000 U.S. troops stationed in South Korea and about 50,000 in
 					Japan.<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mattis, a retired Marine general whose
@@ -56,14 +40,12 @@
 		        	</div>		        	
 		        </div>
 		        <div id="flipper" class="halfPage">
-		        	<div class="contentHolder bottomContent" id="flipperContentHolder"></div>
+		        	<div class="contentHolder bottomContent" id="flipperContent"></div>
 		        </div>
 	        </div>
 	        <div id="topPane" class="pane"></div>
 	        <div id="bottomPane" class="pane"></div>
-            <div id="shroud" class="fullScreen"></div>
         </div><!-----| END of holder |------>
-    <script src="main.js"></script>
-    
+    <script src="script.js"></script>        
 	</body>
 </html>

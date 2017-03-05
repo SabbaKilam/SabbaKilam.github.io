@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
 <!--
@@ -26,10 +27,22 @@
 		<link rel="stylesheet" href="style.css">
 		<script src="prefixfree.js"></script>
 		<script src="L.js"></script>
-        <script src="mvc.js"></script>        
+       
 	</head>
 	<body>
 		<div id="holder" class="fullScreen">
+		<!--   pre-load images -->
+		<div id="imgPreload">
+			<img src="img/BoatsAerialView-1.jpg">
+			<img src="img/BoatsAerialView-2.jpg">
+			<img src="img/BrightRoom-1.jpg">
+			<img src="img/BrightRoom-2.jpg">
+			<img src="img/NativeAmerican-1.jpg">
+			<img src="img/NativeAmerican-2.jpg">
+			<img src="img/StreetLanterns-1.jpg">
+			<img src="img/StreetLanterns-2.jpg">
+		</div>
+		<!-- ===================================== -->			
 	        <div id="app">
 		        <div id="topHalf" class="halfPage">
 		        	<div class="contentHolder topContentHolder" id="topContentHolder">
@@ -63,7 +76,7 @@
 	        <div id="bottomPane" class="pane"></div>
             <div id="shroud" class="fullScreen"></div>
         </div><!-----| END of holder |------>
+    <script src="mvc.js"></script>         
     <script src="main.js"></script>
-    
 	</body>
 </html>

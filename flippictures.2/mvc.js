@@ -9,19 +9,27 @@ m.DOWN = "down";
 m.autoFlipping = false;
 m.fingerFlipping = false;
 m.busyFlipping = false;
+m.flipperClosed = true;
 m.started = m.DOWN;
+m.currentLocation = m.DOWN;
 m.direction = m.UP;
 m.firmlyPressed = false;
 m.pressed = false;
-m.currentAngle = 1; // in degrees
+m.currentAngle = 0; // in degrees
 m.currentY = 0;
 m.priorY = 0;
 m.appWidthMax = 500; // in pixels
-m.testVersion = 
-
+m.currentPage = 1;
+m.testVersion = 10;
+m.urlTop = "";
+m.urlBottom = "";
+m.pageZeroTop = document.querySelector("#topContentHolder").innerHTML;
+m.pageZeroBottom = document.querySelector("#bottomContentHolder").innerHTML;
+m.flipperCrossedDown = false;
+m.flipperCrossedUp = false;
 
 //constants in camel case:
-m.flipTransitionTime = 150; //in milliseconds
+m.flipTransitionTime = 150; //150 in milliseconds
 m.angularStep = 4; //in degrees
 m.flipTimerInterval = (m.angularStep / 180) * m.flipTransitionTime; // in milliseconds
 m.offsetAngle = 40; //to keep cursor within the page (not at the edge) while finger flipping
@@ -71,7 +79,19 @@ m.contents = [
             content: "StreetLanterns-2.jpg",
             type: "halfGraphic"
         }
+    },
+    {
+        topHalf: {
+            content: "Japan-1.jpg",
+            type: "halfGraphic"
+        },
+        bottomHalf: {
+            content: "Japan-2.jpg",
+            type: "halfGraphic"
+        }
     }
+    
+    
 ];
 
 
@@ -86,6 +106,44 @@ let v = {};
 let c = {};
 
 //===| controller methods |========//
+c.hideFlipper = function hideFlipper(){
+    L(v.flipper).styles("visibility: hidden");
+};
+c.showFlipper = function showFlipper(){
+    L(v.flipper).styles("visibility: visible");
+};
+
+c.initializeFlipperContent = function initializeFlipperContent(){
+    if(m.currentLocation === m.UP){
+    let urlTop = m.contents[m.currentPage].topHalf.content;    
+    L(v.flipperContentHolder)
+        .styles
+            ("background: url(img/" + urlTop + ") no-repeat bottom")
+            ("background-size: contain")
+            ("height: 100%")
+            ("top-padding: 100%")
+            ("transform: rotateX(180deg")
+        ;
+    v.topContentHolder.innerHTML = "";        
+        
+    }
+    if(m.currentLocation === m.DOWN){
+    let urlBottom = m.contents[m.currentPage].bottomHalf.content;
+    L(v.flipperContentHolder)
+        .styles
+            ("background: url(img/" + urlBottom + ") no-repeat top")
+            ("background-size: contain")
+            ("height: 100%")
+            ("top-padding: 100%")
+            ("transform: rotateX(0deg")            
+        ;          
+    v.bottomContentHolder.innerHTML = "";        
+    }
+};
+
+c.addContent = function addContent(){
+    
+};
 c.adjustForScreenSize = function adjustForScreenSize(eventObject){
     if(eventObject.type === 'resize'){
         if(window.innerWidth < m.appWidthMax){
@@ -120,9 +178,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 c.flipAndShade();                    
                 if (m.currentAngle >= 180){
                     m.currentAngle = 180;
+                    c.flipAndShade();                    
                     clearInterval(m.flipperTimerId);
-                    m.busyFlipping = false;
-                    m.autoFlipping = false;
+                    c.setFinalFLipperStatus();
                 }
             }
             else if ( m.direction === m.DOWN){
@@ -131,9 +189,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     c.flipAndShade();                    
                     if (m.currentAngle <=0){
                         m.currentAngle = 0;
+                        c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false; 
-                        m.autoFlipping = false;                        
+                        c.setFinalFLipperStatus();                        
                     }
                 }
                 else if(m.currentAngle > 120){
@@ -141,9 +199,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
+                        c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;
-                        m.autoFlipping = false;                        
+                        c.setFinalFLipperStatus();                       
                     }
                 }
             }
@@ -155,9 +213,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 c.flipAndShade();                    
                 if (m.currentAngle <= 0){
                     m.currentAngle = 0;
+                    c.flipAndShade();                    
                     clearInterval(m.flipperTimerId);
-                    m.busyFlipping = false;
-                    m.autoFlipping = false;                    
+                    c.setFinalFLipperStatus();                   
                 }
             }
             else if ( m.direction === m.UP){
@@ -166,9 +224,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     c.flipAndShade();                    
                     if (m.currentAngle >= 180){
                         m.currentAngle = 180;
+                        c.flipAndShade();
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;
-                        m.autoFlipping = false;                        
+                        c.setFinalFLipperStatus();                        
                     }
                 }
                 else if ( m.currentAngle <= 60){
@@ -176,9 +234,9 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                     c.flipAndShade();                    
                     if (m.currentAngle <= 0){
                         m.currentAngle = 0;
+                        c.flipAndShade();                        
                         clearInterval(m.flipperTimerId);
-                        m.busyFlipping = false;
-                        m.autoFlipping = false;                        
+                        c.setFinalFLipperStatus();
                     }
                 }
             }
@@ -189,9 +247,20 @@ c.flipAutomatically = function flipAutomatically(eventObject){
                 a.) if angle > 60, keep going up
                 b.) if angle <= 60, fall back down
         */
-
+        //if flipping is complete, unshade the pages
     }, m.flipTimerInterval);
     //--------------------------//
+};
+c.setFinalFLipperStatus = function setFinalFLipperStatus(){
+    m.busyFlipping = false;
+    m.autoFlipping = false;
+    m.flipperClosed = true;
+    if(m.currentAngle <  90){
+        m.currentLocation = m.DOWN;
+    }
+    else{
+        m.currentLocation = m.UP;        
+    }
 };
 
 c.moveFlipperWithFinger = function(){
@@ -228,7 +297,7 @@ c.shadePage = function shadePage(degrees){
         let modifiedFraction = fraction + offset;
         L.browserPrefix.forEach(prefix=>{
             L(v.topHalf).styles("background-color: hsl(0, 0%,"+ modifiedFraction * 110 +"%)" );
-            L(v.flipper).styles("background-color: hsl(0, 0%,"+ ((1 - fraction)+ 0.65)  * 110 +"%" );
+            L(v.flipper).styles("background-color: hsl(0, 0%,"+ ((1 - fraction)+ 0.65)  * 110 +"%)" );
         });
         L.browserPrefix.forEach(prefix=>{
             L(v.bottomHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
@@ -246,24 +315,39 @@ c.shadePage = function shadePage(degrees){
             L(v.topHalf).styles("background-color: hsl(0, 0%,"+ 100 +"%)" );            
         });        
     }
+    if(degrees === 0 || degrees === 180){
+        m.flipperClosed = true;
+        L(v.topHalf).styles("background-color: hsl(0, 0%, 100%");
+        L(v.bottomHalf).styles("background-color: hsl(0, 0%, 100%");
+    }
 };
 c.showEvent = function showEvent(eventObject, here){
 	here.innerHTML = '<br><center>'+ eventObject.target.id +", "+eventObject.type +'</center><br><br><br><br><br><br>';
 };
 
 c.showModelStates = function showModelStates(targetContainer){
+    m.urlTop = m.contents[m.currentPage].topHalf.content;
+    m.urlBottom = m.contents[m.currentPage].bottomHalf.content;
     let currentStates = `
-        <br>
-        <b>autoFlipping:</b>  ${m.autoFlipping} <br>
-        <b>fingerFlipping:</b>  ${m.fingerFlipping} <br>
+        <br><br>
         <b>started:</b>  ${m.started} <br>
-        <b>firmlyPressed:</b>  ${m.firmlyPressed} <br>
-        <b>pressed:</b>  ${m.pressed} <br>
+        <b>direction:</b>  ${m.direction} <br>
+        <b>current Location:</b> ${m.currentLocation}<br>        
         <b>currentAngle:</b>  ${m.currentAngle.toFixed(2)}&deg; <br>
         <b>currentY:</b>  ${m.currentY.toFixed(2)} <br>
-        <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>
-        <b>direction:</b>  ${m.direction} 
+        <b>current page:</b> ${m.currentPage}<br>
+        <b>URL top:</b> ${m.urlTop}<br>
+        <b>URL bottom:</b> ${m.urlBottom}<br>
+        <b>Flipper Closed:</b> ${m.flipperClosed}<br>
+        <b>test version:</b> ${m.testVersion}
     `;
+    /*
+        <b>firmlyPressed:</b>  ${m.firmlyPressed} <br>
+        <b>pressed:</b>  ${m.pressed} <br>
+        <b>autoFlipping:</b>  ${m.autoFlipping} <br>
+        <b>fingerFlipping:</b>  ${m.fingerFlipping} <br>  
+        <b>priorY:</b>  ${m.priorY.toFixed(2)} <br>        
+    */
     targetContainer.innerHTML = currentStates;
 };
 
