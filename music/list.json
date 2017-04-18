@@ -693,5 +693,10 @@
         "title" : "Hey Leroy Your Mamas Calling You",
         "artist" : "Jimmy Castor",
         "picture" : "leroy.jpg"
+    },
+    "Iris DeMent - Wasteland of the Free" :{
+        "title" : "Wasteland of the Free",
+        "artist" : "Iris DeMent",
+        "picture" : "irisdement.png"
     }
 }
