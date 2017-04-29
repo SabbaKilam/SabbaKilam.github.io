@@ -714,5 +714,10 @@
         "title" : "Hanayome Ningyo",
         "artist" : "Rampal",
         "picture" : "rampalJapanese.png"
+    },
+    "Rampal - Chugoku Chiho No Komori Uta" :{
+        "title" : "Chugoku Chiho No Komori Uta",
+        "artist" : "Rampal",
+        "picture" : "rampalJapanese.png"
     }
 }
