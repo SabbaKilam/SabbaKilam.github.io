@@ -709,5 +709,10 @@
         "title" : "Defune",
         "artist" : "Rampal",
         "picture" : "rampalJapanese.png"
+    },
+    "Rampal - Hanayome Ningyo" :{
+        "title" : "Hanayome Ningyo",
+        "artist" : "Rampal",
+        "picture" : "rampalJapanese.png"
     }
 }
