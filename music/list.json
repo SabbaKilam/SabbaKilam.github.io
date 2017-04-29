@@ -684,7 +684,7 @@
         "title" : "Im Like A Bird",
         "artist" : "Nelly Furtado",
         "picture" : "NellyFurtado.jpg"
-    },
+    }
     "Jimmy Castor - Hey Leroy Your Mamas Calling You" :{
         "title" : "Hey Leroy Your Mamas Calling You",
         "artist" : "Jimmy Castor",
@@ -699,5 +699,10 @@
         "title" : "Every River",
         "artist" : "Kim Richey",
         "picture" : "richeybittersweet.jpg"
+    },
+    "Rampal - Chin Chin Chidori" :{
+        "title" : "Chin Chin Chidori",
+        "artist" : "Rampal",
+        "picture" : "rampalJapanese.png"
     }
 }
