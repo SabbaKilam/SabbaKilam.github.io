@@ -719,5 +719,10 @@
         "title" : "Chugoku Chiho No Komori Uta",
         "artist" : "Rampal",
         "picture" : "rampalJapanese.png"
+    },
+    "Rampal - Nambu Ushi Oi Uta" :{
+        "title" : "Nambu Ushi Oi Uta",
+        "artist" : "Rampal",
+        "picture" : "rampalJapanese.png"
     }
 }
