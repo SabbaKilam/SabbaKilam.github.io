@@ -724,5 +724,10 @@
         "title" : "Nambu Ushi Oi Uta",
         "artist" : "Rampal",
         "picture" : "rampalJapanese.png"
+    },
+    "Red Hot Chili Peppers - Dark Necessities" :{
+        "title" : "Dark Necessities",
+        "artist" : "Red Hot Chili Peppers",
+        "picture" : "chilipeppersdark.jpg"
     }
 }
