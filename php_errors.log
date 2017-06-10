@@ -2,3 +2,23 @@
 [22-Nov-2016 19:12:09 UTC] PHP Stack trace:
 [22-Nov-2016 19:12:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/YiheyisUpload/getFile.php:0
 [22-Nov-2016 19:12:09 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/YiheyisUpload/getFile.php:14
+[02-May-2017 14:04:28 UTC] PHP Warning:  file_put_contents(): Only 2469888 of 4113874 bytes written, possibly out of free disk space in /home/ubuntu/workspace/YiheyisUpload/getFile.php on line 14
+[02-May-2017 14:04:28 UTC] PHP Stack trace:
+[02-May-2017 14:04:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/YiheyisUpload/getFile.php:0
+[02-May-2017 14:04:28 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/YiheyisUpload/getFile.php:14
+[02-May-2017 14:04:56 UTC] PHP Warning:  file_put_contents(): Only 0 of 4842585 bytes written, possibly out of free disk space in /home/ubuntu/workspace/YiheyisUpload/getFile.php on line 14
+[02-May-2017 14:04:56 UTC] PHP Stack trace:
+[02-May-2017 14:04:56 UTC] PHP   1. {main}() /home/ubuntu/workspace/YiheyisUpload/getFile.php:0
+[02-May-2017 14:04:56 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/YiheyisUpload/getFile.php:14
+[03-May-2017 15:02:43 UTC] PHP Warning:  file_put_contents(): Only 0 of 8414449 bytes written, possibly out of free disk space in /home/ubuntu/workspace/YiheyisUpload/getFile.php on line 14
+[03-May-2017 15:02:43 UTC] PHP Stack trace:
+[03-May-2017 15:02:43 UTC] PHP   1. {main}() /home/ubuntu/workspace/YiheyisUpload/getFile.php:0
+[03-May-2017 15:02:43 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/YiheyisUpload/getFile.php:14
+[03-May-2017 15:02:56 UTC] PHP Warning:  file_put_contents(): Only 2469888 of 4113874 bytes written, possibly out of free disk space in /home/ubuntu/workspace/YiheyisUpload/getFile.php on line 14
+[03-May-2017 15:02:57 UTC] PHP Stack trace:
+[03-May-2017 15:02:57 UTC] PHP   1. {main}() /home/ubuntu/workspace/YiheyisUpload/getFile.php:0
+[03-May-2017 15:02:57 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/YiheyisUpload/getFile.php:14
+[10-Jun-2017 02:51:05 UTC] PHP Warning:  file_put_contents(): Only 7135232 of 7576010 bytes written, possibly out of free disk space in /home/ubuntu/workspace/justUpload/getFile.php on line 15
+[10-Jun-2017 02:51:05 UTC] PHP Stack trace:
+[10-Jun-2017 02:51:05 UTC] PHP   1. {main}() /home/ubuntu/workspace/justUpload/getFile.php:0
+[10-Jun-2017 02:51:05 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/justUpload/getFile.php:15

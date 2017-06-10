@@ -307,11 +307,6 @@
         "title" : "Space Age Love Song",
         "artist" : "A Flock Of Seagulls"
     },
-    "Anugama - Call Of The Mountain" : {
-        "title" : "Call Of The Mountain",
-        "artist" : "Anugama",
-        "picture": "anugama-bestof.png"
-    },
     "Air - La Femme d'Argent" : {
         "title" : "La Femme d'Argent",
         "artist" : "Air"
@@ -729,5 +724,9 @@
         "title" : "Dark Necessities",
         "artist" : "Red Hot Chili Peppers",
         "picture" : "chilipeppersdark.jpg"
+    },
+    "Anugama - Call Of The Mountain" :{
+        "title" : "Call Of The Mountain",
+        "artist" : "Anugama"
     }
 }
