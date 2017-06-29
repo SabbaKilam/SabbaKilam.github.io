@@ -20,3 +20,15 @@
 [29-Jun-2017 18:49:37 UTC] PHP Stack trace:
 [29-Jun-2017 18:49:37 UTC] PHP   1. {main}() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:0
 [29-Jun-2017 18:49:37 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:32
+[29-Jun-2017 18:58:33 UTC] PHP Warning:  file_put_contents(): Only 0 of 4842585 bytes written, possibly out of free disk space in /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php on line 32
+[29-Jun-2017 18:58:33 UTC] PHP Stack trace:
+[29-Jun-2017 18:58:33 UTC] PHP   1. {main}() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:0
+[29-Jun-2017 18:58:33 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:32
+[29-Jun-2017 18:58:33 UTC] PHP Warning:  file_put_contents(): Only 0 of 102 bytes written, possibly out of free disk space in /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php on line 52
+[29-Jun-2017 18:58:33 UTC] PHP Stack trace:
+[29-Jun-2017 18:58:33 UTC] PHP   1. {main}() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:0
+[29-Jun-2017 18:58:33 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:52
+[29-Jun-2017 19:09:25 UTC] PHP Warning:  file_put_contents(): Only 3641344 of 4842585 bytes written, possibly out of free disk space in /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php on line 32
+[29-Jun-2017 19:09:25 UTC] PHP Stack trace:
+[29-Jun-2017 19:09:25 UTC] PHP   1. {main}() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:0
+[29-Jun-2017 19:09:25 UTC] PHP   2. file_put_contents() /home/ubuntu/workspace/gitmusicapp/phpfiles/getMusicFile.php:32
