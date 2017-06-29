@@ -726,12 +726,12 @@
         "artist" : "Anugama",
         "picture" : "anugama-bestof.png"
     },
-    "Mr. Scruff - Kalimba" :{
-        "title" : "Kalimba",
-        "artist" : "Mr. Scruff"
-    },
     "Bob Acri - Sleep Away" :{
         "title" : "Sleep Away",
         "artist" : "Bob Acri"
+    },
+    "Mr. Scruff - Kalimba" :{
+        "title" : "Kalimba",
+        "artist" : "Mr. Scruff"
     }
 }
