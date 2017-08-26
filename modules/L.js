@@ -5,6 +5,15 @@ L.styles = function(styleString){
   this.style[keyValue[0].trim()] = keyValue[1].trim()
   return this.styles  
 }
+
+L.noPinchZoom = function(){
+  window.ontouchstart = function(eventObject){
+    if(eventObject.touches && eventObject.touches.length > 1){
+      eventObject.preventDefault();
+    }
+  }  
+}
+
 L.attachAllElementsById = function(here){
     let allElements = document.getElementsByTagName('*')
     let array = []
