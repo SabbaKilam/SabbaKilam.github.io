@@ -14,6 +14,24 @@ L.noPinchZoom = function(){
   }  
 }
 
+L.runQualifiedMethods = function(functionQualifiers, object, runNextUpdate){
+  Object
+    .keys(functionQualifiers)
+    .filter(qualifyFunction)
+    .forEach(runFunction)
+  if(typeof runNextUpdate === 'function'){runNextUpdate()}
+  
+  //-----| helpers |-----//
+  function qualifyFunction(functionName){
+    const isQualified = functionQualifiers[functionName].every( qualifier => qualifier)
+    return isQualified
+  }
+  function runFunction(functionName){
+    object[functionName]()
+  }
+}
+
+
 L.attachAllElementsById = function(here){
     let allElements = document.getElementsByTagName('*')
     let array = []
