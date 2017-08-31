@@ -1,4 +1,3 @@
-//improved-library-abbas
 var L = {}
 L.styles = function(styleString){
   let keyValue = styleString.split(':')
