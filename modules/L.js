@@ -31,8 +31,8 @@ L.runQualifiedMethods = function(functionQualifiers, object, runNextUpdate){
   function runFunction(functionName){
     object[functionName]()    
     /*
-      If the prefix of this function is 'set' (for updating MODEL),
-      and there is similarly named function with a prefix of 'show' (for updating VIEW),
+      If the prefix of this function's name is 'set' (for updating the MODEL),
+      and there is a similarly named function with a prefix of 'show' (for updating the VIEW),
       then run the 'show' version as well.
     */
     let prefix = functionName.slice(0,3)
