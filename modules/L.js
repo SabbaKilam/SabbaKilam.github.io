@@ -1,7 +1,10 @@
 var L = {}
 L.styles = function(styleString){
-  let keyValue = styleString.split(':')
-  this.style[keyValue[0].trim()] = keyValue[1].trim()
+  const colonPosition = styleString.indexOf(':');
+  const property = styleString.slice(0, colonPosition)
+  const value = styleString.slice(colonPosition + 1)
+  this.style[property] = value
+  
   return this.styles  
 }
 
@@ -26,10 +29,20 @@ L.runQualifiedMethods = function(functionQualifiers, object, runNextUpdate){
     return isQualified
   }
   function runFunction(functionName){
-    object[functionName]()
+    object[functionName]()    
+    /*
+      If the prefix of this function is 'set' (for updating MODEL),
+      and there is similarly named function with a prefix of 'show' (for updating VIEW),
+      then run the 'show' version as well.
+    */
+    let prefix = functionName.slice(0,3)
+    let newFunctionName = 'show' + functionName.slice(3)
+    
+    if(prefix === 'set' && object[newFunctionName]){
+      object[newFunctionName]()
+    }
   }
 }
-
 
 L.attachAllElementsById = function(here){
     let allElements = document.getElementsByTagName('*')
