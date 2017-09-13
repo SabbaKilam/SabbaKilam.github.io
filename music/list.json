@@ -736,11 +736,12 @@
     },
     "Vaughan Williams - Concerto for Oboe and Strings" :{
         "title" : "Concerto for Oboe and Strings",
-        "artist" : "Vaughan Williams"
+        "artist" : "Vaughan Williams",
+        "picture" : "VaughanWilliamsOboe.jpg"
     },
     "Vaughan Williams - The Lark Ascending" :{
         "title" : "The Lark Ascending",
         "artist" : "Vaughan Williams",
-        "picture" : "VaughanWilliamsLarAscending.jpg"
+        "picture" : "VaughanWilliamsLarkAscending.jpg"
     }
 }
