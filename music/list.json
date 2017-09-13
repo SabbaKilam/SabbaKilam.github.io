@@ -733,5 +733,14 @@
     "Bob Acri - Sleep Away" :{
         "title" : "Sleep Away",
         "artist" : "Bob Acri"
+    },
+    "Vaughan Williams - Concerto for Oboe and Strings" :{
+        "title" : "Concerto for Oboe and Strings",
+        "artist" : "Vaughan Williams"
+    },
+    "Vaughan Williams - The Lark Ascending" :{
+        "title" : "The Lark Ascending",
+        "artist" : "Vaughan Williams",
+        "picture" : "VaughanWilliamsLarAscending.jpg"
     }
 }
