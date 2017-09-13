@@ -743,5 +743,10 @@
         "title" : "The Lark Ascending",
         "artist" : "Vaughan Williams",
         "picture" : "VaughanWilliamsLarkAscending.jpg"
+    },
+    "Vaughan Williams - Fantasia on a Theme by Thomas Tallis" :{
+        "title" : "Fantasia on a Theme by Thomas Tallis",
+        "artist" : "Vaughan Williams",
+        "picture" : "VaughanWilliamsTallis.jpg"
     }
 }
