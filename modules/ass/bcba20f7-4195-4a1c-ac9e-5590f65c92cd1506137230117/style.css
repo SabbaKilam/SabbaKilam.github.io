@@ -1,0 +1,103 @@
+/*
+Note: a good thing: touchmove downward does NOT trigger
+app reload on samsung Galaxy. Figure out why.
+*/
+
+*{
+  box-sizing: border-box;  
+}
+
+html{
+  position: fixed;  
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: calc(calc(1vw + 0.5vh) + 7px);
+  user-select: none;
+  
+}
+
+body{
+  position: fixed;
+  font-family: helvetica, arial, sans-serif;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #eee;
+}
+header{
+  /* The progress bar */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ddd;
+  box-shadow: 0 1px 0 #fafafa;
+  border-left: 0px solid blue;    
+}
+footer{
+  /* The event details */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 1.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: teal;
+}
+
+main{
+  position: absolute;
+  width: 85%;
+  height: 60%;
+  border-radius: 1rem;
+  box-shadow: 1rem 1rem 5rem gray;
+  text-align: center;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  overflow: hidden;  
+}
+
+#btnFakeUpload{
+  font-size: 1rem;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  outline: none;
+  width: 9rem;
+  text-align: center;
+
+}
+
+input[type="file"]{
+  font-size: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  text-align: center; 
+  width: 90%;
+  border: 1px solid gray;
+  border-radius: 0.5rem;  
+  padding: 1rem;
+  line-height: 0.25;
+}
+
+#shroud{
+  background: radial-gradient(#eee, #111);
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  visibility: visible;
+  transition: all 2.5s ease;
+}

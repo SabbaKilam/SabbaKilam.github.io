@@ -1,0 +1,35 @@
+html{
+  position: fixed;
+  height: 100%;
+  font-size: calc( calc(1vw + 1vh) + 5px);
+  overflow: hidden;
+}
+
+body{
+  position: fixed;  
+  height: 100%;
+  width: 100%;
+  background-color: lightblue;
+  font-size: 1.5rem;  
+}
+
+input{
+  font-size: 1.5rem;  
+}
+
+#shroud{
+  background: radial-gradient(#eee, #111);
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  visibility: visible;
+  transition: all 2.5s ease;
+}
+
+#secretBody{
+  font-size: 1.5rem;
+}

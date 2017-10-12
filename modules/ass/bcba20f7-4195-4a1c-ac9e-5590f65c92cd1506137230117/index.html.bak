@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <title>Inner Sanctum</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body id="secretBody">
+  <center>
+ 
+    <script>
+      if(!localStorage.getItem('secret')){
+        window.history.back(1);        
+      }
+      else{
+        localStorage.removeItem('secret')
+      }      
+    </script>
+    Hello There: You are in the inner sanctum.
+   
+  </center>
+  <div id="shroud"></div>
+  <script>
+    const temp = {
+      shroud: document.getElementById('shroud'),
+      secretBody: document.getElementById('secretBody')
+    }
+    v.secretBody.style.fontSize = '1.5rem'    
+    setTimeout(function(){
+      temp.shroud.style.visibility = 'hidden'
+      temp.shroud.style.opacity = '0'
+    },2000)
+  </script>
+</body>  
+</html>
+

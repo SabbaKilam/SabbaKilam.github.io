@@ -1,0 +1,58 @@
+<!doctype html>
+<html id="root">
+  <head>
+    <title>File Upload</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="favicon.png" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <link rel="stylesheet" href="style.css">
+    <script src="prefixfree.js"></script>    
+    
+    <script src="L.js"></script>
+    <script src="MVC.js"></script>
+    <script src="methodsMODEL.js"></script>
+    <script src="methodsVIEW.js"></script>    
+  </head>
+  
+  <body id="body">
+    <!---------------------------------------------->
+    <script>
+      if(!window.localStorage.getItem('secret')){
+        window.history.back(1);        
+      }
+      else{
+        window.localStorage.removeItem('secret')
+      }      
+    </script>
+    <!---------------------------------------------->
+    
+    <header id="progressBar"></header>
+    
+    <main id="main">
+      <button id="btnFakeUpload">Test Progress Bar</button>      
+      <input type="file" id="fileElement" name="fileElement" accept="audio/mp3">
+    </main>
+    
+    <footer id="info">Events Shown Here</footer>
+    <div id="shroud"></div>
+    <script>
+      const temp = {
+        shroud: document.getElementById('shroud'),
+        secretBody: document.getElementById('secretBody')
+      }
+      setTimeout(function(){
+        temp.shroud.style.visibility = 'hidden'
+        temp.shroud.style.opacity = '0'
+      },1000)
+    </script>    
+    
+    
+    <!-----| NO HTML BELOW THIS LINE |----->
+    <script>
+      /*global c*/
+      window.addEventListener('DOMContentLoaded', c.initialize, true)
+    </script>    
+  </body>
+</html>
