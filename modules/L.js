@@ -1,7 +1,7 @@
 /*
   Author:  Abbas Abdulmalik
   Created: ~ May, 2017
-  Revised: NOvember 4, 2017 
+  Revised: November 4, 2017 
   Original Filename: L.js 
   Purpose: a small personal re-usable js library for a simple MVC architecture
   Notes: Now qualifyFunction helper doesn't return true for empty arrays (no vacuous truth)
