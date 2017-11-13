@@ -83,8 +83,8 @@ L.runQualifiedMethods = function(functionQualifiers, object, runNextUpdate){
 
 L.uploadFiles = function(fileElement, phpScriptName, progressReporter){
   const array = [] // make a real array to borrow it's forEach method
-  array.forEach.call(fileElement.files, file => {
-    const postman = new XMLHttpRequest() // make a file delivere for each file
+  array.forEach.call(fileElement.files, (file, index) => {
+    const postman = new XMLHttpRequest() // make a file deliverer for each file
     const uploadObject = postman.upload
     const envelope = new FormData() // make a holder for the file's name and content
     envelope.stuff = envelope.append // give 'append' the nickname 'stuff'
@@ -117,10 +117,9 @@ L.uploadFiles = function(fileElement, phpScriptName, progressReporter){
       
       uploadObject.onprogress = function(progressObject){
         if(progressReporter){
-          progressReporter(progressObject.loaded, progressObject.total)
+          progressReporter(progressObject.loaded, progressObject.total, index)
         }
       }
-      
     }
   })
 }
