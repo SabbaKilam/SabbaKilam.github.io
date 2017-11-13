@@ -1,10 +1,11 @@
 /*
   Author:  Abbas Abdulmalik
   Created: ~ May, 2017
-  Revised: November 4, 2017 
+  Revised: November 13, 2017 
   Original Filename: L.js 
   Purpose: a small personal re-usable js library for a simple MVC architecture
   Notes: Now qualifyFunction helper doesn't return true for empty arrays (no vacuous truth)
+         UploadFiles added.  
 */
 
 var L = {}
@@ -80,3 +81,46 @@ L.runQualifiedMethods = function(functionQualifiers, object, runNextUpdate){
   }
 }
 
+L.uploadFiles = function(fileElement, phpScriptName, progressReporter){
+  const array = [] // make a real array to borrow it's forEach method
+  array.forEach.call(fileElement.files, file => {
+    const postman = new XMLHttpRequest() // make a file delivere for each file
+    const uploadObject = postman.upload
+    const envelope = new FormData() // make a holder for the file's name and content
+    envelope.stuff = envelope.append // give 'append' the nickname 'stuff'
+    const reader = new FileReader() // make a file reader (the raw file element is useless)
+    
+    reader.readAsDataURL(file) // process the file's contents
+    reader.onload = function(){ // when done ...
+      const contents = reader.result // collect the result, and ...
+      envelope.stuff('contents', contents) // place it in the envelope along with ...
+      envelope.stuff('filename', file.name) // its filename
+      postman.open(`POST`, phpScriptName)// open up a POST to the server's php script
+      postman.send(envelope) // send the file
+      
+      //check when file loads and when there is an error
+      postman.onload = eventObject => {
+        postman.status !== 200 ? showMessage() : false
+        //-----| helper |------//
+        function showMessage(){
+          const message = `Trouble with file: ${postman.status}`
+          console.log(message)
+          alert(message)
+        }
+      }
+      
+      postman.onerror = eventObject => {
+        const message = `Trouble connecting to server`
+        console.log(message)
+        alert(message)
+      }
+      
+      uploadObject.onprogress = function(progressObject){
+        if(progressReporter){
+          progressReporter(progressObject.loaded, progressObject.total)
+        }
+      }
+      
+    }
+  })
+}
