@@ -1,17 +1,11 @@
 /*
   Author:  Abbas Abdulmalik
   Created: ~ May, 2017
-  Revised: November 15, 2017 
+  Revised: November 13, 2017 
   Original Filename: L.js 
   Purpose: a small personal re-usable js library for a simple MVC architecture
   Notes: Now qualifyFunction helper doesn't return true for empty arrays (no vacuous truth)
-         UploadFiles added.
-         uploadFiles takes a callback -- progressReporter-- as it FIRST argument (parameter)
-         to allow for an optional fourth parameter of an upload path for the server.
-         progressReporter will be passed three arguments when called:
-         1.) the amount of bytes uploaded so far
-         2.) the total size of the file in bytes
-         3.) the index of the file in the "array" of files being uploaded
+         UploadFiles added.  
 */
 
 var L = {}
@@ -87,7 +81,7 @@ L.runQualifiedMethods = function(functionQualifiers, object, runNextUpdate){
   }
 }
 
-L.uploadFiles = function(progressReporter, fileElement, phpScriptName, uploadPath='uploads/'){
+L.uploadFiles = function(fileElement, phpScriptName, progressReporter){
   const array = [] // make a real array to borrow it's forEach method
   array.forEach.call(fileElement.files, (file, index) => {
     const postman = new XMLHttpRequest() // make a file deliverer for each file
@@ -101,8 +95,6 @@ L.uploadFiles = function(progressReporter, fileElement, phpScriptName, uploadPat
       const contents = reader.result // collect the result, and ...
       envelope.stuff('contents', contents) // place it in the envelope along with ...
       envelope.stuff('filename', file.name) // its filename
-      envelope.stuff('path', uploadPath) // its filename
-      
       postman.open(`POST`, phpScriptName)// open up a POST to the server's php script
       postman.send(envelope) // send the file
       
@@ -124,7 +116,7 @@ L.uploadFiles = function(progressReporter, fileElement, phpScriptName, uploadPat
       }
       
       uploadObject.onprogress = function(progressObject){
-        if(typeof progressReporter === 'function'){
+        if(progressReporter){
           progressReporter(progressObject.loaded, progressObject.total, index)
         }
       }
