@@ -123,6 +123,7 @@ L.uploadFiles = function(progressReporter, fileElement, phpScriptName, uploadPat
         alert(message)
       }
       
+      //invoke the callback for each upload progress report
       uploadObject.onprogress = function(progressObject){
         if(typeof progressReporter === 'function'){
           progressReporter(progressObject.loaded, progressObject.total, index)
