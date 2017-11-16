@@ -101,7 +101,7 @@ L.uploadFiles = function(progressReporter, fileElement, phpScriptName, uploadPat
       const contents = reader.result // collect the result, and ...
       envelope.stuff('contents', contents) // place it in the envelope along with ...
       envelope.stuff('filename', file.name) // its filename
-      envelope.stuff('path', uploadPath) // its filename
+      envelope.stuff('path', uploadPath) // its upload path on the server
       
       postman.open(`POST`, phpScriptName)// open up a POST to the server's php script
       postman.send(envelope) // send the file
