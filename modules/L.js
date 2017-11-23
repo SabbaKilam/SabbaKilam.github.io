@@ -171,5 +171,8 @@ L.sortByExtension = function (array) {
     }
   });
   
-  return array;
+  const newArray = []
+  array.forEach( m => newArray.push(m))
+  
+  return newArray;
 }
