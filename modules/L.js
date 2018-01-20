@@ -176,3 +176,29 @@ L.sortByExtension = function (array) {
   
   return newArray;
 }
+
+L.arrayStringMatch = function(subString, arrayOfStringArrays){
+  /*
+  From an array of string arrays, return a possibly smaller array
+  of only those string arrays whose member strings contain the given subString
+  regardless of case.
+     1. For arrayOfStringArrays, use the filter method (a function property of an array)
+     that expects a function argument that operates on each array member
+     2. Let's call the function argument 'match'
+     3. 'match' should test each member array for a match of the substring as follows:
+      a.) join the members strings together into a bigString that is lowerCased
+      b.) lowerCase the subString
+      c.) use indexOf to match substring to the bigString
+      d.) return true for a match, otherwise return false
+     4. the filter creates a new array after doing this.
+     5. final step: return the new array that the filter produced 
+  */
+  //============================================================//
+  return arrayOfStringArrays.filter(match)
+  //-------| Helper function 'match' |---------//
+  function match(memberArray){
+    const bigString = memberArray.join(``).toLowerCase()
+    const substringToMatch = subString.toLowerCase()
+    return bigString.indexOf(substringToMatch) !== -1   
+  }
+}
